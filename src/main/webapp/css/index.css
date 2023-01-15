@@ -1,0 +1,159 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.font-bold {
+    font-weight: bold;
+}
+.font-18 {
+    font-size: 18px;
+}
+.color-gray {
+    color: gray;
+}
+
+/* header start */
+header {
+    width: 100%;
+    padding-top: 25px;
+    height: 50px;
+    display: flex;
+    justify-content:space-between;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.297);
+    /* z-index: 999; */
+    /* position: fixed; */
+}
+header div{
+    padding: 0 40px;
+}
+#mainTitle{
+    text-decoration: none;
+    color: #ef303d;
+    padding-left: 60px;
+}
+
+#mainLog{
+    font-size: 16px;
+    color: black;
+    padding: auto;
+    width: 70px;
+    height: 30px;
+    margin-right: 60px;
+}
+/* header css end*/
+
+/* 최상단 검색창 css start*/
+#search-box {
+    width: 100%;
+    height: 50px;
+    margin: 40px 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+#icon-box{
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+#icon-box p{
+    padding: 0;
+}
+
+.hotel-icon{
+    font-size: 22px;
+    color: black;
+}
+
+#search-main{
+    width: 370px;
+    margin-top: 5px;
+}
+
+#search-main input{
+    width: 300px;
+    height: 30px;
+    border-radius: 15px;
+    outline: none;
+    font-size: 20px;
+}
+
+#search-main button{
+    background-color: #ef303d;
+    font-size: 20px;
+    color: white;
+    border-style: none;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+#subsearch-box{
+    display: flex;
+    justify-content: space-around;
+}
+
+#filter-box{
+    border: 1px solid black;
+    border-radius: 10px;
+    outline: none;
+    width: 60px;
+    height: 30px;
+    text-align: center;
+    font-size: 16px;
+    margin-top: 7px;
+}
+#filter-box i,span,a{
+    color: black;
+    text-decoration: none;
+    padding-top: 5px;
+}
+/* 최상단 검색창 css end*/
+
+
+/* content start*/
+#content {
+    width: 100%;
+    height: 100%;
+}
+
+#content-area{
+    width: 1200px;
+    margin: 0 auto;
+    /* border: 1px solid black; */
+}
+
+.hotel-box{
+    width: 300px;
+    height: 400px;
+    display: inline-block;
+    margin: 10px;
+    /* border: 1px solid black; */
+}
+
+.hotel-box img{
+    width: 300px;
+    height: 300px;
+    border: 1px solid black;
+    border-radius: 15px;
+    outline: none;
+}
+
+.hotel-box p{
+    padding: 3px 10px;
+}
+/* content end*/
+
+
+
+footer {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(245, 245, 245);
+    color: rgba(0, 0, 0, 0.38);
+    padding: 50px 50px;
+    font-size: 13px;
+    border-top: 1px solid rgba(0, 0, 0, 0.297);
+	
+}
+
