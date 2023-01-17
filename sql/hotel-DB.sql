@@ -140,6 +140,61 @@ create table tb_room_image(
     constraint fk_tb_room_image foreign key (room_no) references tb_room(room_no)
 );
 
+create sequence req_user_no ;
+create sequence req_hotel_no ;
+
+insert into tb_user values('1','admin','1234','홍길동','01012341234','A','honggd@naver.com','길동이올시다',default);
+insert into tb_user values('2','user','1234','일반인','01012341234','U','users@naver.com','고객이올시다',default);
+insert into tb_hotel values('H001','호텔컨포지엄','서울시 강남구 논현동 24-5','H','ONDA는 다양한 숙박업소분들과 함께 일하는 팀입니다. 한국의 각 지역의 멋진 숙박업소를 찾아 고객님께 연결해주는 일을 하고 있습니다. 업무시간은 한국시간으로 10:00~18:00입니다. 예약이 완료 되시면 ONDA로 예약확정 문자를 드립니다.','admin');
+insert into tb_hotel values('P002','펜션이더리움','강원도 속초시 속초리 24-5','P','우리는 함께하는 팀입니다. 화이팅입니다.','admin');
+insert into tb_room values ('HR001','스위트룸',300000,default,'H001');
+insert into tb_room values ('HR002','디럭스싱글',120000,default,'H001');
+insert into tb_room values ('HR003','디럭스',120000,default,'H001');
+insert into tb_room values ('HR004','럭셔리스위트',300000,default,'H001');
+insert into tb_room values ('PR005','ider101',120000,default,'P002');
+insert into tb_room values ('PR006','ider201',150000,default,'P002');
+insert into tb_room values ('PR007','ider301',150000,default,'P002');
+insert into tb_room values ('PR008','ider303',170000,default,'P002');
+
+insert into tb_category values('c01','넷플릭스');
+insert into tb_category values('c02','주방');
+insert into tb_category values('c03','주차장');
+insert into tb_category values('c04','수영장');
+insert into tb_category values('c05','해변');
+insert into tb_category values('c06','온천');
+insert into tb_category values('c07','루프탑');
+insert into tb_category values('c08','오션뷰');
+insert into tb_category values('c09','반려동물');
+
+insert into tb_hotel_category values('c01','H001','admin');
+insert into tb_hotel_category values('c07','H001','admin');
+insert into tb_hotel_category values('c04','H001','admin');
+insert into tb_hotel_category values('c03','P002','admin');
+insert into tb_hotel_category values('c08','P002','admin');
+insert into tb_hotel_category values('c09','P002','admin');
+select* from tb_room;
+
+insert into tb_reservation values ('R0101',default,'2023-01-05','2023-01-06',default,'HR001','user','H001');
+insert into tb_reservation values ('R0102',default,'2022-12-31','2023-01-01',default,'HR001','user','H001');
+insert into tb_reservation values ('R0103',default,'2022-05-07','2022-05-10',default,'HR001','user','H001');
+
+insert into tb_sales_data values ('P0101',300000,'2023-01-01','R0101','user');
+
+insert into tb_board values('B0101','게시판만들어주세요','게시판내용은 길게길겔에에에에~~~~~~~~~~~~~~~~~~~~~~쓸거에요 !','카테고리','예약취소','01012341234','honggd@naver.com',default,'user');
+insert into tb_board_comment values('BC0101',' 문의사항남깁니다 .. ps.user ',default,default,'B0101','user');
+
+insert into tb_hotel_image values(1,'호텔1.png','20220418_125936088_36.png',default,'H001');
+insert into tb_room_image values(1,'룸1.png','20220418_125936088_35.png',default,'HR001');
+insert into tb_room_image values(2,'룸2.png','20220418_125936088_31.png',default,'HR002');
+insert into tb_room_image values(3,'룸3.png','20220418_125936088_32.png',default,'HR003');
+insert into tb_room_image values(4,'룸4.png','20220418_125936088_33.png',default,'HR004');
+
+insert into tb_hotel_image values(2,'펜션1.png','20220418_125936088_37.png',default,'P002');
+insert into tb_room_image values(5,'룸1.png','20220418_125936088_38.png',default,'PR005');
+insert into tb_room_image values(6,'룸1.png','20220418_125936088_39.png',default,'PR006');
+insert into tb_room_image values(7,'룸1.png','20220418_125936088_40.png',default,'PR007');
+insert into tb_room_image values(8,'룸1.png','20220418_125936088_41.png',default,'PR008');
+
 select * from tb_room_image;
 select * from tb_hotel_image;
 select * from tb_hotel;
@@ -153,8 +208,10 @@ select * from tb_board_comment;
 select * from tb_board;
 select * from tb_sales_data;
 
-select h.*,(select min(room_price) from tb_room r where r.hotel_no = h.hotel_no group by hotel_no) price,(select renamed_filename from tb_hotel_image i where i.hotel_no = h.hotel_no) renamed_filename from tb_hotel h;
 
+
+
+select h.*,(select min(room_price) from tb_room r where r.hotel_no = h.hotel_no group by hotel_no) price,(select renamed_filename from tb_hotel_image i where i.hotel_no = h.hotel_no) renamed_filename from tb_hotel h;
 
 
 
