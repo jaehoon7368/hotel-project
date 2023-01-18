@@ -51,10 +51,12 @@ window.addEventListener('load', () => {
 			console.log(data);
 			/*
 				<div class="hotel-box">
-                    <img src="" alt="">
-                    <p class="font-bold" name="hotelName"></p>
-                    <p class="color-gray" name="hotelAddress"></p>
-                    <p class="color-gray" name="hotelPrice">₩ ~ /박</p>
+					<a href="<%= request.getContextPath()%>/hotel/roomView">
+                    	<img src="" alt="">
+                    	<p class="font-bold" name="hotelName"></p>
+                    	<p class="color-gray" name="hotelAddress"></p>
+                    	<p class="color-gray" name="hotelPrice">₩ ~ /박</p>
+                    <a>
                 </div>
 			*/
 			const contentArea = document.querySelector("#content-area");
@@ -62,9 +64,12 @@ window.addEventListener('load', () => {
 			data.forEach((hotel) =>{
 				console.log(hotel);
 				console.log(hotel.renamedFilename);
+				console.log(hotel.hotelNo);
 				const div = document.createElement("div");
 				div.classList.add("hotel-box");
 				
+				const a = document.createElement("a");
+				a.href = `<%= request.getContextPath()%>/room/roomView?hotelNo=\${hotel.hotelNo}`;
 				const img = document.createElement("img");
 				img.src = `<%= request.getContextPath() %>/upload/hotel/\${hotel.renamedFilename}`;
 				
@@ -78,9 +83,10 @@ window.addEventListener('load', () => {
 				
 				const price = document.createElement("p");
 				price.classList.add("color-gray");
-				price.append("₩" +  hotel.price + " ~/박");
+				price.append("₩" +  hotel.price + " ~ / 박");
 				
-				div.append(img,name,price,address);
+				a.append(img,name,price,address);
+				div.append(a);
 				contentArea.append(div);
 			});
 			

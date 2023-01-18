@@ -10,17 +10,4 @@
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
   
-  <servlet>
-  	<servlet-name>HotelTotalViewServlet</servlet-name>
-  	<servlet-class>com.sh.airbnb.hotel.controller.HotelTotalViewServlet</servlet-class>
-  	<init-param>
-			<param-name>charset</param-name>
-			<param-value>UTF-8</param-value>
-	</init-param>
-  </servlet>
-
-  <servlet-mapping>
-  	<servlet-name>HotelTotalViewServlet</servlet-name>
-  	<url-pattern>/hotelView</url-pattern>
-  </servlet-mapping>
 </web-app>
