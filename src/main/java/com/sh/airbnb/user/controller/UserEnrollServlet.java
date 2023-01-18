@@ -33,7 +33,7 @@ public class UserEnrollServlet extends HttpServlet {
 	 * 회원가입처리
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-HttpSession session = request.getSession(true);
+		
 		
 		try {
 			// 0. 인코딩처리
@@ -60,21 +60,18 @@ HttpSession session = request.getSession(true);
 			// 2. 업무로직 - db insert
 			int result = userService.insertUser(user);
 			
-
-			if(result > 0) {
-				// 회원가입성공 메세지
-				session.setAttribute("msg", "회원가입을 축하드립니다.");
-			}
+			request.getSession().setAttribute("msg", "회원가입이 완료되었습니다.");
+			response.sendRedirect(request.getContextPath() + "/");
 		} catch(Exception e) {
-			// 회원가입실패 메세지
-			session.setAttribute("msg", "회원가입 실패했습니다.");
-
-			// 예외로깅
 			e.printStackTrace();
+			request.getSession().setAttribute("msg", "회원가입 실패!.");
+			response.sendRedirect(request.getContextPath() + "/");
+			
+
+			
+			
 		}
 		
-		// 4. 리다이렉트 - /mvc/
-		response.sendRedirect(request.getContextPath() + "/");
 		
 	}
 }
