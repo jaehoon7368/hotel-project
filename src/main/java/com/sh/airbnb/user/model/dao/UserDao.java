@@ -95,7 +95,7 @@ public class UserDao {
 		user.setPhone(rset.getString("phone"));
 		user.setUserRole(UserRole.valueOf(rset.getString("user_role")));
 		user.setEmail(rset.getString("email"));
-		user.setNickName(rset.getString("nickName"));
+		user.setNickName(rset.getString("nick_Name"));
 		user.setUserStatus(UserStatus.valueOf(rset.getString("user_status")));
 		
 		return user;
