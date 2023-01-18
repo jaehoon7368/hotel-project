@@ -29,7 +29,7 @@ public class HelloMvcUtils {
 	 * @return
 	 */
 	
-	public static String getEncryptedPssword(String rawPassword, String salt) {
+	public static String getEncryptedPassword(String rawPassword, String salt) {
 		String encryptedPassword = null;
 		
 		try {
