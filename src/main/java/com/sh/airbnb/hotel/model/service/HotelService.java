@@ -19,4 +19,11 @@ public class HotelService {
 		return hotelList;
 	}
 
+	public Hotel selectOneHotel(String hotelNo) {
+		Connection conn = getConnection();
+		Hotel hotel = hotelDao.selectOneHotel(conn,hotelNo);
+		close(conn);
+		return hotel;
+	}
+
 }

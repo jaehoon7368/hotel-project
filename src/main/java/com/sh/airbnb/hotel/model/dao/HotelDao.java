@@ -56,5 +56,29 @@ public class HotelDao {
 		return hotelList;
 	}
 
+	public Hotel selectOneHotel(Connection conn, String hotelNo) {
+		String sql = prop.getProperty("selectOneHotel");
+		Hotel hotel = null;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, hotelNo);
+			try(ResultSet rset = pstmt.executeQuery()){
+				while(rset.next()) {
+					hotel = new Hotel();
+					hotel.setHotelNo(rset.getString("hotel_no"));
+					hotel.setHotelName(rset.getString("hotel_name"));
+					hotel.setHotelAddress(rset.getString("hotel_address"));
+					hotel.setHotelType(HotelType.valueOf(rset.getString("hotel_type")));
+					hotel.setHotelInfo(rset.getString("hotel_info"));
+					hotel.setRenamedFilename(rset.getString("renamed_filename"));
+				}
+//				System.out.println(hotelList);
+			}
+			} catch (SQLException e) {
+				throw new HotelException("한개의 호텔 정보 불러오기 오류!",e);
+			}
+		return hotel;
+	}
+
 
 }
