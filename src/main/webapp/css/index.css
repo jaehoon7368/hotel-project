@@ -25,6 +25,7 @@ header {
 }
 header div{
     padding: 0 40px;
+    margin-right: 70px;
 }
 #mainTitle{
     text-decoration: none;
@@ -164,6 +165,7 @@ footer {
         border-radius: 20px;
         padding: 5px;
         text-align: center;
+        margin-right: 10px;
     }
     
     

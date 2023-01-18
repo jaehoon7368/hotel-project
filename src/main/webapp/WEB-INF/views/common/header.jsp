@@ -22,8 +22,8 @@
             </div>
             <div>
             <div id="profile">
-        			<a><i class="fa-regular fa-user" id="fa-user"></i></a>
-        			<a><i class="fa-solid fa-bars" id="fa-bar"></i></a>
+        			<a href="#"><i class="fa-regular fa-user" id="fa-user"><span> <i class="fa-solid fa-bars" id="fa-bar"></i></span></i></a>
+        			<!--  <a href="#"><i class="fa-solid fa-bars" id="fa-bar"></i></a> -->
             <!--  </div> -->
                <!--  <button id="signup" onclick="location.href = '<%= request.getContextPath() %>/user/userEnroll';">회원가입</button>
                 <button id="btn1">관리자로그인</button> -->
