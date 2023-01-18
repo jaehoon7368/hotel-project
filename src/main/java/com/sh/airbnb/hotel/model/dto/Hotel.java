@@ -1,8 +1,13 @@
 package com.sh.airbnb.hotel.model.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Hotel extends HotelEntity {
 	private int price;
 	private String renamedFilename;
+	private List<HotelImage> hotelImages =new ArrayList<>();
+	
 	
 	public Hotel() {
 		super();
@@ -36,6 +41,13 @@ public class Hotel extends HotelEntity {
 	public String toString() {
 		return "Hotel [price=" + price + ", renamedFilename=" + renamedFilename + ", toString()=" + super.toString()
 				+ "]";
+	}
+	public void addHotelImage(HotelImage hotelImage) {
+		this.hotelImages.add(hotelImage);
+	}
+
+	public List<HotelImage> getHotelImages() {
+		return hotelImages;
 	}
 
 	
