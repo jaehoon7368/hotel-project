@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Hotel Project</title>
+<title>Alpha</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/index.css" />
 <script src="<%= request.getContextPath()%>/js/jquery-3.6.1.js"></script>
 </head>
@@ -18,7 +18,7 @@
 	<div id="container">
         <header>
             <div class=>
-                <h2><a href="" id="mainTitle">airbnb</a></h2>
+                <h2><a href="<%=request.getContextPath()%>" id="mainTitle">Alpha</a></h2>
             </div>
             <div>
             <div id="profile">

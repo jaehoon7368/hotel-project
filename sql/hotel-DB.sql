@@ -209,9 +209,16 @@ select * from tb_board;
 select * from tb_sales_data;
 
 
+select r.*,(select renamed_filename from tb_room_image i where i.room_no = r.room_no) renamed_filename from tb_room r where hotel_no = 'H001' order by room_price asc;
+
 
 
 select h.*,(select min(room_price) from tb_room r where r.hotel_no = h.hotel_no group by hotel_no) price,(select renamed_filename from tb_hotel_image i where i.hotel_no = h.hotel_no) renamed_filename from tb_hotel h;
+
+select h.*,(select renamed_filename from tb_hotel_image i where i.hotel_no = h.hotel_no) renamed_filename from tb_hotel h where hotel_no = 'H001';
+
+update tb_hotel set hotel_address = '서울시 강남구 논현동 24-6' where hotel_no = 'H001';
+update tb_hotel set hotel_address = '강원 속초시 중앙동 468-121' where hotel_no = 'P002';
 
 
 
