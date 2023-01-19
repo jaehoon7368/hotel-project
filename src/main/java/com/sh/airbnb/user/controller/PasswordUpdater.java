@@ -46,7 +46,7 @@ public class PasswordUpdater {
 		}
 		
 		// 2. 일괄 업데이트
-		sql = "update user set password = ? where user_id = ?";
+		sql = "update tb_user set password = ? where user_id = ?";
 		try(PreparedStatement pstmt = conn.prepareStatement(sql);){
 			for(User user : list) {
 				pstmt.setString(1, user.getPassword());
