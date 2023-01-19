@@ -14,6 +14,7 @@ import com.sh.airbnb.admin.model.exception.AdminException;
 import com.sh.airbnb.hotel.model.dto.Hotel;
 import com.sh.airbnb.hotel.model.dto.HotelImage;
 import com.sh.airbnb.hotel.model.dto.HotelType;
+import com.sh.airbnb.room.model.dto.Room;
 
 public class AdminDao {
 	private Properties prop = new Properties();
@@ -110,5 +111,31 @@ public class AdminDao {
 			throw new AdminException("호텔이미지 등록 오류 !",e);
 		}
 		return result;
+	}
+
+	public List<Room> selectAllRoom(String hotelNo, Connection conn) {
+		String sql = prop.getProperty("selectAllRoom");
+		//select *from tb_room where hotel_no = ?
+		List<Room> rooms =new ArrayList<>();
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, hotelNo);
+			try(ResultSet rset =pstmt.executeQuery()){
+				while(rset.next()) {
+					Room room = new Room();
+//					room.set
+					
+					
+					//룸 객체  
+				}
+				
+			}
+			
+		}catch(Exception e) {
+			throw new AdminException ("호텔당 룸 객체 가져오기 오류 ",e);
+			
+		}
+		
+		
+		return null;
 	}
 }

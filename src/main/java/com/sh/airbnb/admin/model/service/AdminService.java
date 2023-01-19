@@ -1,11 +1,12 @@
 package com.sh.airbnb.admin.model.service;
 
 import static com.sh.airbnb.common.JdbcTemplate.close;
+import static com.sh.airbnb.common.JdbcTemplate.commit;
 import static com.sh.airbnb.common.JdbcTemplate.getConnection;
 import static com.sh.airbnb.common.JdbcTemplate.rollback;
-import static com.sh.airbnb.common.JdbcTemplate.commit;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.sh.airbnb.admin.model.dao.AdminDao;
@@ -53,12 +54,24 @@ public class AdminService {
 	}
 
 	public List<Hotel> selectAllHotel(String userId) {
+		List<Hotel>hotelList =new ArrayList();
 		
+		try {
 		Connection conn =getConnection();
-		List<Hotel>hotels = adminDao.selectAllHotel(conn,userId);
-		
+		hotelList = adminDao.selectAllHotel(conn,userId);
 		close(conn);
-		return hotels;
+		if(hotelList != null) {
+		for(Hotel hotel : hotelList) {
+			hotel.setRooms(adminDao.selectAllRoom(hotel.getHotelNo(),conn));
+		}
+		}
+		
+		}catch(Exception e) {
+			throw e;
+		}
+		
+		
+		return hotelList;
 	}
 
 }
