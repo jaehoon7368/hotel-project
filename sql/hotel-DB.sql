@@ -46,6 +46,8 @@ create table tb_room(
     constraint fk_tb_room_tb_hotel_no foreign key (hotel_no) references tb_hotel(hotel_no)
 );
 
+alter table tb_room add room_info long;
+
 create table tb_reservation(
     re_no varchar(10),
     people_num number default 1,
@@ -97,9 +99,10 @@ create table tb_board_comment(
 );
 
 create table tb_hotel_comment(
-    comment_no varchar2(10),
-    comment_level number,
+    comment_no number,
+    comment_level number default 1,
     content varchar2(2000),
+    comment_ref number,
     reg_date date default sysdate,
     hotel_no varchar2(10),
     user_id varchar2(15),
@@ -208,19 +211,47 @@ select * from tb_board_comment;
 select * from tb_board;
 select * from tb_sales_data;
 
+-- alter table tb_hotel_comment add comment_ref number;
 
-select r.*,(select renamed_filename from tb_room_image i where i.room_no = r.room_no) renamed_filename from tb_room r where hotel_no = 'H001' order by room_price asc;
-
-
-
-select h.*,(select min(room_price) from tb_room r where r.hotel_no = h.hotel_no group by hotel_no) price,(select renamed_filename from tb_hotel_image i where i.hotel_no = h.hotel_no) renamed_filename from tb_hotel h;
-
-select h.*,(select renamed_filename from tb_hotel_image i where i.hotel_no = h.hotel_no) renamed_filename from tb_hotel h where hotel_no = 'H001';
-
-update tb_hotel set hotel_address = '서울시 강남구 논현동 24-6' where hotel_no = 'H001';
-update tb_hotel set hotel_address = '강원 속초시 중앙동 468-121' where hotel_no = 'P002';
+ALTER TABLE tb_hotel_comment MODIFY comment_no number;
 
 
+--select r.*,(select renamed_filename from tb_room_image i where i.room_no = r.room_no) renamed_filename from tb_room r where hotel_no = 'H001' order by room_price asc;
+
+--select h.*,(select min(room_price) from tb_room r where r.hotel_no = h.hotel_no group by hotel_no) price,(select renamed_filename from tb_hotel_image i where i.hotel_no = h.hotel_no) renamed_filename from tb_hotel h;
+
+--select h.*,(select renamed_filename from tb_hotel_image i where i.hotel_no = h.hotel_no) renamed_filename from tb_hotel h where hotel_no = 'H001';
+
+--update tb_hotel set hotel_address = '서울시 강남구 논현동 24-6' where hotel_no = 'H001';
+--update tb_hotel set hotel_address = '강원 속초시 중앙동 468-121' where hotel_no = 'P002';
+
+create sequence seq_hotel_comment_no;
+
+insert into tb_hotel_comment values(seq_hotel_comment_no.nextval, default, '멋진 숙소네요.',null, default, 'H001', 'user');
+insert into tb_hotel_comment values(seq_hotel_comment_no.nextval, default, '다시오고싶어요~!.',null, default, 'H001', 'admin');
+-- 대댓글
+insert into tb_hotel_comment values(seq_hotel_comment_no.nextval, 2, '또오세용.',1, default, 'H001', 'user');
+insert into tb_hotel_comment values(seq_hotel_comment_no.nextval, 2, '또 방문할게요~.',1, default, 'H001', 'admin');
+insert into tb_hotel_comment values(seq_hotel_comment_no.nextval, 2, '또오세용!!!.',2, default, 'H001', 'user');
+
+
+--drop table tb_hotel_comment;
+
+create table tb_hotel_comment(
+    comment_no number,
+    comment_level number default 1,
+    content varchar2(2000),
+    comment_ref number,
+    reg_date date default sysdate,
+    hotel_no varchar2(10),
+    user_id varchar2(15),
+    constraint pk_tb_hotel_comment primary key (comment_no),
+    constraint fk_tb_hotel_comment_tb_hotel foreign key (hotel_no) references tb_hotel(hotel_no),
+    constraint fk_tb_hotel_comment_tb_user foreign key (user_id) references tb_user(user_id)
+);
+
+
+--select * from tb_hotel_comment where hotel_no = 'H001' start with comment_level = 1 connect by prior comment_no = comment_ref order siblings by comment_no asc;
 
 
 

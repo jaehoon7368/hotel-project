@@ -44,6 +44,7 @@ public class RoomDao {
 					room.setLimitPeople(rset.getInt("limit_people"));
 					room.setHotelNo(rset.getString("hotel_no"));
 					room.setRenamedFilename(rset.getString("renamed_filename"));
+					room.setRoomInfo(rset.getString("room_info"));
 					roomList.add(room);
 				}
 			}

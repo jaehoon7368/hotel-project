@@ -49,6 +49,50 @@
                 </div>
             </div>
                 <%} %>
+                
+          <hr>
+            <div id="comment-container">
+                <h2>리뷰</h2>
+                <div id="comment-editor">
+                    <form action="<%=request.getContextPath()%>/room/hotelCommentEnroll" method="post" name="boardCommentFrm">
+                        <input type="hidden" name="hotelNo" value="<%=hotel.getHotelNo()%>>">
+                        <input type="hidden" name="writer">
+                        <input type="hidden" name="commentLevel" value="1" />
+                        <input type="hidden" name="commentRef" value="0" />
+                        <textarea id="comment-content" name="content"></textarea>
+                        <button type="submit" id="btn-comment-enroll1">등록</button>
+                    </form>
+                </div>
+
+                <table id="tbl-comment">
+                    <tr class="level1">
+                        <td>
+                            <sub class="comment-writer">honggd</sub>
+                            <sub class="comment-date">23-01-18</sub>
+                            <br>
+                            <!-- 댓글내용-->
+                            가나다라마바사아
+                        </td>
+                        <td>
+                            <button class="btn-reply" value="">답글</button>
+                            <button class="btn-delete" value="">삭제</button>
+                        </td>
+                    </tr>
+                    <tr class="level2">
+                        <td>
+                            <sub class="comment-writer">honggd</sub>
+                            <sub class="comment-date">23-01-18</sub>
+                            <br>
+                            <!-- 대댓글 -->
+                            123456789
+                        </td>
+                        <td>
+                            <button class="btn-delete" value="">삭제</button>
+                        </td>
+                    </tr>
+                </table>
+                
+            </div>
 
             <div id="map"></div>
 
