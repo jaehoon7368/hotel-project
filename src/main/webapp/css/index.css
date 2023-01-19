@@ -25,6 +25,7 @@ header {
 }
 header div{
     padding: 0 40px;
+    margin-right: 20px;
 }
 #mainTitle{
     text-decoration: none;
@@ -156,4 +157,50 @@ footer {
     border-top: 1px solid rgba(0, 0, 0, 0.297);
 	
 }
+
+ #profile-img {
+        background-color: white;
+        border: 1px solid rgb(171, 167, 167);
+        width: 50px;
+        border-radius: 20px;
+        padding: 5px;
+        text-align: center;
+        margin-right: 100px;
+ }
+ 
+  #profile-menu{
+        border: 1px solid rgb(171, 167, 167);
+        width: 200px;
+        padding: 5px;
+        border-radius: 10px;
+        margin: 3px;
+        display:none;
+        position: absolute;
+        margin: 3px;
+   		margin-left: -10px;
+        background-color: #bdb8b817;
+    }
+  #profile-menu.active{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      color:gray;
+    }
+
+   #wrapper {
+        padding: 10px;
+        width: 100%;
+    }
+    
+   #wrapper li {
+   		list-style:none;
+   		padding:10px
+   }
+    
+   #board, #sign {
+   		padding:10px;
+   		margin-left:10px;
+   }
+   
+    
 

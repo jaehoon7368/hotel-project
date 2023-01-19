@@ -11,7 +11,7 @@
 			<tr>
 				<th>아이디<sup>*</sup></th>
 				<td>
-					<input type="text" placeholder="4글자이상" name="userId" id="_userId" value="아이디를 입력해주세요." required>
+					<input type="text" placeholder="4글자이상" name="userId" id="_userId" value="" required>
 					<input type="button" value="아이디 중복검사" onclick="checkIdDuplicate();"/>
 					<input type="hidden" id="idValid" name="idValid" value="0"/>
 					<%-- 사용가능한 아이디인 경우 1, 이미 사용중인 아이디인 경우 0 --%>
@@ -19,37 +19,37 @@
 			</tr>
 				<th>패스워드<sup>*</sup></th>
 				<td>
-					<input type="password" name="password" id="_password" value="비밀번호를 입력해주세요." required><br>
+					<input type="password" name="password" id="_password" value="" required><br>
 				</td>
 			</tr>
 			<tr>
 				<th>패스워드확인<sup>*</sup></th>
 				<td>	
-					<input type="password" id="passwordCheck" value="비밀번호를 입력해주세요." required><br>
+					<input type="password" id="passwordCheck" value="" required><br>
 				</td>
 			</tr>  
 			<tr>
 				<th>이름<sup>*</sup></th>
 				<td>	
-				<input type="text"  name="userName" id="userName" value="이름을 입력해주세요." required><br>
+				<input type="text"  name="userName" id="userName" value="" required><br>
 				</td>
 			</tr>
 			<tr>
 				<th>닉네임<sup>*</sup></th>
 				<td>
-					<input type="text" name="nickName" id="nickName" value="닉네임을 입력해주세요." required><br>
+					<input type="text" name="nickName" id="nickName" value="" required><br>
 				</td>
 			<tr>
 			<tr>
 				<th>이메일</th>
 				<td>	
-					<input type="email" placeholder="abc@xyz.com" name="email" id="email" value="이메일을 입력해주세요."><br>
+					<input type="email" placeholder="abc@xyz.com" name="email" id="email" value=""><br>
 				</td>
 			</tr>
 			<tr>
 				<th>휴대폰<sup>*</sup></th>
 				<td>	
-					<input type="tel" placeholder="(-없이)01012345678" name="phone" id="phone" maxlength="11" value="번호를 입력해주세요." required><br>
+					<input type="tel" placeholder="(-없이)01012345678" name="phone" id="phone" maxlength="11" value="" required><br>
 				</td>
 			</tr>
 			
