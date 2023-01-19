@@ -1,3 +1,4 @@
+<%@page import="com.sh.airbnb.review.model.dto.Review"%>
 <%@page import="com.sh.airbnb.hotel.model.dto.Hotel"%>
 <%@page import="com.sh.airbnb.room.model.dto.Room"%>
 <%@page import="java.util.List"%>
@@ -8,6 +9,7 @@
 <%
 	List<Room> roomList = (List<Room>) request.getAttribute("roomList");
 	Hotel hotel = (Hotel) request.getAttribute("hotel");
+	List<Review> reviewList = (List<Review>) request.getAttribute("reviewList");
 %>
 
 <div id="hotel-info">
@@ -54,9 +56,9 @@
             <div id="comment-container">
                 <h2>리뷰</h2>
                 <div id="comment-editor">
-                    <form action="<%=request.getContextPath()%>/room/hotelCommentEnroll" method="post" name="boardCommentFrm">
-                        <input type="hidden" name="hotelNo" value="<%=hotel.getHotelNo()%>>">
-                        <input type="hidden" name="writer">
+                    <form action="<%=request.getContextPath()%>/review/hotelReviewCommentEnroll" method="post" name="boardCommentFrm">
+                        <input type="hidden" name="hotelNo" value="<%=hotel.getHotelNo()%>">
+                        <input type="hidden" name="writer" value="<%= loginUser != null ? loginUser.getUserId() : ""%>">
                         <input type="hidden" name="commentLevel" value="1" />
                         <input type="hidden" name="commentRef" value="0" />
                         <textarea id="comment-content" name="content"></textarea>
@@ -64,34 +66,51 @@
                     </form>
                 </div>
 
+			<%
+				if(!reviewList.isEmpty()){
+			%>
                 <table id="tbl-comment">
+            <%
+            	for(Review review : reviewList){
+            		if(review.getCommentLevel() == 1){
+            	
+            %>
                     <tr class="level1">
                         <td>
-                            <sub class="comment-writer">honggd</sub>
-                            <sub class="comment-date">23-01-18</sub>
+                            <sub class="comment-writer"><%=review.getUserId() %></sub>
+                            <sub class="comment-date"><%=review.getRegDate() %></sub>
                             <br>
                             <!-- 댓글내용-->
-                            가나다라마바사아
+                           	<%=review.getContent() %>
                         </td>
                         <td>
                             <button class="btn-reply" value="">답글</button>
                             <button class="btn-delete" value="">삭제</button>
                         </td>
                     </tr>
+                <%
+            		} else {
+                %>
                     <tr class="level2">
                         <td>
-                            <sub class="comment-writer">honggd</sub>
-                            <sub class="comment-date">23-01-18</sub>
+                            <sub class="comment-writer"><%=review.getUserId() %></sub>
+                            <sub class="comment-date"><%=review.getRegDate() %></sub>
                             <br>
                             <!-- 대댓글 -->
-                            123456789
+                            <%=review.getContent() %>
                         </td>
                         <td>
                             <button class="btn-delete" value="">삭제</button>
                         </td>
                     </tr>
+                <%
+            		}// if..else
+				}//for
+                %>
                 </table>
-                
+                <%
+					}
+                %>
             </div>
 
             <div id="map"></div>

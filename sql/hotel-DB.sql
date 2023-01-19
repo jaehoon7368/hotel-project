@@ -236,7 +236,7 @@ insert into tb_hotel_comment values(seq_hotel_comment_no.nextval, 2, '또오세�
 
 delete from tb_user where user_id = 'leess';
 
-<<<<<<< HEAD
+
 --drop table tb_hotel_comment;
 
 create table tb_hotel_comment(
@@ -255,14 +255,10 @@ create table tb_hotel_comment(
 
 --select * from tb_hotel_comment where hotel_no = 'H001' start with comment_level = 1 connect by prior comment_no = comment_ref order siblings by comment_no asc;
 
+insert into tb_hotel_comment values (seq_hotel_comment_no.nextval, ?, ?, default, ?, ?, ?)
+
 select*from tb_user;
 
-
-
-
-
-
-
-
-
-
+create sequence req_user_no;
+create sequence req_hotel_image_no;
+create sequence req_hotel_no ;
