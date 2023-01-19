@@ -12,7 +12,7 @@
 		for(Cookie cookie : cookies){
 			String name = cookie.getName();
 			String value = cookie.getValue();
-			// System.out.println(name + "=" + value);
+			System.out.println(name + "=" + value);
 			if("saveId".equals(name))
 				saveId = value;
 		}

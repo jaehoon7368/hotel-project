@@ -220,7 +220,9 @@ select h.*,(select renamed_filename from tb_hotel_image i where i.hotel_no = h.h
 update tb_hotel set hotel_address = '서울시 강남구 논현동 24-6' where hotel_no = 'H001';
 update tb_hotel set hotel_address = '강원 속초시 중앙동 468-121' where hotel_no = 'P002';
 
+delete from tb_user where user_id = 'leess';
 
+select*from tb_user;
 
 
 
