@@ -33,7 +33,10 @@ public class AdminEnrolledHotelViewServlet extends HttpServlet {
 		//2.업무로직
 		List<Hotel>hotelList = new ArrayList<>();
 		hotelList = adminService.selectAllHotel(userId);
-
+		
+			
+			
+			
 		//3.view단처리
 		request.setAttribute("hotelList",hotelList );
 		request.getRequestDispatcher("/WEB-INF/views/admin/adminEnrolledHotelView.jsp")

@@ -69,14 +69,13 @@ public class AdminHotelEnrollServlet extends HttpServlet {
 			int result = 0;
 		//2. 업무로직
 			result = adminService.insertHotel(hotel);
+			System.out.println("호텔등록완료 -> 룸 사진 추가 페이지 바로 이동  나중에 세션으로 보내서 alert 뜨게 만들기");
 			
+			response.sendRedirect(request.getContextPath()+"/admin/adminRoomEnroll?no="+hotel.getHotelNo());	
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;  //톰캣에 오류 전송
 		}
-		System.out.println("호텔등록완료 -> 룸 사진 추가 페이지 바로 이동  나중에 세션으로 보내서 alert 뜨게 만들기");
-		
-		response.sendRedirect(request.getContextPath()+"/admin/adminRoomEnrollView.jsp");
 		
 		
 	}
