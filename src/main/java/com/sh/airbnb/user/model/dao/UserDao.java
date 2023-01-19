@@ -42,9 +42,9 @@ public class UserDao {
 			pstmt.setString(1, user.getUserId());
 			pstmt.setString(2, user.getPassword());
 			pstmt.setString(3, user.getUserName());
-			pstmt.setString(4, user.getNickName());
+			pstmt.setString(4, user.getPhone());
 			pstmt.setString(5, user.getEmail());
-			pstmt.setString(6, user.getPhone());
+			pstmt.setString(6, user.getNickName());
 
 			result = pstmt.executeUpdate();
 			
@@ -81,9 +81,6 @@ public class UserDao {
 		return user;
 	}
 
-
-
-
 	private User handleUserResultSet(ResultSet rset) throws SQLException {
 		
 		User user = new User();
@@ -95,7 +92,7 @@ public class UserDao {
 		user.setPhone(rset.getString("phone"));
 		user.setUserRole(UserRole.valueOf(rset.getString("user_role")));
 		user.setEmail(rset.getString("email"));
-		user.setNickName(rset.getString("nickName"));
+		user.setNickName(rset.getString("nick_name"));
 		user.setUserStatus(UserStatus.valueOf(rset.getString("user_status")));
 		
 		return user;

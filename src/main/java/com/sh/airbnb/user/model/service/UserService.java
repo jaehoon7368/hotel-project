@@ -43,10 +43,10 @@ public class UserService {
 		// 1. Connection 생성
 				Connection conn = getConnection();
 				// 2. dao요청 (Connection 전달)
-				User member = userDao.selectOneUser(conn, userId);
+				User user = userDao.selectOneUser(conn, userId);
 				// 3. 반환
 				close(conn);
-				return member;
+				return user;
 
 	}
 }
