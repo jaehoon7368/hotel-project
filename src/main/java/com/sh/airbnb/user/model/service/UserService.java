@@ -5,7 +5,6 @@ import static com.sh.airbnb.common.JdbcTemplate.commit;
 import static com.sh.airbnb.common.JdbcTemplate.getConnection;
 import static com.sh.airbnb.common.JdbcTemplate.rollback;
 
-
 import java.sql.Connection;
 
 import com.sh.airbnb.user.model.dao.UserDao;
@@ -48,5 +47,54 @@ public class UserService {
 				close(conn);
 				return user;
 
+	}
+
+	public int updateUser(User user) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = userDao.updateUser(conn, user);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public int deleteUser(String userId) {
+		int result = 0;
+		// 1. Connection객체 생성
+		Connection conn = getConnection();
+		try {
+			// 2. dao 요청
+			result = userDao.deleteUser(conn, userId);
+			// 3. 트랜잭션 처리
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e; // controller 통보용
+		} finally {
+			// 4. Connection객체 반환
+			close(conn);
+		}
+		return result;
+	}
+
+	public int updatePassword(User user) {
+		Connection conn = getConnection();
+		int result = 0;;
+		try {
+			result = userDao.updatePassword(conn, user);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
 	}
 }

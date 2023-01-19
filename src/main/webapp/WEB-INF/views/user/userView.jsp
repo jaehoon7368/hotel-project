@@ -22,7 +22,7 @@
 			<tr>
 				<th>닉네임<sup>*</sup></th>
 				<td>	
-				<input type="text"  name="Nickname" id="Nickname" value="<%= loginUser.getNickName() %>"  required><br>
+				<input type="text"  name="nickName" id="nickName" value="<%= loginUser.getNickName() %>"  required><br>
 				</td>
 			</tr>
 			<tr>

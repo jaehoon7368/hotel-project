@@ -224,7 +224,26 @@ delete from tb_user where user_id = 'leess';
 
 select*from tb_user;
 
+update tb_hotel set hotel_address = '서울시 강남구 논현동 24-6' where hotel_no = 'H001';
+update tb_hotel set hotel_address = '강원 속초시 중앙동 468-121' where hotel_no = 'P002';
 
+alter table tb_room add room_info long;
+
+create sequence seq_hotel_comment_no;
+--drop table tb_hotel_comment;
+
+create table tb_hotel_comment(
+    comment_no number,
+    comment_level number default 1,
+    content varchar2(2000),
+    comment_ref number,
+    reg_date date default sysdate,
+    hotel_no varchar2(10),
+    user_id varchar2(15),
+    constraint pk_tb_hotel_comment primary key (comment_no),
+    constraint fk_tb_hotel_comment_tb_hotel foreign key (hotel_no) references tb_hotel(hotel_no),
+    constraint fk_tb_hotel_comment_tb_user foreign key (user_id) references tb_user(user_id)
+);
 
 
 

@@ -15,6 +15,8 @@ import com.sh.airbnb.user.model.exception.UserException;
 
 
 
+
+
 public class UserDao {
 	
 	private Properties prop = new Properties();
@@ -97,4 +99,75 @@ public class UserDao {
 		
 		return user;
 	}
+
+
+
+
+	public int updateUser(Connection conn, User user) {
+		String sql = prop.getProperty("updateUser");
+		int result = 0;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, user.getUserName());
+			pstmt.setString(2, user.getNickName());
+			pstmt.setString(3, user.getEmail());
+			pstmt.setString(4, user.getPhone());
+			pstmt.setString(5,  user.getUserId());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new UserException("회원정보 수정 오류", e);
+		}
+		return result;
+	}
+
+
+
+
+	public int deleteUser(Connection conn, String userId) {
+		int result = 0;
+		String sql = prop.getProperty("deleteUser");
+
+		try(PreparedStatement pstmt = conn.prepareStatement(sql);){
+			pstmt.setString(1, userId);
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			throw new UserException("회원탈퇴 오류", e);
+		}
+
+		return result;
+	}
+
+
+
+
+	public int updatePassword(Connection conn, User user) {
+		int result = 0;
+		String sql = prop.getProperty("updatePassword");
+
+		try (PreparedStatement pstmt = conn.prepareStatement(sql);){
+			pstmt.setString(1, user.getPassword());
+			pstmt.setString(2, user.getUserId());
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			throw new UserException("비밀번호 수정 오류!", e);
+		}
+
+		return result;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
