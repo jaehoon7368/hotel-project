@@ -1,120 +1,71 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/header.jsp" %>
- 	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <script>
-        $( function() {
-          $( "input" ).checkboxradio({
-            icon: false
-          });
-        } );
-        </script>
+	pageEncoding="UTF-8"%>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet"
+	href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
 
 <style>
-#hotelMain {
-	border: solid 1px gray;
-	border-radius: 5%;
-	text-align: center;
-	width: 600px;
-}
-td {
-	border-bottom: solid 1px gray;
+.entireBox {
+	margin: auto;
+	border: 1px solid gray;
+	width: 800px;
+	height: 800px;
+	border-radius: 2%;
 }
 
-.lastTd {
-	border: none;
-}
-
-.text {
-	border: none;
-	background: transparent;
-	width: 100%;
-	height: 50px;
-}
-#entireBox{
-	display : flex;
-	width :1000px;
-	
-
-}
-div.adminBox{
-	width: 500px;
-	border : solid 1px black ;
-	
-}
-
-#entireBox li{
-	padding:  20px;
-	padding-left :100px;
-	list-style: none;
-	}
-#entireBox a{
-	font-size : 20px;
-
-	
-}
-	
 </style>
-		
-		<div id = "entireBox"> 
-		<div class="adminBox">
-		       <ul>
-                <li><a href="">개인정보 수정</a></li>
-                <li><a href="">작성 리뷰</a></li>
-                <li><a href="">예약 내역 확인</a></li>
-                <li><a href="<%=request.getContextPath()%>/admin/adminhotelenroll">">호텔 등록</a></li>
-                <li><a href="<%=request.getContextPath()%>/admin/adminenrolledhotelview">등록된 호텔 보기</a></li>
-            </ul>
-         </div>
-        <div id="content" class="adminBox" >
-         
-        <form action="<%=request.getContextPath()%>/admin/adminhotelenroll" name="hotelEnrollFrm" method="POST"
-        enctype= "multipart/form-data" >
-            <br>
-            <h2>인원수</h2><br />
-            <div >
-                <label for="radio-1">2명</label>
-                <input type="radio" name="radio-1" id="radio-1" value="2">
-                <label for="radio-2">4명</label>
-                <input type="radio" name="radio-1" id="radio-2" value="4">
-                <label for="radio-3">6명</label>
-                <input type="radio" name="radio-1" id="radio-3" value="6">
-                <label for="radio-4">8명</label>
-                <input type="radio" name="radio-1" id="radio-4" value="8">
-                <label for="radio-5">10명</label>
-                <input type="radio" name="radio-1" id="radio-5" value="10">
-            </div>
-          
-          
-            <h2>Checkbox</h2>
-  			<fieldset>
-    		<legend>Hotel Ratings: </legend>
-    		<label for="checkbox-1"><img src="<%=request.getContextPath() %>/image/bath.png" alt="" /></label>
-    		<input type="checkbox" name="checkbox-1" id="checkbox-1" ">
-    		<label for="checkbox-2">3 Star</label>
-    		<input type="checkbox" name="checkbox-2" id="checkbox-2">
-    		<label for="checkbox-3">4 Star</label>
-    		<input type="checkbox" name="checkbox-3" id="checkbox-3">
-    		<label for="checkbox-4">5 Star</label>
-    		<input type="checkbox" name="checkbox-4" id="checkbox-4">
-  			</fieldset>
- 
-     	   <label for="">호텔 룸사진 등록 하기 </label> <input type="file" id= "upFile" name ="upFile" required accept="image/*"/>
+
+	<form action="" method="post">
+	
+<div class="entireBox">
+	<select class="form-select form-select-lg mb-3"
+		aria-label=".form-select-lg example">
+		<option selected>Room type select</option>
+		<option value="1">One</option>
+		<option value="2">Two</option>
+		<option value="3">Three</option>
+	</select> <select class="form-select form-select-lg mb-3"
+		aria-label=".form-select-lg example">
+		<option selected>Limit People</option>
+		<option value="2">2인</option>
+		<option value="4">4인</option>
+		<option value="6">6인</option>
+		<option value="8">8인</option>
+		<option value="12">12인</option>
+		<option value="16">16인</option>
+	</select>
+
+
+
+	<div class="input-group mb-3">
+		<span class="input-group-text">Room Pirce</span> <input type="text"
+			class="form-control" name="price" aria-label="Amount (to the nearest dollar)">
+		<span class="input-group-text">원(won)</span>
+	</div>
+
+
+
+	<div class="input-group">
+		<span class="input-group-text">Room info</span>
+		<textarea class="form-control" name="info" aria-label="With textarea"></textarea>
+	</div>
+
+	<div class="input-group mb-3">
+  <label class="input-group-text" for="inputGroupFile01">Upload</label>
+  <input type="file" class="form-control" id="inputGroupFile01" name ="upFile" >
+</div>
 			<div id="img-viewer-container">
-			<img id="img-viewer" width="350px">
-          <h2>편의시설 정보 추가하기</h2>
-       	 <input type="submit" value="등록하기" />
+			<img id="img-viewer" width="500px">
+       	 <input type="submit" value="등록하기"  />
         </form>
+</div>
         
-        </div> <!--  adminBox end -->
-        </div>  <!-- entireBox end -->
 
 
 <script>
 
-document.querySelector("#upFile").addEventListener('change',(e)=>{
+document.querySelector("#inputGroupFile01").addEventListener('change',(e)=>{
 	const f = e.target;
 	console.log(f.files);               //배열
 	console.log(f.files[0]);           //보통 0번지에 사진이 들어가있다.
@@ -128,14 +79,9 @@ document.querySelector("#upFile").addEventListener('change',(e)=>{
 		}
 	}else{ //파일 선택 취소한경우
 		document.querySelector("#img-viewer").src = "";
-		
 	}
 })
 
 
 </script>
 
-
-
-
-<%@ include file="/WEB-INF/views/common/footer.jsp"%>
