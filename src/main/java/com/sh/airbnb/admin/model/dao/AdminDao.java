@@ -32,8 +32,6 @@ public class AdminDao {
 	public int insertHotel(Connection conn, Hotel hotel) {
 		String sql = prop.getProperty("insertHotel");
 
-		System.out.println("sql문 가져왓느지 확인 "+sql);
-		System.out.println("호텔 객체 확인 ="+hotel);
 		int result = 0 ;
 		String user = "admin";
 		//insert into tb_hotel values ( ? || to_char(req_hotel_no.nextval,'fm0000') ,?,?,?,?,?
@@ -80,7 +78,6 @@ public class AdminDao {
 		String sql = prop.getProperty("selectLastHoteldNo");
 		//selectLastHoteldNo = select ?||to_char(req_hotel_no.nextval,'fm0000') from dual
 		String hotelNo = "";
-		System.out.println(hotel.getHotelType());
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql);) {
 			pstmt.setString(1, hotel.getHotelType().name());
@@ -112,9 +109,10 @@ public class AdminDao {
 		}
 		return result;
 	}
-
-	public List<Room> selectAllRoom(String hotelNo, Connection conn) {
+	//호텔안에 룸 셋팅 
+	public List<Room> selectAllRoom(String hotelNo, Connection conn) {  
 		String sql = prop.getProperty("selectAllRoom");
+		
 		//select *from tb_room where hotel_no = ?
 		List<Room> rooms =new ArrayList<>();
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -122,20 +120,36 @@ public class AdminDao {
 			try(ResultSet rset =pstmt.executeQuery()){
 				while(rset.next()) {
 					Room room = new Room();
-//					room.set
-					
-					
-					//룸 객체  
+					room.setHotelNo(hotelNo);
+					room.setLimitPeople(rset.getInt("limit_people"));
+					room.setRoomPrice(rset.getInt("room_price"));
+					room.setRoomType(rset.getString("room_type"));
+					room.setRoomNo(rset.getString("room_no"));
+					room.setRenamedFilename(rset.getString("renamed_filename"));
+					rooms.add(room);
 				}
-				
 			}
-			
 		}catch(Exception e) {
 			throw new AdminException ("호텔당 룸 객체 가져오기 오류 ",e);
-			
+		}
+		return rooms;
+	}
+
+	public int insertCategory(String userId,String hotelNo, String[] category, Connection conn) {
+		int result = 0 ;
+		String sql = prop.getProperty("insertgCategory");
+		//insert into tb_category values (? ,?, ?)
+		for(int i = 0 ; i<category.length; i++) {
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, category[i]);
+			pstmt.setString(2,hotelNo);
+			pstmt.setString(3, userId);
+			result = pstmt.executeUpdate();
+		}catch(Exception e) {
+			throw new AdminException("카테고리 등록 오류 ",e);
+		}
 		}
 		
-		
-		return null;
+		return result;
 	}
 }

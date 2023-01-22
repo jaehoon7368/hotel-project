@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.FileRenamePolicy;
@@ -29,6 +30,7 @@ public class AdminHotelEnrollServlet extends HttpServlet {
 		
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		//1.사용자입력값가져오기
 		try {
 			 
@@ -42,17 +44,18 @@ public class AdminHotelEnrollServlet extends HttpServlet {
 			
 			MultipartRequest multiReq = new MultipartRequest(request, saveDirectory ,maxPostSize , encoding, policy);
 			
-			
-			
-			String hotelUserId = multiReq.getParameter("userId");
-			hotelUserId = "admin";     //임시아이디 수동 지정
+			String userId = multiReq.getParameter("userId");
+			userId = "admin";     //임시아이디 수동 지정
 					
 			String hotelName = multiReq.getParameter("hotelName");
 			String hotelAddress = multiReq.getParameter("hotelAddress");
 			String hotelInfo = multiReq.getParameter("hotelInfo");
-			HotelType hotelType = HotelType.valueOf(multiReq.getParameter("radio-1"));
+			HotelType hotelType = HotelType.valueOf(multiReq.getParameter("hotelType"));
+			String[] category = multiReq.getParameterValues("checkbox");
+			
+			
 			Hotel hotel = new Hotel();
-			hotel.setUserId(hotelUserId);
+			hotel.setUserId(userId);
 			hotel.setHotelName(hotelName);
 			hotel.setHotelAddress(hotelAddress);
 			hotel.setHotelInfo(hotelInfo);
@@ -63,21 +66,22 @@ public class AdminHotelEnrollServlet extends HttpServlet {
 				hotelImage.setOriginalFilename(multiReq.getOriginalFileName("upFile1"));
 				hotelImage.setRenamedFilename(multiReq.getFilesystemName("upFile1"));
 				hotel.addHotelImage(hotelImage);
-				
 			}
-			
+			int result1 = 0;
 			int result = 0;
-		//2. 업무로직
+			//2. 업무로직
 			result = adminService.insertHotel(hotel);
-			System.out.println("호텔등록완료 -> 룸 사진 추가 페이지 바로 이동  나중에 세션으로 보내서 alert 뜨게 만들기");
-			
-			response.sendRedirect(request.getContextPath()+"/admin/adminRoomEnroll?no="+hotel.getHotelNo());	
+			if(category!=null) {
+			result1 = adminService.insertCategory(userId,category,hotel.getHotelNo());
+			}
+			session.setAttribute("msg", "호텔 등록을 성공하였습니다. ");
 		} catch (Exception e) {
 			e.printStackTrace();
+			session.setAttribute("msg", "호텔 등록을 실패하였습니다. ");
+			
 			throw e;  //톰캣에 오류 전송
 		}
-		
-		
+		response.sendRedirect(request.getContextPath()+"/admin/adminenrolledhotelview");
 	}
 
 }
