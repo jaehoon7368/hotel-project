@@ -1,3 +1,4 @@
+<%@page import="com.sh.airbnb.user.model.dto.UserRole"%>
 <%@page import="com.sh.airbnb.user.model.dto.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -26,6 +27,9 @@
 <title>Alpha</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/index.css" />
 <script src="<%= request.getContextPath()%>/js/jquery-3.6.1.js"></script>
+<link rel="stylesheet" href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 
 <body>
@@ -40,13 +44,16 @@
         			<i class="fa-regular fa-user" id="fa-user" ><span> <i class="fa-solid fa-bars" id="fa-bar"></i></span></i>
             </div>
             
+            <% 
+			boolean canEdit = loginUser != null ;
+            //로그인 안했을때 나오는 메뉴
+            if(!canEdit){ %>
             <div id="profile-menu" onclick="profileMenu();">
 		        <div id="wrapper">
 		            <div id="sign">
 		                <ul>
 		                    <li><button id="signin" onclick="location.href = '<%= request.getContextPath() %>/user/userLogin';">로그인</button></li>
 		                    <li><button id="signup" onclick="location.href = '<%= request.getContextPath() %>/user/userEnroll';">회원가입</button></li>
-		                   	<li><button id="btn1">관리자로그인</button></li>
 		                </ul>
 		            </div>
 		            <hr>
@@ -58,18 +65,36 @@
 		                </ul>
 		        </div>
 		     </div>
+		     <% }else {  //로그인했을시 나오는 메뉴 바 %>
+		      <div id="profile-menu" onclick="profileMenu();">
+		        <div id="wrapper">
+		            <div id="sign">
+		                <ul>
+		                   	<li><button id="btn1">마이페이지</button></li>
+		                   	<li><button id="btn2" onclick="location.href ='<%=request.getContextPath()%>/admin/adminhotelenroll';">판매자로그인</button></li>
+		                   	<li><button id="btn3">서버관리자로그인</button></li>
+		                </ul>
+		            </div>
+		            <hr>
+		            <div id="board">
+		                <ul>
+		                    <li><a href=""></a>공지사항</li>
+		                    <li><a href=""></a>자주 묻는 질문</li>
+		                    <li><a href=""></a>1:1 문의</li>
+		                </ul>
+		        </div>
+		        
+		     </div>
+		    
+		     
+		     
+		   <%} %> 
         </header> 
         <!-- header 종료 -->
-        
-       
-
         <div id="content" class=""></div>
-        
 <script>
-	document.querySelector("#btn1").addEventListener('click',()=>{
-	location.href ="<%=request.getContextPath()%>/admin/adminhotelenroll"
-	
-});
+
+
 
 function profileMenu() {
 	const Img = document.querySelector("#profile-img");
