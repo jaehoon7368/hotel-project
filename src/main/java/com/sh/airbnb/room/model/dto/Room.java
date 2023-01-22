@@ -7,8 +7,8 @@ public class Room extends RoomEntity{
 	public Room() {}
 
 	public Room(String roomNo, String roomType, int roomPrice, int limitPeople, String hotelNo,
-			String renamedFilename) {
-		super(roomNo, roomType, roomPrice, limitPeople, hotelNo);
+			String renamedFilename, String roomInfo) {
+		super(roomNo, roomType, roomPrice, limitPeople, hotelNo, roomInfo);
 		this.renamedFilename = renamedFilename;
 	}
 

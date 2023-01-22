@@ -62,7 +62,7 @@ img{
 #main-room-info{
     width: 550px;
     height: 250px;
-    margin: 10px 0;
+    margin: 15px 0;
 }
 
 #main-room-info h2{
@@ -74,14 +74,18 @@ img{
     font-size: 23px;
 }
 
-#main-room-info p{
-    margin: 10px 0;
+#price-box{
+	margin-top : 30px
 }
 
 #price-name{
     font-size: 18px;
     font-weight: bold;
     padding: 14px 0;
+}
+
+#info p{
+	padding : 10px 0;
 }
 
 #reservation-btn{
@@ -99,12 +103,139 @@ img{
     text-decoration: none;
     color: white;
 }
+#reservation-a p{
+	margin-top: 10px;
+}
 
 #map{
     width: 1000px;
     height: 350px;
     margin: 50px auto;
     border: 1px solid black;
+}
+
+#comment-container{
+    width: 900px;
+    margin: 50px auto;
+    /* border: 1px solid black; */
+    transform: translate(30px,0);
+}
+
+.comment-content{
+    border-radius: 15px;
+    outline: none;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+.btn-comment-enroll1{
+    width: 50px;
+    height: 35px;
+    background-color: #ef303d;
+    color: white;
+    border-style: none;
+    border-radius: 15px;
+    outline: none;
+    position: relative;
+    top: -12px;
+}
+
+#comment-editor textarea{
+    font-size: 20px;
+    width: 785px;
+    height: 30px;
+    padding-left: 10px;
+    padding-top: 5px;
+}
+
+#content2{
+	 font-size: 16px;
+	 padding-left: 10px;
+     padding-top: 5px;
+}
+
+#tbl-comment{
+    width: 800px;
+    height: 50px;
+    border: 1px solid black;
+    margin-bottom: 5px;
+    border-collapse: separate;
+    border-radius: 15px;
+    outline: none;
+}
+
+
+table#tbl-comment tr td {
+    border-bottom: 1px solid lightgray;
+    padding: 5px;
+    text-align: left;
+    line-height: 180%;
+}
+
+table#tbl-comment tr td:first-of-type {
+    padding: 5px 5px 5px 30px;
+}
+
+table#tbl-comment tr td:last-of-type {
+    text-align: right;
+    width: 130px;
+}
+
+table#tbl-comment button.btn-reply {
+    display: none;
+    width: 50px;
+    height: 35px;
+    background-color: #ef303d;
+    color: white;
+    border-style: none;
+    border-radius: 15px;
+    outline: none;
+}
+
+table#tbl-comment button.btn-delete{
+    display : none;
+    width: 50px;
+    height: 35px;
+    background-color: black;
+    color: white;
+    border-style: none;
+    border-radius: 15px;
+    outline: none;
+}
+
+table#tbl-comment tr:hover button.btn-delete{display:inline;}
+
+table#tbl-comment tr:hover button.btn-reply {
+    display: inline;
+}
+
+table#tbl-comment sub.comment-writer {
+    color: navy;
+    font-size: 14px
+}
+
+table#tbl-comment sub.comment-date {
+    color: tomato;
+    font-size: 10px
+}
+
+table#tbl-comment tr.level2 {
+    color: gray;
+    font-size: 14px;
+}
+
+table#tbl-comment tr.level2 td:first-of-type {
+    padding-left: 80px;
+}
+
+table#tbl-comment tr.level2 sub.comment-writer {
+    color: #8e8eff;
+    font-size: 14px
+}
+
+table#tbl-comment tr.level2 sub.comment-date {
+    color: #ff9c8a;
+    font-size: 10px
 }
 /* content end */
 
