@@ -62,7 +62,7 @@ img{
 #main-room-info{
     width: 550px;
     height: 250px;
-    margin: 10px 0;
+    margin: 15px 0;
 }
 
 #main-room-info h2{
@@ -74,14 +74,18 @@ img{
     font-size: 23px;
 }
 
-#main-room-info p{
-    margin: 10px 0;
+#price-box{
+	margin-top : 30px
 }
 
 #price-name{
     font-size: 18px;
     font-weight: bold;
     padding: 14px 0;
+}
+
+#info p{
+	padding : 10px 0;
 }
 
 #reservation-btn{
@@ -98,6 +102,9 @@ img{
     text-align: center;
     text-decoration: none;
     color: white;
+}
+#reservation-a p{
+	margin-top: 10px;
 }
 
 #map{
@@ -135,7 +142,7 @@ img{
 
 #comment-editor textarea{
     font-size: 20px;
-    width: 805px;
+    width: 785px;
     height: 30px;
     padding-left: 10px;
     padding-top: 5px;
@@ -148,12 +155,13 @@ img{
 }
 
 #tbl-comment{
-    width: 820px;
+    width: 800px;
     height: 50px;
-    border-radius: 15px;
-    outline: none;
     border: 1px solid black;
     margin-bottom: 5px;
+    border-collapse: separate;
+    border-radius: 15px;
+    outline: none;
 }
 
 
@@ -161,7 +169,7 @@ table#tbl-comment tr td {
     border-bottom: 1px solid lightgray;
     padding: 5px;
     text-align: left;
-    line-height: 120%;
+    line-height: 180%;
 }
 
 table#tbl-comment tr td:first-of-type {

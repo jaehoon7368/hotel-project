@@ -39,7 +39,7 @@
                     <div id="price-box">
                         <p id="price-name"><span><%=room.getRoomPrice()%>원</span>가격</p>
                         <hr class="color-gray">
-                        <div>
+                        <div id="info">
                             <p>객실이용안내</p>
                         </div>
                             <a href="" id="reservation-a">
@@ -75,6 +75,7 @@
             		if(review.getCommentLevel() == 1){
             	
             %>
+         
                 <table id="tbl-comment">
             
                     <tr class="level1">
@@ -117,6 +118,7 @@
                 <%
 					}
                 %>
+          
             </div>
 
             <div id="map"></div>
