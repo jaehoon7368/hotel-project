@@ -56,25 +56,27 @@
             <div id="comment-container">
                 <h2>리뷰</h2>
                 <div id="comment-editor">
-                    <form action="<%=request.getContextPath()%>/review/hotelReviewCommentEnroll" method="post" name="boardCommentFrm">
+                    <form action="<%=request.getContextPath()%>/review/hotelReviewCommentEnroll" method="post" name="hotelReviewCommentFrm">
                         <input type="hidden" name="hotelNo" value="<%=hotel.getHotelNo()%>">
                         <input type="hidden" name="writer" value="<%= loginUser != null ? loginUser.getUserId() : ""%>">
                         <input type="hidden" name="commentLevel" value="1" />
                         <input type="hidden" name="commentRef" value="0" />
-                        <textarea id="comment-content" name="content"></textarea>
-                        <button type="submit" id="btn-comment-enroll1">등록</button>
+                        <textarea class="comment-content" name="content"></textarea>
+                        <button type="submit" class="btn-comment-enroll1">등록</button>
                     </form>
                 </div>
 
 			<%
 				if(!reviewList.isEmpty()){
 			%>
-                <table id="tbl-comment">
             <%
             	for(Review review : reviewList){
+            		boolean canRemove = loginUser != null && (loginUser.getUserId().equals(review.getUserId()));
             		if(review.getCommentLevel() == 1){
             	
             %>
+                <table id="tbl-comment">
+            
                     <tr class="level1">
                         <td>
                             <sub class="comment-writer"><%=review.getUserId() %></sub>
@@ -84,8 +86,10 @@
                            	<%=review.getContent() %>
                         </td>
                         <td>
-                            <button class="btn-reply" value="">답글</button>
-                            <button class="btn-delete" value="">삭제</button>
+                            <button class="btn-reply" value="<%=review.getCommentNo()%>">답글</button>
+                            <%if(canRemove) {%>
+                            <button class="btn-delete" value="<%=review.getCommentNo()%>">삭제</button>
+                            <%} %>
                         </td>
                     </tr>
                 <%
@@ -100,12 +104,14 @@
                             <%=review.getContent() %>
                         </td>
                         <td>
-                            <button class="btn-delete" value="">삭제</button>
+                            <%if(canRemove) {%>
+                            <button class="btn-delete" value="<%=review.getCommentNo()%>">삭제</button>
+                            <%} %>
                         </td>
                     </tr>
                 <%
             		}// if..else
-				}//for
+            	}//for
                 %>
                 </table>
                 <%
@@ -114,6 +120,100 @@
             </div>
 
             <div id="map"></div>
+
+<form 
+	action="<%= request.getContextPath() %>/review/HotelReviewCommentDelete" 
+	name="hotelReviewCommentDelFrm"
+	method="POST">
+	<input type="hidden" name="commentNo" />
+	<input type="hidden" name="hotelNo" value="<%= hotel.getHotelNo() %>"/>
+</form>
+
+  <script>
+const loginAlert = () => {
+		alert("로그인 후 이용할 수 있습니다.");
+		location.href = "<%=request.getContextPath()%>/user/userLogin";
+};
+
+
+
+// textarea
+document.hotelReviewCommentFrm.content.addEventListener('focus', (e) => {
+	<% if(loginUser == null){ %>
+		loginAlert();
+	<% } %>
+});
+  
+document.querySelectorAll(".btn-delete").forEach((button) => {
+	button.onclick = (e) => {
+		if(confirm("해당 댓글을 삭제하시겠습니까?")){
+			const frm = document.hotelReviewCommentDelFrm;
+			frm.commentNo.value = e.target.value;
+			frm.submit();
+		}
+	}; 
+});	
+
+
+document.querySelectorAll(".btn-reply").forEach((button) => {
+	button.onclick = (e) => {
+		console.log(e.target.value);
+		
+		<% if(loginUser == null){ %>
+			loginAlert();
+		<% } else { %>
+			const tr = `
+			<tr>
+				<td colspan="2" style="text-align:left">
+					<form action="<%=request.getContextPath()%>/review/hotelReviewCommentEnroll" method="post" name="hotelReviewCommentFrm">
+                		<input type="hidden" name="hotelNo" value="<%=hotel.getHotelNo()%>">
+                		<input type="hidden" name="writer" value="<%= loginUser != null ? loginUser.getUserId() : ""%>">
+                		<input type="hidden" name="commentLevel" value="2" />
+		                <input type="hidden" name="commentRef" value="\${e.target.value}" />    
+						<textarea class="comment-content" id="content2" name="content" cols="70"></textarea>
+		                <button type="submit" class="btn-comment-enroll1">등록</button>
+		            </form>
+		      	</td>
+		    </tr>
+			`;
+			
+			const target = e.target.parentElement.parentElement; // tr
+			console.log(target);
+			target.insertAdjacentHTML('afterend', tr);
+			
+			button.onclick = null; // 이벤트핸들러 제거
+		
+		<% } %>
+	};
+});
+
+/**
+ * 이벤트버블링을 통해 부모요소에서 이벤트 핸들링
+ */
+document.body.addEventListener('submit', (e) => {
+	console.log(e.target);
+	
+	if(e.target.name === 'hotelReviewCommentFrm'){
+		
+		<% if(loginUser == null){ %>
+			loginAlert();
+			e.preventDefault();
+			return; // 조기리턴
+		<% } %>
+				
+		// 유효성검사
+		const content = e.target.content;
+		if(!/^(.|\n)+$/.test(content.value)){
+			e.preventDefault();
+			alert('내용을 작성해주세요');
+			content.focus();
+		}
+	}
+	
+	
+});
+</script>
+
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	3e905506f4a3cc07b319becdea930119&libraries=services"></script>
 <script>

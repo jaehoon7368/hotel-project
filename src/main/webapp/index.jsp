@@ -5,6 +5,7 @@
 <%
 	List<Hotel> hotelList = (List<Hotel>) request.getAttribute("hotelList"); 
 %>
+
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 <!-- 최상단 검색 및 필터-->
@@ -23,6 +24,7 @@
                         <p>펜션</p>
                     </div>
                 </div>
+
                 <div id="subsearch-box">
                     <div id="search-main" class="search-main">
                         <form action="">

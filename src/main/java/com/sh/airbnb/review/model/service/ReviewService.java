@@ -33,4 +33,19 @@ public class ReviewService {
 		return reviewList;
 	}
 
+	public int deleteHotelReview(int commentNo) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			result = reviewDao.deleteHotelReview(conn,commentNo);
+			commit(conn);
+		}catch(Exception e) {
+			rollback(conn);
+			throw e;
+		}finally {
+			close(conn);
+		}
+		return result;
+	}
+
 }

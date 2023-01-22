@@ -73,4 +73,19 @@ public class ReviewDao {
 		return reviewList;
 	}
 
+	public int deleteHotelReview(Connection conn, int commentNo) {
+		String sql = prop.getProperty("deleteHotelReview");
+		int result = 0;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, commentNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new ReviewException("호텔 리뷰 삭제 오류!",e);
+		}
+		
+		return result;
+	}
+
 }
