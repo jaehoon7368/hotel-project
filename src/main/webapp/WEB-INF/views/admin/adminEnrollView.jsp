@@ -1,20 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
- 	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet"
-	href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
-    <script>
-        $( function() {
-          $( "input" ).checkboxradio({
-            icon: false
-          });
-        } );
-        </script>
 <style>
 #tb{
 	border: solid 1px gray;
@@ -93,24 +79,23 @@ div.adminBox{
          </div>
 	<div id="content" class="adminBox">
 
-
 		<form action="<%=request.getContextPath()%>/admin/adminhotelenroll"
-			name="hotelEnrollFrm" method="POST" enctype="multipart/form-data">
+			name="hotelEnrollFrm" method="POST" enctype="multipart/form-data" id="hotelEnrollFrm">
 			<br>
 			<div class="entireBox">
 				<div class="input-group mb-3">
-					<span class="input-group-text" id="basic-addon1">Hotel Name</span> <input
+					<span class="input-group-text" >Hotel Name</span> <input
 						type="text" class="form-control" placeholder="HotelName"
-						aria-label="Username" aria-describedby="basic-addon1" name= "hotelName">
+						aria-label="Username" aria-describedby="basic-addon1" name= "hotelName" id="name" >
 				</div>
 				<div class="input-group mb-3">
-					<span class="input-group-text" id="basic-addon1">Hotel arddres</span> <input
-						type="text" class="form-control" placeholder="HotelArddress"
-						aria-label="Username" aria-describedby="basic-addon1" name="hotelArddress">
+					<span class="input-group-text" >Hotel address</span> <input
+						type="text" class="form-control" placeholder="HotelAddress"
+						aria-label="Username" aria-describedby="basic-addon1" name="hotelAddress" id="address">
 				</div>
 
 				<select class="form-select form-select-lg mb-3"
-					aria-label=".form-select-lg example" name= "hotelType">
+					aria-label=".form-select-lg example" name= "hotelType" id="type"  required>
 					<option selected>Hotel Type</option>
 					<option value="P">펜션</option>
 					<option value="H">호텔</option>
@@ -120,7 +105,7 @@ div.adminBox{
 
 				<div class="input-group">
 					<span class="input-group-text">Hotel Info</span>
-					<textarea class="form-control" name="hotelNnfo"
+					<textarea id ="info" class="form-control" name="hotelInfo"
 						aria-label="With textarea"></textarea>
 				</div>
 
@@ -168,7 +153,7 @@ div.adminBox{
 			<div id="img-viewer-container">
 					<img id="img-viewer" width="500px">
 				</div>
-				 <button type="button" class="btn btn-dark" onclick ="popUp()" style="float: center" > 호텔 등록하기</button>
+				 <button type="submit" class="btn btn-dark"  style="float: center" > 호텔 등록하기</button>
  		</form> 
 
 	</div> <!--  adminBox end -->
@@ -189,6 +174,7 @@ document.querySelector("#inputGroupFile01").addEventListener('change',(e)=>{
 			//읽기 작업 완료시 호출될 load이벤트핸들러
 			document.querySelector("#img-viewer").src = e.target.result; // dataUrl		
 			console.log(e.target.result); //파일2진데이터를 인코딩한 결과
+			
 		}
 	}else{ //파일 선택 취소한경우
 		document.querySelector("#img-viewer").src = "";
@@ -197,34 +183,28 @@ document.querySelector("#inputGroupFile01").addEventListener('change',(e)=>{
 })
 
 
-document.hotelEnrollFrm.onsubmit = (e)=>{
-	//호텔정보 입력 유효성 검사입니다.
-	const name = e.target.hotelName;
-	const address = e.target.hotelAddress;
-	const info = e.target.hotelInfo;
-	console.log(type)
-	console.log(name)
-	console.log(address)
-	console.log(info)
-	if(!/^.+%/.test(name.value)){
-		alert('호텔 이름을 입력해주세요.');
-		type.select();
+document.hotelEnrollFrm.addEventListener('submit',(e)=>{
+	e.preventDefault();
+	const \$name = $('#name').val();
+	const \$address = $('#address').val();
+	const \$info = $('#info').val();
+	const \$type = $('#type').val();
+	
+	
+	if(!/^[가-힣]{3,}$/.test(\$name.value)){
+		alert('호텔 이름은 3글자 이상 입력해주세요.');
 		return false;
 	}	
-	if(!/^.+%/.test(address.value)){
-		alert('호텔 주소를 입력해주세요.');
-		type.select();
+	if(!/^[가-힣0-9]{5,}$/.test(\$address.value)){
+		alert('호텔 주소를 정확히 입력해주세요.');
 		return false;
 	}
-	if(!/^.+%/.test(info.value)){
+	if(!/^[가-힣]{5,}$/.test(\$info.value)){
 		alert('호텔 정보를 입력해주세요.');
-		type.select();
 		return false;
 	}
 	
-}
-
-
+})
 </script>
 
 

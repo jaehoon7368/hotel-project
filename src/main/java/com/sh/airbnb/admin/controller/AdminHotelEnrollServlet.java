@@ -30,6 +30,7 @@ public class AdminHotelEnrollServlet extends HttpServlet {
 		
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		//1.사용자입력값가져오기
 		try {
 			 
@@ -52,7 +53,7 @@ public class AdminHotelEnrollServlet extends HttpServlet {
 			HotelType hotelType = HotelType.valueOf(multiReq.getParameter("hotelType"));
 			String[] category = multiReq.getParameterValues("checkbox");
 			
-			HttpSession session = request.getSession();
+			
 			Hotel hotel = new Hotel();
 			hotel.setUserId(userId);
 			hotel.setHotelName(hotelName);
@@ -74,11 +75,13 @@ public class AdminHotelEnrollServlet extends HttpServlet {
 			result1 = adminService.insertCategory(userId,category,hotel.getHotelNo());
 			}
 			session.setAttribute("msg", "호텔 등록을 성공하였습니다. ");
-			response.sendRedirect(request.getContextPath()+"/admin/adminRoomEnroll?no="+hotel.getHotelNo());
 		} catch (Exception e) {
 			e.printStackTrace();
+			session.setAttribute("msg", "호텔 등록을 실패하였습니다. ");
+			
 			throw e;  //톰캣에 오류 전송
 		}
+		response.sendRedirect(request.getContextPath()+"/admin/adminenrolledhotelview");
 	}
 
 }
