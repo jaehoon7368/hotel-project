@@ -61,8 +61,9 @@ public class UserLoginServlet extends HttpServlet {
 		else {
 			session.setAttribute("msg", "아이디가 존재하지 않거나 비밀번호가 틀립니다.");
 		}
-		String referer = request.getHeader("Referer");
-		response.sendRedirect(referer);
+//		String referer = request.getHeader("Referer");
+//		response.sendRedirect(referer);
+		response.sendRedirect(request.getContextPath() + "/");
 
 	}
 
