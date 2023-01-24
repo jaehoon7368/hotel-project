@@ -53,7 +53,7 @@ header div{
 }
 
 #icon-box{
-    width: 400px;
+    width: 200px;
     display: flex;
     justify-content: space-between;
     text-align: center;
@@ -72,26 +72,140 @@ header div{
     margin-top: 5px;
 }
 
-#search-main input{
+#search-btn{
     width: 300px;
-    height: 30px;
-    border-radius: 15px;
+    height: 35px;
+    border-radius: 20px;
     outline: none;
-    font-size: 20px;
+    cursor: pointer;
+    border: 1px solid black;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
     padding-left: 10px;
+    padding-top: 5px;
+}
+#search-btn div{
+    width: 120px;
+    text-align: center;
+    font-size: 17px;
+}
+#where-box{
+    padding-left: 30px;
+}
+#when-box{
+    padding-right: 25px;
+}
+#search-btn div p{
+    padding-top: 2px;
+}
+#search-btn-span{
+    font-size: 20px;
+    color: rgb(188, 188, 188);
+    height: 100%;
 }
 
-#search-main button{
+#search-icon{
+    width: 20px;
     background-color: #ef303d;
-    font-size: 20px;
+    font-size: 16px;
     color: white;
     border-style: none;
     border-radius: 50%;
-    padding: 5px;
+    padding: 4px;
+    margin-right: 3px;
+    margin-top: -2px;
+    float: right;
 }
 
+#search-detail{
+    width: 850px;
+    height: 60px;
+    background-color:lightgray;
+    border-radius: 30px;
+    position: absolute;
+    display: flex;
+    transform: translate(300px,100px);
+    justify-content: space-around;
+    box-shadow: 7px 7px 10px #111;
+}
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.modal.show {
+    display:flex;
+}
+
+#search-detail p{
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#search-location{
+    width: 460px;
+    height: 100%;
+    border-radius: 30px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 20px;
+    background-color: white;
+}
+#search-location input{
+    width: 400px;
+    font-size: 16px;
+    border: none;
+    padding: 5px 0;
+}
+.checkInOut-box{
+    width: 120px;
+    height: 100%;
+    background-color: white;
+    border-radius: 30px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 20px;
+}
+.checkInOut-box input{
+    width: 100px;
+    font-size: 16px;
+    border: none;
+    padding: 5px 0;
+}
+#search-detail-btn{
+    width: 90px;
+    height: 100%;
+    border-radius: 30px;
+    cursor: pointer;
+    background-color: #ef303d;
+    display: flex;
+    justify-content: center;
+}
+#search-detail-btn button{
+    background-color: #ef303d;
+    height: 50px;
+    margin-top: 5px;
+    color: white;
+    font-size: 16px;
+    border-style: none;
+    cursor: pointer;
+}
+#search-detail-btn span{
+    color: white;
+}
+
+/* 서치버튼과 필터 박스 */
 #subsearch-box{
-    width: 450px;
+    width: 400px;
     display: flex;
     justify-content: space-around;
 }
@@ -117,6 +231,9 @@ header div{
     justify-content: space-around;
     width: 250px;
     text-align: center;
+    border: 1px solid black;
+    border-radius: 15px;
+    outline: none;
 }
 #ckeckInOut-box input{
     width: 100px;
