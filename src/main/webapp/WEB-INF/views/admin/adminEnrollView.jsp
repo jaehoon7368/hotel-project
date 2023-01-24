@@ -1,120 +1,67 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin/adminEnrollView.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 <style>
-#tb{
-	border: solid 1px gray;
-	border-radius: 2%;
-	text-align: center;
-	width: 600px;
+.hotelbtn{
+    width: 100px;
+    height: 40px;
+    background-color: black;
+    padding: 5px 0;
+    border-radius: 15px;
+    outline: none;
+    font-size: 15px;
+    text-align: center;
+    color: white;
+	border : none;
 }
-td {
-	border-bottom: solid 1px gray;
-}
-
-.lastTd {
-	border: none;
-}
-
-.text {
-	border: none;
-	background: transparent;
-	width: 100%;
-	height: 50px;
-}
-#entireBox{
-	display : flex;
-
-}
-#typeBox{
-	padding-left :200px;
-	padding-top :50px;
-	padding-bottom :10px;
-}
-
-div.adminBox{
-	width: 500px;
-	
-}
-
-#entireBox li{
-	padding:  20px;
-	padding-left :100px;
-	list-style: none;
-	}
-
-#entireBox a{
-	font-size : 20px;
-	color : black;
-	text-decoration: none;
-	
-}
-#categoryBox img{
-	width:70px;
-}
-#categoryBox{
-	width:600px;
-	height :200px;
-	text-align: center;
-}
-.entireBox {
-	border-radius: 2%;
-	border: 1px solid gray;
-	width: 800px;
-	height: 50%;
-	text-align: center
-}
-
 
 </style>
 		<div id = "entireBox"> 
 		<div class="adminBox">
 		       <ul>
-		       	<!-- 기훈 수정 시작 -->
-                <li><a href="<%= request.getContextPath()%>/user/userView">개인정보 수정</a></li>
-                <!-- 기훈 수정 끝 -->
+                <li><a href="">개인정보 수정</a></li>
                 <li><a href="">작성 리뷰</a></li>
                 <li><a href="">예약 내역 확인</a></li>
                 <li><a href="<%=request.getContextPath()%>/admin/adminhotelenroll">호텔 등록</a></li>
-                <li><a href="<%=request.getContextPath()%>/admin/adminenrolledhotelview">등록된 호텔 보기</a></li>
+                <li><a href="<%=request.getContextPath()%>/admin/adminenrolledhotelview?user_id=<%=loginUser.getUserId() %>">등록된 호텔 보기</a></li>
             </ul>
          </div>
 	<div id="content" class="adminBox">
 
 		<form action="<%=request.getContextPath()%>/admin/adminhotelenroll"
-			name="hotelEnrollFrm" method="POST" enctype="multipart/form-data" id="hotelEnrollFrm">
+			name="hotelEnrollFrm" method="POST" enctype="multipart/form-data" >
 			<br>
+			<input type="hidden"  name="userId"value="<%=loginUser.getUserId()%>" />
 			<div class="entireBox">
-				<div class="input-group mb-3">
-					<span class="input-group-text" >Hotel Name</span> <input
-						type="text" class="form-control" placeholder="HotelName"
-						aria-label="Username" aria-describedby="basic-addon1" name= "hotelName" id="name" >
-				</div>
-				<div class="input-group mb-3">
-					<span class="input-group-text" >Hotel address</span> <input
-						type="text" class="form-control" placeholder="HotelAddress"
-						aria-label="Username" aria-describedby="basic-addon1" name="hotelAddress" id="address">
-				</div>
-
-				<select class="form-select form-select-lg mb-3"
-					aria-label=".form-select-lg example" name= "hotelType" id="type"  required>
-					<option selected>Hotel Type</option>
-					<option value="P">펜션</option>
-					<option value="H">호텔</option>
-					<option value="Y">모텔</option>
-				</select>
-
-
-				<div class="input-group">
-					<span class="input-group-text">Hotel Info</span>
-					<textarea id ="info" class="form-control" name="hotelInfo"
-						aria-label="With textarea"></textarea>
-				</div>
-
-				<div class="input-group mb-3">
-					<label class="input-group-text" for="inputGroupFile01">Upload</label>
-					<input type="file" class="form-control" id="inputGroupFile01"
-						name="upFile">
+			<table id="enrollTb" style="height: 100%; width: 100%;" >
+				<tr >
+					<td><span>호텔 이름</span> <input type="text" name="hotelName" id="name" class="put"></td>
+				</tr>
+				<tr >
+					<td><span>호텔 주소</span><input type="text"  name="hotelAddress" id="address" class="put"></td>
+				</tr>
+				<tr>
+					
+					<td>
+						<select style="width:300px; height :50px; font-size:x-large;"  name= "hotelType" id="type"  required>
+						<option value="" selected>호텔 타입을 선택해주세요</option>
+						<option value="P">펜션</option>
+						<option value="H">호텔</option>
+						<option value="Y">모텔</option>
+					</select>
+					</td>
+				</tr>
+				<tr>
+					<td><span>호텔 정보</span><textarea id ="info" name="hotelInfo"class="put"></textarea></td>
+				</tr>
+			</table>
+				<div class="">
+					<label >메인 사진 등록</label>
+					<input type="file" name="upFile"  id="upFile">
 				</div>
 			
 				<br />
@@ -152,10 +99,11 @@ div.adminBox{
 					<input type="checkbox" name="checkbox" id="checkbox-10"
 						value="c013">
 				</div>
+				<br /><br /><br /><br />
 			<div id="img-viewer-container">
 					<img id="img-viewer" width="500px">
 				</div>
-				 <button type="submit" class="btn btn-dark"  style="float: center" > 호텔 등록하기</button>
+				 <button type="submit" class= "hotelbtn" style="float: center" > 호텔 등록하기</button>
  		</form> 
 
 	</div> <!--  adminBox end -->
@@ -165,7 +113,7 @@ div.adminBox{
 
 <script>
 
-document.querySelector("#inputGroupFile01").addEventListener('change',(e)=>{
+document.querySelector("#upFile").addEventListener('change',(e)=>{
 	const f = e.target;
 	console.log(f.files);               //배열
 	console.log(f.files[0]);           //보통 0번지에 사진이 들어가있다.
@@ -185,28 +133,28 @@ document.querySelector("#inputGroupFile01").addEventListener('change',(e)=>{
 })
 
 
-document.hotelEnrollFrm.addEventListener('submit',(e)=>{
-	e.preventDefault();
-	const \$name = $('#name').val();
-	const \$address = $('#address').val();
-	const \$info = $('#info').val();
-	const \$type = $('#type').val();
+document.hotelEnrollFrm.onsubmit = (e) => {
+	const name = e.target.hotelName;
+	const address = e.target.hotelAddress;
+	const info = e.target.hotelInfo;
 	
-	
-	if(!/^[가-힣]{3,}$/.test(\$name.value)){
-		alert('호텔 이름은 3글자 이상 입력해주세요.');
-		return false;
-	}	
-	if(!/^[가-힣0-9]{5,}$/.test(\$address.value)){
-		alert('호텔 주소를 정확히 입력해주세요.');
+	if(!/^.+$/.test(name.value)){
+		alert("호텔이름을 작성해주세요.");
 		return false;
 	}
-	if(!/^[가-힣]{5,}$/.test(\$info.value)){
-		alert('호텔 정보를 입력해주세요.');
+	if(!/^.+$/.test(address.value)){
+		alert("호텔주소를 작성해주세요.");
 		return false;
 	}
 	
-})
+	if(!/^(.|n)/.test(info.value)){
+		alert("내용을 작성해주세요.");
+		return false;
+	}
+	
+}
+
+
 </script>
 
 

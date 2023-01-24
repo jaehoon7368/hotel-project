@@ -1,0 +1,64 @@
+#entireBox{
+	display : flex;
+
+}
+#typeBox{
+	padding-left :200px;
+	padding-top :50px;
+	padding-bottom :10px;
+}
+
+div.adminBox{
+	width: 500px;
+	
+}
+#entireBox li{
+	padding:  20px;
+	padding-left :100px;
+	list-style: none;
+	}
+#entireBox a{
+	font-size : 20px;
+	color : black;
+	text-decoration: none;
+	
+}
+#categoryBox img{
+	width:70px;
+}
+#categoryBox{
+	width:600px;
+	height :200px;
+	text-align: center;
+	font-family: 'Gowun Dodum' ;
+}
+.entireBox {
+	border-radius: 5%;
+	border: 1px solid gray;
+	width: 800px;
+	height: 50%;
+	text-align: center
+}
+			
+#enrollTb td{
+	border : solid 1px gray;
+	border-top : none;
+	border-right : none;
+	border-left :none;
+	text-align: center;
+	
+}
+.put{
+	width: 500px;
+	height: 40px;
+	font-size: larger;
+	border :none;
+}
+.put info {
+	height: 100px;
+
+}
+#enrollTb {
+	font-family: 'Gowun Dodum' ;
+	font-size :x-large;
+}
