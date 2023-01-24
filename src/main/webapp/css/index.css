@@ -312,7 +312,7 @@ footer {
         position: absolute;
         margin: 3px;
    		margin-left: -10px;
-        background-color: #bdb8b817;
+        background-color: #f6f6f6;
     }
   #profile-menu.active{
       display: flex;
@@ -334,6 +334,10 @@ footer {
    #board, #sign {
    		padding:10px;
    		margin-left:10px;
+   }
+   
+   #rine {
+   		width: 90%;
    }
    
     

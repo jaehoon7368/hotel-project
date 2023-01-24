@@ -68,7 +68,7 @@
 		                    <li><button id="signup" onclick="location.href = '<%= request.getContextPath() %>/user/userEnroll';">회원가입</button></li>
 		                </ul>
 		            </div>
-		            <hr>
+		            <hr id="rine">
 		            <div id="board">
 		                <ul>
 		                    <li><a href=""></a>공지사항</li>
@@ -82,12 +82,14 @@
 		        <div id="wrapper">
 		            <div id="sign">
 		                <ul>
-		                   	<li><button id="btn1">마이페이지</button></li>
-		                   	<li><button id="btn2" onclick="location.href ='<%=request.getContextPath()%>/admin/adminhotelenroll';">판매자로그인</button></li>
-		                   	<li><button id="btn3">서버관리자로그인</button></li>
+		                	
+		                   	<li><button id="btn1" onclick="location.href = '<%= request.getContextPath() %>/user/userLogout';">로그아웃</button></li>
+		                   	<li><button id="btn2" onclick="location.href ='<%=request.getContextPath()%>/admin/adminhotelenroll';">마이페이지</button></li>
+		                   	<li><button id="btn3" onclick="location.href ='<%=request.getContextPath()%>/admin/adminhotelenroll';">판매자로그인</button></li>
+		                   	<li><button id="btn4">서버관리자로그인</button></li>
 		                </ul>
 		            </div>
-		            <hr>
+		            <hr id="rine">
 		            <div id="board">
 		                <ul>
 		                    <li><a href=""></a>공지사항</li>

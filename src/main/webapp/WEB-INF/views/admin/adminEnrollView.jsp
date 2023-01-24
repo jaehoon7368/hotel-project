@@ -70,7 +70,9 @@ div.adminBox{
 		<div id = "entireBox"> 
 		<div class="adminBox">
 		       <ul>
-                <li><a href="">개인정보 수정</a></li>
+		       	<!-- 기훈 수정 시작 -->
+                <li><a href="<%= request.getContextPath()%>/user/userView">개인정보 수정</a></li>
+                <!-- 기훈 수정 끝 -->
                 <li><a href="">작성 리뷰</a></li>
                 <li><a href="">예약 내역 확인</a></li>
                 <li><a href="<%=request.getContextPath()%>/admin/adminhotelenroll">호텔 등록</a></li>
