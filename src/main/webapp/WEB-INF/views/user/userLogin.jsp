@@ -4,10 +4,9 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/user/login.css" />
     
+
 <body>
-
  <!-- 로그인폼 시작 -->
-
 				<div class="wrapper">
 			      <div class="box">
 				      <div class="center">

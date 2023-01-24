@@ -1,62 +1,56 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/user/join.css" />
 <section id=enroll-container>
-	<h2>회원 가입 정보 입력</h2>
-	<form 
-		name="userEnrollFrm" 
-		method="POST" 
-		action="<%= request.getContextPath() %>/user/userEnroll">
-		<table>
-			<tr>
-				<th>아이디<sup>*</sup></th>
-				<td>
-					<input type="text" placeholder="4글자이상" name="userId" id="_userId" value="" required>
-					<input type="button" value="아이디 중복검사" onclick="checkIdDuplicate();"/>
-					<input type="hidden" id="idValid" name="idValid" value="0"/>
-					<%-- 사용가능한 아이디인 경우 1, 이미 사용중인 아이디인 경우 0 --%>
-				</td>
-			</tr>
-				<th>패스워드<sup>*</sup></th>
-				<td>
-					<input type="password" name="password" id="_password" value="" required><br>
-				</td>
-			</tr>
-			<tr>
-				<th>패스워드확인<sup>*</sup></th>
-				<td>	
-					<input type="password" id="passwordCheck" value="" required><br>
-				</td>
-			</tr>  
-			<tr>
-				<th>이름<sup>*</sup></th>
-				<td>	
-				<input type="text"  name="userName" id="userName" value="" required><br>
-				</td>
-			</tr>
-			<tr>
-				<th>닉네임<sup>*</sup></th>
-				<td>
-					<input type="text" name="nickName" id="nickName" value="" required><br>
-				</td>
-			<tr>
-			<tr>
-				<th>이메일</th>
-				<td>	
-					<input type="email" placeholder="abc@xyz.com" name="email" id="email" value=""><br>
-				</td>
-			</tr>
-			<tr>
-				<th>휴대폰<sup>*</sup></th>
-				<td>	
-					<input type="tel" placeholder="(-없이)01012345678" name="phone" id="phone" maxlength="11" value="" required><br>
-				</td>
-			</tr>
-			
-		</table>
-		<input type="submit" value="가입" >
-		<input type="reset" value="취소">
-	</form>
+	<div class="wrapper">
+        <div class="box">
+        <div class="center">
+            <h1>회원가입</h1>
+            <form name="userEnrollFrm" 
+				  method="POST" 
+				  action="<%= request.getContextPath() %>/user/userEnroll">
+              <div class="txt_field">
+                <input type="text"  name="userName" id="userName" value="" required>
+                <span></span>
+                <label>이름</label>
+              </div>
+              <div class="txt_field">
+               		<input type="text" name="userId" id="_userId" value="" required>
+                <span></span>
+                <label>ID</label>
+              </div>
+              <div class="idcheck">
+				<input type="button" id="idcheck" value="중복확인" onclick="checkIdDuplicate();"/>
+				<input type="hidden" id="idValid" name="idValid" value="0"/>
+              </div>
+              <div class="txt_field">
+                <input type="password" name="password" id="_password" value="" required>
+                <span></span>
+                <label>PASSWORD</label>
+              </div>
+              <div class="txt_field">
+                <input type="password" id="passwordCheck" value="" required>
+                <span></span>
+                <label>PASSWORD CHECK</label>
+              </div>
+              <div class="txt_field">
+                <input type="tel"  name="phone" id="phone" maxlength="11" value="" required>
+                <span></span>
+                <label>PHONE</label>
+              </div>
+              <div class="txt_field">
+                <input type="email" name="email" id="email" value="" required>
+                <span></span>
+                <label>EMAIL</label>
+              </div>
+              <br><br>
+              <input type="submit" value="Sign Up">
+            </form>
+          </div>
+        </div>
+       </div>
+	
 </section>
 <form action="<%= request.getContextPath() %>/user/checkIdDuplicate" name="checkIdDuplicateFrm">
 	<input type="hidden" name="userId" />

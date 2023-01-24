@@ -84,8 +84,8 @@
   top: 55%;
   left: 45%;
   transform: translate(-50%, -50%);
-  width: 400px;
-  height: 560px;
+  width: 600px;
+  height: 700px;
   background: white;
   border-radius: 10px;
   box-shadow: 10px 10px 50px rgba(0,0,0,0.05);
@@ -93,9 +93,10 @@
 .center h1{
   text-align: center;
   padding: 20px 0;
+  border-bottom: 1px solid silver;
 }
 .center form{
-  padding: 0 70px;
+  padding: 0 130px;
   box-sizing: border-box;
 }
 form .txt_field{
@@ -177,6 +178,77 @@ input[type="submit"]:hover{
 }
 .signup_link a:hover{
   text-decoration: underline;
+}
+
+
+
+.form {
+  padding: 30px 40px;
+}
+
+.form-control {
+  margin-bottom: 10px;
+  padding-bottom: 20px;
+  position: relative;
+}
+
+.form-control label {
+  color: #777;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-control input {
+  border: 2px solid #f0f0f0;
+  border-radius: 4px;
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.form-control input:focus {
+  outline: 0;
+  border-color: #777;
+}
+
+.form-control.success input {
+  border-color: var(--success-color);
+}
+
+.form-control.error input {
+  border-color: var(--error-color);
+}
+
+.form-control small {
+  color: var(--error-color);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  visibility: hidden;
+}
+
+.form-control.error small {
+  visibility: visible;
+}
+
+.form button {
+  cursor: pointer;
+  background-color: #df4f59;
+  border: 2px solid #df4f59;
+  border-radius: 4px;
+  color: #fff;
+  display: block;
+  font-size: 16px;
+  padding: 10px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.idcheck {
+	width:100px;
+	margin-left:350px;
+	margin-top:-60px;
 }
 
 header {
