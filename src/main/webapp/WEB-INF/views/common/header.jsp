@@ -123,28 +123,6 @@ window.addEventListener('load', () => {
 	<% if(msg != null) { %>
 		alert("<%= msg %>");
 	<% } %>
-	
-	<% if (loginUser == null) { %>
-	document.loginFrm.addEventListener('submit', (e) => {
-		const userId = document.querySelector("#userId");
-		const password = document.querySelector("#password");
-		
-		if(!/^\w{4,}$/.test(userId.value)){
-			alert("유효한 아이디를 입력하세요.");
-			userId.select();
-			e.preventDefault(); // 폼제출방지
-			return; // 조기리턴
-		}
-		
-		if(!/^\w{4,}$/.test(password.value)){
-			alert("유효한 비밀번호를 입력하세요");
-			password.select();
-			e.preventDefault();
-			return;
-		}
-	});
-	<% } %>
-	
 });
 
 </script>
