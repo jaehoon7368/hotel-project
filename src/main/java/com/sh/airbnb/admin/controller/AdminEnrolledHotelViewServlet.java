@@ -29,7 +29,6 @@ public class AdminEnrolledHotelViewServlet extends HttpServlet {
 		//1.입력값
 		String userId = request.getParameter("user_id");
 		
-		userId = "admin";
 		//2.업무로직
 		List<Hotel>hotelList = new ArrayList<>();
 		hotelList = adminService.selectAllHotel(userId);

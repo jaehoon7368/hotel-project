@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<link rel="stylesheet" href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
 
 <style>
 .entireBox {
@@ -12,54 +15,71 @@
 
 </style>
 
-	<form action="" method="post">
-	
-<div class="entireBox">
-	<select class="form-select form-select-lg mb-3"
-		aria-label=".form-select-lg example">
-		<option selected>Room type select</option>
-		<option value="1">One</option>
-		<option value="2">Two</option>
-		<option value="3">Three</option>
-	</select> <select class="form-select form-select-lg mb-3"
-		aria-label=".form-select-lg example">
-		<option selected>Limit People</option>
-		<option value="2">2인</option>
-		<option value="4">4인</option>
-		<option value="6">6인</option>
-		<option value="8">8인</option>
-		<option value="12">12인</option>
-		<option value="16">16인</option>
-	</select>
+<form action="<%=request.getContextPath()%>/admin/adminRoomEnroll" 
+method="POST" enctype="multipart/form-data" name="roomEnrollFrm">
 
+	<div class="entireBox">
+		<select class="form-select form-select-lg mb-3"
+			aria-label=".form-select-lg example" required name="type">
+			<option value="" selected>Room type select</option>
+			<option value="스탠다드">스탠다드</option>
+			<option value="디럭스">디럭스</option>
+			<option value="슈퍼디럭스">슈퍼디럭스</option>
+		</select> <select class="form-select form-select-lg mb-3"
+			aria-label=".form-select-lg example" required name="people">
+			<option value="" selected>Limit People</option>
+			<option value="2">2인</option>
+			<option value="4">4인</option>
+			<option value="6">6인</option>
+			<option value="8">8인</option>
+			<option value="12">12인</option>
+			<option value="16">16인</option>
+		</select>
 
+		<div class="input-group mb-3">
+			<span class="input-group-text">Room Pirce</span> <input type="text"
+				class="form-control" name="price" required
+				aria-label="Amount (to the nearest dollar)"> <span
+				class="input-group-text">원(won)</span>
+		</div>
 
-	<div class="input-group mb-3">
-		<span class="input-group-text">Room Pirce</span> <input type="text"
-			class="form-control" name="price" aria-label="Amount (to the nearest dollar)">
-		<span class="input-group-text">원(won)</span>
-	</div>
+		<div class="input-group">
+			<span class="input-group-text">Room info</span>
+			<textarea class="form-control" name="info" aria-label="With textarea"
+				required></textarea>
+		</div>
 
-
-
-	<div class="input-group">
-		<span class="input-group-text">Room info</span>
-		<textarea class="form-control" name="info" aria-label="With textarea"></textarea>
-	</div>
-
-	<div class="input-group mb-3">
-  <label class="input-group-text" for="inputGroupFile01">Upload</label>
-  <input type="file" class="form-control" id="inputGroupFile01" name ="upFile" >
+		<div class="input-group mb-3">
+			<label class="input-group-text" for="inputGroupFile01">Upload</label>
+			<input type="file" class="form-control" id="inputGroupFile01"
+				name="upFile" required>
+		</div>
+		<div id="img-viewer-container">
+			<img id="img-viewer" width="500px"> 
+			<input type="submit" class="btn btn-dark" value="룸등록 "  />
+</form>
 </div>
-			<div id="img-viewer-container">
-			<img id="img-viewer" width="500px">
-       	 <input type="submit" value="등록하기"  />
-        </form>
-</div>
-        
+
 
 
 <script>
+
+document.roomEnrollFrm.onsubmit=(e) =>{
+	const price = e.target.price;
+	const info = e.target.info ;
+	
+	
+	if(!/^[0-9]{4,}$/.test(price.value)){
+		alert("가격을 10000원이상 입력하세요.");
+		return false;
+	}
+	
+	if(!/^(.|n)/.test(info.value)){
+		alert("내용을 작성해주세요.");
+		return false;
+	}
+	
+}
 
 document.querySelector("#inputGroupFile01").addEventListener('change',(e)=>{
 	const f = e.target;

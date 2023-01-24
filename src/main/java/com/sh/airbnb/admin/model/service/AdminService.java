@@ -8,10 +8,14 @@ import static com.sh.airbnb.common.JdbcTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.sh.airbnb.admin.model.dao.AdminDao;
 import com.sh.airbnb.hotel.model.dto.Hotel;
 import com.sh.airbnb.hotel.model.dto.HotelImage;
+import com.sh.airbnb.room.model.dto.Room;
+import com.sh.airbnb.room.model.dto.RoomImage;
+import com.sh.airbnb.user.model.dto.User;
 
 public class AdminService {
 	private AdminDao adminDao = new AdminDao();
@@ -30,6 +34,7 @@ public class AdminService {
 			for(HotelImage hotelImage : hotelImages) {
 				hotelImage.setHotelNo(hotelNo);
 				result = adminDao.insertHotelImages(conn,hotelImage);
+				System.out.println(hotelImage);
 			}
 		}
 				
@@ -44,7 +49,7 @@ public class AdminService {
 	}
 
 	public List<Hotel> selectAllHotel(String userId) {
-		List<Hotel>hotelList =new ArrayList();
+		List<Hotel>hotelList =new ArrayList<>();
 		try {
 		Connection conn =getConnection();
 		hotelList = adminDao.selectAllHotel(conn,userId);
@@ -71,6 +76,51 @@ public class AdminService {
 		}catch(Exception e ){
 			rollback(conn);
 			throw e;
+		}finally {
+			close(conn);
+		}
+		
+		return result;
+	}
+
+	public List<User> searchUser(Map<String, String> param) {
+		List<User> userList = new ArrayList<>();
+		
+		try {
+			Connection conn = getConnection();
+			
+		userList = adminDao.searchUser(conn,param);
+		
+		close(conn);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return userList;
+	}
+
+	public int insertRoom(Room room) {
+		int result =0;
+		
+		Connection conn = getConnection();
+		
+		try {
+			result = adminDao.insertRoom(room,conn);
+			String roomNo = adminDao.selectLastRoomNo(conn,room);
+			room.setRoomNo(roomNo);
+			List<RoomImage> roomImages = room.getRoomImage();
+			if(!roomImages.isEmpty()){
+				for (RoomImage roomImage : roomImages) {
+					roomImage.setRoomNo(roomNo);
+					result = adminDao.insertRoomImages(conn,roomImage);
+				}
+			
+			}
+			
+			commit(conn);
+		}catch (Exception e) {
+			rollback(conn);
+			throw e ;
 		}finally {
 			close(conn);
 		}

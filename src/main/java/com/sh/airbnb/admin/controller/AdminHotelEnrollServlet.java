@@ -45,8 +45,6 @@ public class AdminHotelEnrollServlet extends HttpServlet {
 			MultipartRequest multiReq = new MultipartRequest(request, saveDirectory ,maxPostSize , encoding, policy);
 			
 			String userId = multiReq.getParameter("userId");
-			userId = "admin";     //임시아이디 수동 지정
-					
 			String hotelName = multiReq.getParameter("hotelName");
 			String hotelAddress = multiReq.getParameter("hotelAddress");
 			String hotelInfo = multiReq.getParameter("hotelInfo");
@@ -60,28 +58,32 @@ public class AdminHotelEnrollServlet extends HttpServlet {
 			hotel.setHotelAddress(hotelAddress);
 			hotel.setHotelInfo(hotelInfo);
 			hotel.setHotelType(hotelType);
+			hotel.setUserId(userId);
 			
-			if(multiReq.getFile("upFile1")!=null) {
+			if(multiReq.getFile("upFile")!=null) {
 				HotelImage hotelImage = new HotelImage();
-				hotelImage.setOriginalFilename(multiReq.getOriginalFileName("upFile1"));
-				hotelImage.setRenamedFilename(multiReq.getFilesystemName("upFile1"));
+				hotelImage.setOriginalFilename(multiReq.getOriginalFileName("upFile"));
+				hotelImage.setRenamedFilename(multiReq.getFilesystemName("upFile"));
 				hotel.addHotelImage(hotelImage);
 			}
-			int result1 = 0;
+			
+			
 			int result = 0;
+			int result1 = 0;
 			//2. 업무로직
 			result = adminService.insertHotel(hotel);
 			if(category!=null) {
 			result1 = adminService.insertCategory(userId,category,hotel.getHotelNo());
 			}
 			session.setAttribute("msg", "호텔 등록을 성공하였습니다. ");
+			response.sendRedirect(request.getContextPath()+"/admin/adminenrolledhotelview");
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.setAttribute("msg", "호텔 등록을 실패하였습니다. ");
-			
+			response.sendRedirect(request.getContextPath()+"/admin/adminhotelenroll");
 			throw e;  //톰캣에 오류 전송
 		}
-		response.sendRedirect(request.getContextPath()+"/admin/adminenrolledhotelview");
+		
 	}
 
 }
