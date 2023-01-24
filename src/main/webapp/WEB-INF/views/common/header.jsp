@@ -104,6 +104,8 @@
 		     
 		   <%} %> 
         </header> 
+        </div>
+        </body>
         <!-- header 종료 -->
         <div id="content" class=""></div>
 <script>
