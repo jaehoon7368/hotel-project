@@ -26,7 +26,19 @@
                     <%} %>
                     </div>
                 </div>
-            </div>
+            </div> <!-- 호텔 이미지 end -->
+            
+           <hr>
+            <div id="search-detail">
+                            <div class="checkInOut-box">
+                                <p>체크인</p>
+                                <input type="search" class="datepicker"  id="checkIn" name="checkIn" placeholder="날짜추가">
+                            </div>
+                            <div class="checkInOut-box">
+                                <p>체크아웃</p>
+                                <input type="search" class="datepicker" id="checkOut" name="checkOut" placeholder="날짜추가">
+                            </div>
+                        </div>
 
 				<% for(Room room : roomList) {%>
             <div id="room-info">
@@ -132,6 +144,27 @@
 </form>
 
   <script>
+ 
+  $.datepicker.setDefaults({
+      dateFormat: 'yy-mm-dd',
+      prevText: '이전 달',
+      nextText: '다음 달',
+      monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+      monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+      dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+      dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+      dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+      showMonthAfterYear: true,
+      yearSuffix: '년'
+  });
+
+  $(function () {
+      $('.datepicker').datepicker();
+  });
+  $(function () {
+      $('.datepicker').datepicker();
+  });
+ 
 const loginAlert = () => {
 		alert("로그인 후 이용할 수 있습니다.");
 		location.href = "<%=request.getContextPath()%>/user/userLogin";
