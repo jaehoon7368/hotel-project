@@ -15,8 +15,8 @@ import com.sh.airbnb.hotel.model.service.HotelService;
 /**
  * Servlet implementation class HotelSearchServlet
  */
-@WebServlet("/hotel/searchHotel")
-public class HotelSearchServlet extends HttpServlet {
+@WebServlet("")
+public class HotelViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private HotelService hotelService = new HotelService();
 	/**

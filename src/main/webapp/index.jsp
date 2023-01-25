@@ -4,6 +4,9 @@
     pageEncoding="UTF-8"%>
 <%
 	List<Hotel> hotelList = (List<Hotel>) request.getAttribute("hotelList");
+ 	String searchLocation = (String) request.getAttribute("searchLocation");
+	String checkIn = (String) request.getAttribute("checkIn");
+	String checkOut = (String) request.getAttribute("checkOut");
 %>
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -54,7 +57,7 @@
                     
                     <!--  버튼 클릭 후 modal -->
                     <div class="modal">
-                        <form action="<%=request.getContextPath()%>/hotel/searchHotel">
+                        <form action="">
                         <div id="search-detail">
                             <div id="search-location">
                                 <p>여행지</p>
@@ -69,7 +72,7 @@
                                 <input type="search" class="datepicker" id="checkOut" name="checkOut" placeholder="날짜추가">
                             </div>
                             <div id="search-detail-btn">
-                                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i><span> 검색</span></button>
+                                <button type="submit" onclick="checkForm(this)"><i class="fa-solid fa-magnifying-glass"></i><span> 검색</span></button>
                             </div>
                         </div>
                     </form>
@@ -85,9 +88,20 @@
             
             <!-- 숙소 목록 -->
             <div id="content-area">
-            	
+            <%for(Hotel hotel : hotelList) {%>
+            	<div class="hotel-box">
+					<a href="<%= request.getContextPath()%>/room/roomView?hotelNo=<%=hotel.getHotelNo()%>&checkIn=<%=checkIn%>&checkOut=<%=checkOut%>">
+                    	<img src="<%=request.getContextPath()%>/upload/hotel/<%=hotel.getRenamedFilename() %>" alt="">
+                    	<p class="font-bold" name="hotelName"><%=hotel.getHotelName()%></p>
+                    	<p class="color-gray" name="hotelAddress"><%=hotel.getHotelAddress() %></p>
+                    	<p class="color-gray" name="hotelPrice">₩<%=hotel.getPrice() %> ~ / 박</p>
+                    <a>
+                </div>
+            <%} %>
             </div>
   <script>
+  
+  
     /* search-modal */
     const body = document.querySelector('body');
     const modal = document.querySelector('.modal');
@@ -133,68 +147,9 @@
             $('.datepicker').datepicker();
         });
         /* ckeckInOut 캘린더 한글 end */
-      
+
     </script>     
-<script>
 
-window.addEventListener('load', () => {
-	hotelTotalView();	
-});
-
-/* 비동기 호텔 정보 불러오기 */
-const hotelTotalView = () =>{
-	$.ajax({
-		url:"<%=request.getContextPath()%>/hotel/hotelView",
-		dataType : "json",
-		success(data){
-			console.log(data);
-			/*
-				<div class="hotel-box">
-					<a href="<%= request.getContextPath()%>/hotel/roomView">
-                    	<img src="" alt="">
-                    	<p class="font-bold" name="hotelName"></p>
-                    	<p class="color-gray" name="hotelAddress"></p>
-                    	<p class="color-gray" name="hotelPrice">₩ ~ /박</p>
-                    <a>
-                </div>
-			*/
-			const contentArea = document.querySelector("#content-area");
-			data.forEach((hotel) =>{
-				console.log(hotel);
-				console.log(hotel.renamedFilename);
-				console.log(hotel.hotelNo);
-				const div = document.createElement("div");
-				div.classList.add("hotel-box");
-				
-				const a = document.createElement("a");
-				a.href = `<%= request.getContextPath()%>/room/roomView?hotelNo=\${hotel.hotelNo}`;
-				const img = document.createElement("img");
-				img.src = `<%= request.getContextPath() %>/upload/hotel/\${hotel.renamedFilename}`;
-				
-				const name = document.createElement("p");
-				name.classList.add("font-bold","text-dark","font-18");
-				name.append(hotel.hotelName);
-				
-				const address = document.createElement("p");
-				address.classList.add("color-gray");
-				address.append(hotel.hotelAddress);
-				
-				const price = document.createElement("p");
-				price.classList.add("color-gray");
-				price.append("₩" +  hotel.price + " ~ / 박");
-				
-				a.append(img,name,price,address);
-				div.append(a);
-				contentArea.append(div);
-			});
-			
-		},
-		error: console.log
-		
-	});
-}
-
-/* 비동기 호텔 정보 불러오기 end */
 
 </script>				
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
