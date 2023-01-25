@@ -6,12 +6,19 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import com.sh.airbnb.user.model.dto.User;
 import com.sh.airbnb.user.model.dto.UserRole;
 import com.sh.airbnb.user.model.dto.UserStatus;
 import com.sh.airbnb.user.model.exception.UserException;
+
+
+
+
 
 
 
@@ -96,6 +103,7 @@ public class UserDao {
 		user.setEmail(rset.getString("email"));
 		user.setNickName(rset.getString("nick_name"));
 		user.setUserStatus(UserStatus.valueOf(rset.getString("user_status")));
+		user.setEnrollDate(rset.getTimestamp("enroll_date"));
 		
 		return user;
 	}
@@ -157,6 +165,106 @@ public class UserDao {
 		}
 
 		return result;
+	}
+
+
+
+
+	public List<User> searchUser(Connection conn, Map<String, String> param) {
+		List<User> users = new ArrayList<>();
+		String searchType = param.get("searchType"); // member_id | member_name | gender
+		String searchKeyword = param.get("searchKeyword");
+		String sql = prop.getProperty("searchUser"); // select * from member where # like ?
+		sql = sql.replace("#", searchType);
+		System.out.println(sql);
+		
+		// 1. PreaparedStatement 객체 생성 & 미완성쿼리 값대입
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, "%" + searchKeyword + "%"); 
+			// 2. 실행 & ResultSet 반환
+			try(ResultSet rset = pstmt.executeQuery()){				
+				// 3. ResultSet -> List<Member>
+				while(rset.next())
+					users.add(handleUserResultSet(rset));
+			}
+		} catch (SQLException e) {
+			throw new UserException("관리자 회원검색 오류", e);
+		}
+	
+		
+		
+		return users;
+	}
+
+
+
+
+	public int updateUserRole(Connection conn, String userId, String userRole) {
+		String sql = prop.getProperty("updateUserRole");
+		int result = 0;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, userRole);
+			pstmt.setString(2, userId);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new UserException("관리자 회원권한수정 오류", e);
+		}
+		
+		return result;
+	}
+
+
+
+
+	public List<User> selectAllUser(Connection conn, Map<String, Object> param) {
+		String sql = prop.getProperty("selectAllUser"); // select * from (select row_number() over(order by enroll_date desc) rnum, m.* from member m) where rnum between ? and ?
+		List<User> users = new ArrayList<>();
+		int page = (int) param.get("page");
+		int limit = (int) param.get("limit");
+		int start = (page - 1) * limit + 1; 
+		int end = page * limit;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql);){
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			
+			try(ResultSet rset = pstmt.executeQuery();){
+				
+				while(rset.next()) {
+					User user = handleUserResultSet(rset);
+					users.add(user);
+				}
+			}
+			
+			
+		} catch (SQLException e) {
+			throw new UserException("관리자 회원목록조회 오류!", e);
+		}
+				
+		return users;
+	}
+
+
+
+
+	public int selectTotalCount(Connection conn) {
+		String sql = prop.getProperty("selectTotalCount"); // select count(*) from member
+		int totalCount = 0;
+		
+		try(
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rset = pstmt.executeQuery();	
+		){
+			while(rset.next())
+				totalCount = rset.getInt(1); // 컬럼인덱스
+	
+		} catch (SQLException e) {
+			throw new UserException("전체 사용자수 조회 오류", e);
+		}	
+		
+		return totalCount;
 	}
 }
 
