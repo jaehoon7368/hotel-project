@@ -28,7 +28,7 @@ div.adminBox{
 }
 #categoryBox{
 	width:600px;
-	height :200px;
+	height :400px;
 	text-align: center;
 	font-family: 'Gowun Dodum' ;
 }
@@ -36,7 +36,7 @@ div.adminBox{
 	border-radius: 5%;
 	border: 1px solid gray;
 	width: 800px;
-	height: 50%;
+	height: 1600px;
 	text-align: center
 }
 			
