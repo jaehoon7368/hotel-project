@@ -63,7 +63,7 @@ header div{
 }
 
 .hotel-icon{
-    font-size: 22px;
+    font-size: 16px;
     color: black;
 }
 
@@ -252,7 +252,7 @@ header div{
 }
 
 #content-area{
-    width: 1200px;
+    width: 1000px;
     margin: 0 auto;
     /* border: 1px solid black; */
 }
