@@ -38,7 +38,7 @@ public class HotelViewServlet extends HttpServlet {
 		request.setAttribute("searchLocation", searchLocation);
 		request.setAttribute("checkIn", checkIn);
 		request.setAttribute("checkOut", checkOut);
-		request.getRequestDispatcher("/WEB-INF/views/hotel/hotel.jsp").forward(request, response);
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
 }
