@@ -285,4 +285,13 @@ create table tb_hotel_comment(
     constraint fk_tb_hotel_comment_tb_user foreign key (user_id) references tb_user(user_id)
 );
 
+insert into tb_category values ('c011','에어컨');
+insert into tb_category values ('c012','피트니스센터');
+insert into tb_category values ('c013','세탁기');
+insert into tb_category values ('c014','주방');
+insert into tb_category values ('c015','데스크톱');
+insert into tb_category values ('c016','와이파이');
+insert into tb_category values ('c017','데스크톱');
 
+alter table tb_hotel modify hotel_name varchar2(50);
+select req_hotel_image_no.nextval from dual;

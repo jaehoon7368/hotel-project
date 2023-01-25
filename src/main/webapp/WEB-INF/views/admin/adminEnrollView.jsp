@@ -23,8 +23,8 @@
 		<div id = "entireBox"> 
 		<div class="adminBox">
 		       <ul>
-                <li><a href="">개인정보 수정</a></li>
-                <li><a href="">작성 리뷰</a></li>
+                <li><a href="<%= request.getContextPath() %>/user/userView">개인정보 수정</a></li>
+                <li><a href="<%= request.getContextPath() %>/user/userCommentView">작성 리뷰</a></li>
                 <li><a href="">예약 내역 확인</a></li>
                 <li><a href="<%=request.getContextPath()%>/admin/adminhotelenroll">호텔 등록</a></li>
                 <li><a href="<%=request.getContextPath()%>/admin/adminenrolledhotelview?user_id=<%=loginUser.getUserId() %>">등록된 호텔 보기</a></li>
