@@ -61,7 +61,7 @@
 			</table>
 				<div class="">
 					<label >메인 사진 등록</label>
-					<input type="file" name="upFile"  id="upFile">
+					<input type="file" name="upFile"  id="upFile"  required>
 				</div>
 			
 				<br />
