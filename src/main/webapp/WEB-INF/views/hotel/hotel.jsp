@@ -15,16 +15,22 @@
             <div id="search-box"> 
                 <div id="icon-box">
                     <div>
-                        <a href="" class="hotel-icon"><i class="fa-solid fa-hotel"></i></a>
+                        <a href="" class="hotel-icon">
+                        <i class="fa-solid fa-hotel"></i>
                         <p>호텔</p>
+                        </a>
                     </div>
                     <div>
-                        <a href="" class="hotel-icon"><i class="fa-regular fa-building"></i></a>
+                        <a href="" class="hotel-icon">
+                        <i class="fa-regular fa-building"></i>
                         <p>모텔</p>
+                        </a>
                     </div>
                     <div>
-                        <a href="" class="hotel-icon"><i class="fa-solid fa-shop"></i></a>
+                        <a href="" class="hotel-icon">
+                        <i class="fa-solid fa-shop"></i>
                         <p>펜션</p>
+                        </a>
                     </div>
                 </div>
                 <div id="subsearch-box">
