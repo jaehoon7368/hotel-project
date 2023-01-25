@@ -29,11 +29,13 @@ create table tb_room(
     room_type  varchar2(100) not null,
     room_price number not null,
     limit_people number default 2,
-    room_info varchar2(4000),
     hotel_no varchar2(10),
+    room_info varchar2(4000),
     constraint pk_tb_room_no primary key (room_no),
     constraint fk_tb_room_tb_hotel_no foreign key (hotel_no) references tb_hotel(hotel_no)
 );
+
+ALTER TABLE tb_room MODIFY hotel_no varchar2(20);
 
 create table tb_reservation(
     re_no varchar(10),
@@ -120,6 +122,8 @@ create table tb_hotel_image(
     constraint pk_tb_hotel_image primary key (image_no),
     constraint fk_tb_hotel_image_tb_hotel foreign key (hotel_no) references tb_hotel(hotel_no)    
 );
+
+
 create table tb_room_image(
     image_no number,
     original_filename varchar2(300),
@@ -159,4 +163,7 @@ insert into tb_category values('c09','반려동물');
 insert into tb_user values('0','user','1234','일반인','01012341234','U','users@naver.com','고객이올시다',default);
 select * from tb_user;
 select * from tb_hotel;
+select * from tb_hotel_image;
 select * from tb_room;
+select * from tb_hotel_category;
+
