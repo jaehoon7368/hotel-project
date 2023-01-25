@@ -1,6 +1,6 @@
 package com.sh.airbnb.user.model.dto;
 
-
+import java.sql.Timestamp;
 
 public class User {
 
@@ -13,6 +13,7 @@ public class User {
 	private String email;
 	private String nickName;
 	private UserStatus userStatus;
+	private Timestamp enrollDate;
 	
 	public User() {
 		super();
@@ -20,7 +21,7 @@ public class User {
 	}
 
 	public User(int userNo, String userId, String password, String userName, String phone, UserRole userRole,
-			String email, String nickName, UserStatus userStatus) {
+			String email, String nickName, UserStatus userStatus, Timestamp enrollDate) {
 		super();
 		this.userNo = userNo;
 		this.userId = userId;
@@ -31,6 +32,7 @@ public class User {
 		this.email = email;
 		this.nickName = nickName;
 		this.userStatus = userStatus;
+		this.enrollDate = enrollDate;
 	}
 
 	public int getUserNo() {
@@ -105,11 +107,20 @@ public class User {
 		this.userStatus = userStatus;
 	}
 
+	public Timestamp getEnrollDate() {
+		return enrollDate;
+	}
+
+	public void setEnrollDate(Timestamp enrollDate) {
+		this.enrollDate = enrollDate;
+	}
+
 	@Override
 	public String toString() {
 		return "User [userNo=" + userNo + ", userId=" + userId + ", password=" + password + ", userName=" + userName
 				+ ", phone=" + phone + ", userRole=" + userRole + ", email=" + email + ", nickName=" + nickName
-				+ ", userStatus=" + userStatus + "]";
+				+ ", userStatus=" + userStatus + ", enrollDate=" + enrollDate + "]";
 	}
-
+	
+	
 }

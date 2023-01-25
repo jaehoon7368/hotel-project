@@ -54,9 +54,9 @@
                         <div id="info">
                             <p>객실이용안내</p>
                         </div>
-                            <a href="" id="reservation-a">
+                            <a href="<%=request.getContextPath()%>/reservation/reservationView" id="reservation-a">
                                 <div id="reservation-btn">
-                                    <p>예약</p>
+                                	<p>예약</p>
                                 </div>
                             </a>
                     </div>
