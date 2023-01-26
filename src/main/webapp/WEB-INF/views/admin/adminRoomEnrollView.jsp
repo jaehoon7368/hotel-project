@@ -9,7 +9,6 @@
 	margin: auto;
 	border: 1px solid gray;
 	width: 800px;
-	height: 800px;
 	border-radius: 2%;
 }
 
