@@ -72,7 +72,7 @@
                                 <input type="search" class="datepicker" id="checkOut" name="checkOut" placeholder="날짜추가">
                             </div>
                             <div id="search-detail-btn">
-                                <button type="submit" onclick="checkForm(this)"><i class="fa-solid fa-magnifying-glass"></i><span> 검색</span></button>
+                                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i><span> 검색</span></button>
                             </div>
                         </div>
                     </form>

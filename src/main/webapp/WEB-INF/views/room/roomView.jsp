@@ -10,6 +10,8 @@
 	List<Room> roomList = (List<Room>) request.getAttribute("roomList");
 	Hotel hotel = (Hotel) request.getAttribute("hotel");
 	List<Review> reviewList = (List<Review>) request.getAttribute("reviewList");
+	String checkIn = (String) request.getAttribute("checkIn");
+	String checkOut = (String) request.getAttribute("checkOut");
 %>
 
 <div id="hotel-info">
@@ -29,16 +31,24 @@
             </div> <!-- 호텔 이미지 end -->
             
            <hr>
-            <div id="search-detail">
-                            <div class="checkInOut-box">
-                                <p>체크인</p>
-                                <input type="search" class="datepicker"  id="checkIn" name="checkIn" placeholder="날짜추가">
-                            </div>
-                            <div class="checkInOut-box">
-                                <p>체크아웃</p>
-                                <input type="search" class="datepicker" id="checkOut" name="checkOut" placeholder="날짜추가">
-                            </div>
-                        </div>
+          <form action="<%=request.getContextPath()%>/room/searchRoom">
+            <div id="check-box">
+                <div class="checkMain-box">
+                    <h3>체크인</h3>
+                    <input type="search" class="datepicker" id="checkIn" name="checkIn" placeholder="   날짜 추가">
+                </div>
+                <div class="checkMain-box">
+                    <h3>체크아웃</h3>
+                    <input type="search" class="datepicker" id="checkOut" name="checkOut" placeholder="   날짜 추가">
+                </div>
+                <div id="search-detail-btn">
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i><span> 검색</span></button>
+                </div>
+                <div>
+                	<input type="hidden" name="hotelNo" value="<%=hotel.getHotelNo() %>" />
+                </div>
+            </div>
+            </form>
 
 				<% for(Room room : roomList) {%>
             <div id="room-info">
@@ -54,11 +64,9 @@
                         <div id="info">
                             <p>객실이용안내</p>
                         </div>
-                            <a href="<%=request.getContextPath()%>/reservation/reservationView" id="reservation-a">
                                 <div id="reservation-btn">
-                                	<p>예약</p>
+                                	<button onclick="reservationBtn('<%=hotel.getHotelName() %>','<%=room.getRoomType() %>','<%=checkIn%>','<%=checkOut%>','<%=room.getRoomPrice()%>');">예약</button>
                                 </div>
-                            </a>
                     </div>
                 </div>
             </div>
@@ -142,28 +150,33 @@
 	<input type="hidden" name="commentNo" />
 	<input type="hidden" name="hotelNo" value="<%= hotel.getHotelNo() %>"/>
 </form>
+<script>
+$.datepicker.setDefaults({
+    dateFormat: 'yy-mm-dd',
+    prevText: '이전 달',
+    nextText: '다음 달',
+    monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+    monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+    dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+    dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+    dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+    showMonthAfterYear: true,
+    yearSuffix: '년'
+});
 
+$(function () {
+    $('.datepicker').datepicker();
+});
+$(function () {
+    $('.datepicker').datepicker();
+});
+</script>
   <script>
- 
-  $.datepicker.setDefaults({
-      dateFormat: 'yy-mm-dd',
-      prevText: '이전 달',
-      nextText: '다음 달',
-      monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-      monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-      dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-      dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-      dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-      showMonthAfterYear: true,
-      yearSuffix: '년'
-  });
-
-  $(function () {
-      $('.datepicker').datepicker();
-  });
-  $(function () {
-      $('.datepicker').datepicker();
-  });
+  
+  const reservationBtn = (hotelName,roomType,checkIn,checkOut,price) =>{
+	  
+	location.href ="<%=request.getContextPath()%>/reservation/reservationView?hotelName=" + hotelName + "&roomType=" + roomType + "&checkIn=" + checkIn + "&checkOut=" +checkOut + "&price=" +price;  
+  };
  
 const loginAlert = () => {
 		alert("로그인 후 이용할 수 있습니다.");

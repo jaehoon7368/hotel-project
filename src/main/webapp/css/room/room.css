@@ -22,22 +22,58 @@
     outline: none;
 }
 
-#search-detail{
-    width: 400px;
-    height: 60px;
-    background-color:lightgray;
-    border-radius: 30px;
+#check-box{
+    width: 550px;
+    height: 65px;
     margin: auto;
     display: flex;
     justify-content: space-around;
     text-align: center;
-    box-shadow: 7px 7px 10px #111;
-}
-#search-detail p{
-    font-size: 14px;
-    font-weight: bold;
+    margin-top: 20px;
+    padding: 10px 10px;
 }
 
+.checkMain-box{
+    width: 200px;
+    height: 100%;
+    background-color: white;
+    border-radius: 30px;
+    cursor: pointer;
+    justify-content: center;
+    background-color: white;
+    border: 2px solid #ef303d;
+}
+
+#check-box h3{
+    padding: 5px 0;
+}
+
+#check-box input{
+    width: 160px;
+    font-size: 16px;
+    padding: 5px 0;
+    border-style: none;
+    text-align: center;
+}
+#search-detail-btn button {
+    background-color: #ef303d;
+    height: 50px;
+    margin-top: 5px;
+    color: white;
+    font-size: 16px;
+    border-style: none;
+    cursor: pointer;
+}
+
+#search-detail-btn {
+    width: 90px;
+    height: 100%;
+    border-radius: 30px;
+    cursor: pointer;
+    background-color: #ef303d;
+    display: flex;
+    justify-content: center;
+}
 #room-image-box{
     width: 410px;
     height: 410px;

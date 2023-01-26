@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%
+	String hotelName = (String) request.getAttribute("hotelName");
+	String roomType = (String) request.getAttribute("roomType");
+	String checkIn = (String) request.getAttribute("checkIn");
+	String checkOut = (String) request.getAttribute("checkOut");
+	int price = (int) request.getAttribute("price");
+%>    
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 
@@ -103,13 +109,13 @@
                     </tr>
                     <tr>
                         <th class="name"> 예약자이름 <br>
-                            <input class= "put" type="text"placeholder="체크인시 필요한 정보">
+                            <input class= "put" type="text" name="name" placeholder="체크인시 필요한 정보">
                         </th>
                         </tr>
                     </tr>
                     <tr>
                         <th class="name"> 휴대폰번호
-                            <p><input class="put" type="text" placeholder="체크인시 필요한 정보입니다."></p>
+                            <p><input class="put" type="text" name="phone" placeholder="체크인시 필요한 정보입니다."></p>
                             <pre class="phone">  휴대폰번호를 확인해주세요.</pre> 
                         </th>
                     </tr>
@@ -133,25 +139,25 @@
                     <td class="opa">숙소이름</td>
                 </tr>
                 <tr>
-                    <td>강릉 크리스탈 풀빌라</td>
+                    <td><%=hotelName %></td>
                 </tr>
                 <tr>
                     <td class="opa">객실타입/기간</td>
                 </tr>
                 <tr>
-                    <td>Junio suite T 스파오션뷰</td>
+                    <td><%=roomType %></td>
                 </tr>
                 <tr>
                     <td class="opa">체크인</td>
                 </tr>
                 <tr>
-                    <td>01.11 수 15:00</td>
+                    <td><%=checkIn %> 15:00</td>
                 </tr>
                 <tr>
                     <td class="opa">체크아웃</td>
                 </tr>
                 <tr>
-                    <td>01.12 목 11:00</td>
+                    <td><%=checkOut %> 11:00</td>
                 </tr>
                 <tr>
                     <td></td>
@@ -166,7 +172,7 @@
                     <td style="font-weight: 800;">총결제 금액(VAT포함)</td>
                 </tr>
                 <tr>
-                    <td style=" font-size : 30px;font-weight: 800; color:red">270,000원</td>
+                    <td style=" font-size : 30px;font-weight: 800; color:red"><%=price%>원</td>
                 </tr>
                 <tr>
                     <td></td>
