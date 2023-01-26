@@ -83,9 +83,7 @@
                     </div>
                     
                     <div class="modal2">
-                        <div>
-            
-                        </div>
+                        <div id="filter-main">필터</div>
                     </div>
                 </div>
                 

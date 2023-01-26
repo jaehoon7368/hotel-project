@@ -247,6 +247,22 @@ header div{
 	cursor: pointer;
 	border-style: none;
 }
+#filter-main {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 600px;
+
+    padding: 40px;
+
+    text-align: center;
+
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 7px 7px 10px #111;
+    transform: translateX(-50%) translateY(-50%);
+}
 
 #ckeckInOut-box{
     display: flex;
