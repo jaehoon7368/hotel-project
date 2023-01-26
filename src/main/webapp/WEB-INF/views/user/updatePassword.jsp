@@ -13,7 +13,7 @@
 				<td><input type="password" name="oldPassword" id="oldPassword" required></td>
 			</tr>
 			<tr>
-				<th>변경할 비밀번호</th>
+				<th>새 비밀번호</th>
 				<td>
 					<input type="password" name="newPassword" id="newPassword" required>
 				</td>
