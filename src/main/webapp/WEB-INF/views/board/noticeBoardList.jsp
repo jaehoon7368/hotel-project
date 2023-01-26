@@ -114,6 +114,7 @@
                     <ul class="notice-show">
                     <% for(NoticeBoard noticeBoards :  noticeBoardList) { %>
                          <li class="notice-list">
+                         <input type="hidden" name="noticeNo" value="<%= noticeBoards.getNoticeNo() %>" />
                             <div class="notice-title">
                                     <svg xmlns="http://www.w3.org/2000/svg" style="float: right; " width="20" height="20" fill="currentColor" class="bi bi-chevron-expand" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd" d="M3.646 9.146a.5.5 0 0 1 .708 0L8 12.793l3.646-3.647a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 0-.708zm0-2.292a.5.5 0 0 0 .708 0L8 3.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708z"/>
@@ -126,8 +127,8 @@
                             	<%= noticeBoards.getContent() %>
                             	<br />
                             	
-                            	<input type="button" value="수정" onclick="updateNotice()" />
-                            	<input type="button" id="" value="삭제" onclick="deleteNotice(<%= noticeBoards.getNoticeNo() %>)" />
+                            	<input type="button" value="수정" onclick="updateNotice(<%= noticeBoards.getNoticeNo() %>)" />
+                            	<input type="button" value="삭제" onclick="deleteNotice(<%= noticeBoards.getNoticeNo() %>)" />
                             </div>
                          </li>
                     <% } %>
@@ -136,50 +137,32 @@
             </div>
         </div>
     </div>
-    <%-- <% if(loginUser != null) {%>
-    <form name="noticeBoardUpdateFrm" action="<%=request.getContextPath() %>/board/noticeBoardUpdate" method="post">
-          <table id="tbl-board-view">
-              <tr>
-                  <th>제 목</th>
-                  <td><input type="text" name="title" value="<%= noticeBoard.getTitle() %>" required style="width: 99%;"></td>
-              </tr>
-              <tr hidden>
-                  <th>작성자</th>
-                  <td>
-                      <input type="text" name="writer" value="<%= loginUser.getUserId() %>" readonly/>
-                  </td>
-              </tr>
-              <tr>
-                  <th>내 용</th>
-                  <td><textarea rows="30" cols="100" value="<%= noticeBoard.getContent() %>" name="content" style="resize: none;"></textarea></td>
-              </tr>
-              <tr>
-                  <th colspan="2">
-                      <input type="submit" value="수정">
-                      <input type="submit" value="취소" />
-                  </th>
-              </tr>
-           </table>
-      </form>
-      <% } %> --%>
-
+   
+<!-- 글삭제 -->
 <form action="<%= request.getContextPath() %>/board/noticeBoardDelete" name="noticeBoardDeleteFrm" method="POST">
 	<input type="hidden"  name="noticeNo" value="" />
 </form>
+
+<!-- 업데이트 폼으로 보내는 보조폼 -->
+<form action="<%= request.getContextPath() %>/board/noticeBoardUpdate" name="updateNoticeFrm" method="get">
+	<input type="hidden" name="noticeNo" value="" />
+</form>
 <script>
 
-// 수정
-const updateNotice = () => { 
-document.noticeBoardUpdateFrm.submit();
 
-}; 
+// 수정
+const updateNotice = (noticeNo) => {
+	console.log(noticeNo)
+	document.updateNoticeFrm.noticeNo.value = noticeNo;
+	document.updateNoticeFrm.submit();
+} 
+
 
 // 삭제
 const deleteNotice = (noticeNo) => {
-	
+	if(confirm("삭제하시겠습니까 ?"))
 	document.noticeBoardDeleteFrm.noticeNo.value = noticeNo;
 	document.noticeBoardDeleteFrm.submit();
-	
 };
 
 </script>

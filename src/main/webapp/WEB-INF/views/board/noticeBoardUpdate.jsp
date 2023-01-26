@@ -99,6 +99,7 @@
                 <div style="padding-top: 35px;">
                     <form name="noticeBoardUpdateFrm" action="<%=request.getContextPath() %>/board/noticeBoardUpdate" method="post">
                         <table id="tbl-board-view">
+                        
                             <tr>
                                 <th>제 목</th>
                                 <td><input type="text" name="title" value="<%= noticeBoard.getTitle() %>" required style="width: 99%;"></td>
@@ -106,20 +107,20 @@
                             <tr hidden>
                                 <th>작성자</th>
                                 <td>
-                                    <input type="text" name="writer" value="<%= loginUser.getUserId() %>" readonly/>
+                                    <input type="text" name="writer" value="<%= noticeBoard.getWriter() %>" readonly/>
                                 </td>
                             </tr>
                             <tr>
                                 <th>내 용</th>
-                                <td><textarea rows="30" cols="100" value="<%= noticeBoard.getContent() %>" name="content" style="resize: none;"></textarea></td>
+                                <td><textarea rows="30" cols="100" name="content" style="resize: none;"><%= noticeBoard.getContent() %></textarea></td>
                             </tr>
-                            
                             <tr>
                                 <th colspan="2">
                                     <input type="submit" value="작성하기">
                                 </th>
                             </tr>
                          </table>
+                         <input type="hidden" name="noticeNo" value="<%= noticeBoard.getNoticeNo() %>" />
                     </form>
                 </div>
                 
