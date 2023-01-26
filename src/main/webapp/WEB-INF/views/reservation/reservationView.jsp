@@ -6,6 +6,7 @@
 	String checkIn = (String) request.getAttribute("checkIn");
 	String checkOut = (String) request.getAttribute("checkOut");
 	int price = (int) request.getAttribute("price");
+	String hotelNo = (String) request.getAttribute("hotelNo");
 %>    
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 

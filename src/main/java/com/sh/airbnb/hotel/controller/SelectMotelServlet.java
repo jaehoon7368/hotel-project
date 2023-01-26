@@ -13,22 +13,21 @@ import com.sh.airbnb.hotel.model.dto.Hotel;
 import com.sh.airbnb.hotel.model.service.HotelService;
 
 /**
- * Servlet implementation class HotelSearchServlet
+ * Servlet implementation class SelectMotelServlet
  */
-@WebServlet("")
-public class HotelViewServlet extends HttpServlet {
+@WebServlet("/selectMotel")
+public class SelectMotelServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private HotelService hotelService = new HotelService();
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		String searchLocation = request.getParameter("searchLocation");
 		String checkIn = request.getParameter("checkIn");
 		String checkOut = request.getParameter("checkOut");
 		
-		List<Hotel> hotelList = hotelService.hotelTotalView();
+		List<Hotel> hotelList = hotelService.selectMotel();
 		
 		request.setAttribute("hotelList", hotelList);
 		request.setAttribute("searchLocation", searchLocation);

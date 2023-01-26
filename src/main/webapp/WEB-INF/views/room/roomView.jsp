@@ -65,7 +65,7 @@
                             <p>객실이용안내</p>
                         </div>
                                 <div id="reservation-btn">
-                                	<button onclick="reservationBtn('<%=hotel.getHotelName() %>','<%=room.getRoomType() %>','<%=checkIn%>','<%=checkOut%>','<%=room.getRoomPrice()%>');">예약</button>
+                                	<button onclick="reservationBtn('<%=hotel.getHotelName() %>','<%=room.getRoomType() %>','<%=checkIn%>','<%=checkOut%>','<%=room.getRoomPrice()%>','<%=hotel.getHotelNo()%>');">예약</button>
                                 </div>
                     </div>
                 </div>
@@ -173,9 +173,9 @@ $(function () {
 </script>
   <script>
   
-  const reservationBtn = (hotelName,roomType,checkIn,checkOut,price) =>{
+  const reservationBtn = (hotelName,roomType,checkIn,checkOut,price,hotelNo) =>{
 	  
-	location.href ="<%=request.getContextPath()%>/reservation/reservationView?hotelName=" + hotelName + "&roomType=" + roomType + "&checkIn=" + checkIn + "&checkOut=" +checkOut + "&price=" +price;  
+	location.href ="<%=request.getContextPath()%>/reservation/reservationView?hotelName=" + hotelName + "&roomType=" + roomType + "&checkIn=" + checkIn + "&checkOut=" +checkOut + "&price=" +price +"&hotelNo=" + hotelNo;  
   };
  
 const loginAlert = () => {
