@@ -83,4 +83,75 @@ public class BoardService {
 		return result;
 	}
 
+
+
+	public int deleteInquiyBoard(int inquiyNo) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			result = boardDao.deleteInquiyBoard(conn, inquiyNo);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+
+
+	public int updateNoticeBoard(NoticeBoard noticeBoard) {
+		Connection conn = getConnection();
+		int result = 0;
+		
+		try {
+			result = boardDao.updateNoticeBoard(conn, noticeBoard);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+
+
+	public NoticeBoard selectOneNoticeBoard(int noticeNo) {
+		Connection conn = getConnection();
+		NoticeBoard noticeBoard = boardDao.selectOneNoticeBoard(conn, noticeNo);
+		close(conn);
+		return noticeBoard;
+	}
+
+
+
+	public InquiyBoard selectOneInquiyBoard(int inquiyNo) {
+		Connection conn = getConnection();
+		InquiyBoard inquiyBoard = boardDao.selectOneInquiyBoard(conn, inquiyNo);
+		close(conn);
+		return inquiyBoard;
+	}
+
+
+
+	public int updateInquiyBoard(InquiyBoard inquiyBoard) {
+		Connection conn = getConnection();
+		int result = 0;
+		
+		try {
+			result = boardDao.updateInquiyBoard(conn, inquiyBoard);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
 }
