@@ -44,7 +44,6 @@
 	<div class="adminBox">
 		<ul>
 			<li><a href="">개인정보 수정</a></li>
-			<li><a href="">작성 리뷰</a></li>
 			<li><a href="">예약 내역 확인</a></li>
 			<li><a
 				href="<%=request.getContextPath()%>/admin/adminhotelenroll">호텔

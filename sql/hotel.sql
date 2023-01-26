@@ -166,5 +166,7 @@ select * from tb_hotel;
 select * from tb_hotel_image;
 select * from tb_room;
 select * from tb_hotel_category;
+select * from tb_hotel_comment;
 
 ALTER TABLE tb_user ADD enroll_date date default sysdate;
+

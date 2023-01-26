@@ -11,11 +11,6 @@
 				  method="POST" 
 				  action="<%= request.getContextPath() %>/user/userEnroll">
               <div class="txt_field">
-                <input type="text"  name="userName" id="userName" value="" required>
-                <span></span>
-                <label>이름</label>
-              </div>
-              <div class="txt_field">
                		<input type="text" name="userId" id="_userId" value="" required>
                 <span></span>
                 <label>ID</label>
@@ -33,6 +28,11 @@
                 <input type="password" id="passwordCheck" value="" required>
                 <span></span>
                 <label>PASSWORD CHECK</label>
+              </div>
+              <div class="txt_field">
+                <input type="text"  name="userName" id="userName" value="" required>
+                <span></span>
+                <label>이름</label>
               </div>
               <div class="txt_field">
                 <input type="tel"  name="phone" id="phone" maxlength="11" value="" required>
