@@ -1,0 +1,78 @@
+.sidebar {
+  position:absolute;
+  width: 15%;
+  height: 100%;
+  font-size: 15px;
+  border-right: solid rgb(236, 231, 231) 1px;
+}
+
+.userView-nav {
+  position: relative;
+  margin: 0 15%;
+  text-align: right;
+  top: 45%;
+  transform: translateY(-50%);
+  font-weight: bold;
+}
+
+.userView-nav ul {
+  list-style: none;
+}
+  
+.userView-nav li {
+    position: relative;
+    margin: 2.2em 0;
+  }
+    
+.userView-nav a {
+      line-height: 20px;
+      text-transform: uppercase;
+      text-decoration: none;
+      letter-spacing: 0.4em;
+      display: block;
+      transition: all ease-out 300ms;
+      color: black;
+    }
+    
+
+
+  .enroll-container {
+    display: block;
+    margin-left: 30%;
+    height: 300px;
+    width: 400px;
+    padding-top: 5%;
+  }
+  
+  table, tr{
+    width: 500px;
+  }
+  table, td{
+    padding: 30px;
+  }
+  table, th{
+    width: 600px;
+  }
+  .input {
+    border:none;
+    height: 40px;
+    width: 400px;
+  }
+  .button{
+    border-radius: 10px;
+    margin-left: 10px;
+    padding: 5px;
+    background-color: white;
+    padding-left: 10px;
+  }
+  #button{
+    margin-left: 35%;
+    padding-top:17%;
+  }
+  .userView-container{
+  	padding-bottom:190px;
+  }
+  body {
+  display:contents;
+  height:100%;
+  }
