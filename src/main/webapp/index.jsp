@@ -84,8 +84,11 @@
                     
                     <div class="modal2">
                     	<form action="<%=request.getContextPath()%>/filterSearch">
-	                        <div id="filter-main">필터</div>
-                    		<button>상세검색</button>
+	                        <div id="filter-main">
+	                        	<p>필터</p>
+                    			<button>상세검색</button>
+	                        </div>
+	                       
                     	</form>
                     </div>
                 </div>
