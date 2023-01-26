@@ -21,6 +21,7 @@ public class ReservationView extends HttpServlet {
 		String checkOut = request.getParameter("checkOut");
 		int price = Integer.parseInt(request.getParameter("price"));
 		String hotelNo = request.getParameter("hotelNo");
+		String roomNo = request.getParameter("roomNo");
 		
 		request.setAttribute("hotelName", hotelName);
 		request.setAttribute("roomType", roomType);
@@ -28,6 +29,7 @@ public class ReservationView extends HttpServlet {
 		request.setAttribute("checkOut", checkOut);
 		request.setAttribute("price", price);
 		request.setAttribute("hotelNo", hotelNo);
+		request.setAttribute("roomNo", roomNo);
 		request.getRequestDispatcher("/WEB-INF/views/reservation/reservationView.jsp").forward(request, response);
 	
 	}
