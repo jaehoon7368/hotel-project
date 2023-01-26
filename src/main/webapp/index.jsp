@@ -86,6 +86,7 @@
                     	<form action="<%=request.getContextPath()%>/filterSearch">
 	                        <div id="filter-main">
 	                        	<p>필터</p>
+	                        	<div></div>
                     			<button>상세검색</button>
 	                        </div>
 	                       
