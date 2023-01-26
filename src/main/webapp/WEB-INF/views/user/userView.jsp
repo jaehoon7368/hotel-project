@@ -3,48 +3,70 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
-<section id=enroll-container>
-	<h2>회원 정보</h2>
-	<form name="memberUpdateFrm" method="post" action="<%= request.getContextPath() %>/user/userUpdate">
-		<table>
-			<tr>
-				<th>아이디<sup>*</sup></th>
-				<td>
-					<input type="text" name="userId" id="userId" value="<%= loginUser.getUserId() %>" readonly>
-				</td>
-			</tr>
-			<tr>
-				<th>이름<sup>*</sup></th>
-				<td>	
-				<input type="text"  name="userName" id="userName" value="<%= loginUser.getUserName() %>"  required><br>
-				</td>
-			</tr>
-			<tr>
-				<th>닉네임<sup>*</sup></th>
-				<td>	
-				<input type="text"  name="nickName" id="nickName" value="<%= loginUser.getNickName() %>"  required><br>
-				</td>
-			</tr>
-			<tr>
-				<th>이메일</th>
-				<td>	
-					<input type="email" placeholder="abc@xyz.com" name="email" id="email" value="<%= loginUser.getEmail() != null ? loginUser.getEmail() : "" %>"><br>
-				</td>
-			</tr>
-			<tr>
-				<th>휴대폰<sup>*</sup></th>
-				<td>	
-					<input type="tel" placeholder="(-없이)01012345678" name="phone" id="phone" maxlength="11" value="<%= loginUser.getPhone() %>" required><br>
-				</td>
-			</tr>
-			
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/user/userView.css" />
+<body>
+<div class=userView-container>
+ <div class="sidebar">
+        <nav class="userView-nav">
+          <ul>
+            <li class="active"><a href="<%= request.getContextPath() %>/user/userView">개인정보수정</a></li>
+            <hr>
+            <li><a href="#">예약내역확인</a></li>
+            <hr>
+            <li><a href="<%=request.getContextPath()%>/admin/adminhotelenroll">숙소등록하기</a></li>
+            <hr>
+            <li><a href="<%=request.getContextPath()%>/admin/adminenrolledhotelview?user_id=<%=loginUser.getUserId() %>">등록숙소확인</a></li>
+            <hr>
+            <li><a href="<%= request.getContextPath()%>/user/userList">회원관리</a></li>
+            <hr>
+          </ul>
+        </nav>
+     </div>
 
-		</table>
-        <input type="submit" value="정보수정"/>
-        <input type="button" value="비밀번호변경" onclick="updatePassword();"/>
-        <input type="button" onclick="deleteUser();" value="탈퇴"/>
-	</form>
-</section>
+     <div class="enroll-container">
+        <h2>개인 정보</h2>
+        <form name="memberUpdateFrm" method="post" action="<%= request.getContextPath() %>/user/userUpdate">
+            <table>
+                <tr>
+                    <th>아이디</th>
+                    <td>
+                        <input  type="text" class="input" name="userId" id="userId" value="<%= loginUser.getUserId() %>" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <th>이름</th>
+                    <td>	
+                    <input type="text" class="input"  name="userName" id="userName" value="<%= loginUser.getUserName() %>"  required><br>
+                    </td>
+                </tr>
+                <tr>
+                    <th>닉네임</th>
+                    <td>	
+                    <input type="text" class="input"  name="nickName" id="nickName" value="<%= loginUser.getNickName() %>"  required><br>
+                    </td>
+                </tr>
+                <tr>
+                    <th>이메일</th>
+                    <td>	
+                        <input type="email" class="input" placeholder="abc@xyz.com" name="email" id="email" value="<%= loginUser.getEmail() != null ? loginUser.getEmail() : "" %>"><br>
+                    </td>
+                </tr>
+                <tr>
+                    <th>휴대폰</th>
+                    <td>	
+                        <input type="tel" class="input" placeholder="(-없이)01012345678" name="phone" id="phone" maxlength="11" value="<%= loginUser.getPhone() %>" required><br>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div id="button">
+    <input type="submit" class="button" value="정보수정"/>
+    <input type="button" class="button" value="비밀번호변경" onclick="updatePassword();"/>
+    <input type="button" class="button" onclick="deleteUser();" value="회원탈퇴"/>
+    </div>
+  </div>
+ </body>
 
 <form action="<%= request.getContextPath() %>/user/userDelete" method="POST" name="userDeleteFrm"></form>
 <script>
