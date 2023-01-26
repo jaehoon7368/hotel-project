@@ -15,19 +15,19 @@
             <div id="search-box"> 
                 <div id="icon-box">
                     <div>
-                        <a href="" class="hotel-icon">
+                        <a href="<%=request.getContextPath()%>/selectHotel" class="hotel-icon">
                         <i class="fa-solid fa-hotel"></i>
                         <p>호텔</p>
                         </a>
                     </div>
                     <div>
-                        <a href="" class="hotel-icon">
+                        <a href="<%=request.getContextPath()%>/selectMotel" class="hotel-icon">
                         <i class="fa-regular fa-building"></i>
                         <p>모텔</p>
                         </a>
                     </div>
                     <div>
-                        <a href="" class="hotel-icon">
+                        <a href="<%=request.getContextPath()%>/selectPension" class="hotel-icon">
                         <i class="fa-solid fa-shop"></i>
                         <p>펜션</p>
                         </a>
@@ -72,14 +72,20 @@
                                 <input type="search" class="datepicker" id="checkOut" name="checkOut" placeholder="날짜추가">
                             </div>
                             <div id="search-detail-btn">
-                                <button type="submit" onclick="checkForm(this)"><i class="fa-solid fa-magnifying-glass"></i><span> 검색</span></button>
+                                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i><span> 검색</span></button>
                             </div>
                         </div>
                     </form>
                     </div> <!-- modal end-->
                     
                     <div id="filter-box">
-                        <a href=""><i class="fa-solid fa-bars-staggered"></i><span> 필터</span></a>
+                        <button id="filter-btn"><i class="fa-solid fa-bars-staggered"></i><span> 필터</span></button>
+                    </div>
+                    
+                    <div class="modal2">
+                        <div>
+            
+                        </div>
                     </div>
                 </div>
                 
@@ -125,6 +131,28 @@
             }
     });
     /* search-modal end*/
+    
+    /*filter modal start*/
+        const modal2 = document.querySelector('.modal2');
+        const filterBtn = document.querySelector("#filter-btn");
+        filterBtn.addEventListener('click', () => {
+            modal2.classList.toggle('show');
+
+            if (modal2.classList.contains('show')) {
+                body.style.overflow = 'hidden';
+            }
+        });
+
+        modal2.addEventListener('click', (e) => {
+            if (e.target === modal2) {
+                modal2.classList.toggle('show');
+
+                if (!modal2.classList.contains('show')) {
+                    body.style.overflow = 'auto';
+                }
+            }
+        });
+    /*filter modal end*/
 
     /* ckeckInOut 캘린더 한글 */
         $.datepicker.setDefaults({
