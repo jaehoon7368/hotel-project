@@ -20,12 +20,14 @@ public class ReservationView extends HttpServlet {
 		String checkIn = request.getParameter("checkIn");
 		String checkOut = request.getParameter("checkOut");
 		int price = Integer.parseInt(request.getParameter("price"));
+		String hotelNo = request.getParameter("hotelNo");
 		
 		request.setAttribute("hotelName", hotelName);
 		request.setAttribute("roomType", roomType);
 		request.setAttribute("checkIn", checkIn);
 		request.setAttribute("checkOut", checkOut);
 		request.setAttribute("price", price);
+		request.setAttribute("hotelNo", hotelNo);
 		request.getRequestDispatcher("/WEB-INF/views/reservation/reservationView.jsp").forward(request, response);
 	
 	}

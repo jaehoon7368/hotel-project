@@ -170,3 +170,6 @@ select * from tb_hotel_comment;
 
 ALTER TABLE tb_user ADD enroll_date date default sysdate;
 
+select * from tb_hotel where hotel_type='H';
+select h.*,(select min(room_price) from tb_room r where r.hotel_no = h.hotel_no group by hotel_no) price,(select renamed_filename from tb_hotel_image i where i.hotel_no = h.hotel_no) renamed_filename from tb_hotel h where h.hotel_type='H';
+

@@ -26,4 +26,28 @@ public class HotelService {
 		return hotel;
 	}
 
+	public List<Hotel> selectHotel() {
+		Connection conn = getConnection();
+		
+		List<Hotel> hotelList = hotelDao.selectHotel(conn);
+		close(conn);
+		return hotelList;
+	}
+
+	public List<Hotel> selectPension() {
+		Connection conn = getConnection();
+		
+		List<Hotel> hotelList = hotelDao.selectPension(conn);
+		close(conn);
+		return hotelList;
+	}
+	
+	public List<Hotel> selectMotel() {
+		Connection conn = getConnection();
+		
+		List<Hotel> hotelList = hotelDao.selectMotel(conn);
+		close(conn);
+		return hotelList;
+	}
+
 }
