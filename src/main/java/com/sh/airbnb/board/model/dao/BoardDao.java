@@ -29,8 +29,6 @@ public class BoardDao {
 	}
 	
 
-	
-
 	public int insertInquiy(Connection conn, InquiyBoard inquiyBoard) {
 		String sql = prop.getProperty("insertInquiy");
 		int result = 0;
@@ -61,20 +59,26 @@ public class BoardDao {
 			try (ResultSet rs = pstmt.executeQuery()){
 				
 				while (rs.next()) {
-					NoticeBoard noticeBoard = new NoticeBoard();
-					noticeBoard.setNoticeNo(rs.getInt("notice_no"));
-					noticeBoard.setTitle(rs.getString("title"));
-					noticeBoard.setRegDate(rs.getDate("reg_date"));
-					noticeBoard.setContent(rs.getString("content"));
-					noticeBoard.setWriter(rs.getString("writer"));
+					NoticeBoard noticeBoard = handNoticeBoardResultSet(rs);
 					noticeBoardList.add(noticeBoard);
 					
 				}
 			}
 		} catch (SQLException e) {
-			throw new BoardException("공시사항 조회 오류", e);
+			throw new BoardException("공시사항 목록 조회 오류", e);
 		}
 		return noticeBoardList;
+	}
+
+
+	private NoticeBoard handNoticeBoardResultSet(ResultSet rs) throws SQLException {
+		NoticeBoard noticeBoard = new NoticeBoard();
+		noticeBoard.setNoticeNo(rs.getInt("notice_no"));
+		noticeBoard.setTitle(rs.getString("title"));
+		noticeBoard.setRegDate(rs.getDate("reg_date"));
+		noticeBoard.setContent(rs.getString("content"));
+		noticeBoard.setWriter(rs.getString("writer"));
+		return noticeBoard;
 	}
 
 
@@ -96,9 +100,6 @@ public class BoardDao {
 		return result;
 	}
 
-
-
-
 	public List<InquiyBoard> selectInquiyBoardList(Connection conn) {
 		String sql = prop.getProperty("selectInquiyBoardList");
 		List<InquiyBoard> inquiyBoardList = new ArrayList<>();
@@ -106,27 +107,31 @@ public class BoardDao {
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)){
 			try (ResultSet rs = pstmt.executeQuery()){
 				while(rs.next()) {
-					InquiyBoard inquiyBoard = new InquiyBoard();
-					inquiyBoard.setInquiyNo(rs.getInt("inquiy_no"));
-					inquiyBoard.setProductType(rs.getString("product_type"));
-					inquiyBoard.setInquiyType(rs.getString("inquiy_type"));
-					inquiyBoard.setPhone(rs.getString("phone"));
-					inquiyBoard.setEmail(rs.getString("email"));
-					inquiyBoard.setContent(rs.getString("content"));
-					inquiyBoard.setRegDate(rs.getDate("reg_date"));
-					inquiyBoard.setWriter(rs.getString("writer"));
+					InquiyBoard inquiyBoard = handInquiyBoardResultSet(rs);
 					inquiyBoardList.add(inquiyBoard);
 				}
 				
 			}
 		} catch (Exception e) {
-			throw new BoardException("문의글 조회 오류", e);
+			throw new BoardException("문의글 목록 조회 오류", e);
 			
 		}
 		return inquiyBoardList;
 	}
 
 
+	private InquiyBoard handInquiyBoardResultSet(ResultSet rs) throws SQLException {
+		InquiyBoard inquiyBoard = new InquiyBoard();
+		inquiyBoard.setInquiyNo(rs.getInt("inquiy_no"));
+		inquiyBoard.setProductType(rs.getString("product_type"));
+		inquiyBoard.setInquiyType(rs.getString("inquiy_type"));
+		inquiyBoard.setPhone(rs.getString("phone"));
+		inquiyBoard.setEmail(rs.getString("email"));
+		inquiyBoard.setContent(rs.getString("content"));
+		inquiyBoard.setRegDate(rs.getDate("reg_date"));
+		inquiyBoard.setWriter(rs.getString("writer"));
+		return inquiyBoard;
+	}
 
 
 	public int deleteNoticeBoard(Connection conn, int noticeNo) {
@@ -139,6 +144,98 @@ public class BoardDao {
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			throw new BoardException("공지사항 삭제 오류", e);
+		}
+		return result;
+	}
+
+
+	public int deleteInquiyBoard(Connection conn, int inquiyNo) {
+		String sql = prop.getProperty("deleteInquiyBoard");
+		// delete from tb_inquiy_board where inquiy_no = ?
+		int result = 0;
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, inquiyNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			throw new BoardException("문의사항 삭제 오류", e);
+		}
+		return result;
+	}
+
+
+	public int updateNoticeBoard(Connection conn, NoticeBoard noticeBoard) {
+		String sql = prop.getProperty("updateNoticeBoard");
+		int result = 0;
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, noticeBoard.getTitle());
+			pstmt.setString(2, noticeBoard.getContent());
+			pstmt.setString(3, noticeBoard.getWriter());
+			pstmt.setInt(4, noticeBoard.getNoticeNo());
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			throw new BoardException("공지사항 수정 오류", e);
+		}
+		return result;
+	}
+
+
+	public NoticeBoard selectOneNoticeBoard(Connection conn, int noticeNo) {
+		String sql = prop.getProperty("selectOneNoticeBoard");
+		NoticeBoard noticeBoard = null;
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, noticeNo);
+			
+			try(ResultSet rs = pstmt.executeQuery()){
+				while(rs.next()) {
+					noticeBoard = handNoticeBoardResultSet(rs);
+					
+				}
+			}
+		} catch (Exception e) {
+			throw new BoardException("공지사항 조회 오류", e);
+		}
+		return noticeBoard;
+	}
+
+
+	public InquiyBoard selectOneInquiyBoard(Connection conn, int inquiyNo) {
+		String sql = prop.getProperty("selectOneInquiyBoard");
+		InquiyBoard inquiyBoard = null;
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, inquiyNo);
+			try(ResultSet rs = pstmt.executeQuery()){
+				while(rs.next()) {
+					inquiyBoard = handInquiyBoardResultSet(rs);
+				}
+			}
+		} catch (Exception e) {
+			throw new BoardException("문의글 조회 오류", e);
+		}
+		return inquiyBoard;
+	}
+
+
+	public int updateInquiyBoard(Connection conn, InquiyBoard inquiyBoard) {
+		String sql = prop.getProperty("updateInquiyBoard");
+		int result = 0;
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, inquiyBoard.getProductType());
+			pstmt.setString(2, inquiyBoard.getInquiyType());
+			pstmt.setString(3, inquiyBoard.getPhone());
+			pstmt.setString(4, inquiyBoard.getEmail());
+			pstmt.setString(5, inquiyBoard.getContent());
+			pstmt.setString(6, inquiyBoard.getWriter());
+			pstmt.setInt(7, inquiyBoard.getInquiyNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			throw new BoardException("문의글 수정 오류", e);
 		}
 		return result;
 	}

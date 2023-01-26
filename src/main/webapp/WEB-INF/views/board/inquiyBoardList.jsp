@@ -95,7 +95,7 @@
 	                    (loginUser.getUserId().equals(inquiyBoards.getWriter())) || loginUser.getUserRole() == UserRole.A) { %>
                         <li class="notice-list" style="border-bottom: 1px solid rgba(0,0,0,0.4);">
                             <div style="padding: 35px 0 35px 0; display: block;" class="menu">
-                                <p style="margin: 0;">[문의] <%= inquiyBoards.getContent().substring(0, 10) %>
+                                <p style="margin: 0;">[문의] <%= inquiyBoards.getContent().substring(0, 1) %>
                                     <svg xmlns="http://www.w3.org/2000/svg" style="float: right;" width="20" height="20" fill="currentColor" class="bi bi-chevron-expand" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd" d="M3.646 9.146a.5.5 0 0 1 .708 0L8 12.793l3.646-3.647a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 0-.708zm0-2.292a.5.5 0 0 0 .708 0L8 3.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708z"/>
                                     </svg>
@@ -104,6 +104,12 @@
                             </div>
                             <div class="content" style="display: none; background: #fafafa; padding: 12px 16px; margin-bottom: 12px ;">
                             		<%= inquiyBoards.getContent() %>
+                            		<br />
+                            		<br />
+                            		<hr />
+                            		<br />
+	                            <input type="button" value="수정" onclick="updateInquiy(<%= inquiyBoards.getInquiyNo() %>)" />
+	                            <input type="button" value="삭제" onclick="deleteInquiy(<%= inquiyBoards.getInquiyNo() %>)" />
                             </div>
                          </li>
                          <% }
@@ -119,6 +125,24 @@
             </div>
         </div>
     </div>
+    <form action="<%= request.getContextPath() %>/board/inquiyBoardDelete" name="inquiyBoardDeleteFrm" method="POST">
+    	<input type="hidden" name="inquiyNo" value=""  />
+    </form>
+    
+    <form action="<%= request.getContextPath() %>/board/inquiyBoardUpdate" name="updateInquiyFrm" method="GET">
+    	<input type="hidden" name="inquiyNo" value="" />
+    </form>
+    <script>
+    const deleteInquiy = (inquiyNo) => {
+    	document.inquiyBoardDeleteFrm.inquiyNo.value = inquiyNo;
+    	document.inquiyBoardDeleteFrm.submit();
+    }
+    const updateInquiy = (inquiyNo) => {
+    	console.log(inquiyNo);
+    	document.updateInquiyFrm.inquiyNo.value = inquiyNo;
+    	document.updateInquiyFrm.submit();
+    }
+    </script>
     <script>
         $(".menu").click((e) => {
                         console.log(e.target);
