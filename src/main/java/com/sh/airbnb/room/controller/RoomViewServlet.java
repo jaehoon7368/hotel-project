@@ -39,7 +39,6 @@ public class RoomViewServlet extends HttpServlet {
 		//호텔 룸정보 가져오기
 		List<Room> roomList = roomService.roomTotalView(hotelNo); //select r.*,(select renamed_filename from tb_room_image i where i.room_no = r.room_no) renamed_filename from tb_room r where hotel_no = 'H001' order by room_price asc
 
-		
 		//호텔 정보 가져오기
 		Hotel hotel = hotelService.selectOneHotel(hotelNo);
 		
