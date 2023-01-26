@@ -5,10 +5,15 @@ import static com.sh.airbnb.common.JdbcTemplate.commit;
 import static com.sh.airbnb.common.JdbcTemplate.getConnection;
 import static com.sh.airbnb.common.JdbcTemplate.rollback;
 
+
 import java.sql.Connection;
+import java.util.List;
+import java.util.Map;
 
 import com.sh.airbnb.user.model.dao.UserDao;
 import com.sh.airbnb.user.model.dto.User;
+
+
 
 
 
@@ -96,5 +101,42 @@ public class UserService {
 			close(conn);
 		}
 		return result;
+	}
+
+	public List<User> searchUser(Map<String, String> param) {
+		Connection conn = getConnection();
+		List<User> users = userDao.searchUser(conn, param);
+		close(conn);
+		return users;
+	}
+
+	public int updateUserRole(String userId, String userRole) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			result = userDao.updateUserRole(conn, userId, userRole);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		
+		return result;
+	}
+
+	public List<User> selectAllUser(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<User> members = userDao.selectAllUser(conn, param);
+		close(conn);
+		return members;
+	}
+
+	public int selectTotalCount() {
+		Connection conn = getConnection();
+		int totalCount = userDao.selectTotalCount(conn);
+		close(conn);
+		return totalCount;
 	}
 }

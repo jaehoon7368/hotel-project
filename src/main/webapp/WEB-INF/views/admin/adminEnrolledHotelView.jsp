@@ -44,7 +44,6 @@
 	<div class="adminBox">
 		<ul>
 			<li><a href="">개인정보 수정</a></li>
-			<li><a href="">작성 리뷰</a></li>
 			<li><a href="">예약 내역 확인</a></li>
 			<li><a
 				href="<%=request.getContextPath()%>/admin/adminhotelenroll">호텔
@@ -61,8 +60,7 @@
       %>
 		<form action="<%=request.getContextPath()%>/admin/adminhotelenroll"
 			name="hotelEnrollFrm" method="POST" enctype="multipart/form-data">
-			<br> <input type="hidden" name="userId"
-				value="<%=loginUser.getUserId()%>" />
+			<br> 
 			<div class="entireBox">
 				<table id="enrollTb" style="height: 100%; width: 100%;">
 					<tr>
@@ -72,7 +70,6 @@
 						<td><span> 호텔 이름 : </span> <%=hotel.getHotelName() %></td>
 					</tr>
 					<tr>
-
 						<td><span>호텔 주소 : </span><%=hotel.getHotelAddress() %>
 						</td>
 					</tr>
@@ -83,41 +80,28 @@
 				<img class="mainImage"
 					src="<%=request.getContextPath() %>/upload/hotel/<%=hotel.getRenamedFilename() %>"
 					alt="...">
-				<li style ="padding :0px;"><button type="button" class="roombtn" onclick="popUp()">룸
+				<li style ="padding :0px;"><button type="button" class="roombtn" onclick="roomEnroll('<%=hotel.getHotelNo()%>')">룸
 						등록하기</button></li>
-				<div class="">
-				<script>
-                  const popUp = ()=>{
-                    const popup =  open ('<%=request.getContextPath()%>/admin/adminRoomEnroll?no=<%=hotel.getHotelNo()%>','myPopup','_blank','width=400px,height=200px,left=300px,top=300px')
-                  }
-                  </script>
-
-
-				</div>
 				<br />
 				<div id="categoryBox" style="width:100%">
 				<div id="img-viewer-container">
-									<%
+					<%
 					if (hotel.getRooms() != null) {
 						for (Room room : hotel.getRooms()) {
 					%>
 					<img id="img-viewer " class="subImage"src="<%=request.getContextPath()%>/upload/room/<%=room.getRenamedFilename()%>"
-						style="width: 200px" alt="...">
-								<%
-		}
-		}else{
-		%>
-		<div class="noEnroll">
+						style="width: 300px" alt="...">
+					<%
+					}
+					}else{
+					%>
 	<h2>등록된 룸이없습니다. 등록을 부탁드립니다</h2>
-	</div>
-		
-		
 		<% }%>
 				</div>
 				</div>
 				
 		</form>
-
+	<div style="height :250px"></div>
 	</div>
 
 <%
@@ -133,7 +117,11 @@
  	%>
 </div>
 <!-- entireBox end -->
-
+<script>
+	const roomEnroll = (hotelNo)=>{
+  		const popup =  open ('<%=request.getContextPath()%>/admin/adminRoomEnroll?no=' + hotelNo,'myPopup','_blank','width=400px,height=200px,left=300px,top=300px')
+	}
+</script>
 
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

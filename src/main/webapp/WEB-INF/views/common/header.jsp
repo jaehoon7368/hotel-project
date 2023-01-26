@@ -71,9 +71,9 @@
 		            <hr id="rine">
 		            <div id="board">
 		                <ul>
-		                    <li><a href=""></a>공지사항</li>
+		                    <li><a href="<%= request.getContextPath() %>/board/noticeBoardList"></a>공지사항</li>
 		                    <li><a href=""></a>자주 묻는 질문</li>
-		                    <li><a href=""></a>1:1 문의</li>
+		                    <li><a href="<%= request.getContextPath() %>/board/inquiyBoardList"></a>1:1 문의</li>
 		                </ul>
 		        </div>
 		     </div>
@@ -83,18 +83,18 @@
 		            <div id="sign">
 		                <ul>
 		                	
-		                   	<li><button id="btn1" onclick="location.href = '<%= request.getContextPath() %>/user/userLogout';">로그아웃</button></li>
+		                   	<li><button id="btn1" onclick="location.href ='<%= request.getContextPath() %>/user/userLogout';">로그아웃</button></li>
 		                   	<li><button id="btn2" onclick="location.href ='<%=request.getContextPath()%>/admin/adminhotelenroll';">마이페이지</button></li>
 		                   	<li><button id="btn3" onclick="location.href ='<%=request.getContextPath()%>/admin/adminhotelenroll';">판매자로그인</button></li>
-		                   	<li><button id="btn4">서버관리자로그인</button></li>
+		                   	<li><button id="btn4" onclick="location.href ='<%= request.getContextPath()%>/user/userList';">서버관리자로그인</button></li>
 		                </ul>
 		            </div>
 		            <hr id="rine">
 		            <div id="board">
 		                <ul>
-		                    <li><a href=""></a>공지사항</li>
+		                    <li><a href="<%= request.getContextPath() %>/board/noticeBoardList">공지사항</a></li>
 		                    <li><a href=""></a>자주 묻는 질문</li>
-		                    <li><a href=""></a>1:1 문의</li>
+		                    <li><a href="<%= request.getContextPath() %>/board/inquiyBoardList">1:1 문의</a></li>
 		                </ul>
 		        </div>
 		        

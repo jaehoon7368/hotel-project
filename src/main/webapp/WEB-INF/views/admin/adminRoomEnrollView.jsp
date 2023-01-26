@@ -19,12 +19,11 @@
 method="POST" enctype="multipart/form-data" name="roomEnrollFrm">
 
 	<div class="entireBox">
-		<select class="form-select form-select-lg mb-3"
-			aria-label=".form-select-lg example" required name="type">
-			<option value="" selected>Room type select</option>
-			<option value="스탠다드">스탠다드</option>
-			<option value="디럭스">디럭스</option>
-			<option value="슈퍼디럭스">슈퍼디럭스</option>
+<div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon1">Room Type</span>
+  <input type="text" class="form-control" placeholder="Room Type" aria-label="Username" name="type" aria-describedby="basic-addon1">
+</div>
+
 		</select> <select class="form-select form-select-lg mb-3"
 			aria-label=".form-select-lg example" required name="people">
 			<option value="" selected>Limit People</option>
@@ -37,8 +36,8 @@ method="POST" enctype="multipart/form-data" name="roomEnrollFrm">
 		</select>
 
 		<div class="input-group mb-3">
-			<span class="input-group-text">Room Pirce</span> <input type="text"
-				class="form-control" name="price" required
+			<span class="input-group-text">Room Pirce</span> 
+			<input type="text" class="form-control" name="price" required
 				aria-label="Amount (to the nearest dollar)"> <span
 				class="input-group-text">원(won)</span>
 		</div>
@@ -54,11 +53,12 @@ method="POST" enctype="multipart/form-data" name="roomEnrollFrm">
 			<input type="file" class="form-control" id="inputGroupFile01"
 				name="upFile" required>
 		</div>
-		<div id="img-viewer-container">
-			<img id="img-viewer" width="500px"> 
-			<input type="submit" class="btn btn-dark" value="룸등록 "  />
-</form>
+		<div  id="img-viewer-container">
+			<img style="margin :auto" id="img-viewer" width="500px"> 
+			<div style="text-align: center; margin-top:30px"><input type="submit" class="btn btn-dark"  value="룸등록 "  /></div>
+			
 </div>
+</form>
 
 
 
@@ -92,6 +92,7 @@ document.querySelector("#inputGroupFile01").addEventListener('change',(e)=>{
 			//읽기 작업 완료시 호출될 load이벤트핸들러
 			document.querySelector("#img-viewer").src = e.target.result; // dataUrl		
 			console.log(e.target.result); //파일2진데이터를 인코딩한 결과
+			document.querySelector("#img-viewer").style = "width:100% ;height :50%;"
 		}
 	}else{ //파일 선택 취소한경우
 		document.querySelector("#img-viewer").src = "";
