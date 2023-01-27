@@ -45,9 +45,34 @@
 		</thead>
 		
 	</table>
+	<tbody>
+		<% if(reservations.isEmpty()){ %>
+			<tr>
+				<td colspan="10">조회된 예약내역이 없습니다.</td>
+			</tr>
+		<% 
+		   } else { 
+			  for(Reservation reservation : reservations){
+		%>
+				<tr>
+					<td><%= hotelName %></td>
+					<td><%= reservation.getReName() %></td>
+					<td><%= roomType %></td>
+					<td><%= reservation.getReDay() %></td>
+					<td><%= reservation.getStartDate() %></td>
+					<td><%= reservation.getEndDate() %></td>
+					<td><%= reservation.getRePrice() %></td>
+				
+					
+				</tr>
+		<%
+			  }			
+			} 
+		%>
+		</tbody>
 
 <script>
-	
+
 
 
 </script>
