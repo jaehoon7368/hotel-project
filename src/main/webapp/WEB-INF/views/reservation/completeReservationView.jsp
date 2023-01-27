@@ -1,10 +1,13 @@
+<%@page import="com.sh.airbnb.reservation.model.dto.Reservation"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
-
+<%  
+		Reservation rev = (Reservation)session.getAttribute("resevation");
+%>
    <style>
         .reBox{
             width: 636px;
@@ -53,7 +56,7 @@
 }
 
     </style>
-    
+    	<!--  호텔이름 /  룸타입 / 박 / 체크인 체크아웃 /예약번호/ 예약자 이름 / 총가격 /  -->
     <div class="reBox">
         <h2 style="padding:10px;">예약이 완료되었습니다.</h2> 
         <hr>
@@ -61,7 +64,7 @@
 
         <table class="reTable">
             <tr style="width:70px ;">
-                <td class="name" colspan="2">강릉 크리스탈 풀빌라</td>
+                <td class="name" colspan="2"><%=rev %></td>
             </tr> 
             <tr>
                 <td class="name"colspan="2">스파오션부 (룸타입) /1박</td>

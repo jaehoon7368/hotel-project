@@ -69,7 +69,7 @@ public class ReservationDao {
 
 	public Reservation selectOneReservation(String reNo, Connection conn) {
 		String sql = prop.getProperty("selectOneReservation");
-		// sql 문 추가해야함 아직 아냏ㅅ음 여기까지  땅땅 
+		// select * from tb_reservation where re_no = ?
 		Reservation reservation = new Reservation();
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
 			pstmt.setString(1, reNo);
