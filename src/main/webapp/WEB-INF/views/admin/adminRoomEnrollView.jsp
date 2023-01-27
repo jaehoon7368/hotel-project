@@ -77,6 +77,7 @@ document.roomEnrollFrm.onsubmit=(e) =>{
 		alert("내용을 작성해주세요.");
 		return false;
 	}
+	e.target.close();
 	
 }
 
@@ -97,6 +98,8 @@ document.querySelector("#inputGroupFile01").addEventListener('change',(e)=>{
 		document.querySelector("#img-viewer").src = "";
 	}
 })
+
+
 
 
 </script>

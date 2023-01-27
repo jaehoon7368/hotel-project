@@ -2,6 +2,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%
 
 	String hotelName = (String) request.getAttribute("hotelName");
@@ -12,14 +13,16 @@
 	Date date2 = new SimpleDateFormat("yyyy-MM-dd").parse(checkOut);
 	long dateofAccom = (date2.getTime() -date1.getTime()); //날짜 차이 계산 밀리초
 	long result = (dateofAccom/(24*60*60)/1000);   // 일수 계산  = 몇박  
+	int reDay = (int)result;
 	int price = (int) request.getAttribute("price");
 	int totalPrice = price* (int)result;	 // 일수 * 가격
 	String hotelNo = (String) request.getAttribute("hotelNo");
 	String roomNo = (String) request.getAttribute("roomNo");
+	String userId = "";
+	userId = loginUser.getUserId()  != null ?  loginUser.getUserId() : "비회원";
 
 
 %>    
-<%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 
 <style>
@@ -156,7 +159,10 @@
         <input type="hidden" value= "<%=hotelNo%>" name ="hotelNo"/>
         <input type="hidden" value= "<%=checkIn%>" name= "checkIn"/>
         <input type="hidden" value= "<%=checkOut%>" name= "checkOut"/>
-        <input type="hidden" value= "<%=loginUser.getUserId()%>" name= "userId"/>
+        <input type="hidden" value= "<%=userId%>" name= "userId"/>
+        <input type="hidden" value= "<%=totalPrice%>" name= "totalprice"/>
+        <input type="hidden" value= "<%=reDay%>" name= "reDay"/>
+        
         
         <div id="rightBox">
             <table id="tb2">
@@ -218,7 +224,7 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td style="text-align: center"><button  class="reservationbtn">예약하기</button></td>
+                    <td style="text-align: center"><button id="rebtn" class="reservationbtn">예약하기</button></td>
                 </tr>
 				</form>
 
@@ -227,6 +233,18 @@
     </div>    <!--entirebox  -->
 
 <script>
+
+document.querySelector("#rebtn").addEventListener('click',(e)=>{
+	const bool =  confirm("정말 예약하시겠습니까? 취소하시면 첫화면으로 돌아갑니다.");
+	
+	if(bool){
+		e.target.submit();
+	}else{
+		e.target.location.href="<%=request.getContextPath()%>/" ;
+	}
+	
+	
+})
 	
 
 
