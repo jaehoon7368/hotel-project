@@ -45,6 +45,7 @@ public class ReservationView extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session =  request.getSession();
+		System.out.println("예약 등록 서블릿 오는지 확인");
 		//입력값 확인 
 		try {
 		
@@ -54,7 +55,6 @@ public class ReservationView extends HttpServlet {
 		String checkOut = request.getParameter("checkOut");
 		int people = Integer.parseInt(request.getParameter("people"));
 		String userId = request.getParameter("userId");
-		
 		String reName = request.getParameter("reName");
 		int reDay = Integer.parseInt(request.getParameter("reDay"));
 		int totalPrice = Integer.parseInt(request.getParameter("totalPrice"));
@@ -62,8 +62,9 @@ public class ReservationView extends HttpServlet {
 		
 
 		System.out.println("룸넘버"+roomNo);
-		
-		
+		System.out.println("예약자이름"+reName);
+		System.out.println("몇박햇는지"+reDay);
+		System.out.println("총가격 "+totalPrice);
 		
 
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
