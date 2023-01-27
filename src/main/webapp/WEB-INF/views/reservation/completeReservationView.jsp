@@ -86,7 +86,7 @@
     	    		data: {
     		    		imp_uid : rsp.imp_uid,
     		    		revReNo : <%=rev.getReNo()%>,
-    		    		price :  <%=rev.getRePrice()%>
+    		    		price :  <%=rev.getRePrice()%>,
     		    		userId : <%=loginUser.getUserId()%>
     		    		//기타 필요한 데이터가 있으면 추가 전달 전달해서 post로 저장
     	    		}
