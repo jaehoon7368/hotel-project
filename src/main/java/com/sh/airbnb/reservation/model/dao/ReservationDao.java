@@ -31,17 +31,20 @@ public class ReservationDao {
 	}
 	
 	public int insertReservation(Reservation rev, Connection conn) {
-		String sql = prop.getProperty("insertResevation");
-		
+		String sql = prop.getProperty("insertReservation");
+		//insert into tb_reservation values ('R'||to_char(req_reservation.nextval,'fm0000'),?,?,?,'Y',?,?,?,?,?,?)
 		int result = 0;
 		
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)){
 			pstmt.setInt(1,rev.getPeople());
-			pstmt.setDate(2, (Date) rev.getStartDate());
-			pstmt.setDate(3, (Date) rev.getEndDate());
+			pstmt.setDate(2, rev.getStartDate());
+			pstmt.setDate(3, rev.getEndDate());
 			pstmt.setString(4, rev.getRoomNo());
 			pstmt.setString(5, rev.getUserId());
 			pstmt.setString(6,rev.getHotelNo());
+			pstmt.setString(7, rev.getReName());
+			pstmt.setInt(8, rev.getReDay());
+			pstmt.setInt(9, rev.getRePrice());
 			result = pstmt.executeUpdate();
 		}catch(Exception e) {
 			throw new ReservationException("예약 등록 오류 ",e);
@@ -58,11 +61,36 @@ public class ReservationDao {
 					reNo = rset.getString(1);
 				}
 			}
-			
 		}catch(Exception e ) {
 			throw new ReservationException("예약 마지막 번호 조회 오류 ",e);
 		}
 		return reNo;
+	}
+
+	public Reservation selectOneReservation(String reNo, Connection conn) {
+		String sql = prop.getProperty("selectOneReservation");
+		// sql 문 추가해야함 아직 아냏ㅅ음 여기까지  땅땅 
+		Reservation reservation = new Reservation();
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, reNo);
+			
+			try(ResultSet rset = pstmt.executeQuery()){
+				
+				while(rset.next()) {
+					reservation.setUserId(rset.getString("user_id"));
+					reservation.setStartDate(rset.getDate("start_date"));
+					reservation.setRoomNo(rset.getString("room_no"));
+					reservation.setReservationStatus(rset.getString("reservation_status"));
+					reservation.setPeople(rset.getInt("people"));
+					reservation.setHotelNo(rset.getString("hotel_no"));
+					reservation.setEndDate(rset.getDate("end_date"));
+				}
+			}
+		}catch(Exception e ) {
+			throw new ReservationException("예약 조회 오류 ",e);
+		}
+		
+		return reservation;
 	}
 
 }

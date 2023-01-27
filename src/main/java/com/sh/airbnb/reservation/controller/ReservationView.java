@@ -50,26 +50,43 @@ public class ReservationView extends HttpServlet {
 		
 		String hotelNo = request.getParameter("hotelNo");
 		String roomNo = request.getParameter("roomNo");
-		String roomType = request.getParameter("roomType");
 		String checkIn= request.getParameter("checkIn");
 		String checkOut = request.getParameter("checkOut");
 		int people = Integer.parseInt(request.getParameter("people"));
 		String userId = request.getParameter("userId");
 		
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+		String reName = request.getParameter("reName");
+		int reDay = Integer.parseInt(request.getParameter("reDay"));
+		int totalPrice = Integer.parseInt(request.getParameter("totalPrice"));
+		
+		
+
+		System.out.println("룸넘버"+roomNo);
+		
+		
+		
+
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		Date startDate = formatter.parse(checkIn);
 		Date endDate = formatter.parse(checkOut);
+		long startDate1 = startDate.getTime();
+		long endDate1 = endDate.getTime();
+
 		
-		Reservation reservation = new Reservation(null,people,startDate,endDate,null,roomNo,userId,hotelNo);
 		
+		
+		java.sql.Date sqlDate1 = new java.sql.Date(startDate1);
+		java.sql.Date sqlDate2 = new java.sql.Date(endDate1);
+		System.out.println("sql 데이트"+sqlDate1);
+		System.out.println("sql 데이트"+sqlDate2);
+		
+		Reservation reservation = new Reservation(null,people,sqlDate1,sqlDate2,null,roomNo,userId,hotelNo,reName,reDay,totalPrice);
 		
 		//등록 메소드
-		
 		int result = 0;
 		result = reservationService.insertResevation(reservation);
 		String reNo = reservation.getReNo();
-		
-		
+			
 		response.sendRedirect(request.getContextPath()+"/reservation/completeReservation?reNo="+reNo);
 		session.setAttribute("msg", "예약에 성공 하셨습니다. 예약후 결제를 하셔야 예약확정됩니다.");
 		}catch (Exception e ) {
