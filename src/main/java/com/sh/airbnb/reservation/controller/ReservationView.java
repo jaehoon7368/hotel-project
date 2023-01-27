@@ -81,7 +81,7 @@ public class ReservationView extends HttpServlet {
 		System.out.println("sql 데이트"+sqlDate1);
 		System.out.println("sql 데이트"+sqlDate2);
 		
-		Reservation reservation = new Reservation(null,people,sqlDate1,sqlDate2,null,roomNo,userId,hotelNo,reName,reDay,totalPrice);
+		Reservation reservation = new Reservation(null,people,sqlDate1,sqlDate2,null,roomNo,userId,hotelNo,reName,reDay,totalPrice,null,null);
 		
 		//등록 메소드
 		int result = 0;
