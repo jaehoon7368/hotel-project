@@ -59,6 +59,7 @@ create table tb_hotel(
 );
 
 
+
 create table tb_room(
     room_no varchar2(10),
     room_type  varchar2(100) not null,
@@ -236,5 +237,19 @@ insert into tb_category values ('c014','주방');
 insert into tb_category values ('c015','데스크톱');
 insert into tb_category values ('c016','와이파이');
 insert into tb_category values ('c017','데스크톱');
+
+insert into tb_user values('0','user','1234','일반인','01012341234','U','users@naver.com','고객이올시다',default);
+select * from tb_user;
+select * from tb_hotel;
+select * from tb_hotel_image;
+select * from tb_room;
+select * from tb_hotel_category;
+select * from tb_hotel_comment;
+select * from tb_reservation;
+
+ALTER TABLE tb_user ADD enroll_date date default sysdate;
+
+select * from tb_hotel where hotel_type='H';
+select h.*,(select min(room_price) from tb_room r where r.hotel_no = h.hotel_no group by hotel_no) price,(select renamed_filename from tb_hotel_image i where i.hotel_no = h.hotel_no) renamed_filename from tb_hotel h where h.hotel_type='H';
 
 
