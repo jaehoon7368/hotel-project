@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.sh.airbnb.room.model.dao.RoomDao;
 import com.sh.airbnb.room.model.dto.Room;
+import com.sh.airbnb.room.model.dto.RoomPrice;
 
 public class RoomService {
 	
@@ -16,6 +17,13 @@ public class RoomService {
 		List<Room> roomList = roomDao.roomTotalView(conn,hotelNo);
 		close(conn);
 		return roomList;
+	}
+
+	public RoomPrice selectRoomPrice() {
+		Connection conn = getConnection();
+		RoomPrice roomPrice = roomDao.selectRoomPrice(conn);
+		close(conn);
+		return roomPrice;
 	}
 
 

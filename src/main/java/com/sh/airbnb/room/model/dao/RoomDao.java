@@ -12,6 +12,7 @@ import java.util.Properties;
 
 import com.sh.airbnb.hotel.model.dao.HotelDao;
 import com.sh.airbnb.room.model.dto.Room;
+import com.sh.airbnb.room.model.dto.RoomPrice;
 import com.sh.airbnb.room.model.exception.RoomException;
 
 public class RoomDao {
@@ -53,6 +54,27 @@ public class RoomDao {
 			throw new RoomException("객실 정보 불러오기 오류",e);
 		}
 		return roomList;
+	}
+
+	public RoomPrice selectRoomPrice(Connection conn) {
+		String sql = prop.getProperty("selectRoomPrice");
+		RoomPrice roomPrice = null;
+		
+		try(
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rset = pstmt.executeQuery();
+			){
+			while(rset.next()) {
+				roomPrice = new RoomPrice();
+				roomPrice.setMinPrice(rset.getInt("min_price"));
+				roomPrice.setMaxPrice(rset.getInt("max_price"));
+				roomPrice.setAvgPrice(rset.getInt("avg_price"));
+				
+			}
+		} catch (SQLException e) {
+			throw new RoomException("객실 최소,최대,평균 가격 불러오기 오류",e);
+		}
+		return roomPrice;
 	}
 
 }

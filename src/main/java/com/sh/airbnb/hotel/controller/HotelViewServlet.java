@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sh.airbnb.hotel.model.dto.Hotel;
 import com.sh.airbnb.hotel.model.service.HotelService;
+import com.sh.airbnb.room.model.dto.RoomPrice;
+import com.sh.airbnb.room.model.service.RoomService;
 
 /**
  * Servlet implementation class HotelSearchServlet
@@ -19,6 +21,7 @@ import com.sh.airbnb.hotel.model.service.HotelService;
 public class HotelViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private HotelService hotelService = new HotelService();
+	private RoomService roomService = new RoomService();
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -29,11 +32,13 @@ public class HotelViewServlet extends HttpServlet {
 		String checkOut = request.getParameter("checkOut");
 		
 		List<Hotel> hotelList = hotelService.hotelTotalView();
+		RoomPrice roomPrice = roomService.selectRoomPrice();
 		
 		request.setAttribute("hotelList", hotelList);
 		request.setAttribute("searchLocation", searchLocation);
 		request.setAttribute("checkIn", checkIn);
 		request.setAttribute("checkOut", checkOut);
+		request.setAttribute("roomPrice", roomPrice);
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
