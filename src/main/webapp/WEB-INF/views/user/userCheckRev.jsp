@@ -32,8 +32,10 @@
           </ul>
         </nav>
      </div>
+ </content>
     	<!--  호텔이름 /  룸타입 / 박 / 체크인 체크아웃 /예약번호/ 예약자 이름 / 총가격 /  -->
     	<div class="wrapper">
+    	<div style ="margin-top :13px"><h2>예약내역</h2></div>
        <% if(reservations.isEmpty()){ %>
 			<tr>
 				<td colspan="10">조회된 예약내역이 없습니다.</td>
@@ -45,7 +47,7 @@
 	
     <div class="reBox">
        <tbody>
-        <div style ="margin-top :13px"><h2>예약내역</h2></div>
+        
 
         <table class="reTable">
             <tr style="width:70px ;">
@@ -82,7 +84,7 @@
         </table>
         
         <h3>결제금액</h3>
-        <h2 class="price"><%= reservation.getRePrice() %> 원</h2>
+        <h2 class="price"><%= reservation.getRePrice() %>원</h2>
         <button class="mainbtn" id="btn-kakao-pay">취소하기 </button>
        </tbody>
     </div>
@@ -91,11 +93,4 @@
 			} 
 		%>
    </div>
-    
-</content>	
-
-    
-    
-    
-    
     <%@ include file="/WEB-INF/views/common/footer.jsp" %>
