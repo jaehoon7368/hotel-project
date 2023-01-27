@@ -6,11 +6,15 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import com.sh.airbnb.admin.model.dao.AdminDao;
 import com.sh.airbnb.reservation.model.dto.Reservation;
 import com.sh.airbnb.reservation.model.exception.ReservationException;
+
 
 public class ReservationDao {
 	private Properties prop = new Properties ();
@@ -91,6 +95,36 @@ public class ReservationDao {
 		}
 		
 		return reservation;
+	}
+
+	public List<Reservation> selectAllReservation(Connection conn, String userId) {
+		String sql = prop.getProperty("selectAllReservation");
+		List<Reservation> reservations = new ArrayList<>();
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, userId);
+			
+			
+			try(ResultSet rset = pstmt.executeQuery();){
+				
+				while(rset.next()) {
+					Reservation reservation = new Reservation();
+					reservation.setHotelName(rset.getString("hotel_name"));
+					reservation.setReName(rset.getString("re_name"));
+					reservation.setRoomType(rset.getString("room_type"));
+					reservation.setReDay(rset.getInt("re_day"));
+					reservation.setStartDate(rset.getDate("start_date"));
+					reservation.setEndDate(rset.getDate("end_date"));
+					reservation.setRePrice(rset.getInt("re_price"));
+					reservations.add(reservation);
+					System.out.println("reservation : " + reservations);
+				}
+			}
+			
+		} catch (SQLException e) {
+			throw new ReservationException("예약내역조회 오류!", e);
+		}
+				
+		return reservations;
 	}
 
 }
