@@ -11,7 +11,7 @@
           <ul>
             <li class="active"><a href="<%= request.getContextPath() %>/user/userView">개인정보수정</a></li>
             <hr>
-            <li><a href="#">예약내역확인</a></li>
+            <li><a href="<%= request.getContextPath()%>/user/userCheckRev">예약내역확인</a></li>
             <hr>
             <li><a href="<%=request.getContextPath()%>/admin/adminhotelenroll">숙소등록하기</a></li>
             <hr>
@@ -25,34 +25,35 @@
 
      <div class="enroll-container">
         <h2>개인 정보</h2>
+        <hr />
         <form name="memberUpdateFrm" method="post" action="<%= request.getContextPath() %>/user/userUpdate">
             <table>
                 <tr>
-                    <th>아이디</th>
+                    <th>아이디 :</th>
                     <td>
                         <input  type="text" class="input" name="userId" id="userId" value="<%= loginUser.getUserId() %>" readonly>
                     </td>
                 </tr>
                 <tr>
-                    <th>이름</th>
+                    <th>이름 :</th>
                     <td>	
                     <input type="text" class="input"  name="userName" id="userName" value="<%= loginUser.getUserName() %>"  required><br>
                     </td>
                 </tr>
                 <tr>
-                    <th>닉네임</th>
+                    <th>닉네임 :</th>
                     <td>	
                     <input type="text" class="input"  name="nickName" id="nickName" value="<%= loginUser.getNickName() %>"  required><br>
                     </td>
                 </tr>
                 <tr>
-                    <th>이메일</th>
+                    <th>이메일 :</th>
                     <td>	
                         <input type="email" class="input" placeholder="abc@xyz.com" name="email" id="email" value="<%= loginUser.getEmail() != null ? loginUser.getEmail() : "" %>"><br>
                     </td>
                 </tr>
                 <tr>
-                    <th>휴대폰</th>
+                    <th>휴대폰 :</th>
                     <td>	
                         <input type="tel" class="input" placeholder="(-없이)01012345678" name="phone" id="phone" maxlength="11" value="<%= loginUser.getPhone() %>" required><br>
                     </td>
