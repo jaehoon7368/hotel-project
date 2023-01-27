@@ -22,22 +22,9 @@ public class CompleteReservationServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Reservation reservation = new Reservation();
 		String reNo = request.getParameter("reNo");
-		
-		
-		
-		
-		
 		reservation = reservationService.selectOneReservation(reNo);
-		
-		
-		
-		
-		
-		
-		
 		request.getSession().setAttribute("resevation", reservation);
 		request.getRequestDispatcher("/WEB-INF/views/reservation/completeReservationView.jsp").forward(request, response);
-		
 	}
 	
 	

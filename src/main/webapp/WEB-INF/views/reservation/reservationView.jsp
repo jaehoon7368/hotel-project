@@ -9,13 +9,17 @@
 	String roomType = (String) request.getAttribute("roomType");
 	String checkIn = (String) request.getAttribute("checkIn");
 	String checkOut = (String) request.getAttribute("checkOut");
+	
 	Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(checkIn);
 	Date date2 = new SimpleDateFormat("yyyy-MM-dd").parse(checkOut);
-	long dateofAccom = (date2.getTime() -date1.getTime()); //날짜 차이 계산 밀리초
-	long result = (dateofAccom/(24*60*60)/1000);   // 일수 계산  = 몇박  
-	int reDay = (int)result;
+	
+	long result = (date2.getTime() -date1.getTime()); //날짜 차이 계산 밀리초
+	long reservationDay = (result/(24*60*60)/1000);   // 일수 계산  = 몇박  
+	int reDay = (int)reservationDay;  // 일수 int 변환
+	
 	int price = (int) request.getAttribute("price");
-	int totalPrice = price* (int)result;	 // 일수 * 가격
+	int totalPrice = price* (int)reservationDay;	 // 일수 * 가격
+	
 	String hotelNo = (String) request.getAttribute("hotelNo");
 	String roomNo = (String) request.getAttribute("roomNo");
 	String userId = "";
@@ -122,7 +126,7 @@
                     </tr>
                     <tr> <form action="<%=request.getContextPath() %>/reservation/reservationView" method ="POST" >
                         <th class="name"> 예약자이름 <br>
-                            <input class= "put" type="text" name="name" placeholder="체크인시 필요한 정보" required>
+                            <input class= "put" type="text" name="reName" placeholder="체크인시 필요한 정보" required>
                         </th>
                         </tr>
                     </tr>
@@ -160,7 +164,7 @@
         <input type="hidden" value= "<%=checkIn%>" name= "checkIn"/>
         <input type="hidden" value= "<%=checkOut%>" name= "checkOut"/>
         <input type="hidden" value= "<%=userId%>" name= "userId"/>
-        <input type="hidden" value= "<%=totalPrice%>" name= "totalprice"/>
+        <input type="hidden" value= "<%=totalPrice%>" name= "totalPrice"/>
         <input type="hidden" value= "<%=reDay%>" name= "reDay"/>
         
         
@@ -176,7 +180,7 @@
                     <td class="opa">객실타입/기간</td>
                 </tr>
                 <tr>
-                    <td><%=roomType %> / <%=result %>박 </td>
+                    <td><%=roomType %> / <%=reservationDay %>박 </td>
                 </tr>
                 <tr>
                     <td class="opa">체크인</td>
