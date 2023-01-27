@@ -253,3 +253,7 @@ select * from tb_hotel where hotel_type='H';
 select h.*,(select min(room_price) from tb_room r where r.hotel_no = h.hotel_no group by hotel_no) price,(select renamed_filename from tb_hotel_image i where i.hotel_no = h.hotel_no) renamed_filename from tb_hotel h where h.hotel_type='H';
 
 select hotel_name, room_type, re_day, start_date, end_date, re_name, re_price from tb_reservation re join tb_room rm on re.room_no = rm.room_no join tb_hotel h on rm.hotel_no = h.hotel_no join tb_user u on re.user_id = u.user_id where re.user_id = 'honggd';
+select min(room_price) min_price,max(room_price) max_price,avg(room_price) avg_price from tb_room;
+
+
+
