@@ -16,8 +16,8 @@ public class ReservationService {
 		try {
 			
 			result = reservationDao.insertReservation(reservation,conn);
-			
 			String reNo = reservationDao.selectLastReNo(conn);
+			
 			reservation.setReNo(reNo);
 			
 		}catch(Exception e ) {
@@ -27,6 +27,19 @@ public class ReservationService {
 			close(conn);
 		}
 		return result;
+	}
+	public Reservation selectOneReservation(String reNo) {
+		Reservation reservation = new Reservation();
+		Connection conn = getConnection();
+		try {
+			reservation =reservationDao.selectOneReservation(reNo,conn);
+		
+			close(conn);
+		}catch(Exception e) {
+			throw e;
+		}
+		
+		return reservation;
 	}
 
 }
