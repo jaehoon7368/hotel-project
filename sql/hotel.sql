@@ -24,6 +24,7 @@ create table tb_hotel(
 );
 
 
+
 create table tb_room(
     room_no varchar2(10),
     room_type  varchar2(100) not null,

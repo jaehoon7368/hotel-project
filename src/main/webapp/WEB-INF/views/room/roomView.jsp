@@ -174,8 +174,13 @@ $(function () {
   <script>
   
   const reservationBtn = (hotelName,roomType,checkIn,checkOut,price,hotelNo,roomNo) =>{
+	  <% if(loginUser == null){ %>
+		loginAlert();
+	<% } else {%>
+		location.href ="<%=request.getContextPath()%>/reservation/reservationView?hotelName=" + hotelName + "&roomType=" + roomType + "&checkIn=" + checkIn + "&checkOut=" +checkOut + "&price=" +price +"&hotelNo=" + hotelNo + "&roomNo=" +roomNo;  
+	
+	<% }%>
 	  
-	location.href ="<%=request.getContextPath()%>/reservation/reservationView?hotelName=" + hotelName + "&roomType=" + roomType + "&checkIn=" + checkIn + "&checkOut=" +checkOut + "&price=" +price +"&hotelNo=" + hotelNo + "&roomNo=" +roomNo;  
   };
  
 const loginAlert = () => {
@@ -191,6 +196,7 @@ document.hotelReviewCommentFrm.content.addEventListener('focus', (e) => {
 		loginAlert();
 	<% } %>
 });
+
   
 document.querySelectorAll(".btn-delete").forEach((button) => {
 	button.onclick = (e) => {
