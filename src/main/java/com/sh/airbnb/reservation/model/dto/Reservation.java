@@ -34,10 +34,6 @@ public class Reservation extends ReservationEntity {
 		this.roomType = roomType;
 	}
 
-
-		
-		
-	
 	
 	
 }

@@ -1,0 +1,108 @@
+.sidebar {
+  position:absolute;
+  width: 15%;
+  height: 100%;
+  font-size: 15px;
+  border-right: solid rgb(236, 231, 231) 1px;
+}
+
+.userView-nav {
+  position: relative;
+  margin: 0 15%;
+  text-align: right;
+  top: 45%;
+  transform: translateY(-50%);
+  font-weight: bold;
+}
+
+.userView-nav ul {
+  list-style: none;
+}
+  
+.userView-nav li {
+    position: relative;
+    margin: 2.2em 0;
+  }
+    
+.userView-nav a {
+      line-height: 20px;
+      text-transform: uppercase;
+      text-decoration: none;
+      letter-spacing: 0.4em;
+      display: block;
+      transition: all ease-out 300ms;
+      color: black;
+    }
+    
+ .reBox{
+     display: inline-block;
+	 width: 300px;
+     height: 400px;
+     text-align: center;
+	 border: solid black 1px;
+	 flex-direction: column;
+	 flex-wrap: wrap;
+	 margin: 30px;
+	 align-items: center;
+     border-radius: 10px;
+
+  }
+
+.reTable {
+	text-align: center;
+}
+
+.reTable td {
+	height: 30px;
+	width: 250px;
+}
+
+.td1 {
+	color: gray;
+	font-weight: 400;
+}
+
+.td2 {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.name {
+	font-size: larger;
+	font-weight: 800;
+	color: gray;
+}
+
+.price {
+	color: red;
+}
+
+.mainbtn {
+	width: 100px;
+	height: 40px;
+	background-color: black;
+	padding: 5px 0;
+	border-radius: 15px;
+	outline: none;
+	font-size: 15px;
+	text-align: center;
+	color: white;
+	border: none;
+	margin-top: 17px;
+}
+
+div#content {
+	height:0;
+}
+
+
+.wrapper {
+	 margin-top:5%;
+	 margin-left:20%;
+	 height:100%;
+}
+
+.footer {
+	height:200px;
+}
+
+

@@ -3,10 +3,13 @@ import static com.sh.airbnb.common.JdbcTemplate.close;
 import static com.sh.airbnb.common.JdbcTemplate.getConnection;
 import static com.sh.airbnb.common.JdbcTemplate.rollback;
 
+
 import java.sql.Connection;
+import java.util.List;
 
 import com.sh.airbnb.reservation.model.dao.ReservationDao;
 import com.sh.airbnb.reservation.model.dto.Reservation;
+
 
 public class ReservationService {
 	private ReservationDao reservationDao  = new ReservationDao();
@@ -54,6 +57,12 @@ public class ReservationService {
 		}
 		
 		return result;
+	}
+	public List<Reservation> selectAllReservation(String userId) {
+		Connection conn = getConnection();
+		List<Reservation> reservations = reservationDao.selectAllReservation(conn, userId);
+		close(conn);
+		return reservations;
 	}
 
 }
