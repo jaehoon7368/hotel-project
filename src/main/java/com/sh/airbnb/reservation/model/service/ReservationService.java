@@ -41,5 +41,19 @@ public class ReservationService {
 		
 		return reservation;
 	}
+	public int insertPayment(int price, String reNo ,String userId) {
+		int result = 0 ;
+		Connection conn = getConnection();
+		try {
+			result = reservationDao.insertPayment(price,reNo,conn,userId);
+		}catch(Exception e) {
+			rollback(conn);
+			throw e;
+		}finally {
+			close(conn);
+		}
+		
+		return result;
+	}
 
 }

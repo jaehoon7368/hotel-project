@@ -23,6 +23,7 @@ public class CompleteReservationServlet extends HttpServlet {
 		Reservation reservation = new Reservation();
 		String reNo = request.getParameter("reNo");
 		reservation = reservationService.selectOneReservation(reNo);
+		reservation.setReNo(reNo);
 		request.getSession().setAttribute("resevation", reservation);
 		request.getRequestDispatcher("/WEB-INF/views/reservation/completeReservationView.jsp").forward(request, response);
 	}
