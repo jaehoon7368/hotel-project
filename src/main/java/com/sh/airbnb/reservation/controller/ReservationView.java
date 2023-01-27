@@ -80,10 +80,11 @@ public class ReservationView extends HttpServlet {
 		java.sql.Date sqlDate2 = new java.sql.Date(endDate1);
 		System.out.println("sql 데이트"+sqlDate1);
 		System.out.println("sql 데이트"+sqlDate2);
-		
+
 		Reservation reservation = new Reservation(null,people,sqlDate1,sqlDate2,null,roomNo,userId,hotelNo,reName,reDay,totalPrice,null,null);
 		
-		//등록 메소드
+		
+		//등록 메소드s
 		int result = 0;
 		result = reservationService.insertResevation(reservation);
 		String reNo = reservation.getReNo();

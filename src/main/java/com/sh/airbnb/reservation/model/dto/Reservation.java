@@ -33,7 +33,7 @@ public class Reservation extends ReservationEntity {
 	public void setRoomType(String roomType) {
 		this.roomType = roomType;
 	}
-	
+
 	
 	
 }
