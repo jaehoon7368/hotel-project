@@ -83,14 +83,113 @@
                     </div>
                     
                     <div class="modal2">
-                    	<form action="<%=request.getContextPath()%>/filterSearch">
-	                        <div id="filter-main">
-	                        	<p>필터</p>
-	                        	<div></div>
-                    			<button>상세검색</button>
-	                        </div>
-	                       
-                    	</form>
+                        <form action="<%=request.getContextPath()%>/filterSearch">
+                            <div id="filter-main">
+                                <div id="filter-header">
+                                    <p class="font-bold">필터</p>
+                                </div>
+                                <div id="price-box">
+                                    <h3>가격범위</h3>
+                                    <div id="price-text">
+                                        <p>평균 1박 요금은 ₩200000입니다.</p>
+                                    </div>
+                                    <div id="range-box">
+                                    <div class="middle">
+                                        <div class="multi-range-slider">
+                                            <input type="range" id="input-left" min="1" max="100" value="1" oninput="document.getElementById('value1').value=this.value;"/>
+                                            <input type="range" id="input-right" min="1" max="100" value="100" oninput="document.getElementById('value2').value=this.value;"/>
+                                            <div class="slider">
+                                                <div class="track"></div>
+                                                <div class="range"></div>
+                                                <div class="thumb left"><p>|||</p></div>
+                                                <div class="thumb right"><p>|||</p></div>
+                                            </div>
+                                        </div>
+                                        <div id="value-box">
+                                            <div>
+                                                <div class="val-box">
+                                                    <p>최저 요금</p>
+                                                    <span>₩ </span><input type="text" id="value1" onchange="minPrice(event)">
+                                                </div>
+                                            </div>
+                                            <h3>-</h3>
+                                            <div>
+                                                <div class="val-box">
+                                                    <p>최고 요금</p>
+                                                    <span>₩ </span><input type="text" id="value2" onchange="maxPrice(event)">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- 가격 범위 end -->
+
+                                <div id="category-box">
+                                    <h3>편의시설</h3>
+                                    <div id="category">
+                                        <div>
+                                            <label for="checkbox-1">
+                                                <p><i class="fa-solid fa-wind"></i></p>
+                                            </label>
+                                            <span>에어컨 </span><input type="checkbox" name="checkbox" id="checkbox-1" value="c011">
+            
+                                            <label for="checkbox-2">
+                                                <p><i class="fa-solid fa-wifi"></i></p>
+                                            </label>
+                                            <span>와이파이 </span><input type="checkbox" name="checkbox" id="checkbox-2" value="c016">
+                                            
+                                            <label for="checkbox-3">
+                                                <p><i class="fa-brands fa-neos"></i></p>
+                                            </label>
+                                            <span>넷플릭스 </span><input type="checkbox" name="checkbox" id="checkbox-3" value="c01"> 
+                                            
+                                            <label for="checkbox-4">
+                                                <p><i class="fa-solid fa-person-swimming"></i></p>
+                                            </label>
+                                            <span>수영장 </span><input type="checkbox" name="checkbox" id="checkbox-4" value="c04">
+                                        </div>
+                                        <div>
+                                            <label for="checkbox-5">
+                                                <p><i class="fa-solid fa-utensils"></i></p>
+                                            </label> 
+                                            <span>주방 </span><input type="checkbox" name="checkbox" id="checkbox-5" value="c014">
+                                            
+                                            <label for="checkbox-6">
+                                                <p><i class="fa-solid fa-dog"></i></p>
+                                            </label> 
+                                            <span>반려견동반 </span><input type="checkbox" name="checkbox" id="checkbox-6" value="c09"> 
+                                            
+                                            <label for="checkbox-7">
+                                                <p><i class="fa-solid fa-square-parking"></i></p>
+                                            </label> 
+                                            <span>주차장 </span><input type="checkbox" name="checkbox" id="checkbox-7" value="c03"> 
+                                                
+                                                <label for="checkbox-8">
+                                                    <p><i class="fa-solid fa-dumbbell"></i></p>
+                                                </label>
+                                            <span>헬스장 </span><input type="checkbox" name="checkbox" id="checkbox-8" value="c012">
+                                        </div>
+    
+                                        <div>
+                                            <label for="checkbox-9">
+                                                <p><i class="fa-solid fa-computer"></i></p>
+                                            </label> 
+                                            <span>데스크톱 </span><input type="checkbox" name="checkbox" id="checkbox-9" value="c015"> 
+                                                
+                                            <label for="checkbox-10">
+                                                <p><i class="fa-solid fa-shirt"></i></p>
+                                            </label>
+                                            <span>세탁기 </span><input type="checkbox" name="checkbox" id="checkbox-10" value="c013">
+                                        </div>
+                                    </div>
+                                    <div id="filter-main-btn">
+                                        <button type="submit">상세검색</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                    
+                        </form>
                     </div>
                 </div>
                 
@@ -112,6 +211,18 @@
             </div>
   <script>
   
+  /* filter input값 실시간 range 변경 */
+  const minPrice = (e) =>{
+      document.querySelector("#input-left").value = Number(e.target.value);
+      const event = new Event('input');
+      document.querySelector("#input-left").dispatchEvent(event);
+  };
+  const maxPrice = (e) => {
+          document.querySelector("#input-right").value = Number(e.target.value);
+          const event = new Event('input');
+          document.querySelector("#input-right").dispatchEvent(event);
+      };
+  /* filter input값 실시간 range 변경 end */
   
     /* search-modal */
     const body = document.querySelector('body');
@@ -182,7 +293,40 @@
         /* ckeckInOut 캘린더 한글 end */
 
     </script>     
+	
+	<script>
+        /* 양방향 range */
+        const inputLeft = document.getElementById("input-left");
+            const inputRight = document.getElementById("input-right");
 
+            const thumbLeft = document.querySelector(".slider > .thumb.left");
+            const thumbRight = document.querySelector(".slider > .thumb.right");
+            const range = document.querySelector(".slider > .range");
 
-</script>				
+            const setLeftValue = () => {
+                const _this = inputLeft;
+                const [min, max] = [parseInt(_this.min), parseInt(_this.max)];
+                // 교차되지 않게, 1을 빼준 건 완전히 겹치기보다는 어느 정도 간격을 남겨두기 위해.
+                _this.value = Math.min(parseInt(_this.value), parseInt(inputRight.value) - 1);
+                // input, thumb 같이 움직이도록
+                const percent = ((_this.value - min) / (max - min)) * 100;
+                thumbLeft.style.left = percent + "%";
+                range.style.left = percent + "%";
+            };
+
+            const setRightValue = () => {
+                const _this = inputRight;
+                const [min, max] = [parseInt(_this.min), parseInt(_this.max)];
+                // 교차되지 않게, 1을 더해준 건 완전히 겹치기보다는 어느 정도 간격을 남겨두기 위해.
+                _this.value = Math.max(parseInt(_this.value), parseInt(inputLeft.value) + 1);
+                // input, thumb 같이 움직이도록
+                const percent = ((_this.value - min) / (max - min)) * 100;
+                thumbRight.style.right = 100 - percent + "%";
+                range.style.right = 100 - percent + "%";
+            };
+
+            inputLeft.addEventListener("input", setLeftValue);
+            inputRight.addEventListener("input", setRightValue);
+            /* 양방향 range end */
+    </script>				
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

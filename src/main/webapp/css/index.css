@@ -237,7 +237,7 @@ header div{
 #filter-box i,span,a{
     color: black;
     text-decoration: none;
-    padding-top: 5px;
+    padding-top: 3px;
 }
 #filter-box button{
 	width:80%;
@@ -251,18 +251,206 @@ header div{
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 400px;
-    height: 600px;
+    width: 600px;
+    height: 655px;
 
-    padding: 40px;
+    padding: 10px 10px;
 
-    text-align: center;
+    /* text-align: center; */
 
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
     box-shadow: 7px 7px 10px #111;
-    transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-52%);
 }
+
+/* filter main 폼 */
+#filter-header{
+    border-bottom: 1px solid gray;
+    text-align: center;
+    width: 100%;
+    height: 30px;
+}
+#price-box{
+    margin-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid gray;
+}
+#price-text{
+    /* text-align: center; */
+    color: gray;
+    margin-bottom: 50px;
+    padding-top: 5px;
+}
+#range-box{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+        
+}
+.middle {
+    position: relative;
+    width: 90%;
+    max-width: 500px;
+}
+
+.slider {
+    position: relative;
+    z-index: 1;
+    height: 6px;
+    margin: 0 15px;
+}
+
+.slider>.track {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 5px;
+    background-color: lightgrey;
+}
+
+.slider>.range {
+    position: absolute;
+    z-index: 2;
+    left: 0%;
+    right: 0%;
+    top: 0;
+    bottom: 0;
+    border-radius: 5px;
+    background-color: gray;
+}
+
+.slider>.thumb {
+    position: absolute;
+    z-index: 3;
+    width: 25px;
+    height: 25px;
+    border: 2px solid gray;
+    border-radius: 50%;
+}
+
+.slider>.thumb.left {
+    left: 0%;
+    transform: translate(-27px, -12px);
+}
+.slider>.thumb.left p{
+    color: gray;
+    margin-top: 3px;
+    margin-left: 5px;
+}
+
+.slider>.thumb.right {
+    right: 0%;
+    transform: translate(27px, -12px);
+}
+
+.slider>.thumb.right p {
+    color: gray;
+    margin-top: 3px;
+    margin-left: 5px;
+}
+
+input[type="range"] {
+    position: absolute;
+    /* opacity로 가린 것을 이벤트도 비활성화하기 위해 */
+    transform: translateX(-2%);
+    pointer-events: none;
+    -webkit-appearance: none;
+    z-index: 2;
+    height: 10px;
+    width: 105%;
+    opacity: 0;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    /* 겹쳐진 두 thumb를 모두 활성화 */
+    pointer-events: all;
+    width: 30px;
+    height: 30px;
+    border-radius: 0;
+    border: 0 none;
+    background-color: red;
+    cursor: pointer;
+    /* appearance를 해야 위의 스타일들을 볼 수 있음 */
+    -webkit-appearance: none;
+}
+
+#value-box{
+    width: 500px;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    margin-left: -10px;
+    color: gray;
+    text-align: center;
+}
+#value-box h3{
+    margin-top: 15px;
+}
+.val-box{
+    width: 230px;
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid gray;
+}
+.val-box p{
+    margin-top: 5px;
+    font-size: 14px;
+}
+.val-box input{
+    width: 170px;
+    font-size: 20px;
+    border: none;
+}
+
+#category-box{
+    margin-top: 20px;
+    width: 100%;
+}
+
+#filter-main-btn{
+    background-color: black;
+    color: white;
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    margin: auto;
+    margin-top: 10px;
+}
+
+#category-box button{
+    background-color: red;
+    color: white;
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    border-style: none;
+    border-radius: 10px;
+}
+
+#category{
+    width: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid gray;
+}
+#category i{
+    font-size: 40px;
+    text-align: center;
+    padding: 5px 0;
+}
+/* filter main 폼 end */
 
 #ckeckInOut-box{
     display: flex;
