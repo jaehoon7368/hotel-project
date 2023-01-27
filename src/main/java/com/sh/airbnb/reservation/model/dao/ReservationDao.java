@@ -100,13 +100,23 @@ public class ReservationDao {
 	public List<Reservation> selectAllReservation(Connection conn, String userId) {
 		String sql = prop.getProperty("selectAllReservation");
 		List<Reservation> reservations = new ArrayList<>();
-		
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
-
+			pstmt.setString(1, userId);
+			
+			
 			try(ResultSet rset = pstmt.executeQuery();){
 				
 				while(rset.next()) {
-				
+					Reservation reservation = new Reservation();
+					reservation.setHotelName(rset.getString("hotel_name"));
+					reservation.setReName(rset.getString("re_name"));
+					reservation.setRoomType(rset.getString("room_type"));
+					reservation.setReDay(rset.getInt("re_day"));
+					reservation.setStartDate(rset.getDate("start_date"));
+					reservation.setEndDate(rset.getDate("end_date"));
+					reservation.setRePrice(rset.getInt("re_price"));
+					reservations.add(reservation);
+					System.out.println("reservation : " + reservations);
 				}
 			}
 			

@@ -6,12 +6,12 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/user/userView.css" />
 <body>
 <div class=userView-container>
- <div class="sidebar">
+ 	<div class="sidebar">
         <nav class="userView-nav">
           <ul>
             <li class="active"><a href="<%= request.getContextPath() %>/user/userView">개인정보수정</a></li>
             <hr>
-            <li><a href="<%= request.getContextPath()%>/user/userCheckRev">예약내역확인</a></li>
+            <li><a href="<%= request.getContextPath()%>/user/userCheckRev?user_id=<%=loginUser.getUserId()%>">예약내역확인</a></li>
             <hr>
             <li><a href="<%=request.getContextPath()%>/admin/adminhotelenroll">숙소등록하기</a></li>
             <hr>
@@ -25,8 +25,8 @@
 
      <div class="enroll-container">
         <h2>개인 정보</h2>
-        <hr />
-        <form name="memberUpdateFrm" method="post" action="<%= request.getContextPath() %>/user/userUpdate">
+        
+        <form name="userUpdateFrm" method="post" action="<%= request.getContextPath() %>/user/userUpdate">
             <table>
                 <tr>
                     <th>아이디 :</th>

@@ -4,49 +4,37 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/user/userCheckRev.css" />
 <%
 
 	List<Reservation> reservations = (List<Reservation>) request.getAttribute("reservations");
-	String hotelName = (String) request.getAttribute("hotelName");
-	String roomType = (String) request.getAttribute("roomType");
-	String checkIn = (String) request.getAttribute("checkIn");
-	String checkOut = (String) request.getAttribute("checkOut");
-	Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(checkIn);
-	Date date2 = new SimpleDateFormat("yyyy-MM-dd").parse(checkOut);
-	long dateofAccom = (date2.getTime() -date1.getTime()); //날짜 차이 계산 밀리초
-	long result = (dateofAccom/(24*60*60)/1000);   // 일수 계산  = 몇박  
-	int price = (int) request.getAttribute("price");
-	int totalPrice = price* (int)result;	 // 일수 * 가격
-	String hotelNo = (String) request.getAttribute("hotelNo");
-	String roomNo = (String) request.getAttribute("roomNo");
+
 
 
 %>    
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
+<content>
 
-<style>
-
-</style>
-
-
-    
-    <table id="tbl-user">
-		<thead>
-			<tr>
-				<th>숙소이름</th>
-				<th>예약자</th>
-				<th>객실타입</th>
-				<th>기간</th>
-				<th>체크인</th>
-				<th>체크아웃</th>
-				<th>총 결제금액</th>
-			</tr>
-		</thead>
-		
-	</table>
-	<tbody>
-		<% if(reservations.isEmpty()){ %>
+    <div class="sidebar">
+        <nav class="userView-nav">
+          <ul>
+            <li class="active"><a href="<%= request.getContextPath() %>/user/userView">개인정보수정</a></li>
+            <hr>
+            <li><a href="<%= request.getContextPath()%>/user/userCheckRev?user_id=<%=loginUser.getUserId()%>">예약내역확인</a></li>
+            <hr>
+            <li><a href="<%=request.getContextPath()%>/admin/adminhotelenroll">숙소등록하기</a></li>
+            <hr>
+            <li><a href="<%=request.getContextPath()%>/admin/adminenrolledhotelview?user_id=<%=loginUser.getUserId() %>">등록숙소확인</a></li>
+            <hr>
+            <li><a href="<%= request.getContextPath()%>/user/userList">회원관리</a></li>
+            <hr>
+          </ul>
+        </nav>
+     </div>
+    	<!--  호텔이름 /  룸타입 / 박 / 체크인 체크아웃 /예약번호/ 예약자 이름 / 총가격 /  -->
+    	<div class="wrapper">
+       <% if(reservations.isEmpty()){ %>
 			<tr>
 				<td colspan="10">조회된 예약내역이 없습니다.</td>
 			</tr>
@@ -54,29 +42,57 @@
 		   } else { 
 			  for(Reservation reservation : reservations){
 		%>
-				<tr>
-					<td><%= hotelName %></td>
-					<td><%= reservation.getReName() %></td>
-					<td><%= roomType %></td>
-					<td><%= reservation.getReDay() %></td>
-					<td><%= reservation.getStartDate() %></td>
-					<td><%= reservation.getEndDate() %></td>
-					<td><%= reservation.getRePrice() %></td>
-				
-					
-				</tr>
-		<%
+	
+    <div class="reBox">
+       <tbody>
+        <div style ="margin-top :13px"><h2>예약내역</h2></div>
+
+        <table class="reTable">
+            <tr style="width:70px ;">
+                <td class="name" colspan="2"><%=reservation.getHotelName() %></td>
+            </tr> 
+            <tr>
+                <td class="name"colspan="2">스파오션부 (룸타입) /1박</td>
+            </tr> 
+            <tr>
+            </tr> 
+            <tr>
+                <td> </td>
+            </tr> 
+            <tr>
+                <td class="td1">체크인</td>
+                <td class="td2"><%= reservation.getStartDate() %></td>
+            </tr>
+            <tr>
+                <td class="td1">체크아웃</td>
+                <td class="td2" ><%= reservation.getEndDate() %></td>
+            </tr>
+            <tr>
+                <td colspan="2"><hr> </td>
+            </tr>
+ 
+            <tr>
+                <td class="td1">예약자 이름</td>
+                <td class="td2"><%= reservation.getReName() %></td>
+            </tr>
+            
+            <tr>
+                <td colspan="2"><hr></td>
+            </tr>
+        </table>
+        
+        <h3>결제금액</h3>
+        <h2 class="price"><%= reservation.getRePrice() %> 원</h2>
+        <button class="mainbtn" id="btn-kakao-pay">취소하기 </button>
+       </tbody>
+    </div>
+        <%
 			  }			
 			} 
 		%>
-		</tbody>
-
-<script>
-
-
-
-</script>
-
+   </div>
+    
+</content>	
 
     
     

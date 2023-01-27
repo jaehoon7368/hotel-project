@@ -25,11 +25,10 @@ public class UserCheckRevServlet extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId = request.getParameter("userId");
+		String userId = request.getParameter("user_id");
 		
-		Reservation reservation = new Reservation();
 		List<Reservation> reservations = reservationService.selectAllReservation(userId);
-		System.out.println(reservations);
+//		System.out.println(reservations);
 		
 		request.setAttribute("reservations", reservations);
 	
