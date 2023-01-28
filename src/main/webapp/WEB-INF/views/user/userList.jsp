@@ -11,7 +11,7 @@
 <!-- 관리자용 admin.css link -->
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin/admin.css" />
 <style>
-div#search-container {width: 100%; margin:0 0 10px 0; padding:3px; background-color: rgba(0, 188, 212, 0.3);}
+div#search-container {width: 100%; margin:0 0 10px 0; padding:3px; ;}
 div#search-userId	 {display: <%= searchType == null || "user_id".equals(searchType) ? "inline-block" : "none" %>;}
 div#search-userName{display: <%= "user_name".equals(searchType) ? "inline-block" : "none" %>;}
 </style>

@@ -1,10 +1,10 @@
 ﻿@CHARSET "UTF-8";
 /*관리자 페이지 : 회원관리 */
-section#userList-container {text-align:center;}
+section#userList-container {text-align:center; height:100%;}
 section#userList-container table#tbl-user {width:100%; border:1px solid gray; border-collapse:collapse;}
 table#tbl-user th, table#tbl-user td {border:1px solid gray; padding:10px; }
 
-section#userList-container div#neck-container{padding:0px; height: 50px; background-color:rgba(0, 188, 212, 0.3);}
+section#userList-container div#neck-container{padding:0px; height: 50px;}
 section#userList-container div#search-container {margin:0 0 10px 0; padding:3px; float:left;}
 
 /*페이징 : 페이지당회원수*/
@@ -12,7 +12,7 @@ section#userList-container div#numPerPage-container{float:right; margin-top: 10p
 section#userList-container form#numPerPageFrm{display:inline;}
 
 /*페이징 : 페이지바 */
-section#userList-container div#pagebar{margin-top:10px; text-align:center; background-color:rgba(0, 188, 212, 0.3);}
-section#userList-container div#pagebar span.cPage{color: #0066ff; margin-right: 5px;}
+section#userList-container div#pagebar{margin-top:10px; text-align:center;}
+section#userList-container div#pagebar span.cPage{ margin-right: 5px;}
 section#userList-container div#pagebar a{margin-right: 5px; text-decoration: none;}
 section#userList-container div#pagebar a:hover {text-decoration: underline;}
