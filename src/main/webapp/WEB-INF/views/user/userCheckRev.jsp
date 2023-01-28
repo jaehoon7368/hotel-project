@@ -8,11 +8,11 @@
 <%
 
 	List<Reservation> reservations = (List<Reservation>) request.getAttribute("reservations");
-
-
+	Reservation rev = (Reservation)session.getAttribute("resevation");
 
 %>    
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 <content>
 
@@ -38,7 +38,7 @@
     	<div style ="margin-top :13px"><h2>예약내역</h2></div>
        <% if(reservations.isEmpty()){ %>
 			<tr>
-				<td colspan="10">조회된 예약내역이 없습니다.</td>
+				<td colspan="10"><br /><br /><br />조회된 예약내역이 없습니다.</td>
 			</tr>
 		<% 
 		   } else { 
@@ -85,7 +85,8 @@
         
         <h3>결제금액</h3>
         <h2 class="price"><%= reservation.getRePrice() %>원</h2>
-        <button class="mainbtn" id="btn-kakao-pay">취소하기 </button>
+        <button class="paybtn" id="btn-kakao-pay">결제하기 </button>
+        <button class="mainbtn" id="btn-cancel">예약취소 </button>
        </tbody>
     </div>
         <%
@@ -93,4 +94,7 @@
 			} 
 		%>
    </div>
+<script>
+
+</script>
     <%@ include file="/WEB-INF/views/common/footer.jsp" %>
