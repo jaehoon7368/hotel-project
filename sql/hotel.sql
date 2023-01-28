@@ -252,11 +252,16 @@ ALTER TABLE tb_user ADD enroll_date date default sysdate;
 
 select * from tb_hotel_category where hotel_no = 'H0002' group by hotel_no;
 
+
+select hotel_name, room_type, re_day, start_date, end_date, re_name, re_price from tb_reservation re join tb_room rm on re.room_no = rm.room_no join tb_hotel h on rm.hotel_no = h.hotel_no join tb_user u on re.user_id = u.user_id where re.user_id = 'honggd';
+select min(room_price) min_price,max(room_price) max_price,avg(room_price) avg_price from tb_room;
+
 select h.*,(select min(r.room_price) from tb_room r where r.hotel_no = h.hotel_no group by hotel_no) price,(select renamed_filename from tb_hotel_image i where i.hotel_no = h.hotel_no) renamed_filename from tb_hotel h where h.hotel_no in ('H0002');
 
 select hotel_no from tb_hotel_category where category_no >= all('c011','c016','c01') and hotel_no in ('H0002','Y0004','H0006','P0001','Y0007','P0005') group by hotel_no;
     
 select hotel_no from tb_room r where r.room_price between 55000 and 470000 group by hotel_no;
+
 
 
 

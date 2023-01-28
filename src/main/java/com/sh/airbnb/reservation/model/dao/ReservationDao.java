@@ -108,7 +108,7 @@ public class ReservationDao {
 	}
 
 	public int insertPayment(int price, String reNo,Connection conn ,String userId) {
-		String sql = prop.getProperty("sql");
+		String sql = prop.getProperty("insertPayment");
 		//insert into tb_sales_data values ('S'||to_char(req_sales_data_no.nextval,'fm0000'),?,default,?)
 		int result =0;
 		

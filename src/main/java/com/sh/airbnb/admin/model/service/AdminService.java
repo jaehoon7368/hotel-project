@@ -38,6 +38,8 @@ public class AdminService {
 			}
 		}
 				
+		
+		
 		commit(conn);
 		}catch(Exception e) {
 			rollback(conn);
@@ -70,7 +72,9 @@ public class AdminService {
 		Connection conn = getConnection();
 		
 		try {
+			
 			result = adminDao.insertCategory(userId,hotelNo,category,conn);
+			
 			
 			commit(conn);
 		}catch(Exception e ){
@@ -117,6 +121,7 @@ public class AdminService {
 			
 			}
 			
+			
 			commit(conn);
 		}catch (Exception e) {
 			rollback(conn);
@@ -125,6 +130,25 @@ public class AdminService {
 			close(conn);
 		}
 		
+		return result;
+	}
+
+	public int deleteHotel(String hotelNo) {
+		int result = 0;
+		
+		Connection conn = getConnection();
+		
+		try {
+
+			result = adminDao.deleteHotel(conn,hotelNo);			
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+
 		return result;
 	}
 
