@@ -8,11 +8,11 @@
 <%
 
 	List<Reservation> reservations = (List<Reservation>) request.getAttribute("reservations");
-	Reservation rev = (Reservation)session.getAttribute("resevation");
-
+	Reservation rev = (Reservation) session.getAttribute("resevation");
+	System.out.println("reservations = " + reservations);
 %>    
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
 
 <content>
 
@@ -46,20 +46,12 @@
 		%>
 	
     <div class="reBox">
-       <tbody>
-        
-
         <table class="reTable">
             <tr style="width:70px ;">
                 <td class="name" colspan="2"><%=reservation.getHotelName() %></td>
             </tr> 
             <tr>
                 <td class="name"colspan="2">스파오션부 (룸타입) /1박</td>
-            </tr> 
-            <tr>
-            </tr> 
-            <tr>
-                <td> </td>
             </tr> 
             <tr>
                 <td class="td1">체크인</td>
@@ -72,29 +64,72 @@
             <tr>
                 <td colspan="2"><hr> </td>
             </tr>
- 
             <tr>
                 <td class="td1">예약자 이름</td>
                 <td class="td2"><%= reservation.getReName() %></td>
             </tr>
-            
+            <tr>
+                <td class="td1">예약 번호</td>
+                <td class="td2"><%= reservation.getReNo() %></td>
+            </tr>
             <tr>
                 <td colspan="2"><hr></td>
             </tr>
         </table>
-        
         <h3>결제금액</h3>
         <h2 class="price"><%= reservation.getRePrice() %>원</h2>
+        <% if("Y".equals(reservation.getReservationStatus())) { %>
         <button class="paybtn" id="btn-kakao-pay">결제하기 </button>
-        <button class="mainbtn" id="btn-cancel">예약취소 </button>
-       </tbody>
-    </div>
+        <button class="btn-cancel" value="<%= reservation.getReNo() %>">예약취소</button>
+        <% } else { %>
+        <button class="btn-canceled" value="<%= reservation.getReNo() %>">취소된 예약</button>
+        <% } %>
+        
+		
+    </div> <!-- rebox -->
         <%
 			  }			
 			} 
 		%>
-   </div>
+   </div> <!-- wrapper -->
+
+		<form action="<%= request.getContextPath() %>/user/userRevCancel" name="userRevCancelFrm" method="POST">
+			<input type="hidden" name="reNo" value="" />
+			<input type="hidden" name="userId" value="<%= loginUser.getUserId() %>"/>
+		</form>
+		
 <script>
+document.querySelectorAll(".btn-cancel").forEach((button) =>{
+	button.onclick = (e) =>{
+		if (confirm('예약을 취소하시겠습니까?')){
+			const frm = document.userRevCancelFrm;
+		    frm.reNo.value = e.target.value;
+			frm.submit();
+		}
+	}
+});
+
+
+
+
+
+
+
+
+
+
+
+// const revCancel = () => {
+	
+//    if (confirm('예약을 취소하시겠습니까?')){
+//    	document.userRevCancelFrm.submit();
+        
+        
+//    }else{
+//        location.href='<%=request.getContextPath()%>/user/userCheckRev?user_id= <%=loginUser.getUserId()%>';
+//    }
+// };
+    
 
 </script>
     <%@ include file="/WEB-INF/views/common/footer.jsp" %>

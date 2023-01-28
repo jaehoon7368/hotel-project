@@ -140,6 +140,8 @@ public class ReservationDao {
 					reservation.setStartDate(rset.getDate("start_date"));
 					reservation.setEndDate(rset.getDate("end_date"));
 					reservation.setRePrice(rset.getInt("re_price"));
+					reservation.setReNo(rset.getString("re_no"));
+					reservation.setReservationStatus(rset.getString("reservation_status"));
 					reservations.add(reservation);
 					System.out.println("reservation : " + reservations);
 				}
@@ -151,5 +153,21 @@ public class ReservationDao {
 				
 		return reservations;
 	}
+
+	public int updateReservationStatus(Connection conn, Reservation rev) {
+		String sql = prop.getProperty("updateReservationStatus");
+		int result = 0;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1,  rev.getReNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new ReservationException("예약취소 오류", e);
+		}
+		return result;
+	}
+
+
 
 }
