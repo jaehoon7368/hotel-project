@@ -2,6 +2,7 @@ package com.sh.airbnb.reservation.model.service;
 import static com.sh.airbnb.common.JdbcTemplate.close;
 import static com.sh.airbnb.common.JdbcTemplate.getConnection;
 import static com.sh.airbnb.common.JdbcTemplate.rollback;
+import static com.sh.airbnb.common.JdbcTemplate.commit;
 
 
 import java.sql.Connection;
@@ -64,5 +65,24 @@ public class ReservationService {
 		close(conn);
 		return reservations;
 	}
+	
+	public int updateReservationStatus(Reservation rev) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = reservationDao.updateReservationStatus(conn, rev);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+		
+	}
+	
+
+	
 
 }
