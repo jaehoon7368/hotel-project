@@ -111,14 +111,14 @@
                                             <div>
                                                 <div class="val-box">
                                                     <p>최저 요금</p>
-                                                    <span>₩ </span><input type="text" id="value1" onchange="minPrice(event)" value="<%=roomPrice.getMinPrice() %>">
+                                                    <span>₩ </span><input type="text" id="value1" name="min_price" onchange="minPrice(event)" value="<%=roomPrice.getMinPrice() %>">
                                                 </div>
                                             </div>
                                             <h3>-</h3>
                                             <div>
                                                 <div class="val-box">
                                                     <p>최고 요금</p>
-                                                    <span>₩ </span><input type="text" id="value2" onchange="maxPrice(event)" value="<%=roomPrice.getMaxPrice() %>">
+                                                    <span>₩ </span><input type="text" id="value2"  name="max_price" onchange="maxPrice(event)" value="<%=roomPrice.getMaxPrice() %>">
                                                 </div>
                                             </div>
                                         </div>

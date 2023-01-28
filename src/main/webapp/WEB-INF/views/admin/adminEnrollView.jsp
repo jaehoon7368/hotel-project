@@ -6,18 +6,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 <style>
-.hotelbtn{
-    width: 100px;
-    height: 40px;
-    background-color: black;
-    padding: 5px 0;
-    border-radius: 15px;
-    outline: none;
-    font-size: 15px;
-    text-align: center;
-    color: white;
-	border : none;
-}
 
 </style>
 		<div id = "entireBox"> 

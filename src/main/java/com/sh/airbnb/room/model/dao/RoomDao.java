@@ -77,4 +77,27 @@ public class RoomDao {
 		return roomPrice;
 	}
 
+	public List<RoomPrice> priceFilterHotelNo(Connection conn, int minPrice, int maxPrice) {
+		String sql = prop.getProperty("selectPriceFilterHotelNo");
+		List<RoomPrice> priceHotelNo = new ArrayList<>();
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, minPrice);
+			pstmt.setInt(2, maxPrice);
+			
+			try(ResultSet rset = pstmt.executeQuery()){
+				while(rset.next()) {
+					RoomPrice roomPrice = new RoomPrice();
+					roomPrice.setHotelNo(rset.getString("hotel_no"));
+					priceHotelNo.add(roomPrice);
+				}
+			}
+			
+		} catch (SQLException e) {
+			throw new RoomException("필터 가격 정보로 hotelNo 가져오기 오류",e);
+		}
+		
+		return priceHotelNo;
+	}
+
 }

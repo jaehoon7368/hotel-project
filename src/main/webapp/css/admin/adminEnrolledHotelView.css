@@ -32,9 +32,9 @@ div.adminBox{
 	text-align: center;
 	font-family: 'Gowun Dodum' ;
 }
-.entireBox {
+.rightBox {
+	padding-top :30px;
 	border-radius: 5%;
-	border: 1px solid gray;
 	width: 800px;
 	height:50%;
 	text-align: center
@@ -59,10 +59,18 @@ div.adminBox{
 
 }
 #enrollTb {
-	font-family: 'Gowun Dodum' ;
-	font-size :x-large;
+	font-size :medium;
 }
-.hotelbtn{
+
+
+.mainImage {
+	padding : 40px;
+	width: 90%;
+}
+#categoryBox{
+	display: flex;
+}
+.roombtn{
     width: 100px;
     height: 40px;
     background-color: black;
