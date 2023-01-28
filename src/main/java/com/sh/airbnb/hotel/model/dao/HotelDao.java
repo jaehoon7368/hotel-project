@@ -11,8 +11,11 @@ import java.util.List;
 import java.util.Properties;
 
 import com.sh.airbnb.hotel.model.dto.Hotel;
+import com.sh.airbnb.hotel.model.dto.HotelCategory;
+import com.sh.airbnb.hotel.model.dto.HotelEntity;
 import com.sh.airbnb.hotel.model.dto.HotelType;
 import com.sh.airbnb.hotel.model.exception.HotelException;
+import com.sh.airbnb.room.model.dto.RoomPrice;
 
 public class HotelDao {
 	
@@ -135,6 +138,79 @@ public class HotelDao {
 		}
 		} catch (SQLException e) {
 			throw new HotelException("모텔 정보 불러오기 오류!",e);
+		}
+		return hotelList;
+	}
+
+	public List<HotelCategory> selectCategoryHotelNo(Connection conn, String category, List<RoomPrice> priceHotelNo) {
+		String sql = prop.getProperty("selectCategoryHotelNo");
+		List<HotelCategory> categoryHotelNo = new ArrayList<>();
+
+		StringBuilder price = new StringBuilder();
+		
+		System.out.println(category);
+		
+		for(int i = 0 ; i < priceHotelNo.size();i++) {
+			if(i == 0) {
+				price.append(priceHotelNo.get(i).getHotelNo() + "'" + ",");
+			}
+			else if(i != priceHotelNo.size()-1) {
+				price.append("'" + priceHotelNo.get(i).getHotelNo() + "'" + ",");
+			}else if( i == priceHotelNo.size()-1) {
+				price.append("'" + priceHotelNo.get(i).getHotelNo());
+			}
+			else {
+				price.append("'" + priceHotelNo.get(i).getHotelNo() + "'");
+			}
+		}
+		String hotelNo = price.toString();
+		System.out.println("hotelNo = " + hotelNo);
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+				pstmt.setString(1, category);
+				pstmt.setString(2, hotelNo);
+			try(ResultSet rset = pstmt.executeQuery()){
+				while(rset.next()) {
+					HotelCategory hotelCategory = new HotelCategory();
+					hotelCategory.setCategoryNo(rset.getString("category_no"));
+					hotelCategory.setHotelNo(rset.getString("hotel_no"));
+					hotelCategory.setUserId(rset.getString("user_id"));
+					categoryHotelNo.add(hotelCategory);
+				}
+			}
+			System.out.println(categoryHotelNo);
+		} catch (SQLException e) {
+			throw new HotelException("호텔 필터 카테고리 hotelNo 가져오기 오류!",e);
+		}
+		
+		return categoryHotelNo;
+	}
+
+	public List<Hotel> filterSelectHotel(Connection conn, List<HotelCategory> categoryHotelNo) {
+		String sql = prop.getProperty("filterHotelList");
+		List<Hotel> hotelList = new ArrayList<>();
+		StringBuilder cate = new StringBuilder();
+		
+		for(int i = 0 ; i < categoryHotelNo.size();i++) {
+			if(i != categoryHotelNo.size()-1) {
+				cate.append(categoryHotelNo.get(i).getHotelNo() + ",");
+			}else {
+				cate.append(categoryHotelNo.get(i).getHotelNo());
+			}
+		}
+		String hotelNo = cate.toString();
+		System.out.println("hotelNo = " + hotelNo);
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+				pstmt.setString(1, hotelNo);
+		try(ResultSet rset = pstmt.executeQuery()){
+			while(rset.next()) {
+				Hotel hotel = handleHotelResultSet(rset);
+				hotelList.add(hotel);
+			}
+		}
+		} catch (SQLException e) {
+			throw new HotelException("필터 호텔 정보 가져오기 오류!",e);
 		}
 		return hotelList;
 	}
