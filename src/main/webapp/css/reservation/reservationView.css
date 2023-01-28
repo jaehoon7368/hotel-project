@@ -1,0 +1,78 @@
+#entireBox {
+	width: 100%;
+	height: 800px;
+	display: flex;
+}
+
+#leftBox {
+	margin-left :150px;
+	width: 50%;
+	height: 800px;
+}
+
+#rightBox {
+	width: 500px;
+	height: 800px;
+}
+
+.tb1 {
+	padding-left: 50px;
+	text-align: left;
+}
+
+.tb1 tr {
+	height: 100px;
+}
+
+.phone {
+	font-size: 13px;
+	color: rgba(255, 0, 0, 0.564);
+}
+
+.put {
+	border: 1px solid rgba(128, 128, 128, 0.588);
+	border-radius: 5px;
+	width: 500px;
+	height: 33px;
+}
+
+.name {
+	color: rgba(128, 128, 128, 0.612);
+}
+
+#rightBox {
+	padding-top: 5%;
+	background-color: #fafafa;
+	height: 683px;
+	width: 296px;
+}
+
+#tb2 {
+	padding-left: 20px;
+	height: 100%;
+	width: 100%;
+}
+
+.reservationbtn {
+	width: 100px;
+	height: 40px;
+	background-color: red;
+	padding: 5px 0;
+	border-radius: 15px;
+	outline: none;
+	font-size: 15px;
+	text-align: center;
+	color: white;
+	border: none;
+}
+.opa{
+ 	color : #8080808c;
+	font-size  :14px;
+	font : bold;
+ 
+}
+.re{
+	font-size:13px;
+	color: gray;
+
+}
