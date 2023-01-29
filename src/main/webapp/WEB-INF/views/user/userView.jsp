@@ -63,13 +63,13 @@
                     </td>
                 </tr>
             </table>
-        </form>
     </div>
     <div id="button">
     <input type="submit" class="button" value="정보수정"/>
     <input type="button" class="button" value="비밀번호변경" onclick="updatePassword();"/>
     <input type="button" class="button" onclick="deleteUser();" value="회원탈퇴"/>
     </div>
+        </form>
   </div>
  </body>
 
