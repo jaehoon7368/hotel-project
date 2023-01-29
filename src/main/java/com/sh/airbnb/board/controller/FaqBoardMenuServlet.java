@@ -9,33 +9,28 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sh.airbnb.board.model.dto.InquiyBoard;
+import com.sh.airbnb.board.model.dto.FaqBoard;
 import com.sh.airbnb.board.model.service.BoardService;
 
 /**
- * Servlet implementation class InquiyBoardListServlet
+ * Servlet implementation class FaqBoardMenuServlet
  */
-@WebServlet("/board/inquiyBoardList")
-public class InquiyBoardListServlet extends HttpServlet {
+@WebServlet("/board/faqBoardMenu")
+public class FaqBoardMenuServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BoardService boardService = new BoardService();
-	
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 1 iiyNo = null jsp에서 못가져옴 ㅇㅇ.
-		// 세션으로 처리가능.
-		// 2
-		List<InquiyBoard> inquiyBoardList = boardService.selectInquiyBoardList();
-		System.out.println("inquiyBoardList = " + inquiyBoardList);
+		String category = request.getParameter("category");
 		
-		// 3
-//		request.setAttribute("inquiyBoard", inquiyBoard);
-		request.setAttribute("inquiyBoardList", inquiyBoardList);
-		request.getRequestDispatcher("/WEB-INF/views/board/inquiyBoardList.jsp").
-			forward(request, response);
+		List<FaqBoard> faqBoardList = boardService.selectFaqBoardMenu(category);
+		System.out.println(faqBoardList);
+		
+		request.setAttribute("faqBoardList", faqBoardList);
+		request.getRequestDispatcher("/WEB-INF/views/board/faqBoardList.jsp").forward(request, response);
 	}
 
 }
