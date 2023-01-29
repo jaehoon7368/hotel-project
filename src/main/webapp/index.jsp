@@ -63,7 +63,8 @@
                         <div id="search-detail">
                             <div id="search-location">
                                 <p>여행지</p>
-                                <input type="search" name="searchLocation" id="searchLocation" list="searchLocation-list" placeholder="여행지검색"> 
+                                <input type="search" name="searchLocation" id="searchLocation" list="searchLocation-list" 
+                                autocomplete="off" placeholder="여행지검색"> 
                                 <datalist id="searchLocation-list">
                     			<option value="서울"></option>
                     			<option value="경기"></option>

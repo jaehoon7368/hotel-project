@@ -16,6 +16,7 @@
 
 <div id="hotel-info">
                 <h1><%=hotel.getHotelName() %></h1>
+                <p id="hotel-address"><%=hotel.getHotelAddress() %></p>
                 <div id="total-image">
                     <div id="hotel-image">
                         <img src="<%=request.getContextPath()%>/upload/hotel/<%=hotel.getRenamedFilename() %>" alt="">

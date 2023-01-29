@@ -165,8 +165,9 @@ public class HotelDao {
 				}
 				else {
 					price.append("'" + priceHotelNo.get(i).getHotelNo() + "'");
-				}		
-						
+				}
+				
+	
 			}
 		}
 		
@@ -175,13 +176,14 @@ public class HotelDao {
 
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
-				pstmt.setString(1, category);
-				pstmt.setString(2, hotelNo);
+				pstmt.setString(1,category);
+				pstmt.setString(2,hotelNo);
 			try(ResultSet rset = pstmt.executeQuery()){
 				while(rset.next()) {
 					HotelCategory hotelCategory = new HotelCategory();
 					hotelCategory.setHotelNo(rset.getString("hotel_no"));
 					categoryHotelNo.add(hotelCategory);
+					
 				}
 			}
 			System.out.println(categoryHotelNo);
