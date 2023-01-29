@@ -151,58 +151,81 @@ public class HotelDao {
 		System.out.println(category);
 		
 		for(int i = 0 ; i < priceHotelNo.size();i++) {
-			if(i == 0) {
-				price.append(priceHotelNo.get(i).getHotelNo() + "'" + ",");
-			}
-			else if(i != priceHotelNo.size()-1) {
-				price.append("'" + priceHotelNo.get(i).getHotelNo() + "'" + ",");
-			}else if( i == priceHotelNo.size()-1) {
-				price.append("'" + priceHotelNo.get(i).getHotelNo());
+			if(priceHotelNo.size() == 1) {
+				price.append(priceHotelNo.get(i).getHotelNo());
 			}
 			else {
-				price.append("'" + priceHotelNo.get(i).getHotelNo() + "'");
+				if(i == 0) {
+					price.append(priceHotelNo.get(i).getHotelNo() + "'");
+				}
+				else if(i != priceHotelNo.size()-1) {
+					price.append(",'" + priceHotelNo.get(i).getHotelNo() + "'");
+				}else if( i == priceHotelNo.size()-1) {
+					price.append(",'" + priceHotelNo.get(i).getHotelNo());
+				}
+				else {
+					price.append("'" + priceHotelNo.get(i).getHotelNo() + "'");
+				}
+				
+	
 			}
 		}
+		
 		String hotelNo = price.toString();
 		System.out.println("hotelNo = " + hotelNo);
+
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
-				pstmt.setString(1, category);
-				pstmt.setString(2, hotelNo);
+				pstmt.setString(1,category);
+				pstmt.setString(2,hotelNo);
+
 			try(ResultSet rset = pstmt.executeQuery()){
+				System.out.println(sql);
 				while(rset.next()) {
 					HotelCategory hotelCategory = new HotelCategory();
-					hotelCategory.setCategoryNo(rset.getString("category_no"));
 					hotelCategory.setHotelNo(rset.getString("hotel_no"));
-					hotelCategory.setUserId(rset.getString("user_id"));
 					categoryHotelNo.add(hotelCategory);
+					
 				}
 			}
-			System.out.println(categoryHotelNo);
 		} catch (SQLException e) {
 			throw new HotelException("호텔 필터 카테고리 hotelNo 가져오기 오류!",e);
 		}
-		
+		System.out.println(categoryHotelNo.size()+"사이즈");
 		return categoryHotelNo;
 	}
 
 	public List<Hotel> filterSelectHotel(Connection conn, List<HotelCategory> categoryHotelNo) {
 		String sql = prop.getProperty("filterHotelList");
 		List<Hotel> hotelList = new ArrayList<>();
+		System.out.println(categoryHotelNo);
 		StringBuilder cate = new StringBuilder();
 		
+		
 		for(int i = 0 ; i < categoryHotelNo.size();i++) {
-			if(i != categoryHotelNo.size()-1) {
-				cate.append(categoryHotelNo.get(i).getHotelNo() + ",");
-			}else {
+			if(categoryHotelNo.size() == 1) {
 				cate.append(categoryHotelNo.get(i).getHotelNo());
+			}else {				
+				if(i == 0) {
+					cate.append(categoryHotelNo.get(i).getHotelNo() + "'");
+				}
+				else if(i != categoryHotelNo.size()-1) {
+					cate.append(",'" + categoryHotelNo.get(i).getHotelNo() + "'");
+				}else if( i == categoryHotelNo.size()-1) {
+					cate.append(",'" + categoryHotelNo.get(i).getHotelNo());
+				}
+				else {
+					cate.append("'" + categoryHotelNo.get(i).getHotelNo() + "'");
+				}
+				
+				
 			}
 		}
-		String hotelNo = cate.toString();
-		System.out.println("hotelNo = " + hotelNo);
+		String totalHotelNo = cate.toString();
+		System.out.println("totalHotelNo = " + totalHotelNo);
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
-				pstmt.setString(1, hotelNo);
+				pstmt.setString(1, totalHotelNo);
 		try(ResultSet rset = pstmt.executeQuery()){
 			while(rset.next()) {
 				Hotel hotel = handleHotelResultSet(rset);

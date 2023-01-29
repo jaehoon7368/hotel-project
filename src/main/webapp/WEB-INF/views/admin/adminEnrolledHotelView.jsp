@@ -6,38 +6,15 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%
 	List<Hotel>hotelList = (List<Hotel>)request.getAttribute("hotelList");
-%><link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/admin/adminEnrollView.css" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-	href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap"
-	rel="stylesheet">
+%>
+
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/adminEnrolledHotelView.css" />
+
 <style>
-.mainImage {
-	padding : 40px;
-	width: 90%;
-}
-#categoryBox{
-	display: flex;
-}
-.roombtn{
-    width: 100px;
-    height: 40px;
-    background-color: black;
-    padding: 5px 0;
-    border-radius: 15px;
-    outline: none;
-    font-size: 15px;
-    text-align: center;
-    color: white;
-	border : none;
-}
-
-
 
 
 </style>
+
 
 
 <div id="entireBox">
@@ -53,40 +30,42 @@
 					호텔 보기</a></li>
 		</ul>
 	</div>
-	<div id="content" class="adminBox">
+	
+	
+	<div  id="rightBox"class="adminBox">
 		<%
-      if (hotelList != null) {
+      if (!hotelList.isEmpty()) {
         for (Hotel hotel : hotelList) {
       %>
-		<form action="<%=request.getContextPath()%>/admin/adminhotelenroll"
-			name="hotelEnrollFrm" method="POST" enctype="multipart/form-data">
+		<form action="<%=request.getContextPath()%>/admin/adminhotelDelete"
+			name="hotelDeleteFrm" method="POST" >
 			<br> 
-			<div class="entireBox">
+			<div class="rightBox">
 				<table id="enrollTb" style="height: 100%; width: 100%;">
 					<tr>
-						<td><span>호텔 번호 : </span><%=hotel.getHotelNo() %></td>
+						<td><span>호텔 번호  </span><input type="text" name="hotelNo" class= "put" value=" <%=hotel.getHotelNo() %>" /></td>
 					</tr>
 					<tr>
-						<td><span> 호텔 이름 : </span> <%=hotel.getHotelName() %></td>
+						<td><span> 호텔 이름  </span> <input type="text" name="hotelName" class= "put" value=" <%=hotel.getHotelName() %>" /></td>
 					</tr>
 					<tr>
-						<td><span>호텔 주소 : </span><%=hotel.getHotelAddress() %>
-						</td>
+						<td><span> 호텔 주소  </span><input type="text" name ="hotelAddress" class= "put" value=" <%=hotel.getHotelAddress() %>" /></td>
 					</tr>
 					<tr>
-						<td><span>호텔 정보 : </span><%=hotel.getHotelInfo() %></td>
+						<td><span> 호텔 정보  </span><input type="text" name="hotelInfo" class= "put" value=" <%=hotel.getHotelInfo() %>" /></td>
 					</tr>
 				</table>
 				<img class="mainImage"
 					src="<%=request.getContextPath() %>/upload/hotel/<%=hotel.getRenamedFilename() %>"
 					alt="...">
-				<li style ="padding :0px;"><button type="button" class="roombtn" onclick="roomEnroll('<%=hotel.getHotelNo()%>')">룸
-						등록하기</button></li>
+				<li style ="padding :0px;"><button type="submit" class="roombtn" > 호텔 정보 삭제</button></li>
+				<br /><hr /><br />
+				<li style ="padding :0px;"><button type="button" class="roombtn" onclick="roomEnroll('<%=hotel.getHotelNo()%>')">룸 등록하기</button></li>
 				<br />
 				<div id="categoryBox" style="width:100%">
 				<div id="img-viewer-container">
 					<%
-					if (hotel.getRooms() != null) {
+					if (!hotel.getRooms().isEmpty()) {
 						for (Room room : hotel.getRooms()) {
 					%>
 					<img id="img-viewer " class="subImage"src="<%=request.getContextPath()%>/upload/room/<%=room.getRenamedFilename()%>"
@@ -102,26 +81,23 @@
 				
 		</form>
 	<div style="height :250px"></div>
-	</div>
 
 <%
 }
 } else {
 %>
-<div class="noEnroll">
-	<h2>등록된 호텔이 없습니다. 등록을 부탁드립니다</h2>
-</div>
-
+	<h3>등록된 호텔이 없습니다. 등록을 부탁드립니다</h3>
 <%
  	}
  	%>
+	</div>
 </div>
 <!-- entireBox end -->
 <script>
 	const roomEnroll = (hotelNo)=>{
   		const popup =  open ('<%=request.getContextPath()%>/admin/adminRoomEnroll?no=' + hotelNo,'myPopup','_blank','width=400px,height=200px,left=300px,top=300px')
 	}
+
 </script>
 
 
-<%@ include file="/WEB-INF/views/common/footer.jsp"%>

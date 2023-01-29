@@ -60,6 +60,7 @@ public class AdminDao {
 		List<Hotel> hotels = new ArrayList<>();
 		try(PreparedStatement pstmt =conn.prepareStatement(sql)){
 			pstmt.setString(1, userId);
+			System.out.println(sql+"sql문 확인");
 			
 			try(ResultSet rset = pstmt.executeQuery()){
 				while(rset.next()) {
@@ -242,6 +243,23 @@ public class AdminDao {
 		} catch (Exception e) {
 			throw new AdminException("호텔이미지 등록 오류 !",e);
 		}
+		return result;
+	}
+
+	public int deleteHotel(Connection conn, String hotelNo) {
+		String sql = prop.getProperty("deleteHotel");
+		
+		int result = 0;
+		System.out.println(hotelNo);
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1,hotelNo);
+			result = pstmt.executeUpdate();
+		}catch(Exception e) {
+			throw new AdminException("호텔삭제 오류 !",e);
+			
+		}
+		
+		
 		return result;
 	}
 }

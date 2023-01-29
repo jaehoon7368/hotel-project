@@ -10,6 +10,11 @@
             <form name="userEnrollFrm" 
 				  method="POST" 
 				  action="<%= request.getContextPath() %>/user/userEnroll">
+			  <div class="txt_field">
+                <input type="text"  name="userName" id="userName" value="" required>
+                <span></span>
+                <label>이름</label>
+              </div>
               <div class="txt_field">
                		<input type="text" name="userId" id="_userId" value="" required>
                 <span></span>
@@ -29,10 +34,11 @@
                 <span></span>
                 <label>PASSWORD CHECK</label>
               </div>
+             
               <div class="txt_field">
-                <input type="text"  name="userName" id="userName" value="" required>
+                <input type="text"  name="nickName" id="nickName" value="" required>
                 <span></span>
-                <label>이름</label>
+                <label>닉네임</label>
               </div>
               <div class="txt_field">
                 <input type="tel"  name="phone" id="phone" maxlength="11" value="" required>
@@ -45,7 +51,7 @@
                 <label>EMAIL</label>
               </div>
               <br><br>
-              <input type="submit" value="Sign Up">
+              <input type="submit" value="가입하기">
             </form>
           </div>
         </div>

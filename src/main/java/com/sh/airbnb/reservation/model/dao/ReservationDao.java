@@ -108,7 +108,7 @@ public class ReservationDao {
 	}
 
 	public int insertPayment(int price, String reNo,Connection conn ,String userId) {
-		String sql = prop.getProperty("sql");
+		String sql = prop.getProperty("insertPayment");
 		//insert into tb_sales_data values ('S'||to_char(req_sales_data_no.nextval,'fm0000'),?,default,?)
 		int result =0;
 		
@@ -134,11 +134,11 @@ public class ReservationDao {
 				while(rset.next()) {
 					Reservation reservation = new Reservation();
 					reservation.setHotelName(rset.getString("hotel_name"));
-					reservation.setReName(rset.getString("re_name"));
 					reservation.setRoomType(rset.getString("room_type"));
 					reservation.setReDay(rset.getInt("re_day"));
 					reservation.setStartDate(rset.getDate("start_date"));
 					reservation.setEndDate(rset.getDate("end_date"));
+					reservation.setReName(rset.getString("re_name"));
 					reservation.setRePrice(rset.getInt("re_price"));
 					reservation.setReNo(rset.getString("re_no"));
 					reservation.setReservationStatus(rset.getString("reservation_status"));

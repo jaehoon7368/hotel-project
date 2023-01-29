@@ -178,6 +178,29 @@ header div{
     border: none;
     padding: 5px 0;
 }
+
+
+datalist {
+  position: absolute;
+  max-height: 20em;
+  border: 0 none;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+datalist option {
+  font-size: 0.8em;
+  padding: 0.3em 1em;
+  background-color: #ccc;
+  cursor: pointer;
+}
+
+datalist option:hover, datalist option:focus {
+  color: #fff;
+  background-color: #036;
+  outline: 0 none;
+}
+
 .checkInOut-box{
     width: 120px;
     height: 100%;
@@ -500,7 +523,12 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .hotel-box p{
+	font-size : 14px;
     padding: 3px 10px;
+    margin-bottom:0px;
+}
+.hotel-box h3{
+	padding: 3px 10px;
     margin-bottom:0px;
 }
 /* content end*/

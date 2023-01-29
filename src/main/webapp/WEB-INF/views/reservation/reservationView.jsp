@@ -168,9 +168,6 @@ document.querySelector("#rebtn").addEventListener('click',(e)=>{
 	
 	
 })
-	
-
-
 
 
 </script>
