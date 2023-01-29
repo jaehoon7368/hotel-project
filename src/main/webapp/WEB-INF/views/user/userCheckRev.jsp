@@ -38,7 +38,7 @@
     	<div style ="margin-top :13px"><h2>예약내역</h2></div>
        <% if(reservations.isEmpty()){ %>
 			<tr>
-				<td colspan="10">죄송합니다. 조회된 예약내역이 없습니다.</td>
+				<td colspan="10">조회된 예약내역이 없습니다.</td>
 			</tr>
 		<% 
 		   } else { 
