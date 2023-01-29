@@ -36,16 +36,22 @@ public class FilterSearchServlet extends HttpServlet {
 		StringBuilder price = new StringBuilder();
 		
 		for(int i = 0 ; i <_category.length;i++) {
-			if(i == 0) {
-				price.append(_category[i] + "'" + ",");
-			}
-			else if(i != _category.length-1) {
-				price.append("'" + _category[i] + "'" + ",");
-			}else if(i == _category.length-1){
-				price.append("'" + _category[i]);
-			}
-			else {
-				price.append("'" + _category[i] + "'");
+
+			if(_category.length == 1) {
+				price.append(_category[i]);
+			}else {
+				if(i == 0) {
+					price.append(_category[i] + "'");
+				}
+				else if(i != _category.length-1) {
+					price.append(",'" + _category[i] + "'");
+				}else if(i == _category.length-1){
+					price.append(",'" + _category[i]);
+				}
+				else {
+					price.append("'" + _category[i] + "'");
+				}				
+
 			}
 		}
 		String category = price.toString();

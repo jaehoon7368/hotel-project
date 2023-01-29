@@ -63,7 +63,13 @@
                         <div id="search-detail">
                             <div id="search-location">
                                 <p>여행지</p>
-                                <input type="search" name="searchLocation" id="searchLocation" placeholder="여행지검색"> 
+                                <input type="search" name="searchLocation" id="searchLocation" list="searchLocation-list" placeholder="여행지검색"> 
+                                <datalist id="searchLocation-list">
+                    			<option value="서울"></option>
+                    			<option value="경기"></option>
+                    			<option value="부산"></option>
+                    			<option value="제주"></option>
+               					 </datalist>
                             </div>
                             <div class="checkInOut-box">
                                 <p>체크인</p>
@@ -211,7 +217,7 @@
                 </div>
             <%} %>
             </div>
-  <script>
+<script>
   
   /* filter input값 실시간 range 변경 */
   const minPrice = (e) =>{
@@ -293,10 +299,9 @@
             $('.datepicker').datepicker();
         });
         /* ckeckInOut 캘린더 한글 end */
-
-    </script>     
+</script>     
 	
-	<script>
+<script>
         /* 양방향 range */
         const inputLeft = document.getElementById("input-left");
             const inputRight = document.getElementById("input-right");
@@ -330,5 +335,5 @@
             inputLeft.addEventListener("input", setLeftValue);
             inputRight.addEventListener("input", setRightValue);
             /* 양방향 range end */
-    </script>				
+</script>				
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
