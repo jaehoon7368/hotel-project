@@ -36,6 +36,7 @@ public class FilterSearchServlet extends HttpServlet {
 		StringBuilder price = new StringBuilder();
 		
 		for(int i = 0 ; i <_category.length;i++) {
+
 			if(_category.length == 1) {
 				price.append(_category[i]);
 			}else {
@@ -50,6 +51,7 @@ public class FilterSearchServlet extends HttpServlet {
 				else {
 					price.append("'" + _category[i] + "'");
 				}				
+
 			}
 		}
 		String category = price.toString();

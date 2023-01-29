@@ -59,13 +59,12 @@ public class AdminRoomEnrollServlet extends HttpServlet {
 		int result = 0 ; 
 		result = adminService.insertRoom(room);
 		
-		
-		session.setAttribute("msg", "룸 등록을 성공하였습니다. ");
-		response.sendRedirect(request.getContextPath()+"/admin/adminenrolledhotelview");
+		request.getSession().setAttribute("msg","룸 등록을 성공하였습니다.");
+		response.sendRedirect(request.getContextPath()+"/");
 		
 		}catch (Exception e ) {
 			e.printStackTrace();
-			session.setAttribute("msg", "룸 등록을 실패하였습니다.");
+			request.getSession().setAttribute("msg","룸 등록을 실패하였습니다.");
 			throw e ;
 			
 		}
