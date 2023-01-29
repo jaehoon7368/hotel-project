@@ -151,21 +151,28 @@ public class HotelDao {
 		System.out.println(category);
 		
 		for(int i = 0 ; i < priceHotelNo.size();i++) {
-			if(i == 0) {
-				price.append(priceHotelNo.get(i).getHotelNo() + "'" + ",");
-			}
-			else if(i != priceHotelNo.size()-1) {
-				price.append("'" + priceHotelNo.get(i).getHotelNo() + "'" + ",");
-			}else if( i == priceHotelNo.size()-1) {
-				price.append("'" + priceHotelNo.get(i).getHotelNo());
+			if(priceHotelNo.size() == 1) {
+				price.append(priceHotelNo.get(i).getHotelNo());
 			}
 			else {
-				price.append("'" + priceHotelNo.get(i).getHotelNo() + "'");
+				if(i == 0) {
+					price.append(priceHotelNo.get(i).getHotelNo() + "'");
+				}
+				else if(i != priceHotelNo.size()-1) {
+					price.append(",'" + priceHotelNo.get(i).getHotelNo() + "'");
+				}else if( i == priceHotelNo.size()-1) {
+					price.append(",'" + priceHotelNo.get(i).getHotelNo());
+				}
+				else {
+					price.append("'" + priceHotelNo.get(i).getHotelNo() + "'");
+				}		
+						
 			}
 		}
-		String hotelNo = price.toString();
-		System.out.println("카테고리"+category);
 		
+		String hotelNo = price.toString();
+		System.out.println("hotelNo = " + hotelNo);
+
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
 				
@@ -178,7 +185,6 @@ public class HotelDao {
 				while(rset.next()) {
 					HotelCategory hotelCategory = new HotelCategory();
 					hotelCategory.setHotelNo(rset.getString("hotel_no"));
-					System.out.println("rset후 호텔넘버"+hotelCategory.getHotelNo());
 					categoryHotelNo.add(hotelCategory);
 				}
 			}
@@ -192,21 +198,34 @@ public class HotelDao {
 	public List<Hotel> filterSelectHotel(Connection conn, List<HotelCategory> categoryHotelNo) {
 		String sql = prop.getProperty("filterHotelList");
 		List<Hotel> hotelList = new ArrayList<>();
+		System.out.println(categoryHotelNo);
 		StringBuilder cate = new StringBuilder();
 		
+		
 		for(int i = 0 ; i < categoryHotelNo.size();i++) {
-			if(i != categoryHotelNo.size()-1) {
-				cate.append(categoryHotelNo.get(i).getHotelNo() + ",");
-			}else {
+			if(categoryHotelNo.size() == 1) {
 				cate.append(categoryHotelNo.get(i).getHotelNo());
+			}else {				
+				if(i == 0) {
+					cate.append(categoryHotelNo.get(i).getHotelNo() + "'");
+				}
+				else if(i != categoryHotelNo.size()-1) {
+					cate.append(",'" + categoryHotelNo.get(i).getHotelNo() + "'");
+				}else if( i == categoryHotelNo.size()-1) {
+					cate.append(",'" + categoryHotelNo.get(i).getHotelNo());
+				}
+				else {
+					cate.append("'" + categoryHotelNo.get(i).getHotelNo() + "'");
+				}
+				
+				
 			}
 		}
-		String hotelNo = cate.toString();
-		System.out.println("hotelNo = " + hotelNo);
+		String totalHotelNo = cate.toString();
+		System.out.println("totalHotelNo = " + totalHotelNo);
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
-				pstmt.setString(1, hotelNo);
-				
+				pstmt.setString(1, totalHotelNo);
 		try(ResultSet rset = pstmt.executeQuery()){
 			while(rset.next()) {
 				Hotel hotel = handleHotelResultSet(rset);

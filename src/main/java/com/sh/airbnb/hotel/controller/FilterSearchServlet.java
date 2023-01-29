@@ -36,16 +36,22 @@ public class FilterSearchServlet extends HttpServlet {
 		StringBuilder price = new StringBuilder();
 		
 		for(int i = 0 ; i <_category.length;i++) {
-			if(i == 0) {
-				price.append(_category[i] + "'" + ","); //여기에 작은 따옴표 하나 빠진 거 아님? 앞에꺼 일부러뻇는데  잇어도 안됌 이거 사용한 곳으로 가는 거 단축키 뭐더라 함수
-			} //컨트롤 클릭크 안 되길래 이거 어디서 호출됨?  jsp ? 쿼리문 어딨엉
-			else if(i != _category.length-1) {
-				price.append("'" + _category[i] + "'" + ",") ;
-			}else if(i == _category.length-1){
-				price.append("'" + _category[i]);
-			}
-			else {
-				price.append("'" + _category[i] + "'");
+
+			if(_category.length == 1) {
+				price.append(_category[i]);
+			}else {
+				if(i == 0) {
+					price.append(_category[i] + "'");
+				}
+				else if(i != _category.length-1) {
+					price.append(",'" + _category[i] + "'");
+				}else if(i == _category.length-1){
+					price.append(",'" + _category[i]);
+				}
+				else {
+					price.append("'" + _category[i] + "'");
+				}				
+
 			}
 		}
 		String category = price.toString();
