@@ -572,7 +572,7 @@ footer {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      color:gray;
+      background-color:white;
     }
 
    #wrapper {
