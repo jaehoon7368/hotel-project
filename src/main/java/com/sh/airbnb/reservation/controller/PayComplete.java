@@ -24,19 +24,19 @@ public class PayComplete extends HttpServlet {
 		String reNo = request.getParameter("revReNo");
 		int price = Integer.parseInt(request.getParameter("price"));
 		String userId = request.getParameter("userId");
-		int result = 0;
+		System.out.println(reNo+"예약번호");
+		System.out.println(price+"프라이스");
+		System.out.println(userId+"유저아이디");
 		
+		int result = 0;
 		result = reservationService.insertPayment(price,reNo,userId);
 	
-		
 		
 		response.setContentType("application/json; charset=utf-8");
 		Map<String,Object> map = new HashMap<>();
 		map.put("result", "등록성공");
 		
 		new Gson().toJson(map, response.getWriter());
-
-	
 	}
 
 }

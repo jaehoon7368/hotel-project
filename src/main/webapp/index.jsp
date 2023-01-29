@@ -1,9 +1,11 @@
+<%@page import="com.sh.airbnb.room.model.dto.RoomPrice"%>
 <%@page import="com.sh.airbnb.hotel.model.dto.Hotel"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	List<Hotel> hotelList = (List<Hotel>) request.getAttribute("hotelList");
+	RoomPrice roomPrice = (RoomPrice) request.getAttribute("roomPrice");
  	String searchLocation = (String) request.getAttribute("searchLocation");
 	String checkIn = (String) request.getAttribute("checkIn");
 	String checkOut = (String) request.getAttribute("checkOut");
@@ -61,7 +63,13 @@
                         <div id="search-detail">
                             <div id="search-location">
                                 <p>여행지</p>
-                                <input type="search" name="searchLocation" id="searchLocation" placeholder="여행지검색"> 
+                                <input type="search" name="searchLocation" id="searchLocation" list="searchLocation-list" placeholder="여행지검색"> 
+                                <datalist id="searchLocation-list">
+                    			<option value="서울"></option>
+                    			<option value="경기"></option>
+                    			<option value="부산"></option>
+                    			<option value="제주"></option>
+               					 </datalist>
                             </div>
                             <div class="checkInOut-box">
                                 <p>체크인</p>
@@ -91,13 +99,13 @@
                                 <div id="price-box">
                                     <h3>가격범위</h3>
                                     <div id="price-text">
-                                        <p>평균 1박 요금은 ₩200000입니다.</p>
+                                        <p>평균 1박 요금은 ₩<%=roomPrice.getAvgPrice()%>입니다.</p>
                                     </div>
                                     <div id="range-box">
                                     <div class="middle">
                                         <div class="multi-range-slider">
-                                            <input type="range" id="input-left" min="1" max="100" value="1" oninput="document.getElementById('value1').value=this.value;"/>
-                                            <input type="range" id="input-right" min="1" max="100" value="100" oninput="document.getElementById('value2').value=this.value;"/>
+                                            <input type="range" id="input-left" min="<%=roomPrice.getMinPrice()%>" max="<%=roomPrice.getMaxPrice() %>" value="<%=roomPrice.getMinPrice() %>" oninput="document.getElementById('value1').value=this.value;"/>
+                                            <input type="range" id="input-right" min="<%=roomPrice.getMinPrice()%>" max="<%=roomPrice.getMaxPrice() %>" value="<%=roomPrice.getMaxPrice() %>" oninput="document.getElementById('value2').value=this.value;"/>
                                             <div class="slider">
                                                 <div class="track"></div>
                                                 <div class="range"></div>
@@ -109,14 +117,14 @@
                                             <div>
                                                 <div class="val-box">
                                                     <p>최저 요금</p>
-                                                    <span>₩ </span><input type="text" id="value1" onchange="minPrice(event)">
+                                                    <span>₩ </span><input type="text" id="value1" name="min_price" onchange="minPrice(event)" value="<%=roomPrice.getMinPrice() %>">
                                                 </div>
                                             </div>
                                             <h3>-</h3>
                                             <div>
                                                 <div class="val-box">
                                                     <p>최고 요금</p>
-                                                    <span>₩ </span><input type="text" id="value2" onchange="maxPrice(event)">
+                                                    <span>₩ </span><input type="text" id="value2"  name="max_price" onchange="maxPrice(event)" value="<%=roomPrice.getMaxPrice() %>">
                                                 </div>
                                             </div>
                                         </div>
@@ -209,7 +217,7 @@
                 </div>
             <%} %>
             </div>
-  <script>
+<script>
   
   /* filter input값 실시간 range 변경 */
   const minPrice = (e) =>{
@@ -291,10 +299,9 @@
             $('.datepicker').datepicker();
         });
         /* ckeckInOut 캘린더 한글 end */
-
-    </script>     
+</script>     
 	
-	<script>
+<script>
         /* 양방향 range */
         const inputLeft = document.getElementById("input-left");
             const inputRight = document.getElementById("input-right");
@@ -328,5 +335,5 @@
             inputLeft.addEventListener("input", setLeftValue);
             inputRight.addEventListener("input", setRightValue);
             /* 양방향 range end */
-    </script>				
+</script>				
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
