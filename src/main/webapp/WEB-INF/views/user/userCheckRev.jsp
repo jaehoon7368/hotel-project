@@ -51,7 +51,7 @@
                 <td class="name" colspan="2"><%=reservation.getHotelName() %></td>
             </tr> 
             <tr>
-                <td class="name"colspan="2">스파오션부 (룸타입) /1박</td>
+                <td class="name"colspan="2"><%= reservation.getRoomType() %> / <%= reservation.getReDay() %></td>
             </tr> 
             <tr>
                 <td class="td1">체크인</td>

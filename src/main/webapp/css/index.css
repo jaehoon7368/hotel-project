@@ -566,7 +566,7 @@ footer {
         position: absolute;
         margin: 3px;
    		margin-left: -10px;
-        background-color: #f6f6f6;
+        background-color: white;
     }
   #profile-menu.active{
       display: flex;
