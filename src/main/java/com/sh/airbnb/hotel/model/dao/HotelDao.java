@@ -178,7 +178,9 @@ public class HotelDao {
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
 				pstmt.setString(1,category);
 				pstmt.setString(2,hotelNo);
+
 			try(ResultSet rset = pstmt.executeQuery()){
+				System.out.println(sql);
 				while(rset.next()) {
 					HotelCategory hotelCategory = new HotelCategory();
 					hotelCategory.setHotelNo(rset.getString("hotel_no"));
@@ -186,11 +188,10 @@ public class HotelDao {
 					
 				}
 			}
-			System.out.println(categoryHotelNo);
 		} catch (SQLException e) {
 			throw new HotelException("호텔 필터 카테고리 hotelNo 가져오기 오류!",e);
 		}
-		
+		System.out.println(categoryHotelNo.size()+"사이즈");
 		return categoryHotelNo;
 	}
 
