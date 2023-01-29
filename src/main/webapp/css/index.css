@@ -523,7 +523,12 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .hotel-box p{
+	font-size : 14px;
     padding: 3px 10px;
+    margin-bottom:0px;
+}
+.hotel-box h3{
+	padding: 3px 10px;
     margin-bottom:0px;
 }
 /* content end*/
