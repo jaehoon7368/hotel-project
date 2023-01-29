@@ -82,3 +82,12 @@ div.adminBox{
     color: white;
 	border : none;
 }
+.rightBox span{
+background-color: black;
+color : white;
+border-radius: 95px 95px 95px 95px;
+-moz-border-radius: 95px 95px 95px 95px;
+-webkit-border-radius: 95px 95px 95px 95px;
+border: 0px solid #000000;
+font-size: medium;
+}

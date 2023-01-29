@@ -60,6 +60,7 @@ public class AdminDao {
 		List<Hotel> hotels = new ArrayList<>();
 		try(PreparedStatement pstmt =conn.prepareStatement(sql)){
 			pstmt.setString(1, userId);
+			System.out.println(sql+"sql문 확인");
 			
 			try(ResultSet rset = pstmt.executeQuery()){
 				while(rset.next()) {

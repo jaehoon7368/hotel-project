@@ -11,15 +11,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/adminEnrolledHotelView.css" />
 
 <style>
-.rightBox span{
-background-color: black;
-color : white;
-border-radius: 95px 95px 95px 95px;
--moz-border-radius: 95px 95px 95px 95px;
--webkit-border-radius: 95px 95px 95px 95px;
-border: 0px solid #000000;
-font-size: medium;
-}
+
 
 </style>
 
@@ -104,9 +96,6 @@ font-size: medium;
 <script>
 	const roomEnroll = (hotelNo)=>{
   		const popup =  open ('<%=request.getContextPath()%>/admin/adminRoomEnroll?no=' + hotelNo,'myPopup','_blank','width=400px,height=200px,left=300px,top=300px')
-	}
-	const hotelDelte =()=>{
-						
 	}
 
 </script>
