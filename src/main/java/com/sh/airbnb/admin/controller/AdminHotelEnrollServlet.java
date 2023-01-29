@@ -75,7 +75,7 @@ public class AdminHotelEnrollServlet extends HttpServlet {
 			result1 = adminService.insertCategory(userId,category,hotel.getHotelNo());
 			}
 			request.getSession().setAttribute("msg","호텔 등록을 성공하였습니다.");
-			response.sendRedirect(request.getContextPath()+"/admin/adminenrolledhotelview");
+			response.sendRedirect(request.getContextPath()+"/admin/adminenrolledhotelview?user_id="+userId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.getSession().setAttribute("msg","호텔 등록을 실패하였습니다.");
