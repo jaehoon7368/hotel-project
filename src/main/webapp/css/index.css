@@ -179,30 +179,28 @@ header div{
     padding: 5px 0;
 }
 
-#search-location datalist {
+
+datalist {
   position: absolute;
-  background-color: white;
-  border: 1px solid black;
-  border-radius: 0 0 5px 5px;
-  border-top: none;
-  font-family: sans-serif;
-  width: 460px;
-  padding: 5px;
-  max-height: 10rem;
-  overflow-y: auto
+  max-height: 20em;
+  border: 0 none;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
-#search-location option {
-  background-color: white;
-  padding: 4px;
-  color: blue;
-  margin-bottom: 1px;
-   font-size: 18px;
+
+datalist option {
+  font-size: 0.8em;
+  padding: 0.3em 1em;
+  background-color: #ccc;
   cursor: pointer;
 }
 
-#search-location option:hover,  .active{
-  background-color: lightblue;
+datalist option:hover, datalist option:focus {
+  color: #fff;
+  background-color: #036;
+  outline: 0 none;
 }
+
 .checkInOut-box{
     width: 120px;
     height: 100%;
@@ -525,7 +523,12 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .hotel-box p{
+	font-size : 14px;
     padding: 3px 10px;
+    margin-bottom:0px;
+}
+.hotel-box h3{
+	padding: 3px 10px;
     margin-bottom:0px;
 }
 /* content end*/

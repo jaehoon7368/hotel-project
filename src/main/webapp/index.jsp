@@ -63,7 +63,8 @@
                         <div id="search-detail">
                             <div id="search-location">
                                 <p>여행지</p>
-                                <input type="search" name="searchLocation" id="searchLocation" list="searchLocation-list" placeholder="여행지검색"> 
+                                <input type="search" name="searchLocation" id="searchLocation" list="searchLocation-list" 
+                                autocomplete="off" placeholder="여행지검색"> 
                                 <datalist id="searchLocation-list">
                     			<option value="서울"></option>
                     			<option value="경기"></option>
@@ -210,7 +211,7 @@
             	<div class="hotel-box">
 					<a href="<%= request.getContextPath()%>/room/roomView?hotelNo=<%=hotel.getHotelNo()%>&checkIn=<%=checkIn%>&checkOut=<%=checkOut%>">
                     	<img src="<%=request.getContextPath()%>/upload/hotel/<%=hotel.getRenamedFilename() %>" alt="">
-                    	<p class="font-bold" name="hotelName"><%=hotel.getHotelName()%></p>
+                    	<h3 name="hotelName"><%=hotel.getHotelName()%></h3>
                     	<p class="color-gray" name="hotelAddress"><%=hotel.getHotelAddress() %></p>
                     	<p class="color-gray" name="hotelPrice">₩<%=hotel.getPrice() %> ~ / 박</p>
                     <a>
