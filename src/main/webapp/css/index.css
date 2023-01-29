@@ -538,13 +538,13 @@ footer {
         position: absolute;
         margin: 3px;
    		margin-left: -10px;
-        background-color: #f6f6f6;
+        background-color: white;
     }
   #profile-menu.active{
       display: flex;
       flex-direction: column;
       justify-content: center;
-      color:gray;
+      background-color:white;
     }
 
    #wrapper {
