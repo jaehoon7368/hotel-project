@@ -55,7 +55,7 @@ public class HotelService {
 		return hotelList;
 	}
 
-	public List<Hotel> filterSelectHotel(int minPrice, int maxPrice, String category) {
+	public List<Hotel> filterSelectHotel(int minPrice, int maxPrice, String[] category) {
 		Connection conn = getConnection();
 		
 		// 가격 필터로 걸러진 hotelNo를 가져온다.

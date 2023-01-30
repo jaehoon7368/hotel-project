@@ -1,3 +1,4 @@
+<%@page import="com.sh.airbnb.common.HelloMvcUtils"%>
 <%@page import="com.sh.airbnb.board.model.dto.InquiyBoardComment"%>
 <%@page import="com.sh.airbnb.user.model.dto.UserRole"%>
 <%@page import="java.util.List"%>
@@ -11,7 +12,7 @@
 	List<InquiyBoardComment> inquiyBoardCommentList = (List<InquiyBoardComment>)request.getAttribute("inquiyBoardCommentList");
 %>
 <style>
-#inquiy-main {width: 1024px; height: 100%; margin: auto;}
+#inquiy-main {width: 1024px; height: 100%; min-height: 800px; margin: auto;}
 .wrap {padding: 54px 0 50px 0;}
 .board-menu {width: 210px; margin: 0; display: block; float: left;}
 .board-menu-list {list-style: none; margin: 0;}
@@ -20,14 +21,13 @@
 .inquriy {width: 770px; height: 100%; float: right;}
 .inquriy-board {width: 770px; height: 100%;}
 .inquriy-head {font-size: 18px; border-bottom: rgba(0,0,0,0.3) solid 1px; height: 41px; margin: 0; padding: 0;}
-.tab-btn {margin-right: 22px; color: rgba(0,0,0,0.6); height: 40px; line-height: normal;}
+.tab-btn {margin-right: 22px; color: rgba(0,0,0,0.6); height: 40px; line-height: normal; cursor: pointer;}
 .non-inquriy-list {padding-top: 120px; text-align: center; height: 373px;}
 </style>
     <div id="inquiy-main" class="wrap">
         <nav class="board-menu">
             <ul class="board-menu-list">
                 <li><a href="<%= request.getContextPath() %>/board/noticeBoardList">공지사항</a></li>
-                <li><a href="">이벤트</a></li>
                 <li><a href="<%= request.getContextPath() %>/board/faqBoardList">자주 묻는 질문</a></li>
                 <%if(loginUser != null) { %>
                 <li><a href="<%= request.getContextPath() %>/board/inquiyBoardList" style="color: #f7323f; font-weight: bold;">1:1 문의</a></li>
@@ -37,7 +37,7 @@
         <div class="inquriy">
             <div class="inquriy-board">
                 <div class="inquriy-head">
-                    <span class="tab-btn" style="color: #f7323f; font-weight: bold;">나의 문의 내역</span>
+                    <span class="tab-btn" onclick="location.href = '<%= request.getContextPath() %>/board/inquiyBoardList'" style="color: #f7323f; font-weight: bold;">나의 문의 내역</span>
                     <span class="tab-btn" onclick="location.href = '<%= request.getContextPath() %>/board/inquiyEnroll'">새 문의 작성</span>
                 </div>
                 <!-- 사용자가 문의를 볼수 없을때 -->
@@ -52,6 +52,7 @@
 	                 
                         <li class="notice-list" style="border-bottom: 1px solid rgba(0,0,0,0.4); list-style: none;">
                             <div style="padding: 35px 0 35px 0; display: block;" class="menu">
+                            	<% inquiyBoards.setContent(HelloMvcUtils.convertLineFeedToBr(HelloMvcUtils.escapeHtml(inquiyBoards.getContent()))); %>
                                 <p style="margin: 0;"><b>[이용문의]</b> <%= inquiyBoards.getContent().substring(0, 1) %>
                                 
                                 	<!-- 아이콘  -->
