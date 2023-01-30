@@ -3,18 +3,23 @@ package com.sh.airbnb.hotel.model.service;
 import static com.sh.airbnb.common.JdbcTemplate.*;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.util.List;
 
 import com.sh.airbnb.hotel.model.dao.HotelDao;
 import com.sh.airbnb.hotel.model.dto.Hotel;
 import com.sh.airbnb.hotel.model.dto.HotelCategory;
 import com.sh.airbnb.hotel.model.dto.HotelEntity;
+import com.sh.airbnb.reservation.model.dao.ReservationDao;
+import com.sh.airbnb.reservation.model.dto.Reservation;
+import com.sh.airbnb.reservation.model.dto.ReservationEntity;
 import com.sh.airbnb.room.model.dao.RoomDao;
 import com.sh.airbnb.room.model.dto.RoomPrice;
 
 public class HotelService {
 	private HotelDao hotelDao = new HotelDao();
 	private RoomDao roomDao = new RoomDao();
+	private ReservationDao reservationDao = new ReservationDao();
 
 	public List<Hotel> hotelTotalView() {
 		Connection conn = getConnection();
@@ -67,6 +72,19 @@ public class HotelService {
 		// 전부 걸러진 hotelList를 Servlet으로 보내준다.
 		List<Hotel> hotelList = hotelDao.filterSelectHotel(conn,categoryHotelNo);
 		System.out.println("hotelList = " + hotelList);
+		close(conn);
+		return hotelList;
+	}
+
+	public List<Hotel> selectSearchHotel(String location, Date sqlDate1, Date sqlDate2) {
+		Connection conn = getConnection();
+		// 지역 필터로 걸러진 hotelList를 가져온다.(address)
+		List<Hotel> addressList = hotelDao.selectHotelAddress(conn,location);
+		// 지역 필터로 걸러진 hotelNo와 예약날짜를 걸러 hotelNo를 가져온다.
+		List<ReservationEntity> reservationList = reservationDao.selectSearhHotel(conn,addressList,sqlDate1,sqlDate2);
+		
+		List<Hotel> hotelList = hotelDao.selectSearchHotel(conn,reservationList);
+		
 		close(conn);
 		return hotelList;
 	}

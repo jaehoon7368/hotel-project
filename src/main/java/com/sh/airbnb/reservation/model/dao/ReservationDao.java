@@ -3,6 +3,7 @@ package com.sh.airbnb.reservation.model.dao;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.sh.airbnb.admin.model.dao.AdminDao;
+import com.sh.airbnb.hotel.model.dto.Hotel;
 import com.sh.airbnb.reservation.model.dto.Reservation;
 import com.sh.airbnb.reservation.model.dto.ReservationEntity;
 import com.sh.airbnb.reservation.model.exception.ReservationException;
@@ -166,6 +168,44 @@ public class ReservationDao {
 			throw new ReservationException("예약취소 오류", e);
 		}
 		return result;
+	}
+
+	public List<ReservationEntity> selectSearhHotel(Connection conn, List<Hotel> addressList, Date sqlDate1, Date sqlDate2) {
+		String sql = prop.getProperty("selectReservationNotHotel");
+		List<ReservationEntity> reservationList = new ArrayList<>();
+		
+		List<String> addressListArray = new ArrayList<>();
+		for(int i = 0 ; i< addressList.size(); i++) {
+			addressListArray.add(addressList.get(i).getHotelNo());
+		}
+		String temp = "";
+		for(int i = 0; i < addressListArray.size();i++) {
+			temp += "'" + addressListArray.get(i) + "'";
+			if(i != addressListArray.size() -1)
+				temp += ", ";
+		}
+		sql = sql.replace("$", temp);
+		System.out.println(temp);
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setDate(1, sqlDate1);
+			pstmt.setDate(2, sqlDate2);
+			pstmt.setDate(3, sqlDate1);
+			pstmt.setDate(4, sqlDate2);
+			pstmt.setDate(5, sqlDate1);
+			pstmt.setDate(6, sqlDate2);
+			
+			try(ResultSet rset = pstmt.executeQuery()){
+				while(rset.next()) {
+				ReservationEntity reservation = new ReservationEntity();
+				reservation.setHotelNo(rset.getString("hotel_no"));
+				reservationList.add(reservation);
+				}
+			}
+		} catch (SQLException e) {
+			throw new ReservationException("예약안된 호텔 불러오기 오류", e);
+		}
+		return reservationList;
 	}
 
 
