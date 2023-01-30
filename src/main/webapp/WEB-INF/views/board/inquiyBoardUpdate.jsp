@@ -18,8 +18,9 @@
 .tab-btn {margin-right: 22px; color: rgba(0,0,0,0.6); height: 40px; line-height: normal;}
 .form-top {padding: 40px 0 40px 0;}
 .user-input {width: 100%; padding: 0 10px 0 10px;}
-td {font-size: 18px; padding: 10px;}
-tr {margin-bottom: 20px;}
+.inquiy-enroll {margin-bottom: 20px;}
+/* td {font-size: 18px; padding: 10px;}
+tr {margin-bottom: 20px;} */
 </style>
 <div id="contentt" class="wrap">
         <nav class="board-menu">
@@ -33,9 +34,8 @@ tr {margin-bottom: 20px;}
 	<div class="inquriy">
             <div class="inquriy-board">
                 <div class="inquriy-head">
-                    <span class="tab-btn">나의 문의 내역</span>
-                    <span class="tab-btn">새 문의 작성</span>
-                    <span class="tab-btn">문의 수정</span>
+                    <span class="tab-btn" onclick="location.href = '<%= request.getContextPath() %>/board/inquiyBoardList'">나의 문의 내역</span>
+                    <span class="tab-btn" onclick="location.href = '<%= request.getContextPath() %>/board/inquiyEnroll'">새 문의 작성</span>
                 </div>
                 <!-- 문의리스트 -->
                 <div class="inquriy-list">
@@ -50,43 +50,37 @@ tr {margin-bottom: 20px;}
                         <div>
                             <div class="form-top">서비스 이용중 불편사항을 문의주시면 최대한 빠른시일내에 답변 드리겠습니다.</div>
                             <table>
-	                            <tr hidden>
-	                           	 <td>작성자</td>
-	                             <td><input type="text" name="writer" value="<%= inquiyBoard.getWriter()%>" /></td>
-	                            </tr>
-                                <tr><td>카테고리 유형</td></tr>
-                                <tr>
-                                    <td>
-                                        <select name="productType" id="" class="user-input">
-                                            <option value="">카테고리 유형을 선택하세요</option>
-                                            <option value="호텔">호텔</option>
-                                            <option value="모텔">모텔</option>
-                                            <option value="펜션">펜션</option>
-                                            <option value="리조트">리조트</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr><td>문의유형</td></tr>
-                                <tr>
-                                    <td>
-                                        <select name="inquiyType" id="" class="user-input">
-                                            <option value="">문의유형을 선택하세요.</option>
-                                            <option value="예약/결제">예약/결제</option>
-                                            <option value="취소/환불">취소/환불</option>
-                                            <option value="이용문의">이용문의</option>
-                                            <option value="이용문의">회원정보</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr><td>휴대폰 번호</td></tr>
-                                <tr><td><input type="tel" name="phone" class="user-input" value="<%= inquiyBoard.getPhone() %>" placeholder="선택사항 입니다."></td></tr>
-                                <tr><td>이메일</td></tr>
-                                <tr><td><input type="email" name="email" class="user-input" value="<%= inquiyBoard.getEmail() %>" placeholder="선택사항 입니다."></td></tr>
-                                <tr><td>문의내용</td></tr>
-                                <tr><td><textarea name="content" id="" cols="110" rows="10" style="resize: none;" class="user-input"  placeholder="문의하실 내용을 10자 이상 입력해주세요"><%= inquiyBoard.getContent() %></textarea></td></tr>
-                                
+	                             <input type="hidden" name="writer" value="<%= loginUser.getUserId() %>" />
+	                             <div class="inquiy-enroll">카테고리</div>
+                                 <div class="inquiy-enroll">
+                                     <select name="productType" id="" class="user-input" style="height: 30px; width: 725px; font-size: 16px; color: rgba(0,0,0,0.60);">
+                                         <option value="<%= inquiyBoard.getProductType() %>"><%= inquiyBoard.getProductType() %></option>
+                                         <option value="호텔">호텔</option>
+                                         <option value="모텔">모텔</option>
+                                         <option value="펜션">펜션</option>
+                                     </select>
+                                 </div>	
+                                 <div class="inquiy-enroll">문의유형</div>
+								 <div class="inquiy-enroll">
+                                     <select name="inquiyType" id="" class="user-input" style="height: 30px; width: 725px; font-size: 16px; color: rgba(0,0,0,0.60);">
+                                         <option value="<%= inquiyBoard.getInquiyType() %>"><%= inquiyBoard.getInquiyType() %></option>
+                                         <option value="예약/결제">예약/결제</option>
+                                         <option value="취소/환불">취소/환불</option>
+                                         <option value="이용문의">이용문의</option>
+                                         <option value="이용문의">회원정보</option>
+                                     </select>
+								 </div>
+								 <div class="inquiy-enroll">휴대폰 번호</div>             
+								 <div class="inquiy-enroll"><input type="tel" name="phone" value="<%= inquiyBoard.getPhone() %>" class="user-input" placeholder="선택사항 입니다." style="height: 30px; width: 700px; font-size: 16px;"></div>                   
+                                 <div class="inquiy-enroll">이메일</div>
+                                 <div class="inquiy-enroll"><input type="email" name="email" value="<%= inquiyBoard.getEmail() %>" class="user-input" placeholder="선택사항 입니다." style="height: 30px; width: 700px; font-size: 16px;"></div>
+                                 <div class="inquiy-enroll">문의내용</div>
+                                 <div class="inquiy-enroll"><textarea name="content" id="" cols="110" rows="10" style="resize: vertical; width: 700px; font-size: 16px;" class="user-input"  placeholder="문의하실 내용을 10자 이상 입력해주세요"><%= inquiyBoard.getContent() %></textarea></div>
+                                 <div class="inquiy-enroll">
+		                            <input type="submit" value="작성하기" style="width: 100px; height: 50px; font-size: 18px;">
+		                            <input type="button" value="취소하기" onclick="history.go(-1);" style="width: 100px; height: 50px; font-size: 18px;"/>
+                                 </div>
                             </table>
-                            <button type="submit">작성하기</button>
                         </div>
                         <input type="hidden" name="inquiyNo" value="<%= inquiyBoard.getInquiyNo() %>" />
                     </form>

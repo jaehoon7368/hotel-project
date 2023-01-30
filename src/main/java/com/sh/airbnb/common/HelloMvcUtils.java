@@ -111,8 +111,9 @@ public class HelloMvcUtils {
 		return pagebar.toString();
 	}
 	public static String convertLineFeedToBr(String str) {
-		return str.replaceAll("\\n","<br>");
+		return str.replaceAll("\\n","<br/>");
 	}
+	
 	
 	/**
 	 * Xss 공격대비 방어
@@ -124,7 +125,7 @@ public class HelloMvcUtils {
 
 	public static String escapeHtml(String str) {
 		
-		return str.replaceAll("<", "&lt;").replaceAll("<", "&gt;");
+		return str.replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 	}
 
 
