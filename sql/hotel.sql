@@ -265,3 +265,4 @@ select hotel_no from tb_room r where r.room_price between 55000 and 650000 group
 
 select h.*,(select min(r.room_price) from tb_room r where r.hotel_no = h.hotel_no group by hotel_no) price,(select renamed_filename from tb_hotel_image i where i.hotel_no = h.hotel_no) renamed_filename from tb_hotel h where h.hotel_no >= any('H0002','Y0004','H0006','P0001','Y0007','P0005');
 
+update tb_user set user_role = 'A' where user_id = 'admin123'; 

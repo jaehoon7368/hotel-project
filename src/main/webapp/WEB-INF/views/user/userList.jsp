@@ -90,7 +90,7 @@ window.addEventListener('load', () => {
 					<td>
 						<select class="user-role" data-user-id="<%= user.getUserId() %>">
 							<option value="<%= UserRole.U %>" <%= user.getUserRole() == UserRole.U ? "selected" : "" %>>일반사용자</option>
-							<option value="<%= UserRole.A %>" <%= user.getUserRole() == UserRole.A ? "selected" : "" %>>숙소관리자</option>
+							<option value="<%= UserRole.S %>" <%= user.getUserRole() == UserRole.S ? "selected" : "" %>>숙소관리자</option>
 						</select>
 					</td>	
 					<td><%= user.getEmail() != null ? user.getEmail() : "" %></td>
