@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sh.airbnb.board.model.dto.NoticeBoard;
 import com.sh.airbnb.board.model.service.BoardService;
+import com.sh.airbnb.common.HelloMvcUtils;
 
 /**
  * Servlet implementation class NoticeBoardUpdateServlet
@@ -28,6 +29,7 @@ public class NoticeBoardUpdateServlet extends HttpServlet {
 			
 			NoticeBoard noticeBoard = boardService.selectOneNoticeBoard(noticeNo);
 			System.out.println("noticeBoard = " + noticeBoard);
+			
 			
 			request.setAttribute("noticeBoard", noticeBoard);
 			request.getRequestDispatcher("/WEB-INF/views/board/noticeBoardUpdate.jsp").forward(request, response);

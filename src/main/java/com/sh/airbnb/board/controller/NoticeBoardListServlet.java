@@ -27,6 +27,7 @@ public class NoticeBoardListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		// 1. 입력값
 		final int limit = 10;
 		int page = 1;
@@ -41,6 +42,10 @@ public class NoticeBoardListServlet extends HttpServlet {
 		// 2. 로직
 		List<NoticeBoard> noticeBoardList = boardService.selectNoticeList(param);
 		System.out.println("noticeBoardList = " + noticeBoardList);
+		// 개행.
+//		NoticeBoard noticeBoard = boardService.selectNoticeBoard();
+//		noticeBoard.setContent(HelloMvcUtils.convertLineFeedToBr(HelloMvcUtils.escapeHtml(noticeBoard.getContent())));
+//		System.out.println("noticeBoard = " + noticeBoard);
 		
 		//  페이지바
 		int totalCount = boardService.selectTotalCount(); // select count(*) from board

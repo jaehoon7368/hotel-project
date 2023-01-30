@@ -233,4 +233,11 @@ public class BoardService {
 		return faqBoardMenu;
 	}
 
+	public NoticeBoard selectNoticeBoard() {
+		Connection conn = getConnection();
+		NoticeBoard noticeBoard = boardDao.selectNoticeBoard(conn);
+		close(conn);
+		return noticeBoard;
+	}
+
 }

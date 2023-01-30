@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <style>
-#main-content {width: 1024px; height: 500px; margin: auto;}
+#main-content {width: 1024px; height: 500px; min-height: 800px; margin: auto;}
 .wrap {padding: 54px 0 50px 0;}
 .board-menu {width: 210px; margin: 0; display: block; float: left;}
 .board-menu-list {list-style: none; margin: 0;}
@@ -20,7 +20,6 @@
         <nav class="board-menu">
             <ul class="board-menu-list">
                 <li><a href="<%= request.getContextPath() %>/board/noticeBoardList" style="font-weight: bold; color: #f7323f;">공지사항</a></li>
-                <li><a href="">이벤트</a></li>
                 <li><a href="<%= request.getContextPath() %>/board/faqBoardList">자주 묻는 질문</a></li>
                 <%if(loginUser != null) { %>
                 <li><a href="<%= request.getContextPath() %>/board/inquiyBoardList">1:1 문의</a></li>
@@ -55,6 +54,7 @@
                             <tr>
                                 <th colspan="2">
                                     <input type="submit" value="작성하기">
+                                    <input type="button" value="취소하기" onclick="history.go(-1);"/>
                                 </th>
                             </tr>
                          </table>
