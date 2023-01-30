@@ -2,6 +2,7 @@ package com.sh.airbnb.room.model.service;
 
 import static com.sh.airbnb.common.JdbcTemplate.*;
 import java.sql.Connection;
+import java.sql.Date;
 import java.util.List;
 
 import com.sh.airbnb.room.model.dao.RoomDao;
@@ -24,6 +25,17 @@ public class RoomService {
 		RoomPrice roomPrice = roomDao.selectRoomPrice(conn);
 		close(conn);
 		return roomPrice;
+	}
+
+	public List<Room> selectRoomDateView(String hotelNo, Date sqlDate1, Date sqlDate2) {
+		Connection conn = getConnection();
+		
+		List<Room> roomDateList = roomDao.roomselectDate(conn,hotelNo,sqlDate1,sqlDate2);
+		System.out.println(roomDateList);
+		List<Room> roomList = roomDao.selectCheckRoom(conn,roomDateList);
+		close(conn);
+		
+		return roomList;
 	}
 
 
