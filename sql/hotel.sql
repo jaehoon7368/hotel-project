@@ -265,4 +265,12 @@ select hotel_no from tb_room r where r.room_price between 55000 and 650000 group
 
 select h.*,(select min(r.room_price) from tb_room r where r.hotel_no = h.hotel_no group by hotel_no) price,(select renamed_filename from tb_hotel_image i where i.hotel_no = h.hotel_no) renamed_filename from tb_hotel h where h.hotel_no >= any('H0002','Y0004','H0006','P0001','Y0007','P0005');
 
-update tb_user set user_role = 'A' where user_id = 'admin123'; 
+select h.*,(select min(r.room_price) from tb_room r where r.hotel_no = h.hotel_no group by hotel_no) price,(select renamed_filename from tb_hotel_image i where i.hotel_no = h.hotel_no) renamed_filename from tb_hotel h where h.hotel_address like '%제주%';
+
+select * from tb_reservation;
+select h.*,(select min(r.room_price) from tb_room r where r.hotel_no = h.hotel_no group by hotel_no) price,(select renamed_filename from tb_hotel_image i where i.hotel_no = h.hotel_no) renamed_filename from tb_hotel h join tb_reservation re on h.hotel_no = re.hotel_no where start_date = '23/01/27';
+ 
+
+update tb_user set user_role = 'A' where user_id = 'admin123';
+
+select hotel_no from tb_reservation  where (start_date  not between  '23/01/29' and to_date('23/01/30') - 1 )  and (end_date  not between to_date( '23/01/29') + 1  and '23/01/30')and not ( start_date < '23/01/29' and end_date > '23/01/30') and hotel_no in ('H0002', 'Y0043', 'Y0007', 'H0021', 'H0036', 'H0037', 'Y0004', 'H0038', 'Y0030', 'Y0041', 'Y0042') group by hotel_no; 

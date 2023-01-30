@@ -59,17 +59,25 @@
                     
                     <!--  버튼 클릭 후 modal -->
                     <div class="modal">
-                        <form action="">
+                        <form action="<%=request.getContextPath()%>/searchDateLocation">
                         <div id="search-detail">
                             <div id="search-location">
                                 <p>여행지</p>
                                 <input type="search" name="searchLocation" id="input2" list="" 
                                 autocomplete="off" role="combobox" placeholder="여행지검색"> 
                                 <datalist id="searchLocation" role="listbox">
-                    			<option value="서울"></option>
-                    			<option value="경기"></option>
-                    			<option value="부산"></option>
-                    			<option value="제주"></option>
+                    				<option value="서울">서울</option>
+                                	<option value="경기">경기</option>
+                                	<option value="인천">인천</option>
+                               		<option value="강원">강원</option>
+                                	<option value="광주">광주</option>
+                                	<option value="대전">대전</option>
+                                	<option value="경남">경남</option>
+                                	<option value="전남">전남</option>
+                                	<option value="충남">충남</option>
+                                	<option value="충북">충북</option>
+                                	<option value="부산">부산</option>
+                                 	<option value="제주">제주</option>
                					 </datalist>
                             </div>
                             <div class="checkInOut-box">
