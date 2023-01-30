@@ -63,8 +63,8 @@
 		        <div id="wrapper">
 		            <div id="sign">
 		                <ul>
-		                    <li><button id="signin" onclick="location.href = '<%= request.getContextPath() %>/user/userLogin';">로그인</button></li>
-		                    <li><button id="signup" onclick="location.href = '<%= request.getContextPath() %>/user/userEnroll';">회원가입</button></li>
+		                    <li><a href="<%= request.getContextPath() %>/user/userLogin">로그인</a></li>
+		                   	<li><a href="<%= request.getContextPath() %>/user/userEnroll">회원가입</a></li>
 		                </ul>
 		            </div>
 		            <hr id="rine">
@@ -81,17 +81,15 @@
 		        <div id="wrapper">
 		            <div id="sign">
 		                <ul>
-		                	
-		                   	<li><button id="btn1" onclick="location.href ='<%= request.getContextPath() %>/user/userLogout';">로그아웃</button></li>
-		                   	<li><button id="btn2" onclick="location.href ='<%=request.getContextPath()%>/user/userView';">마이페이지</button></li>
-		                   	<li><button id="btn4" onclick="location.href ='<%= request.getContextPath()%>/user/userList';">서버관리자로그인</button></li>
+		                   	<li><a href="<%= request.getContextPath() %>/user/userLogout">로그아웃</a></li>
+		                   	<li><a href="<%=request.getContextPath()%>/user/userView">마이페이지</a></li>
 		                </ul>
 		            </div>
 		            <hr id="rine">
 		            <div id="board">
 		                <ul>
 		                    <li><a href="<%= request.getContextPath() %>/board/noticeBoardList">공지사항</a></li>
-		                    <li><a href=""></a>자주 묻는 질문</li>
+		                    <li><a href="">자주 묻는 질문</a></li>
 		                    <li><a href="<%= request.getContextPath() %>/board/inquiyBoardList">1:1 문의</a></li>
 		                </ul>
 		        </div>

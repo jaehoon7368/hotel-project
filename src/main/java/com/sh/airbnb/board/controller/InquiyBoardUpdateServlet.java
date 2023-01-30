@@ -22,15 +22,15 @@ public class InquiyBoardUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int inquiyNo = Integer.parseInt(request.getParameter("inquiyNo"));
-		System.out.println("inquiyNo = " + inquiyNo);
 		
-		InquiyBoard inquiyBoard = boardService.selectOneInquiyBoard(inquiyNo);
-		System.out.println("inquiyBoard = " + inquiyBoard);
-		
-		request.setAttribute("inquiyBoard", inquiyBoard);
-		request.getRequestDispatcher("/WEB-INF/views/board/inquiyBoardUpdate.jsp").forward(request, response);
-		
+			int inquiyNo = Integer.parseInt(request.getParameter("inquiyNo"));
+			System.out.println("inquiyNo = " + inquiyNo);
+			
+			InquiyBoard inquiyBoard = boardService.selectOneInquiyBoard(inquiyNo);
+			System.out.println("inquiyBoard = " + inquiyBoard);
+			
+			request.setAttribute("inquiyBoard", inquiyBoard);
+			request.getRequestDispatcher("/WEB-INF/views/board/inquiyBoardUpdate.jsp").forward(request, response);
 		
 	}
 

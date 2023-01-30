@@ -27,8 +27,10 @@
             <hr>
             <li><a href="<%=request.getContextPath()%>/admin/adminenrolledhotelview?user_id=<%=loginUser.getUserId() %>">등록숙소확인</a></li>
             <hr>
+
             <li><a href="<%= request.getContextPath()%>/user/userList">회원관리</a></li>
             <hr>
+            
           </ul>
         </nav>
      </div>
@@ -51,7 +53,7 @@
                 <td class="name" colspan="2"><%=reservation.getHotelName() %></td>
             </tr> 
             <tr>
-                <td class="name"colspan="2">스파오션부 (룸타입) /1박</td>
+                <td class="name"colspan="2"><%= reservation.getRoomType() %> / <%= reservation.getReDay() %></td>
             </tr> 
             <tr>
                 <td class="td1">체크인</td>

@@ -9,7 +9,7 @@
  	<div class="sidebar">
         <nav class="userView-nav">
           <ul>
-            <li class="active"><a href="<%= request.getContextPath() %>/user/userView">개인정보수정</a></li>
+            <li><a href="<%= request.getContextPath() %>/user/userView">개인정보수정</a></li>
             <hr>
             <li><a href="<%= request.getContextPath()%>/user/userCheckRev?user_id=<%=loginUser.getUserId()%>">예약내역확인</a></li>
             <hr>
@@ -59,13 +59,13 @@
                     </td>
                 </tr>
             </table>
-        </form>
     </div>
     <div id="button">
     <input type="submit" class="button" value="정보수정"/>
     <input type="button" class="button" value="비밀번호변경" onclick="updatePassword();"/>
     <input type="button" class="button" onclick="deleteUser();" value="회원탈퇴"/>
     </div>
+        </form>
   </div>
  </body>
 
