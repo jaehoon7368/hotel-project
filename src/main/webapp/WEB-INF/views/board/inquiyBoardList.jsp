@@ -45,10 +45,9 @@
                 <div>
            
                     <ul class="notice-show">
-                    
                     <% if(!inquiyBoardList.isEmpty()){ %>
 	                <% for(InquiyBoard inquiyBoards : inquiyBoardList) { %>
-	                <% if(inquiyBoards.getWriter().equals(loginUser.getUserId()) || loginUser.getUserRole() == UserRole.A) %>
+	                <%-- <% if(inquiyBoards.getWriter().equals(loginUser.getUserId()) || loginUser.getUserRole() == UserRole.A) %> --%>
 	                 
                         <li class="notice-list" style="border-bottom: 1px solid rgba(0,0,0,0.4); list-style: none;">
                             <div style="padding: 35px 0 35px 0; display: block;" class="menu">
@@ -74,20 +73,19 @@
 	                            <div><%= inquiyBoards.getContent() %></div>
 	                            
 	                            <!-- 답변시작 -->
-	                            <%-- <% for(InquiyBoardComment inquiyBoardComments : inquiyBoardCommentList) { %> --%>
+	                            <% for(InquiyBoardComment inquiyBoardComments : inquiyBoardCommentList) { %>
 	                            <div>
                                     <div style="margin-top: 50px; padding-left: 25px; margin-bottom: 8px;">
                                         <svg xmlns="http://www.w3.org/2000/svg"width="20" height="20" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
                                             <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/>
                                         </svg>
-                                        <b>답변</b> 작성일 <%-- <%= inquiyBoardComments.getRegDate() %> --%> 지울날짜2023.01.25
+                                        <b>답변</b> 작성일 <%= inquiyBoardComments.getRegDate() %>
                                     </div>
                                     <div style="padding-left: 50px; margin-bottom: 30px;">
-                                        임시답변내용kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk <br>
-                                        <%-- <%= inquiyBoardComments.getContent() %> --%>
+                                        <%= inquiyBoardComments.getContent() %>
                                     </div>
                                 </div>
-                                <%-- <% } %> --%>
+                                <% } %>
                                 <div>
                                 	<!-- 답변등록폼 관리자만 보이게 -->
                                     <form action="<%= request.getContextPath() %>/board/inquiyBoardCommentEnroll" method="post" name="inquiyBoardCommentEnrollFrm" style="padding-left: 50px; margin: 30px 0 30px 0;">
