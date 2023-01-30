@@ -32,7 +32,6 @@ public class InquiyBoardListServlet extends HttpServlet {
 		System.out.println("inquiyBoardList = " + inquiyBoardList);
 		
 		// 3
-//		request.setAttribute("inquiyBoard", inquiyBoard);
 		request.setAttribute("inquiyBoardList", inquiyBoardList);
 		request.getRequestDispatcher("/WEB-INF/views/board/inquiyBoardList.jsp").
 			forward(request, response);

@@ -406,6 +406,23 @@ public class BoardDao {
 	}
 
 
+	public NoticeBoard selectNoticeBoard(Connection conn) {
+		String sql = prop.getProperty("selectNoticeBoard");
+		// select * from tb_notice_board order by notice_no desc
+		NoticeBoard noticeBoard = null;
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)){
+			try(ResultSet rs = pstmt.executeQuery()){
+				while(rs.next()) {
+					 noticeBoard = handNoticeBoardResultSet(rs);
+				}
+			}
+		} catch (Exception e) {
+			throw new BoardException("공지사항 목록 조회 오류", e); 
+		}
+		return noticeBoard;
+	}
+
+
 	
 
 
