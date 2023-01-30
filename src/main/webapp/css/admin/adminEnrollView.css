@@ -30,7 +30,7 @@ div.adminBox{
 	width:600px;
 	height :210px;
 	text-align: center;
-	font-family: 'Gowun Dodum' ;
+	font-family: "dohyun" ;
 }
 .entireBox {
 	border-radius: 5%;
@@ -59,7 +59,7 @@ div.adminBox{
 
 }
 #enrollTb {
-	font-family: 'Gowun Dodum' ;
+	font-family: "dohyun" ;
 	font-size :x-large;
 }
 .hotelbtn{

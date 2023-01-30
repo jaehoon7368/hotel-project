@@ -9,7 +9,7 @@
 }
 
 div.adminBox{
-	width: 500px;
+	width: 100%;
 	
 }
 #entireBox li{
@@ -37,7 +37,8 @@ div.adminBox{
 	border-radius: 5%;
 	width: 800px;
 	height:50%;
-	text-align: center
+	text-align: center;
+	margin: auto
 }
 			
 #enrollTb td{
