@@ -38,9 +38,9 @@ div>table>tr td {margin: 10px; padding: 10px;}
     cursor: pointer;
     width: 100px; height: 50px;
 }
-.category-select {width: 765px; height: 30px; font-size: 18px; color: rgba(0,0,0,0.50);}
+.category-select {width: 765px; height: 30px; font-size: 18px; color:rgba(0,0,0,0.50);}
 .faq-title {width: 760px; height: 30px; font-size: 18px;}
-.faq-content {resize: vertical; font-size: 18px;}
+.faq-content {resize: vertical; font-size: 18px; padding: 5px}
 </style>
 	<div id="FAQ-board" class="wrap">
         <nav class="board-menu">

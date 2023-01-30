@@ -15,6 +15,29 @@
 .notice-show {padding: 0 0 0 0;}
 .btn-tab {margin-right: 22px; color: rgba(0,0,0,0.6); height: 40px; line-height: normal;}
 .notice-enroll {border-bottom: #f7323f solid 2px; color: #f7323f; font-weight: bold; height: 40px; position: absolute; padding: 0;}
+.enroll-btn {
+	background-color: #ef303d;
+    text-align: center;
+    color: white;
+    border-radius: 15px;
+    font-size : 18px;
+    border-style: none;
+    cursor: pointer;
+    width: 100px; height: 50px;
+}
+.cancel-btn {
+	background-color: #ef303d;
+    text-align: center;
+    color: white;
+    border-radius: 15px;
+    font-size : 18px;
+    border-style: none;
+    cursor: pointer;
+    width: 100px; height: 50px;
+}
+.notice-form {margin-bottom: 20px; font-size: 18px;}
+.notice-title {width: 670px; height:30px; font-size: 18px;}
+.notice-content {resize: vertical; font-size: 18px; padding: 5px;}
 </style>
 	<div id="main-content" class="wrap">
         <nav class="board-menu">
@@ -38,35 +61,25 @@
                     	  action="<%= request.getContextPath() %>/board/noticeBoardEnroll">
                    	  <div>
                         <table id="tbl-board-view">
-                            <tr hidden>
-                            	<td>작성자</td>
-                            	<td><input type="text" name="writer" value="<%= loginUser.getUserId() %>" /></td>
-                            </tr>
-                            <tr>
-                                <th>제 목</th>
-                                <td><input type="text" name="title" required style="width: 99%;"></td>
-                            </tr>
-                            <tr>
-                                <th>내 용</th>
-                                <td><textarea rows="30" cols="100" name="content" style="resize: none;"></textarea></td>
-                            </tr>
-                            
-                            <tr>
-                                <th colspan="2">
-                                    <input type="submit" value="작성하기">
-                                    <input type="button" value="취소하기" onclick="history.go(-1);"/>
-                                </th>
-                            </tr>
+                            	<input type="hidden" name="writer" value="<%= loginUser.getUserId() %>" />
+                            	<div class="notice-form">제목</div>
+                                <div class="notice-form"><input type="text" name="title" class="notice-title" required placeholder="제목을 입력해주세요."></div>
+                                <div class="notice-form">내용</div>
+								<div class="notice-form"><textarea rows="20" cols="70" name="content" class="notice-content" placeholder="내용을 입력해주세요"></textarea></div>		                                
+                            	<div class="notice-form">
+                                    <input type="submit" value="작성하기" class="enroll-btn">
+                                    <input type="button" value="취소하기" class="cancel-btn" onclick="history.go(-1);"/>
+                            	</div>
                          </table>
-                         
                    	  </div>
                     </form>
-                    
                 </div>
             </div>
         </div>
     </div>
+<script>
 
+</script>
 
 
 
