@@ -11,28 +11,25 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/adminEnrolledHotelView.css" />
 
 <style>
+@font-face{
+	font-family: "dohyun";
+	src :url("<%=request.getContextPath()%>/css/font/BMDOHYEON_ttf.ttf");
+	
+}
 
+.nohotel{
+	height:500px;	
+    display: flex;
+   font-family: "dohyun";
+   font-size :25px;
+}
 
 </style>
 
 
 
-<div id="entireBox">
-	<div class="adminBox">
-		<ul>
-			<li><a href="">개인정보 수정</a></li>
-			<li><a href="">예약 내역 확인</a></li>
-			<li><a
-				href="<%=request.getContextPath()%>/admin/adminhotelenroll">호텔
-					등록</a></li>
-			<li><a
-				href="<%=request.getContextPath()%>/admin/adminenrolledhotelview?user_id=<%=loginUser.getUserId() %>">등록된
-					호텔 보기</a></li>
-		</ul>
-	</div>
 	
-	
-	<div  id="rightBox"class="adminBox">
+	<div  id="rightBox"class="adminBox" style="margin:auto">
 		<%
       if (!hotelList.isEmpty()) {
         for (Hotel hotel : hotelList) {
@@ -58,9 +55,9 @@
 				<img class="mainImage"
 					src="<%=request.getContextPath() %>/upload/hotel/<%=hotel.getRenamedFilename() %>"
 					alt="...">
-				<li style ="padding :0px;"><button type="submit" class="roombtn" > 호텔 정보 삭제</button></li>
+				<li style ="padding :0px; list-style: none;"><button type="submit" class="roombtn " > 호텔 정보 삭제</button></li>
 				<br /><hr /><br />
-				<li style ="padding :0px;"><button type="button" class="roombtn" onclick="roomEnroll('<%=hotel.getHotelNo()%>')">룸 등록하기</button></li>
+				<li style ="padding :0px;list-style: none;"><button type="button" class="roombtn enrollbtn" onclick="roomEnroll('<%=hotel.getHotelNo()%>')">룸 등록하기</button></li>
 				<br />
 				<div id="categoryBox" style="width:100%">
 				<div id="img-viewer-container">
@@ -86,13 +83,16 @@
 }
 } else {
 %>
-	<h3>등록된 호텔이 없습니다. 등록을 부탁드립니다</h3>
+	<div class="nohotel"><div style="margin:auto; font-family: "dohyun";">등록된 호텔이 없습니다. 등록을 부탁드립니다</div></div>
+	
 <%
  	}
  	%>
+	
 	</div>
-</div>
-<!-- entireBox end -->
+
+
+
 <script>
 	const roomEnroll = (hotelNo)=>{
   		const popup =  open ('<%=request.getContextPath()%>/admin/adminRoomEnroll?no=' + hotelNo,'myPopup','_blank','width=400px,height=200px,left=300px,top=300px')
@@ -101,3 +101,5 @@
 </script>
 
 
+
+<%@ include file="/WEB-INF/views/common/footer.jsp"%>

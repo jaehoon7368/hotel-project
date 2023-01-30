@@ -2,23 +2,17 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin/adminEnrollView.css" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 <style>
+div#center {
+	display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: center;
+}
 
 </style>
-		<div id = "entireBox"> 
-		<div class="adminBox">
-		       <ul>
-                <li><a href="<%= request.getContextPath() %>/user/userView">개인정보 수정</a></li>
-                <li><a href="">예약 내역 확인</a></li>
-                <li><a href="<%=request.getContextPath()%>/admin/adminhotelenroll">호텔 등록</a></li>
-                <li><a href="<%=request.getContextPath()%>/admin/adminenrolledhotelview?user_id=<%=loginUser.getUserId() %>">등록된 호텔 보기</a></li>
-            </ul>
-         </div>
-	<div id="content" class="adminBox">
 
+	<div id="center" >
 		<form action="<%=request.getContextPath()%>/admin/adminhotelenroll"
 			name="hotelEnrollFrm" method="POST" enctype="multipart/form-data" >
 			<br>
@@ -93,9 +87,7 @@
 				 <button type="submit" class= "hotelbtn" style="float: center" > 호텔 등록하기</button>
  		</form> 
 
-	</div> <!--  adminBox end -->
-        </div>  <!-- entireBox end -->
-
+	</div>
 
 
 <script>

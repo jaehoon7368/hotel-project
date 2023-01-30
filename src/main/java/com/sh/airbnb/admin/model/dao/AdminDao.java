@@ -249,8 +249,8 @@ public class AdminDao {
 	public int deleteHotel(Connection conn, String hotelNo) {
 		String sql = prop.getProperty("deleteHotel");
 		
+		System.out.println(sql);
 		int result = 0;
-		System.out.println(hotelNo);
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
 			pstmt.setString(1,hotelNo);
 			result = pstmt.executeUpdate();
@@ -258,7 +258,7 @@ public class AdminDao {
 			throw new AdminException("호텔삭제 오류 !",e);
 			
 		}
-		
+		System.out.println(result+"리절트");
 		
 		return result;
 	}

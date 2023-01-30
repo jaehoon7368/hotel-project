@@ -5,11 +5,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/user/userCheckRev.css" />
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <%
 
 	List<Reservation> reservations = (List<Reservation>) request.getAttribute("reservations");
-	Reservation rev = (Reservation) session.getAttribute("resevation");
-	System.out.println("reservations = " + reservations);
+
 %>    
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
@@ -81,7 +81,10 @@
         <h3>결제금액</h3>
         <h2 class="price"><%= reservation.getRePrice() %>원</h2>
         <% if("Y".equals(reservation.getReservationStatus())) { %>
-        <button class="paybtn" id="btn-kakao-pay">결제하기 </button>
+        <button class="paybtn" id= "btn-kakao-pay" onclick = "kakaopay('<%=reservation.getReNo()%>',
+        '<%=reservation.getHotelName() %>','<%=reservation.getStartDate() %>','<%=reservation.getEndDate()%>',
+        '<%=reservation.getRePrice() %>', '<%=reservation.getReName() %>')"> 결제하기 </button>
+        
         <button class="btn-cancel" value="<%= reservation.getReNo() %>">예약취소</button>
         <% } else { %>
         <button class="btn-canceled" value="<%= reservation.getReNo() %>">취소된 예약</button>
@@ -112,26 +115,50 @@ document.querySelectorAll(".btn-cancel").forEach((button) =>{
 });
 
 
+const kakaopay =(reNo,hotelName,startDate,endDate,price,reName) => {
+	var IMP = window.IMP; // 생략 가능
+    IMP.init("imp83164386"); 
+	IMP.request_pay({
+	   	pg : "kakaopay.TC0ONETIME", 
+        pay_method : 'card',
+        merchant_uid : 'alpha' + new Date().getTime(),
+        name : reNo + startDate +  endDate ,
+	    amount :  price,
+	    buyer_email : '',
+	    buyer_name : reName,
+	    buyer_tel : '010-1234-5678',
+	    buyer_addr : '서울특별시 강남구 역삼동',
+	    buyer_postcode : reNo
+	}, function(rsp) {
+		console.log(rsp)
+	    if ( rsp.success ) {
+	    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+	    	$.ajax({
+	    		url: "<%=request.getContextPath()%>/reservation/payComplete", //cross-domain error가 발생하지 않도록 주의해주세요//서블릿 url
+	    		type: 'POST',
+	    		dataType: 'json',
+	    		data: {
+		    		imp_uid : rsp.imp_uid,
+		    		revReNo : reNo,
+		    		price :  price,
+		    		userId : "<%=loginUser.getUserId()%>"
+		    		//기타 필요한 데이터가 있으면 추가 전달 전달해서 post로 저장
+	    		}
+	    	}).done(function(data) {
+	    		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+	    			
+	    			alert('결제가 완료 되었습니다. 메인으로 돌아갑니다.');
+	    			location.href='<%=request.getContextPath()%>/';
+	    	});
+	    } else {
+	        var msg = '결제에 실패하였습니다.';
+	        msg += '에러내용 : ' + rsp.error_msg;
+	        alert('결제에 실패하셨습니다. 메인으로 돌아갑니다. 다시 결제 부탁드립니다.');
+	        location.href='<%=request.getContextPath()%>/';
+	    }
+	});
+  };
 
-
-
-
-
-
-
-
-
-// const revCancel = () => {
-	
-//    if (confirm('예약을 취소하시겠습니까?')){
-//    	document.userRevCancelFrm.submit();
-        
-        
-//    }else{
-//        location.href='<%=request.getContextPath()%>/user/userCheckRev?user_id= <%=loginUser.getUserId()%>';
-//    }
-// };
-    
 
 </script>
     <%@ include file="/WEB-INF/views/common/footer.jsp" %>

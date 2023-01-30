@@ -40,7 +40,12 @@
  <link rel="stylesheet" href="<%=request.getContextPath() %>/css/checkInOut/jquery-ui.css">
 <script src="<%= request.getContextPath()%>/js/jquery-ui.min.js"></script>
 <!-- 캘린더 jquery end -->
-
+<style>
+@font-face{
+	font-family: "dohyun";
+	src :url("<%=request.getContextPath()%>/css/font/BMDOHYEON_ttf.ttf");
+}
+</style>
 
 </head>
 
