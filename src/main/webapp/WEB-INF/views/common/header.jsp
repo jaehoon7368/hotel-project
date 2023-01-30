@@ -41,7 +41,6 @@
 <script src="<%= request.getContextPath()%>/js/jquery-ui.min.js"></script>
 <!-- 캘린더 jquery end -->
 
-
 </head>
 
 <body>
