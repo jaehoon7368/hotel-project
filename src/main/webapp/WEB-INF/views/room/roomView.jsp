@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="com.sh.airbnb.review.model.dto.Review"%>
 <%@page import="com.sh.airbnb.hotel.model.dto.Hotel"%>
 <%@page import="com.sh.airbnb.room.model.dto.Room"%>
@@ -12,6 +13,8 @@
 	List<Review> reviewList = (List<Review>) request.getAttribute("reviewList");
 	String checkIn = (String) request.getAttribute("checkIn");
 	String checkOut = (String) request.getAttribute("checkOut");
+	
+	DecimalFormat decFormat = new DecimalFormat("###,###");
 %>
 
 <div id="hotel-info">
@@ -60,7 +63,7 @@
                 <div id="main-room-info">
                     <h2><%=room.getRoomType()%></h2>
                     <div id="price-box2">
-                        <p id="price-name"><span><%=room.getRoomPrice()%>원</span>가격</p>
+                        <p id="price-name"><span><%=decFormat.format(room.getRoomPrice())%>원</span>가격</p>
                         <br />
                         <hr class="color-gray">
               			<br />
