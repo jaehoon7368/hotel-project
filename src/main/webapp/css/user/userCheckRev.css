@@ -131,4 +131,8 @@ div#content {
 	height:200px;
 }
 
+.sidebar li:hover {
+	background-color: rgb(233, 227, 227);
+    border-radius: 10px;
+}
 

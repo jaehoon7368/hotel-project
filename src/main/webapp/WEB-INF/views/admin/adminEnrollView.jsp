@@ -8,15 +8,27 @@
 <style>
 
 </style>
-		<div id = "entireBox"> 
-		<div class="adminBox">
-		       <ul>
-                <li><a href="<%= request.getContextPath() %>/user/userView">개인정보 수정</a></li>
-                <li><a href="">예약 내역 확인</a></li>
-                <li><a href="<%=request.getContextPath()%>/admin/adminhotelenroll">호텔 등록</a></li>
-                <li><a href="<%=request.getContextPath()%>/admin/adminenrolledhotelview?user_id=<%=loginUser.getUserId() %>">등록된 호텔 보기</a></li>
-            </ul>
-         </div>
+
+	<aside>
+    <div class="sidebar">
+        <nav class="userView-nav">
+          <ul>
+            <li class="active"><a href="<%= request.getContextPath() %>/user/userView">개인정보수정</a></li>
+            <hr>
+            <li><a href="<%= request.getContextPath()%>/user/userCheckRev?user_id=<%=loginUser.getUserId()%>">예약내역확인</a></li>
+            <hr>
+            <li><a href="<%=request.getContextPath()%>/admin/adminhotelenroll">숙소등록하기</a></li>
+            <hr>
+            <li><a href="<%=request.getContextPath()%>/admin/adminenrolledhotelview?user_id=<%=loginUser.getUserId() %>">등록숙소확인</a></li>
+            <hr>
+            <li><a href="<%= request.getContextPath()%>/user/userList">회원관리</a></li>
+            <hr>
+          </ul>
+        </nav>
+     </div>
+	</aside> 
+	
+  <div id="wrapper">
 	<div id="content" class="adminBox">
 
 		<form action="<%=request.getContextPath()%>/admin/adminhotelenroll"
@@ -94,7 +106,8 @@
  		</form> 
 
 	</div> <!--  adminBox end -->
-        </div>  <!-- entireBox end -->
+</div> <!--  wrapper -->
+ 
 
 
 

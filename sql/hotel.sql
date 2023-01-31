@@ -247,6 +247,7 @@ select * from tb_hotel_category;
 select * from tb_hotel_comment;
 select * from tb_reservation;
 select * from tb_category;
+select * from tb_sales_data;
 
 ALTER TABLE tb_user ADD enroll_date date default sysdate;
 
