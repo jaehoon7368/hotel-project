@@ -558,7 +558,7 @@ footer {
 }
 
  #profile-img {
-        border-radius:45%;
+        border-radius:50px;
         border: solid 0.5px gray;
         width: 52px;
         padding: 9px;
@@ -622,6 +622,7 @@ footer {
    #board, #sign {
    		padding:10px;
    		margin-left:10px;
+   		cursor:pointer;
    }
    
    #line {
