@@ -208,6 +208,21 @@ public class ReservationDao {
 		return reservationList;
 	}
 
+	public int updateReservationStatusY(Connection conn, String reNo) {
+		String sql = prop.getProperty("updateReservationStatusY");
+		int result = 0;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1,  reNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new ReservationException("결제시 예약 상황 Y 로 변경 오류", e);
+		}
+		return result;
+		
+	}
+
 
 
 }

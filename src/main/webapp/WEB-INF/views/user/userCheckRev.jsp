@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="com.sh.airbnb.reservation.model.dto.Reservation"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Date"%>
@@ -9,6 +10,7 @@
 <%
 
 	List<Reservation> reservations = (List<Reservation>) request.getAttribute("reservations");
+	DecimalFormat decFormat = new DecimalFormat("###,###");
 
 %>    
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -80,15 +82,16 @@
             </tr>
         </table>
         <h3>결제금액</h3>
-        <h2 class="price"><%= reservation.getRePrice() %>원</h2>
-        <% if("Y".equals(reservation.getReservationStatus())) { %>
+
+        <h2 class="price"><%= decFormat.format(reservation.getRePrice()) %>원</h2>
+        <% if("N".equals(reservation.getReservationStatus())) { %>
+
         <button class="paybtn" id= "btn-kakao-pay" onclick = "kakaopay('<%=reservation.getReNo()%>',
         '<%=reservation.getHotelName() %>','<%=reservation.getStartDate() %>','<%=reservation.getEndDate()%>',
         '<%=reservation.getRePrice() %>', '<%=reservation.getReName() %>')"> 결제하기 </button>
         
-        <button class="btn-cancel" value="<%= reservation.getReNo() %>">예약취소</button>
         <% } else { %>
-        <button class="btn-canceled" value="<%= reservation.getReNo() %>">취소된 예약</button>
+        <button class="btn-cancel" value="<%= reservation.getReNo() %>">예약취소</button>
         <% } %>
         
 		

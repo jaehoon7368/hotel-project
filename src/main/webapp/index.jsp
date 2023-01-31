@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="com.sh.airbnb.room.model.dto.RoomPrice"%>
 <%@page import="com.sh.airbnb.hotel.model.dto.Hotel"%>
 <%@page import="java.util.List"%>
@@ -9,6 +10,8 @@
  	String searchLocation = (String) request.getAttribute("searchLocation");
 	String checkIn = (String) request.getAttribute("checkIn");
 	String checkOut = (String) request.getAttribute("checkOut");
+	
+	DecimalFormat decFormat = new DecimalFormat("###,###");
 %>
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -108,7 +111,7 @@
                                 <div id="price-box">
                                     <h3>가격범위</h3>
                                     <div id="price-text">
-                                        <p>평균 1박 요금은 ₩<%=roomPrice.getAvgPrice()%>입니다.</p>
+                                        <p>평균 1박 요금은 ₩<%=decFormat.format(roomPrice.getAvgPrice())%>원 입니다.</p>
                                     </div>
                                     <div id="range-box">
                                     <div class="middle">
@@ -221,7 +224,7 @@
                     	<img src="<%=request.getContextPath()%>/upload/hotel/<%=hotel.getRenamedFilename() %>" alt="">
                     	<h3 name="hotelName"><%=hotel.getHotelName()%></h3>
                     	<p class="color-gray" name="hotelAddress"><%=hotel.getHotelAddress() %></p>
-                    	<p class="color-gray" name="hotelPrice">₩<%=hotel.getPrice() %> ~ / 박</p>
+                    	<p class="color-gray" name="hotelPrice">₩<%=decFormat.format(hotel.getPrice()) %> ~ / 박</p>
                     <a>
                 </div>
             <%} %>
@@ -330,6 +333,28 @@ document.filterSearchFrm.onsubmit = (e) => {
             $('.datepicker').datepicker();
         });
       /* ckeckInOut 캘린더 한글 end */
+
+      /* 현재 날짜부터 선택 가능 */
+        $('.datepicker').datepicker({
+        	  dateFormat: 'yy-mm-dd',
+        	  minDate: 0
+        	});
+      /* 현재 날짜부터 선택 가능  end */
+      
+      /* 체크아웃 날짜가 체크인 날짜 이전 선택 불가 */
+      $('#checkIn').datepicker();
+    $('#checkIn').datepicker("option", "maxDate", $("#checkOut").val());
+    $('#checkIn').datepicker("option", "onClose", function ( selectedDate ) {
+        $("#checkOut").datepicker( "option", "minDate", selectedDate );
+    });
+
+    $("#checkOut").datepicker();
+    $("#checkOut").datepicker("option", "minDate", $('#checkIn').val());
+    $("#checkOut").datepicker("option", "onClose", function ( selectedDate ) {
+        $('#checkIn').datepicker( "option", "maxDate", selectedDate );
+    });
+      /* 체크아웃 날짜가 체크인 날짜 이전 선택 불가 end */
+        
 </script>   
 
 <script>
