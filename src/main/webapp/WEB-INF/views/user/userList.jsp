@@ -11,7 +11,7 @@
 <!-- 관리자용 admin.css link -->
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin/admin.css" />
 <style>
-div#search-container {width: 100%; margin:0 0 10px 0; padding:3px; ;}
+div#search-container {width: 420px; margin:20px 0 5px 20px; padding:3px;}
 div#search-userId	 {display: <%= searchType == null || "user_id".equals(searchType) ? "inline-block" : "none" %>;}
 div#search-userName{display: <%= "user_name".equals(searchType) ? "inline-block" : "none" %>;}
 </style>
@@ -61,7 +61,7 @@ window.addEventListener('load', () => {
 	</aside>
 
 
-<section id="userList-container">
+<div class="userList-container">
 	<h2>회원관리</h2>
 	
 	<div id="search-container">
@@ -74,6 +74,9 @@ window.addEventListener('load', () => {
 	        <form action="<%=request.getContextPath()%>/user/userFinder">
 	            <input type="hidden" name="searchType" value="user_id" required/>
 	            <input type="text" name="searchKeyword"  size="25" placeholder="검색할 아이디를 입력하세요." 
+	            	value="<%= "user_id".equals(searchType) ? searchKeyword : "" %>"/>
+	            <input type="submit" class="button" value="검색"/>
+	            		
 	            	value="<%= "user_id".equals(searchType) ? searchKeyword : "" %>" required/>
 	            <button type="submit">검색</button>			
 	        </form>	
@@ -131,7 +134,7 @@ window.addEventListener('load', () => {
 		<%= request.getAttribute("pagebar") %>
 	</div>
 	
-</section>
+</div>
 <form action="<%= request.getContextPath() %>/user/updateUserRole" name="userRoleUpdateFrm" method="POST">
 	<input type="hidden" name="userId" />
 	<input type="hidden" name="userRole" />

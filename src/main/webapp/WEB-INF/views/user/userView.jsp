@@ -31,39 +31,30 @@
         <h2>개인 정보</h2>
         
         <form name="userUpdateFrm" method="post" action="<%= request.getContextPath() %>/user/userUpdate">
-            <table>
-                <tr>
-                    <th>아이디 :</th>
-                    <td>
-                        <input  type="text" class="input" name="userId" id="userId" value="<%= loginUser.getUserId() %>" readonly>
-                    </td>
-                </tr>
-                <tr>
-                    <th>이름 :</th>
-                    <td>	
-                    <input type="text" class="input"  name="userName" id="userName" value="<%= loginUser.getUserName() %>"  required><br>
-                    </td>
-                </tr>
-                <tr>
-                    <th>닉네임 :</th>
-                    <td>	
-                    <input type="text" class="input"  name="nickName" id="nickName" value="<%= loginUser.getNickName() %>"  required><br>
-                    </td>
-                </tr>
-                <tr>
-                    <th>이메일 :</th>
-                    <td>	
-                        <input type="email" class="input" placeholder="abc@xyz.com" name="email" id="email" value="<%= loginUser.getEmail() != null ? loginUser.getEmail() : "" %>"><br>
-                    </td>
-                </tr>
-                <tr>
-                    <th>휴대폰 :</th>
-                    <td>	
-                        <input type="tel" class="input" placeholder="(-없이)01012345678" name="phone" id="phone" maxlength="11" value="<%= loginUser.getPhone() %>" required><br>
-                    </td>
-                </tr>
-            </table>
-    </div>
+        <div class=userinfo>
+        	<div>
+        		<h4>실명</h4>
+        		 <input type="text" class="input"  name="userName" id="userName" value="<%= loginUser.getUserName() %>">
+        	</div>
+            <div>
+            	<h4>아이디</h4>
+            	<input  type="text" class="input" name="userId" id="userId" value="<%= loginUser.getUserId() %>" readonly>
+            </div>
+            <div>
+            	<h4>닉네임</h4>
+            	 <input type="text" class="input"  name="nickName" id="nickName" value="<%= loginUser.getNickName() %>"  required>
+            </div>
+            <div>
+            	<h4>이메일</h4>
+            	<input type="email" class="input" placeholder="abc@xyz.com" name="email" id="email" value="<%= loginUser.getEmail() != null ? loginUser.getEmail() : "" %>">
+            </div>
+            <div>
+            	<h4>휴대폰</h4>
+            	<input type="tel" class="input" placeholder="(-없이)01012345678" name="phone" id="phone" maxlength="11" value="<%= loginUser.getPhone() %>" required>
+            </div>
+         </div> <!-- userinfo end -->
+    </div> <!-- enrollcontainer end -->
+    
     <div id="button">
     <input type="submit" class="button" value="정보수정"/>
     <input type="button" class="button" value="비밀번호변경" onclick="updatePassword();"/>

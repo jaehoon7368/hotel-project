@@ -438,7 +438,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 .val-box p{
     margin-top: 5px;
-    font-size: 14px;
+    font-size: 13px;
 }
 .val-box input{
     width: 170px;
