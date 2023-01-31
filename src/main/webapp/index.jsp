@@ -82,11 +82,11 @@
                             </div>
                             <div class="checkInOut-box">
                                 <p>체크인</p>
-                                <input type="search" class="datepicker"  id="checkIn" name="checkIn" value="<%=checkIn != null ? checkIn : "" %>" placeholder="날짜추가">
+                                <input type="search" class="datepicker"  id="checkIn" name="checkIn" placeholder="날짜추가">
                             </div>
                             <div class="checkInOut-box">
                                 <p>체크아웃</p>
-                                <input type="search" class="datepicker" id="checkOut" name="checkOut" value="<%=checkOut != null ? checkOut : "" %>" placeholder="날짜추가">
+                                <input type="search" class="datepicker" id="checkOut" name="checkOut" placeholder="날짜추가">
                             </div>
                             <div id="search-detail-btn">
                                 <button type="submit"><i class="fa-solid fa-magnifying-glass"></i><span> 검색</span></button>
@@ -100,7 +100,7 @@
                     </div>
                     
                     <div class="modal2">
-                        <form action="<%=request.getContextPath()%>/filterSearch">
+                        <form action="<%=request.getContextPath()%>/filterSearch" name="filterSearchFrm">
                             <div id="filter-main">
                                 <div id="filter-header">
                                     <p class="font-bold">필터</p>
@@ -227,6 +227,28 @@
             <%} %>
             </div>
 <script>
+
+document.searchDateLocationFrm.onsubmit = (e) =>{
+	const checkIn = e.target.checkIn.value;
+	const checkOut = e.target.checkOut.value;
+	console.log(e.target.checkIn.value);
+	
+	if(checkIn === "" || checkOut === ""){
+		alert("체크인아웃 날짜를 선택해주세요.");
+		return false;
+	}
+};
+
+document.filterSearchFrm.onsubmit = (e) => {
+	const checked = document.querySelectorAll("[name=checkbox]:checked");
+	console.log(checked.length);
+	
+	if(!checked.length){		
+		alert("편의시설을 선택해주세요.");
+		return false;
+	}
+	
+};    
   
   /* filter input값 실시간 range 변경 */
   const minPrice = (e) =>{
