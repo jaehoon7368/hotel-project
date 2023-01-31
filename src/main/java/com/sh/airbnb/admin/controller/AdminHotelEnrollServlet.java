@@ -49,7 +49,9 @@ public class AdminHotelEnrollServlet extends HttpServlet {
 			String hotelInfo = multiReq.getParameter("hotelInfo");
 			HotelType hotelType = HotelType.valueOf(multiReq.getParameter("hotelType"));
 			String[] category = multiReq.getParameterValues("checkbox");
-			
+			if (category== null) {
+				category[0] ="편의시설 지정이 안되었습니다."; 
+			}
 			
 			Hotel hotel = new Hotel();
 			hotel.setUserId(userId);
@@ -82,7 +84,6 @@ public class AdminHotelEnrollServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/admin/adminhotelenroll");
 			throw e;  //톰캣에 오류 전송
 		}
-		
 	}
 
 }
