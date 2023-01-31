@@ -1,9 +1,12 @@
 package com.sh.airbnb.board.model.service;
 
-import static com.sh.airbnb.common.JdbcTemplate.*;
-
+import static com.sh.airbnb.common.JdbcTemplate.close;
+import static com.sh.airbnb.common.JdbcTemplate.commit;
+import static com.sh.airbnb.common.JdbcTemplate.getConnection;
+import static com.sh.airbnb.common.JdbcTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -56,16 +59,27 @@ public class BoardService {
 		return result;
 	}
 
-//	public List<InquiyBoard> selectInquiyBoardList() {
-//		Connection conn = getConnection();
-//		List<InquiyBoard> inquiyBoardList = boardDao.selectInquiyBoardList(conn);
-//		close(conn);
-//		return inquiyBoardList;
-//	}
+
 	public List<InquiyBoard> selectInquiyBoardList(String userId) {
 		Connection conn = getConnection();
-		List<InquiyBoard> inquiyBoardList = boardDao.selectInquiyBoardList(conn, userId);
+		List<InquiyBoard> inquiyBoardList = new ArrayList<>();
+		try {
+			inquiyBoardList = boardDao.selectInquiyBoardList(conn, userId);
+
+		if(!inquiyBoardList.isEmpty()) {
+			
+			for(InquiyBoard board : inquiyBoardList) {
+				board.setListComment(boardDao.selectComment(board.getInquiyNo(),conn));
+			}
+			
+		}
 		close(conn);
+		}catch(Exception e) {
+			throw e;
+		}
+		
+		
+		
 		return inquiyBoardList;
 	}
 
