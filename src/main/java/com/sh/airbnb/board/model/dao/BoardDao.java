@@ -129,29 +129,14 @@ public class BoardDao {
 		return result;
 	}
 
-//	public List<InquiyBoard> selectInquiyBoardList(Connection conn) {
-//		String sql = prop.getProperty("selectInquiyBoardList");
-//		List<InquiyBoard> inquiyBoardList = new ArrayList<>();
-//		
-//		try (PreparedStatement pstmt = conn.prepareStatement(sql)){
-//			try (ResultSet rs = pstmt.executeQuery()){
-//				while(rs.next()) {
-//					InquiyBoard inquiyBoard = handInquiyBoardResultSet(rs);
-//					inquiyBoardList.add(inquiyBoard);
-//				}
-//			}
-//		} catch (Exception e) {
-//			throw new BoardException("문의글 목록 조회 오류", e);
-//		}
-//		return inquiyBoardList;
-//	}
+
 	
 	public List<InquiyBoard> selectInquiyBoardList(Connection conn, String userId) {
 		String sql = prop.getProperty("selectInquiyBoardList");
 		List<InquiyBoard> inquiyBoardList = new ArrayList<>();
 		
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)){
-			pstmt.setString(1, userId);
+			pstmt.setString(1, userId); 
 			try (ResultSet rs = pstmt.executeQuery()){
 				while(rs.next()) {
 					InquiyBoard inquiyBoard = handInquiyBoardResultSet(rs);
@@ -455,6 +440,31 @@ public class BoardDao {
 					inquiyBoardComment.setRegDate(rs.getDate("reg_date"));
 					inquiyBoardComment.setInquiyCommentLevel(rs.getInt("inquiy_comment_level"));
 					inquiyBoardComment.setInquiyNo(rs.getInt("inquiy_no"));
+					inquiyBoardComment.setWriter(rs.getString("writer"));
+					inquiyBoardCommentList.add(inquiyBoardComment);
+				}
+			}
+		} catch (Exception e) {
+			throw new BoardException("문의답변 조회 오류", e);
+		}
+		return inquiyBoardCommentList;
+	}
+
+
+	public List<InquiyBoardComment> selectComment(int inquiyNo, Connection conn) {
+		String sql = prop.getProperty("selectComment");
+		// select * from tb_inquiy_board_comment where inquiy_no = ? 
+		System.out.println("sql문확인 "+sql);
+		List<InquiyBoardComment> inquiyBoardCommentList = new ArrayList<>();
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, inquiyNo);
+			try(ResultSet rs = pstmt.executeQuery()){
+				while(rs.next()) {
+					InquiyBoardComment inquiyBoardComment = new InquiyBoardComment();
+					inquiyBoardComment.setInquiyCommentNo(rs.getInt("inquiy_comment_no"));
+					inquiyBoardComment.setContent(rs.getString("content"));
+					inquiyBoardComment.setRegDate(rs.getDate("reg_date"));
+					inquiyBoardComment.setInquiyCommentLevel(rs.getInt("inquiy_comment_level"));
 					inquiyBoardComment.setWriter(rs.getString("writer"));
 					inquiyBoardCommentList.add(inquiyBoardComment);
 				}

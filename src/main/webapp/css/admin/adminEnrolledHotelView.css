@@ -135,3 +135,7 @@ font-size: medium;
       transition: all ease-out 300ms;
       color: black;
     }
+    
+ .wrapper {
+ margin-bottom: 15%;
+ }
