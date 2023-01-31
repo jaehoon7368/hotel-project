@@ -76,9 +76,7 @@ window.addEventListener('load', () => {
 	            <input type="text" name="searchKeyword"  size="25" placeholder="검색할 아이디를 입력하세요." 
 	            	value="<%= "user_id".equals(searchType) ? searchKeyword : "" %>"/>
 	            <input type="submit" class="button" value="검색"/>
-	            		
-	            	value="<%= "user_id".equals(searchType) ? searchKeyword : "" %>" required/>
-	            <button type="submit">검색</button>			
+		
 	        </form>	
 	    </div>
 	    <div id="search-userName" class="search-type">

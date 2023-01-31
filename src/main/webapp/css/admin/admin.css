@@ -80,6 +80,7 @@ section#userList-container div#pagebar a:hover {text-decoration: underline;}
     width: 400px;
     font-size:17px;
     border-radius:10px;
+    color : gray;
   }
   #button{
     margin-left: 35%;
@@ -88,7 +89,7 @@ section#userList-container div#pagebar a:hover {text-decoration: underline;}
   .userList-container{
   	margin-left:23%;
   	padding:15px;
-  	margin-bottom:5%;
+  	margin-bottom:30%;
   }
   body {
   display:contents;
