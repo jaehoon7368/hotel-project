@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/user/updatePassword.css" />
 
 <body>
 	<aside>
@@ -28,36 +29,31 @@
 	
 	
 
-<section id=enroll-container>
+  <div class="enroll-container">
 	<h2>비밀번호 변경</h2>
 	<form 
 		name="passwordUpdateFrm" 
 		method="post" >
-		<table>
-			<tr>
-				<th>현재 비밀번호</th>
-				<td><input type="password" name="oldPassword" id="oldPassword" required></td>
-			</tr>
-			<tr>
-				<th>새 비밀번호</th>
-				<td>
-					<input type="password" name="newPassword" id="newPassword" required>
-				</td>
-			</tr>
-			<tr>
-				<th>비밀번호 확인</th>
-				<td>	
-					<input type="password" id="newPasswordCheck" required><br>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2" style="text-align: center;">
-					<input type="submit"  value="변경" />
-				</td>
-			</tr>
-		</table>
+		<div class=userinfo>
+        	<div>
+        		<h4>현재 비밀번호</h4>
+        		 <td><input type="password" class="input" name="oldPassword" id="oldPassword" required>
+        	</div>
+        	<div>
+        		<h4>새 비밀번호</h4>
+        		<input type="password" class="input"  name="newPassword" id="newPassword" required>
+        	</div>
+			<div>
+				<h4>비밀번호 확인</h4>
+				<input type="password" class="input"  id="newPasswordCheck" required>
+			</div>
+		</div>
+		<div id="button">
+		    <input type="submit" class="button" value="변경하기"/>
+		</div>
 	</form>
-</section>
+</div> <!-- enroll-container end -->
+		
 </body>
 <script>
 const oldPassword = document.querySelector("#oldPassword");

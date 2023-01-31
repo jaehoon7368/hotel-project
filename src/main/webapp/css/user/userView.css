@@ -55,6 +55,8 @@
     border:none;
     height: 40px;
     width: 400px;
+    font-size:17px;
+    border-radius:10px;
   }
   .button{
     border-radius: 10px;
@@ -65,7 +67,7 @@
   }
   #button{
     margin-left: 35%;
-    padding-top:15%;
+    padding-top:13%;
   }
   .userView-container{
   	padding-bottom:9%;
@@ -78,5 +80,31 @@
 	background-color: rgb(233, 227, 227);
     border-radius: 10px;
 }
-  
+
+.userinfo div{
+	border-bottom: solid 1px gray;
+	padding:13px;
+}
+
+.userinfo {
+	margin: 15px;
+	padding:10px;
+	width:500px;
+}
+
+.button {
+	width: 100px;
+	height: 40px;
+	background-color: #917e7e;
+	padding: 5px 0;
+	border-radius: 15px;
+	outline: none;
+	font-size: 15px;
+	text-align: center;
+	color: white;
+	border: none;
+	cursor:pointer;
+	margin-top: 17px;
+}
+ 
   
