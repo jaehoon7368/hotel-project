@@ -135,11 +135,8 @@ public class AdminService {
 
 	public int deleteHotel(String hotelNo) {
 		int result = 0;
-		
 		Connection conn = getConnection();
-		
 		try {
-
 			result = adminDao.deleteHotel(conn,hotelNo);			
 			commit(conn);
 		} catch (Exception e) {

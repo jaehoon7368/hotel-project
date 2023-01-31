@@ -30,9 +30,9 @@ public class SearchDateLocationServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-		String location = request.getParameter("searchLocation");
-		String checkIn = request.getParameter("checkIn");
-		String checkOut = request.getParameter("checkOut");
+		String location = request.getParameter("searchLocation")==null?"":request.getParameter("searchLocation");
+		String checkIn = request.getParameter("checkIn").equals("null")?"":request.getParameter("checkIn");
+		String checkOut = request.getParameter("checkOut").equals("null")?"":request.getParameter("checkOut");;
 		System.out.println("location = " + location);
 		System.out.println("checkIn = " + checkIn);
 		System.out.println("checkOut = " + checkOut);

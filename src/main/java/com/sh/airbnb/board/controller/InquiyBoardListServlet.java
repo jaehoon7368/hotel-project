@@ -1,6 +1,7 @@
 package com.sh.airbnb.board.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -28,7 +29,7 @@ public class InquiyBoardListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 1 inquiyNo = null jsp에서 못가져옴 ㅇㅇ.
+		// 세션으로 입력값
 		HttpSession session = request.getSession();
 		System.out.println("session = " + session);
 		
@@ -37,17 +38,13 @@ public class InquiyBoardListServlet extends HttpServlet {
 		String userId = loginUser.getUserId();
 		System.out.println("userId = " + userId);
 		
-		// 세션으로 처리가능.
-		// 2
+		// 업무 로직
 		List<InquiyBoard> inquiyBoardList = boardService.selectInquiyBoardList(userId);
-//		List<InquiyBoard> inquiyBoardList = boardService.selectInquiyBoardList();
 		System.out.println("inquiyBoardList = " + inquiyBoardList);
 		
-		List<InquiyBoardComment> inquiyBoardCommentList = boardService.selectInquiyBoardCommentList();
-		System.out.println("inquiyBoardCommentList = " + inquiyBoardCommentList);
 		
-		// 3
-		request.setAttribute("inquiyBoardCommentList", inquiyBoardCommentList);
+		
+		// 뷰단처리
 		request.setAttribute("inquiyBoardList", inquiyBoardList);
 		request.getRequestDispatcher("/WEB-INF/views/board/inquiyBoardList.jsp").
 			forward(request, response);

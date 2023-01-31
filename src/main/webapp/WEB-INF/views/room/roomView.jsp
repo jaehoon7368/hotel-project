@@ -32,15 +32,15 @@
             </div> <!-- 호텔 이미지 end -->
             
            <hr>
-          <form action="<%=request.getContextPath()%>/room/searchRoom">
+          <form action="<%=request.getContextPath()%>/room/searchRoom" name="dateSearchFrm">
             <div id="check-box">
                 <div class="checkMain-box">
                     <h3>체크인</h3>
-                    <input type="search" class="datepicker" id="checkIn" name="checkIn" placeholder="   날짜 추가">
+                    <input type="search" class="datepicker" id="checkIn" name="checkIn" value="<%=checkIn.equals("null") ?"" : checkIn %>" placeholder="   날짜 추가">
                 </div>
                 <div class="checkMain-box">
                     <h3>체크아웃</h3>
-                    <input type="search" class="datepicker" id="checkOut" name="checkOut" placeholder="   날짜 추가">
+                    <input type="search" class="datepicker" id="checkOut" name="checkOut" value="<%=checkOut.equals("null") ?"" : checkOut %>" placeholder="   날짜 추가">
                 </div>
                 <div id="search-detail-btn">
                     <button type="submit"><i class="fa-solid fa-magnifying-glass"></i><span> 검색</span></button>
@@ -65,9 +65,9 @@
                         <div id="info">
                             <p>객실이용안내</p>
                         </div>
-                                <div id="reservation-btn">
-                                	<button onclick="reservationBtn('<%=hotel.getHotelName() %>','<%=room.getRoomType() %>','<%=checkIn%>','<%=checkOut%>','<%=room.getRoomPrice()%>','<%=hotel.getHotelNo()%>','<%=room.getRoomNo()%>');">예약</button>
-                                </div>
+                        <div id="reservation-btn">
+                            <button type="submit" onclick="reservationBtn('<%=hotel.getHotelName() %>','<%=room.getRoomType() %>','<%=checkIn%>','<%=checkOut%>','<%=room.getRoomPrice()%>','<%=hotel.getHotelNo()%>','<%=room.getRoomNo()%>');">예약</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -174,7 +174,12 @@ $(function () {
 </script>
   <script>
   
-  const reservationBtn = (hotelName,roomType,checkIn,checkOut,price,hotelNo,roomNo) =>{
+  const reservationBtn = (hotelName,roomType,checkIn,checkOut,price,hotelNo,roomNo) =>{ 
+	  
+	if(checkIn === 'null' || checkOut==='null'){
+		alert("체크인아웃 날짜를 선택 후 검색해주세요.");
+		 return false;
+	}
 	  <% if(loginUser == null){ %>
 		loginAlert();
 	<% } else {%>
@@ -187,6 +192,10 @@ $(function () {
 const loginAlert = () => {
 		alert("로그인 후 이용할 수 있습니다.");
 		location.href = "<%=request.getContextPath()%>/user/userLogin";
+};
+const check = () =>{
+	alert("체크인아웃 날짜를 선택해주세요.");
+	return false;
 };
 
 
@@ -265,8 +274,9 @@ document.body.addEventListener('submit', (e) => {
 		}
 	}
 	
-	
 });
+
+
 </script>
 
 
