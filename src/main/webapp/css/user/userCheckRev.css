@@ -137,3 +137,8 @@ div#content {
     border-radius: 10px;
 }
 
+.aside {
+	width:15%;
+	border-right: solid rgb(236, 231, 231) 1px;
+}
+
