@@ -59,7 +59,7 @@
                     
                     <!--  버튼 클릭 후 modal -->
                     <div class="modal">
-                        <form action="<%=request.getContextPath()%>/searchDateLocation">
+                        <form action="<%=request.getContextPath()%>/searchDateLocation" name="searchDateLocationFrm">
                         <div id="search-detail">
                             <div id="search-location">
                                 <p>여행지</p>
@@ -82,11 +82,11 @@
                             </div>
                             <div class="checkInOut-box">
                                 <p>체크인</p>
-                                <input type="search" class="datepicker"  id="checkIn" name="checkIn" placeholder="날짜추가">
+                                <input type="search" class="datepicker"  id="checkIn" name="checkIn" value="<%=checkIn != null ? checkIn : "" %>" placeholder="날짜추가">
                             </div>
                             <div class="checkInOut-box">
                                 <p>체크아웃</p>
-                                <input type="search" class="datepicker" id="checkOut" name="checkOut" placeholder="날짜추가">
+                                <input type="search" class="datepicker" id="checkOut" name="checkOut" value="<%=checkOut != null ? checkOut : "" %>" placeholder="날짜추가">
                             </div>
                             <div id="search-detail-btn">
                                 <button type="submit"><i class="fa-solid fa-magnifying-glass"></i><span> 검색</span></button>
@@ -307,10 +307,11 @@
         $(function () {
             $('.datepicker').datepicker();
         });
-        /* ckeckInOut 캘린더 한글 end */
+      /* ckeckInOut 캘린더 한글 end */
 </script>   
 
 <script>
+/* 지역검색 datalist 커스텀 */
     input2.onfocus = function () {
             searchLocation.style.display = 'block';
             input2.style.borderRadius = "5px 5px 0 0";
@@ -365,6 +366,7 @@
                 x[i].classList.remove("active");
             }
         }
+ /* 지역검색 datalist 커스텀 end */
 </script>  
 	
 <script>
