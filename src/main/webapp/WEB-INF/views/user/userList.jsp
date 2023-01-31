@@ -66,23 +66,23 @@ window.addEventListener('load', () => {
 	
 	<div id="search-container">
 	    <label for="searchType">검색타입 :</label> 
-	    <select id="searchType">
+	    <select id="searchType" required>
 	        <option value="user_id" <%= "user_id".equals(searchType) ? "selected" : "" %>>아이디</option>		
 	        <option value="user_name" <%= "user_name".equals(searchType) ? "selected" : "" %>>회원명</option>
 	    </select>
 	    <div id="search-userId" class="search-type">
 	        <form action="<%=request.getContextPath()%>/user/userFinder">
-	            <input type="hidden" name="searchType" value="user_id"/>
+	            <input type="hidden" name="searchType" value="user_id" required/>
 	            <input type="text" name="searchKeyword"  size="25" placeholder="검색할 아이디를 입력하세요." 
-	            	value="<%= "user_id".equals(searchType) ? searchKeyword : "" %>"/>
+	            	value="<%= "user_id".equals(searchType) ? searchKeyword : "" %>" required/>
 	            <button type="submit">검색</button>			
 	        </form>	
 	    </div>
 	    <div id="search-userName" class="search-type">
 	        <form action="<%=request.getContextPath()%>/user/userFinder">
-	            <input type="hidden" name="searchType" value="user_name"/>
+	            <input type="hidden" name="searchType" value="user_name" required/>
 	            <input type="text" name="searchKeyword" size="25" placeholder="검색할 이름을 입력하세요."
-	            	value="<%= "user_name".equals(searchType) ? searchKeyword : "" %>" />
+	            	value="<%= "user_name".equals(searchType) ? searchKeyword : "" %>"  required/>
 	            <button type="submit">검색</button>			
 	        </form>	
 	    </div>

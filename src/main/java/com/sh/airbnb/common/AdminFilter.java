@@ -41,7 +41,7 @@ public class AdminFilter extends HttpFilter implements Filter {
 		
 		User loginUser = ((User)session.getAttribute("loginUser"));
 		
-		if(loginUser== null || loginUser.getUserRole()!=UserRole.A) {
+		if(loginUser== null || loginUser.getUserRole()!=UserRole.S) {
 			session.setAttribute("msg", "관리자 전용입니다.");
 			httpRes.sendRedirect(httpReq.getContextPath()+"/");
 			return;
