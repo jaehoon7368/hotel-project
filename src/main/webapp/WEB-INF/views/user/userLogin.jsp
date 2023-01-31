@@ -36,7 +36,8 @@
 							</tr>
 							<br><br>
 				            <div class="pass">Forgot Password?</div>
-				            
+				            <button type="submit" class="btn btn-primary" ></button>
+								<img height="38px" src="<%=request.getContextPath()%>/image/kakao.png" />		
 				            <input type="submit" value="Login" tabindex="3">
 				         
 			          </form>

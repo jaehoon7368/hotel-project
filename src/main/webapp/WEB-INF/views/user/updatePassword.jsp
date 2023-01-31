@@ -2,6 +2,32 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
+<body>
+	<aside>
+		<div class="sidebar">
+        <nav class="userView-nav">
+          <ul>
+            <li class="active"><a href="<%= request.getContextPath() %>/user/userView">개인정보수정</a></li>
+            <hr>
+            <li><a href="<%= request.getContextPath()%>/user/userCheckRev?user_id=<%=loginUser.getUserId()%>">예약내역확인</a></li>
+            <hr>
+            <% if((loginUser != null && (loginUser.getUserRole() == UserRole.S || loginUser.getUserRole() == UserRole.A))) { %>
+            <li><a href="<%=request.getContextPath()%>/admin/adminhotelenroll">숙소등록하기</a></li>
+            <hr/>
+            <li><a href="<%=request.getContextPath()%>/admin/adminenrolledhotelview?user_id=<%=loginUser.getUserId() %>">등록숙소확인</a></li>
+            <hr>
+            <% } %>
+            <% if((loginUser != null && loginUser.getUserRole() == UserRole.A)) { %>
+            <li><a href="<%= request.getContextPath()%>/user/userList">회원관리</a></li>
+            <hr>
+            <% } %>
+          </ul>
+        </nav>
+     </div>
+	</aside>
+	
+	
+
 <section id=enroll-container>
 	<h2>비밀번호 변경</h2>
 	<form 
@@ -32,6 +58,7 @@
 		</table>
 	</form>
 </section>
+</body>
 <script>
 const oldPassword = document.querySelector("#oldPassword");
 const newPassword = document.querySelector("#newPassword");
