@@ -81,14 +81,13 @@
         </table>
         <h3>결제금액</h3>
         <h2 class="price"><%= reservation.getRePrice() %>원</h2>
-        <% if("Y".equals(reservation.getReservationStatus())) { %>
+        <% if("N".equals(reservation.getReservationStatus())) { %>
         <button class="paybtn" id= "btn-kakao-pay" onclick = "kakaopay('<%=reservation.getReNo()%>',
         '<%=reservation.getHotelName() %>','<%=reservation.getStartDate() %>','<%=reservation.getEndDate()%>',
         '<%=reservation.getRePrice() %>', '<%=reservation.getReName() %>')"> 결제하기 </button>
         
-        <button class="btn-cancel" value="<%= reservation.getReNo() %>">예약취소</button>
         <% } else { %>
-        <button class="btn-canceled" value="<%= reservation.getReNo() %>">취소된 예약</button>
+        <button class="btn-cancel" value="<%= reservation.getReNo() %>">예약취소</button>
         <% } %>
         
 		

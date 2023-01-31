@@ -50,6 +50,8 @@ public class ReservationService {
 		Connection conn = getConnection();
 		try {
 			result = reservationDao.insertPayment(price,reNo,conn,userId);
+			
+			result = reservationDao.updateReservationStatusY(conn, reNo);
 		}catch(Exception e) {
 			rollback(conn);
 			throw e;
