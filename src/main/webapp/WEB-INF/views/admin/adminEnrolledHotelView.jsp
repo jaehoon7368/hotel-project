@@ -64,16 +64,16 @@
 			<div class="rightBox">
 				<table id="enrollTb" style="height: 100%; width: 100%;">
 					<tr>
-						<td><span>호텔 번호  </span><input type="text" name="hotelNo" class= "put" value=" <%=hotel.getHotelNo() %>" /></td>
+						<td><span>호텔 번호  </span><input type="text" name="hotelNo" class= "put" value="<%=hotel.getHotelNo() %>" /></td>
 					</tr>
 					<tr>
-						<td><span> 호텔 이름  </span> <input type="text" name="hotelName" class= "put" value=" <%=hotel.getHotelName() %>" /></td>
+						<td><span> 호텔 이름  </span> <input type="text" name="hotelName" class= "put" value="<%=hotel.getHotelName() %>" /></td>
 					</tr>
 					<tr>
-						<td><span> 호텔 주소  </span><input type="text" name ="hotelAddress" class= "put" value=" <%=hotel.getHotelAddress() %>" /></td>
+						<td><span> 호텔 주소  </span><input type="text" name ="hotelAddress" class= "put" value="<%=hotel.getHotelAddress() %>" /></td>
 					</tr>
 					<tr>
-						<td><span> 호텔 정보  </span><input type="text" name="hotelInfo" class= "put" value=" <%=hotel.getHotelInfo() %>" /></td>
+						<td><span> 호텔 정보  </span><input type="text" name="hotelInfo" class= "put" value="<%=hotel.getHotelInfo() %>" /></td>
 					</tr>
 				</table>
 				<img class="mainImage"

@@ -250,13 +250,13 @@ public class AdminDao {
 		String sql = prop.getProperty("deleteHotel");
 		
 		System.out.println(sql);
+		System.out.println(hotelNo);
 		int result = 0;
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
 			pstmt.setString(1,hotelNo);
 			result = pstmt.executeUpdate();
 		}catch(Exception e) {
 			throw new AdminException("호텔삭제 오류 !",e);
-			
 		}
 		System.out.println(result+"리절트");
 		

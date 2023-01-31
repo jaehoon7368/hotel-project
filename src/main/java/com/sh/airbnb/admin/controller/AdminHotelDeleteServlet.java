@@ -31,7 +31,7 @@ public class AdminHotelDeleteServlet extends HttpServlet {
 			
 			result = adminService.deleteHotel(hotelNo);
 			
-			
+			System.out.println(result +"리절트 결과값");
 			request.getSession().setAttribute("msg","호텔 삭제를 성공하였습니다.");
 			response.sendRedirect(request.getContextPath()+"/");
 		}catch (Exception e) {
