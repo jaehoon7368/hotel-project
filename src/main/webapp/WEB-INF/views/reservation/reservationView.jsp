@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -24,6 +25,8 @@
 	String roomNo = (String) request.getAttribute("roomNo");
 	String userId = "";
 	userId = loginUser.getUserId()  != null ?  loginUser.getUserId() : "비회원";
+	
+	DecimalFormat decFormat = new DecimalFormat("###,###");
 
 
 %>    
@@ -126,7 +129,7 @@
                     <td style="font-weight: 800;">총결제 금액(VAT포함)</td>
                 </tr>
                 <tr>
-                    <td style=" font-size : 30px;font-weight: 800; color:red"><%=totalPrice%>원</td>
+                    <td style=" font-size : 30px;font-weight: 800; color:red"><%=decFormat.format(totalPrice)%>원</td>
                 </tr>
                 <tr>
                     <td></td>

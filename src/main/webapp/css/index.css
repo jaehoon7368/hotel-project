@@ -59,6 +59,7 @@ header div{
     display: flex;
     justify-content: space-between;
     text-align: center;
+    cursor : pointer;
 }
 #icon-box p{
     padding: 0;

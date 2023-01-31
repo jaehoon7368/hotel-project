@@ -1,9 +1,11 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="com.sh.airbnb.reservation.model.dto.Reservation"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%  
-		Reservation rev = (Reservation)session.getAttribute("resevation");
+	Reservation rev = (Reservation)session.getAttribute("resevation");
+	DecimalFormat decFormat = new DecimalFormat("###,###");
 %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/reservation/completeReservationView.css" />
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
@@ -55,7 +57,7 @@
         </table>
         
         <h3>결제정보</h3>
-        <h2 class="price"><%=rev.getRePrice() %>원</h2> 
+        <h2 class="price"><%=decFormat.format(rev.getRePrice()) %>원</h2> 
         <span><button class="mainbtn" id="btn-kakao-pay">카카오 페이</button> <button class="mainbtn" id="btn-smile-pay">스마일 페이</button></span>
         
         <p></p>
