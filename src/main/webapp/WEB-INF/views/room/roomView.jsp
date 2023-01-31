@@ -332,7 +332,7 @@ geocoder.addressSearch('<%=hotel.getHotelAddress() %>', function(result, status)
 
         // 인포윈도우로 장소에 대한 설명을 표시합니다
         var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;"><%= hotel.getHotelName()%></div>'
+            content: '<div style="width:190px;text-align:center;padding:3px 0;"><%= hotel.getHotelName()%></div>'
         });
         infowindow.open(map, marker);
 

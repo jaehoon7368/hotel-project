@@ -115,20 +115,20 @@ header div{
     color: white;
     border-style: none;
     border-radius: 50%;
-    padding: 4px;
+    padding: 3px 5px;
     margin-right: 3px;
     margin-top: -2px;
     float: right;
 }
 
 #search-detail{
-    width: 850px;
+    width: 900px;
     height: 60px;
     background-color:lightgray;
     border-radius: 30px;
     position: absolute;
     display: flex;
-    transform: translate(300px,100px);
+    transform: translate(250px,100px);
     justify-content: space-around;
     box-shadow: 7px 7px 10px #111;
 }
@@ -216,7 +216,7 @@ option:hover,
 }
 
 .checkInOut-box{
-    width: 120px;
+    width: 145px;
     height: 100%;
     background-color: white;
     border-radius: 30px;
@@ -227,7 +227,7 @@ option:hover,
     padding-left: 20px;
 }
 .checkInOut-box input{
-    width: 100px;
+    width: 125px;
     font-size: 16px;
     border: none;
     padding: 5px 0;
@@ -438,7 +438,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 .val-box p{
     margin-top: 5px;
-    font-size: 14px;
+    font-size: 12px;
 }
 .val-box input{
     width: 170px;
@@ -638,8 +638,6 @@ footer {
 	src :url("<%=request.getContextPath()%>/css/font/BMDOHYEON_ttf.ttf");
 	
 }
-body{
 
-}
 
 

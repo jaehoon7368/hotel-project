@@ -223,7 +223,8 @@
 					<a href="<%= request.getContextPath()%>/room/roomView?hotelNo=<%=hotel.getHotelNo()%>&checkIn=<%=checkIn%>&checkOut=<%=checkOut%>">
                     	<img src="<%=request.getContextPath()%>/upload/hotel/<%=hotel.getRenamedFilename() %>" alt="">
                     	<h3 name="hotelName"><%=hotel.getHotelName()%></h3>
-                    	<p class="color-gray" name="hotelAddress"><%=hotel.getHotelAddress() %></p>
+                    
+                    	<p class="color-gray" name="hotelAddress"><%=hotel.getHotelAddress().length() > 22 ? hotel.getHotelAddress().substring(0,23)+"..." : hotel.getHotelAddress()%></p>
                     	<p class="color-gray" name="hotelPrice">₩<%=decFormat.format(hotel.getPrice()) %> ~ / 박</p>
                     <a>
                 </div>
