@@ -56,7 +56,7 @@
         
         <h3>결제정보</h3>
         <h2 class="price"><%=rev.getRePrice() %>원</h2> 
-        <span><button class="mainbtn" id="btn-kakao-pay">카카오 페이</button> <button class="mainbtn" id="btn-toss-pay">토스 페이</button> <button class="mainbtn" id="btn-smile-pay">스마일 페이</button></span>
+        <span><button class="mainbtn" id="btn-kakao-pay">카카오 페이</button> <button class="mainbtn" id="btn-smile-pay">스마일 페이</button></span>
         
         <p></p>
         <p></p>
