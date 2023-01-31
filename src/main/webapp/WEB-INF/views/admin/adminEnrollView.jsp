@@ -12,6 +12,30 @@ div#center {
 
 </style>
 
+
+	<aside>
+    <div class="sidebar">
+        <nav class="userView-nav">
+          <ul>
+            <li class="active"><a href="<%= request.getContextPath() %>/user/userView">개인정보수정</a></li>
+            <hr>
+            <li><a href="<%= request.getContextPath()%>/user/userCheckRev?user_id=<%=loginUser.getUserId()%>">예약내역확인</a></li>
+            <hr>
+            <li><a href="<%=request.getContextPath()%>/admin/adminhotelenroll">숙소등록하기</a></li>
+            <hr>
+            <li><a href="<%=request.getContextPath()%>/admin/adminenrolledhotelview?user_id=<%=loginUser.getUserId() %>">등록숙소확인</a></li>
+            <hr>
+            <li><a href="<%= request.getContextPath()%>/user/userList">회원관리</a></li>
+            <hr>
+          </ul>
+        </nav>
+     </div>
+	</aside> 
+	
+  <div id="wrapper">
+	<div id="content" class="adminBox">
+
+
 	<div id="center" >
 		<form action="<%=request.getContextPath()%>/admin/adminhotelenroll"
 			name="hotelEnrollFrm" method="POST" enctype="multipart/form-data" >
@@ -87,7 +111,14 @@ div#center {
 				 <button type="submit" class= "hotelbtn" style="float: center" > 호텔 등록하기</button>
  		</form> 
 
+
+	</div> <!--  adminBox end -->
+</div> <!--  wrapper -->
+ 
+
+
 	</div>
+
 
 
 <script>

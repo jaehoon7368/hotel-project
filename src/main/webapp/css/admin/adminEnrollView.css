@@ -36,8 +36,9 @@ div.adminBox{
 	border-radius: 5%;
 	border: 1px solid gray;
 	width: 800px;
-	height:50%;
-	text-align: center
+	height:100%;
+	text-align: center;
+	margin-left:10%;
 }
 			
 #enrollTb td{
@@ -74,3 +75,51 @@ div.adminBox{
     color: white;
 	border : none;
 }
+
+.sidebar {
+  position:absolute;
+  width: 15%;
+  height: 100%;
+  font-size: 15px;
+  border-right: solid rgb(236, 231, 231) 1px;
+}
+
+.userView-nav {
+  position: relative;
+  margin: 0 15%;
+  text-align: right;
+  top: 45%;
+  transform: translateY(-50%);
+  font-weight: bold;
+}
+
+.userView-nav ul {
+  list-style: none;
+}
+  
+.userView-nav li {
+    position: relative;
+    margin: 2.2em 0;
+  }
+    
+.userView-nav a {
+      line-height: 20px;
+      text-transform: uppercase;
+      text-decoration: none;
+      letter-spacing: 0.4em;
+      display: block;
+      transition: all ease-out 300ms;
+      color: black;
+    }
+   
+#wrapper {
+	margin-bottom: 12%;
+    width: 100%;
+    text-align: center;
+}
+
+.sidebar li:hover {
+	background-color: rgb(233, 227, 227);
+    border-radius: 10px;
+}
+

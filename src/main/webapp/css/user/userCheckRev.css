@@ -125,10 +125,15 @@ div#content {
 	 margin-top:5%;
 	 margin-left:20%;
 	 height:100%;
+	 margin-bottom:15%;
 }
 
 .footer {
 	height:200px;
 }
 
+.sidebar li:hover {
+	background-color: rgb(233, 227, 227);
+    border-radius: 10px;
+}
 

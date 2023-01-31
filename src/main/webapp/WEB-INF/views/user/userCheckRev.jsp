@@ -27,10 +27,8 @@
             <hr>
             <li><a href="<%=request.getContextPath()%>/admin/adminenrolledhotelview?user_id=<%=loginUser.getUserId() %>">등록숙소확인</a></li>
             <hr>
-
             <li><a href="<%= request.getContextPath()%>/user/userList">회원관리</a></li>
             <hr>
-            
           </ul>
         </nav>
      </div>
