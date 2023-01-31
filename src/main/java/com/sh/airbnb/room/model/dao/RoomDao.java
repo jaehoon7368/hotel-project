@@ -3,6 +3,7 @@ package com.sh.airbnb.room.model.dao;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -98,6 +99,72 @@ public class RoomDao {
 		}
 		
 		return priceHotelNo;
+	}
+
+	public List<Room> roomselectDate(Connection conn, String hotelNo, Date sqlDate1, Date sqlDate2) {
+		String sql = prop.getProperty("selectDateRoom");
+		List<Room> roomDateList = new ArrayList<>();
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setDate(1, sqlDate1);
+			pstmt.setDate(2, sqlDate2);
+			pstmt.setDate(3, sqlDate1);
+			pstmt.setDate(4, sqlDate2);
+			pstmt.setDate(5, sqlDate1);
+			pstmt.setDate(6, sqlDate2);
+			pstmt.setString(7, hotelNo);
+			try(ResultSet rset = pstmt.executeQuery()){
+				while(rset.next()) {
+					Room room = new Room();
+					room.setRoomNo(rset.getString("room_no"));
+					roomDateList.add(room);
+				}
+			}
+		} catch (SQLException e) {
+			throw new RoomException("체크인아웃 정보로 RoomNo 가져오기 오류",e);
+		}
+		
+		return roomDateList;
+	}
+
+	private Room handleRoomResultSet(ResultSet rset) throws SQLException {
+		Room room = new Room();
+		room.setRoomNo(rset.getString("room_no"));
+		room.setRoomType(rset.getString("room_type"));
+		room.setRoomPrice(rset.getInt("room_price"));
+		room.setLimitPeople(rset.getInt("limit_people"));
+		room.setHotelNo(rset.getString("hotel_no"));
+		room.setRenamedFilename(rset.getString("renamed_filename"));
+		room.setRoomInfo(rset.getString("room_info"));
+		return room;
+	}
+
+	public List<Room> selectCheckRoom(Connection conn, List<Room> roomDateList) {
+		String sql = prop.getProperty("selectRoom");
+		List<Room> roomList = new ArrayList<>();
+		
+		List<String> roomListArray = new ArrayList<>();
+		for(int i = 0 ; i< roomDateList.size(); i++) {
+			roomListArray.add(roomDateList.get(i).getRoomNo());
+		}
+		String temp = "";
+		for(int i = 0; i < roomListArray.size();i++) {
+			temp += "'" + roomListArray.get(i) + "'";
+			if(i != roomListArray.size() -1)
+				temp += ", ";
+		}
+		sql = sql.replace("$", temp);
+		System.out.println("selectSearchHotel = " + temp);
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			try(ResultSet rset = pstmt.executeQuery()){
+				while(rset.next()) {
+					Room room = handleRoomResultSet(rset);
+					roomList.add(room);
+				}
+			}
+		} catch (SQLException e) {
+			throw new RoomException("체크인아웃 정보로 Room 가져오기 오류",e);
+		}
+		return roomList;
 	}
 
 }

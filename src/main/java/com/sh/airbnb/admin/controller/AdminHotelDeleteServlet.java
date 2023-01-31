@@ -25,11 +25,12 @@ public class AdminHotelDeleteServlet extends HttpServlet {
 		String hotelNo = request.getParameter("hotelNo");
 		
 		
-		
+			System.out.println("호텔넘버 딜리트"+hotelNo);
 		
 		try {
 			
 			result = adminService.deleteHotel(hotelNo);
+			
 			
 			request.getSession().setAttribute("msg","호텔 삭제를 성공하였습니다.");
 			response.sendRedirect(request.getContextPath()+"/");

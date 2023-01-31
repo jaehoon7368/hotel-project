@@ -56,9 +56,15 @@ public class BoardService {
 		return result;
 	}
 
-	public List<InquiyBoard> selectInquiyBoardList() {
+//	public List<InquiyBoard> selectInquiyBoardList() {
+//		Connection conn = getConnection();
+//		List<InquiyBoard> inquiyBoardList = boardDao.selectInquiyBoardList(conn);
+//		close(conn);
+//		return inquiyBoardList;
+//	}
+	public List<InquiyBoard> selectInquiyBoardList(String userId) {
 		Connection conn = getConnection();
-		List<InquiyBoard> inquiyBoardList = boardDao.selectInquiyBoardList(conn);
+		List<InquiyBoard> inquiyBoardList = boardDao.selectInquiyBoardList(conn, userId);
 		close(conn);
 		return inquiyBoardList;
 	}
@@ -232,5 +238,25 @@ public class BoardService {
 		close(conn);
 		return faqBoardMenu;
 	}
+
+	public NoticeBoard selectNoticeBoard() {
+		Connection conn = getConnection();
+		NoticeBoard noticeBoard = boardDao.selectNoticeBoard(conn);
+		close(conn);
+		return noticeBoard;
+	}
+
+	public List<InquiyBoardComment> selectInquiyBoardCommentList() {
+		Connection conn = getConnection();
+		List<InquiyBoardComment> inquiyBoardCommentList = boardDao.selectInquiyBoardCommentList(conn);
+		close(conn);
+		return inquiyBoardCommentList;
+	}
+
+	
+
+	
+
+	
 
 }

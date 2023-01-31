@@ -1,3 +1,4 @@
+<%@page import="com.sh.airbnb.common.HelloMvcUtils"%>
 <%@page import="com.sh.airbnb.board.model.dto.InquiyBoardComment"%>
 <%@page import="com.sh.airbnb.board.model.dto.NoticeBoard"%>
 <%@page import="java.util.List"%>
@@ -24,7 +25,7 @@
 .btn-tab {margin-right: 22px; color: rgba(0,0,0,0.6); height: 35px; line-height: normal;}
 .notice-view {border-bottom: #f7323f solid 2px; color: #f7323f; font-weight: bold; height: 37px; position: relative; display: inline-block;}
 .notice-enroll {position: relative; display: inline-block;}
-.notice-content {display: none; background: #fafafa; padding: 20px 30px;}
+.notice-content {display: none; background: #fafafa; padding: 35px 35px;}
 .notice-title {padding: 35px 0 35px 0; display: block;}
 .bi-chevron-expand {float: right; width: 20px; height:20px; }
 div#pagebar{margin:0px 0 50px 0; text-align:center; }
@@ -36,7 +37,6 @@ div#pagebar a{margin-right: 5px;}
         <nav class="board-menu">
             <ul class="board-menu-list" id="board-menu-list">
                 <li><a href="<%= request.getContextPath() %>/board/noticeBoardList" style="font-weight: bold; color: #f7323f;">공지사항</a></li>
-                <li><a href="">이벤트</a></li>
                 <li><a href="<%= request.getContextPath() %>/board/faqBoardList">자주 묻는 질문</a></li>
                 <li><a href="<%= request.getContextPath() %>/board/inquiyBoardList">1:1 문의</a></li>
             </ul>
@@ -61,20 +61,24 @@ div#pagebar a{margin-right: 5px;}
                                     <svg xmlns="http://www.w3.org/2000/svg"  fill="currentColor" class="bi bi-chevron-expand" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd" d="M3.646 9.146a.5.5 0 0 1 .708 0L8 12.793l3.646-3.647a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 0-.708zm0-2.292a.5.5 0 0 0 .708 0L8 3.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708z"/>
                                     </svg>
+                                    <% noticeBoards.setTitle(HelloMvcUtils.convertLineFeedToBr(HelloMvcUtils.escapeHtml(noticeBoards.getTitle()))); %>
                                 <p style="margin: 0;">[공지] <%= noticeBoards.getTitle() %></p>
                                 <span><%= noticeBoards.getRegDate() %></span>
                             </div>
                             <div class="notice-content">
+                            	<!-- 개행 xss공격방어 -->
+                            	<% noticeBoards.setContent(HelloMvcUtils.convertLineFeedToBr(HelloMvcUtils.escapeHtml(noticeBoards.getContent()))); %>
+                            	<!-- 공지사항 내용 -->
                             	<%= noticeBoards.getContent() %>
                             	<br />
                             	<br />
-                            	<% if(loginUser != null && (loginUser.getUserRole() == UserRole.A)) { %>
+                            	<%-- <% if(loginUser != null && (loginUser.getUserRole() == UserRole.A)) { %> --%>
                             	<hr />
                             	<br />
                             	<!-- 관리자 글수정 삭제 -->
-                            	<input type="button" value="수정" onclick="updateNotice(<%= noticeBoards.getNoticeNo() %>)" />
-                            	<input type="button" value="삭제" onclick="deleteNotice(<%= noticeBoards.getNoticeNo() %>)" />
-                            	<% } %>
+                            	<input type="button" value="수정하기" onclick="updateNotice(<%= noticeBoards.getNoticeNo() %>)" />
+                            	<input type="button" value="삭제하기" onclick="deleteNotice(<%= noticeBoards.getNoticeNo() %>)" />
+                            	<%-- <% } %> --%>
                             </div>
                          </li>
                     <% } %>

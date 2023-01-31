@@ -55,7 +55,7 @@ public class FaqBoardEnrollServlet extends HttpServlet {
 		int result = boardService.insertFaqBoard(faqBoard);
 		
 		// 리다이렉트
-		response.sendRedirect(request.getContextPath() + "/");
+		response.sendRedirect(request.getContextPath() + "/board/faqBoardList");
 	}
 
 }

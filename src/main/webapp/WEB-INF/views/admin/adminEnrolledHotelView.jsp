@@ -11,9 +11,21 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/adminEnrolledHotelView.css" />
 
 <style>
+@font-face{
+	font-family: "dohyun";
+	src :url("<%=request.getContextPath()%>/css/font/BMDOHYEON_ttf.ttf");
+	
+}
 
+.nohotel{
+	height:500px;	
+    display: flex;
+   font-family: "dohyun";
+   font-size :25px;
+}
 
 </style>
+
 
 
 
@@ -36,9 +48,12 @@
         </nav>
      </div>
      </aside>
-	
+
 <div id="wrapper"> <!-- 기훈 wrapper추가 -->
 	<div  id="rightBox"class="adminBox">
+
+	<div  id="rightBox"class="adminBox" style="margin:auto">
+
 		<%
       if (!hotelList.isEmpty()) {
         for (Hotel hotel : hotelList) {
@@ -64,9 +79,9 @@
 				<img class="mainImage"
 					src="<%=request.getContextPath() %>/upload/hotel/<%=hotel.getRenamedFilename() %>"
 					alt="...">
-				<li style ="padding :0px;"><button type="submit" class="roombtn" > 호텔 정보 삭제</button></li>
+				<li style ="padding :0px; list-style: none;"><button type="submit" class="roombtn " > 호텔 정보 삭제</button></li>
 				<br /><hr /><br />
-				<li style ="padding :0px;"><button type="button" class="roombtn" onclick="roomEnroll('<%=hotel.getHotelNo()%>')">룸 등록하기</button></li>
+				<li style ="padding :0px;list-style: none;"><button type="button" class="roombtn enrollbtn" onclick="roomEnroll('<%=hotel.getHotelNo()%>')">룸 등록하기</button></li>
 				<br />
 				<div id="categoryBox" style="width:100%">
 				<div id="img-viewer-container">
@@ -92,12 +107,19 @@
 }
 } else {
 %>
-	<h3>등록된 호텔이 없습니다. 등록을 부탁드립니다</h3>
+	<div class="nohotel"><div style="margin:auto; font-family: "dohyun";">등록된 호텔이 없습니다. 등록을 부탁드립니다</div></div>
+	
 <%
  	}
  	%>
+	
 	</div>
+
 </div> <!-- wrapper -->
+
+
+
+
 
 <script>
 	const roomEnroll = (hotelNo)=>{
@@ -107,3 +129,5 @@
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 
+
+<%@ include file="/WEB-INF/views/common/footer.jsp"%>

@@ -59,17 +59,25 @@
                     
                     <!--  버튼 클릭 후 modal -->
                     <div class="modal">
-                        <form action="">
+                        <form action="<%=request.getContextPath()%>/searchDateLocation">
                         <div id="search-detail">
                             <div id="search-location">
                                 <p>여행지</p>
-                                <input type="search" name="searchLocation" id="searchLocation" list="searchLocation-list" 
-                                autocomplete="off" placeholder="여행지검색"> 
-                                <datalist id="searchLocation-list">
-                    			<option value="서울"></option>
-                    			<option value="경기"></option>
-                    			<option value="부산"></option>
-                    			<option value="제주"></option>
+                                <input type="search" name="searchLocation" id="input2" list="" 
+                                autocomplete="off" role="combobox" placeholder="여행지검색"> 
+                                <datalist id="searchLocation" role="listbox">
+                    				<option value="서울">서울</option>
+                                	<option value="경기">경기</option>
+                                	<option value="인천">인천</option>
+                               		<option value="강원">강원</option>
+                                	<option value="광주">광주</option>
+                                	<option value="대전">대전</option>
+                                	<option value="경남">경남</option>
+                                	<option value="전남">전남</option>
+                                	<option value="충남">충남</option>
+                                	<option value="충북">충북</option>
+                                	<option value="부산">부산</option>
+                                 	<option value="제주">제주</option>
                					 </datalist>
                             </div>
                             <div class="checkInOut-box">
@@ -105,8 +113,8 @@
                                     <div id="range-box">
                                     <div class="middle">
                                         <div class="multi-range-slider">
-                                            <input type="range" id="input-left" min="<%=roomPrice.getMinPrice()%>" max="<%=roomPrice.getMaxPrice() %>" value="<%=roomPrice.getMinPrice() %>" oninput="document.getElementById('value1').value=this.value;"/>
-                                            <input type="range" id="input-right" min="<%=roomPrice.getMinPrice()%>" max="<%=roomPrice.getMaxPrice() %>" value="<%=roomPrice.getMaxPrice() %>" oninput="document.getElementById('value2').value=this.value;"/>
+                                            <input type="range" id="input-left" min="<%=roomPrice.getMinPrice()%>" max="<%=roomPrice.getMaxPrice() %>" value="<%=roomPrice.getMinPrice() %>" step='1000' oninput="document.getElementById('value1').value=this.value;"/>
+                                            <input type="range" id="input-right" min="<%=roomPrice.getMinPrice()%>" max="<%=roomPrice.getMaxPrice() %>" value="<%=roomPrice.getMaxPrice() %>" step='1000' oninput="document.getElementById('value2').value=this.value;"/>
                                             <div class="slider">
                                                 <div class="track"></div>
                                                 <div class="range"></div>
@@ -300,7 +308,64 @@
             $('.datepicker').datepicker();
         });
         /* ckeckInOut 캘린더 한글 end */
-</script>     
+</script>   
+
+<script>
+    input2.onfocus = function () {
+            searchLocation.style.display = 'block';
+            input2.style.borderRadius = "5px 5px 0 0";
+        };
+        for (let option of searchLocation.options) {
+            option.onclick = function () {
+                input2.value = option.value;
+                searchLocation.style.display = 'none';
+                input2.style.borderRadius = "5px";
+            }
+        };
+
+        input2.oninput = function () {
+            currentFocus = -1;
+            var text = input2.value.toUpperCase();
+            for (let option of searchLocation.options) {
+                if (option.value.toUpperCase().indexOf(text) > -1) {
+                    option.style.display = "block";
+                } else {
+                    option.style.display = "none";
+                }
+            };
+        }
+        var currentFocus = -1;
+        input2.onkeydown = function (e) {
+            if (e.keyCode == 40) {
+                currentFocus++
+                addActive(searchLocation.options);
+            }
+            else if (e.keyCode == 38) {
+                currentFocus--
+                addActive(searchLocation.options);
+            }
+            else if (e.keyCode == 13) {
+                e.preventDefault();
+                if (currentFocus > -1) {
+                    /*and simulate a click on the "active" item:*/
+                    if (searchLocation.options) searchLocation.options[currentFocus].click();
+                }
+            }
+        }
+
+        function addActive(x) {
+            if (!x) return false;
+            removeActive(x);
+            if (currentFocus >= x.length) currentFocus = 0;
+            if (currentFocus < 0) currentFocus = (x.length - 1);
+            x[currentFocus].classList.add("active");
+        }
+        function removeActive(x) {
+            for (var i = 0; i < x.length; i++) {
+                x[i].classList.remove("active");
+            }
+        }
+</script>  
 	
 <script>
         /* 양방향 range */

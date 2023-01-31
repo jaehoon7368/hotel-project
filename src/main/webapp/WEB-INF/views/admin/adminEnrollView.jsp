@@ -2,12 +2,16 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin/adminEnrollView.css" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 <style>
+div#center {
+	display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: center;
+}
 
 </style>
+
 
 	<aside>
     <div class="sidebar">
@@ -31,6 +35,8 @@
   <div id="wrapper">
 	<div id="content" class="adminBox">
 
+
+	<div id="center" >
 		<form action="<%=request.getContextPath()%>/admin/adminhotelenroll"
 			name="hotelEnrollFrm" method="POST" enctype="multipart/form-data" >
 			<br>
@@ -105,9 +111,13 @@
 				 <button type="submit" class= "hotelbtn" style="float: center" > 호텔 등록하기</button>
  		</form> 
 
+
 	</div> <!--  adminBox end -->
 </div> <!--  wrapper -->
  
+
+
+	</div>
 
 
 
