@@ -1,5 +1,8 @@
 package com.sh.airbnb.board.model.dao;
 
+import static com.sh.airbnb.common.JdbcTemplate.close;
+import static com.sh.airbnb.common.JdbcTemplate.getConnection;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -126,21 +129,37 @@ public class BoardDao {
 		return result;
 	}
 
-	public List<InquiyBoard> selectInquiyBoardList(Connection conn) {
+//	public List<InquiyBoard> selectInquiyBoardList(Connection conn) {
+//		String sql = prop.getProperty("selectInquiyBoardList");
+//		List<InquiyBoard> inquiyBoardList = new ArrayList<>();
+//		
+//		try (PreparedStatement pstmt = conn.prepareStatement(sql)){
+//			try (ResultSet rs = pstmt.executeQuery()){
+//				while(rs.next()) {
+//					InquiyBoard inquiyBoard = handInquiyBoardResultSet(rs);
+//					inquiyBoardList.add(inquiyBoard);
+//				}
+//			}
+//		} catch (Exception e) {
+//			throw new BoardException("문의글 목록 조회 오류", e);
+//		}
+//		return inquiyBoardList;
+//	}
+	
+	public List<InquiyBoard> selectInquiyBoardList(Connection conn, String userId) {
 		String sql = prop.getProperty("selectInquiyBoardList");
 		List<InquiyBoard> inquiyBoardList = new ArrayList<>();
 		
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, userId);
 			try (ResultSet rs = pstmt.executeQuery()){
 				while(rs.next()) {
 					InquiyBoard inquiyBoard = handInquiyBoardResultSet(rs);
 					inquiyBoardList.add(inquiyBoard);
 				}
-				
 			}
 		} catch (Exception e) {
 			throw new BoardException("문의글 목록 조회 오류", e);
-			
 		}
 		return inquiyBoardList;
 	}
@@ -421,6 +440,36 @@ public class BoardDao {
 		}
 		return noticeBoard;
 	}
+
+
+	public List<InquiyBoardComment> selectInquiyBoardCommentList(Connection conn) {
+		String sql = prop.getProperty("selectInquiyBoardCommentList");
+		//
+		List<InquiyBoardComment> inquiyBoardCommentList = new ArrayList<>();
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)){
+			try(ResultSet rs = pstmt.executeQuery()){
+				while(rs.next()) {
+					InquiyBoardComment inquiyBoardComment = new InquiyBoardComment();
+					inquiyBoardComment.setInquiyCommentNo(rs.getInt("inquiy_comment_no"));
+					inquiyBoardComment.setContent(rs.getString("content"));
+					inquiyBoardComment.setRegDate(rs.getDate("reg_date"));
+					inquiyBoardComment.setInquiyCommentLevel(rs.getInt("inquiy_comment_level"));
+					inquiyBoardComment.setInquiyNo(rs.getInt("inquiy_no"));
+					inquiyBoardComment.setWriter(rs.getString("writer"));
+					inquiyBoardCommentList.add(inquiyBoardComment);
+				}
+			}
+		} catch (Exception e) {
+			throw new BoardException("문의답변 조회 오류", e);
+		}
+		return inquiyBoardCommentList;
+	}
+
+
+	
+
+
+	
 
 
 	

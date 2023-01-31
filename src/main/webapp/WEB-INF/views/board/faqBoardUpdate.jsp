@@ -21,6 +21,29 @@
 .faq-head>div>li>a {text-decoration: none; color: rgba(0,0,0,0.90); cursor: pointer;}
 .faq-enroll{margin-bottom: 20px;}
 .font {font-size: 18px;}
+.category-select {width: 765px; height: 30px; font-size: 18px; color: rgba(0,0,0,0.50);}
+.faq-title {width: 760px; height: 30px; font-size: 18px;}
+.faq-content {resize: vertical; font-size: 18px;}
+.update-btn {
+	background-color: #ef303d;
+    text-align: center;
+    color: white;
+    border-radius: 15px;
+    font-size : 18px;
+    border-style: none;
+    cursor: pointer;
+    width: 100px; height: 50px;
+}
+.cancel-btn {
+	background-color: #ef303d;
+    text-align: center;
+    color: white;
+    border-radius: 15px;
+    font-size : 18px;
+    border-style: none;
+    cursor: pointer;
+    width: 100px; height: 50px;
+}
 </style>
 
 	<div id="FAQ-board" class="wrap">
@@ -47,11 +70,12 @@
                 </div>
                 <form action="<%= request.getContextPath() %>/board/faqBoardUpdate" method="POST" name="faqBoardUpdateFrm">
                     <div style="margin-top: 50px;">
-                         <table>
+                        
+                           <table>
                         	<input type="hidden" name="writer" value="<%= loginUser.getUserId()%>" />
                             <div class="faq-enroll font">카테고리</div>
                             <div class="faq-enroll">
-                                <select name="category" id="" style="width: 765px; height: 30px; font-size: 18px; color: rgba(0,0,0,0.50);" readonly>
+                                <select name="category" class="category-select" >
                                 	<option value="<%= faqBoard.getCategory() %>"><%= faqBoard.getCategory() %></option>
                                     <option value="TOP">TOP</option>
                                     <option value="이용문의">이용문의</option>
@@ -62,12 +86,12 @@
                             	</select>
                             </div>
                             <div class="faq-enroll font">제목</div>
-                            <div class="faq-enroll"><input type="text" name="title" value="<%= faqBoard.getTitle()%>" style="width: 760px; height: 30px; font-size: 18px;" placeholder="제목을 입력해주세요"></div>
+                            <div class="faq-enroll"><input type="text" name="title" class="faq-title" value="<%= faqBoard.getTitle()%>" placeholder="제목을 입력해주세요"></div>
                             <div class="faq-enroll font">내용</div>
-                            <div class="faq-enroll"><textarea name="content" id="" cols="80" rows="20" style="resize: vertical; font-size: 18px;" placeholder="내용을 입력해주세요"><%= faqBoard.getContent() %></textarea></div>
+                            <div class="faq-enroll"><textarea name="content" class="faq-content" cols="80" rows="20" placeholder="내용을 입력해주세요"><%= faqBoard.getContent() %></textarea></div>
  							<div class="faq-enroll">
-                                <input type="submit" value="작성하기" style="width: 100px; height: 50px; font-size: 18px;">
-                                <input type="button" value="취소하기" onclick="history.go(-1);" style="width: 100px; height: 50px; font-size: 18px;"/>
+                                <input type="submit" value="작성하기" class="update-btn">
+                                <input type="button" value="취소하기" class="cancel-btn" onclick="history.go(-1);"/>
  							</div>
                         </table>
                         
