@@ -31,7 +31,6 @@ public class RoomService {
 		Connection conn = getConnection();
 		
 		List<Room> roomDateList = roomDao.roomselectDate(conn,hotelNo,sqlDate1,sqlDate2);
-		System.out.println(roomDateList);
 		List<Room> roomList = roomDao.selectCheckRoom(conn,roomDateList);
 		close(conn);
 		
