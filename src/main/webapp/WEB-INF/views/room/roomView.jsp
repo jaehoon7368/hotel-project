@@ -59,12 +59,11 @@
 
                 <div id="main-room-info">
                     <h2><%=room.getRoomType()%></h2>
-                    <div id="price-box">
+                    <div id="price-box2">
                         <p id="price-name"><span><%=room.getRoomPrice()%>원</span>가격</p>
+                        <br />
                         <hr class="color-gray">
-                        <div id="info">
-                            <p>객실이용안내</p>
-                        </div>
+              			<br />
                         <div id="reservation-btn">
                             <button type="submit" onclick="reservationBtn('<%=hotel.getHotelName() %>','<%=room.getRoomType() %>','<%=checkIn%>','<%=checkOut%>','<%=room.getRoomPrice()%>','<%=hotel.getHotelNo()%>','<%=room.getRoomNo()%>');">예약</button>
                         </div>
@@ -171,6 +170,26 @@ $(function () {
 $(function () {
     $('.datepicker').datepicker();
 });
+/* 현재 날짜부터 선택 가능 */
+$('.datepicker').datepicker({
+	  dateFormat: 'yy-mm-dd',
+	  minDate: 0
+	});
+/* 현재 날짜부터 선택 가능  end */
+
+/* 체크아웃 날짜가 체크인 날짜 이전 선택 불가 */
+$('#checkIn').datepicker();
+$('#checkIn').datepicker("option", "maxDate", $("#checkOut").val());
+$('#checkIn').datepicker("option", "onClose", function ( selectedDate ) {
+$("#checkOut").datepicker( "option", "minDate", selectedDate );
+});
+
+$("#checkOut").datepicker();
+$("#checkOut").datepicker("option", "minDate", $('#checkIn').val());
+$("#checkOut").datepicker("option", "onClose", function ( selectedDate ) {
+$('#checkIn').datepicker( "option", "maxDate", selectedDate );
+});
+/* 체크아웃 날짜가 체크인 날짜 이전 선택 불가 end */
 </script>
   <script>
   

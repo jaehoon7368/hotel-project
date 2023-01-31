@@ -330,6 +330,28 @@ document.filterSearchFrm.onsubmit = (e) => {
             $('.datepicker').datepicker();
         });
       /* ckeckInOut 캘린더 한글 end */
+
+      /* 현재 날짜부터 선택 가능 */
+        $('.datepicker').datepicker({
+        	  dateFormat: 'yy-mm-dd',
+        	  minDate: 0
+        	});
+      /* 현재 날짜부터 선택 가능  end */
+      
+      /* 체크아웃 날짜가 체크인 날짜 이전 선택 불가 */
+      $('#checkIn').datepicker();
+    $('#checkIn').datepicker("option", "maxDate", $("#checkOut").val());
+    $('#checkIn').datepicker("option", "onClose", function ( selectedDate ) {
+        $("#checkOut").datepicker( "option", "minDate", selectedDate );
+    });
+
+    $("#checkOut").datepicker();
+    $("#checkOut").datepicker("option", "minDate", $('#checkIn').val());
+    $("#checkOut").datepicker("option", "onClose", function ( selectedDate ) {
+        $('#checkIn').datepicker( "option", "maxDate", selectedDate );
+    });
+      /* 체크아웃 날짜가 체크인 날짜 이전 선택 불가 end */
+        
 </script>   
 
 <script>
