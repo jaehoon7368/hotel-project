@@ -5,42 +5,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/board/notice/noticeList.css" />
 <script src="<%= request.getContextPath()%>/js/jquery-3.6.1.js"></script>
 <%
 	List<NoticeBoard> noticeBoardList = (List<NoticeBoard>) request.getAttribute("noticeBoardList");
 	NoticeBoard noticeBoard = (NoticeBoard)request.getAttribute("noticeBoard");
 %>
-<style>
-#main-content {width: 100%; height: 100%; margin: auto;}
-.wrap {padding: 54px 0 50px 0;}
-.board-menu {width: 210px; margin: 0; display: block; float: left;}
-.board-menu-list {list-style: none; margin: 0;}
-.board-menu-list li {margin-bottom: 24px;}
-#main-content>nav>ul>li>a { color: rgba(0,0,0,0.60); text-decoration: none; font-size: 18px;}
-.notice {width: 800px; height: 100%; margin: auto;}
-.notice-board {width: 800px; height: 100%;}
-.notice-head {font-size: 18px; border-bottom: rgba(0,0,0,0.3) solid 1px; height: 41px; margin: 0; padding: 0;}
-.notice-list {list-style: none; padding: 0 0 0 0; border-bottom: 1px solid rgba(0,0,0,0.4);}
-.notice-show {padding: 0 0 0 0; margin-bottom: 50px;}
-.btn-tab {margin-right: 22px; color: rgba(0,0,0,0.6); height: 35px; line-height: normal;}
-.notice-view {border-bottom: #f7323f solid 2px; color: #f7323f; font-weight: bold; height: 37px; position: relative; display: inline-block;}
-.notice-enroll {position: relative; display: inline-block;}
-.notice-content {display: none; background: #fafafa; padding: 35px 35px;}
-.notice-title {padding: 35px 0 35px 0; display: block;}
-.bi-chevron-expand {float: right; width: 20px; height:20px; }
-div#pagebar{margin:0px 0 50px 0; text-align:center; }
-div#pagebar span.cPage{color: #0066ff; margin-right: 5px;}
-div#pagebar a{margin-right: 5px;}
 
-/* 사이드바 */
-.sidebar li:hover {background-color: rgb(233, 227, 227); border-radius: 10px;}
-.sidebar {position:absolute; width: 15%; height: 100%; font-size: 15px; border-right: solid rgb(236, 231, 231) 1px;}
-.userView-nav {position: relative; margin: 0 15%; text-align: right; top: 18%; transform: translateY(-50%); font-weight: bold;}
-.userView-nav ul {list-style: none;}
-.userView-nav li {position: relative; margin: 2.2em 0;}   
-.userView-nav a {line-height: 20px; text-transform: uppercase; text-decoration: none; letter-spacing: 0.4em; display: block; transition: all ease-out 300ms; color: black;}
-</style>
-		
 		
 <div id="main-content" class="wrap">
 <content>

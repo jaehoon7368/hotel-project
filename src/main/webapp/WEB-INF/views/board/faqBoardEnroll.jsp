@@ -1,55 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/board/faq/faqEnroll.css" />
 <script src="<%= request.getContextPath()%>/js/jquery-3.6.1.js"></script>
-<style>
-#FAQ-board {width: 100%; min-height: 900px; margin: auto;}
-.wrap {padding: 54px 0 50px 0;}
-.board-menu {width: 210px; margin: 0; display: block; float: left;}
-.board-menu-list {list-style: none; margin: 0;}
-.board-menu-list li {margin-bottom: 24px;}
-#FAQ-board>nav>ul>li>a {color: rgba(0,0,0,0.60); text-decoration: none; font-size: 18px;}
-.FAQ {width: 800px; height: 300px; margin: auto;}
-.faq-board {width: 800px; height: 500px;}
-.faq-head {font-size: 18px; border-bottom: rgba(0,0,0,0.3) solid 1px; height: 41px; margin: 0; padding: 0;}
-.btn-tab {margin-right: 22px; color: rgba(0,0,0,0.6); height: 40px; line-height: normal;}
-.faq-head>div>li {list-style: none; margin-right: 20px; float: left;}
-.faq-head>div>li>a {text-decoration: none; color: rgba(0,0,0,0.90); cursor: pointer;}
-div>table>tr td {margin: 10px; padding: 10px;}
-.faq-enroll{margin-bottom: 20px;}
-.font {font-size: 18px;}
-.category-select {width: 745px; height: 30px; font-size: 18px; color:rgba(0,0,0,0.50);}
-.faq-title {width: 740px; height: 30px; font-size: 18px;}
-.faq-content {resize: vertical; font-size: 18px; padding: 5px}
-/* 사이드바 */
-.sidebar li:hover {background-color: rgb(233, 227, 227); border-radius: 10px;}
-.sidebar {position:absolute; width: 15%; height: 100%; font-size: 15px; border-right: solid rgb(236, 231, 231) 1px;}
-.userView-nav {position: relative; margin: 0 15%; text-align: right; top: 18%; transform: translateY(-50%); font-weight: bold;}
-.userView-nav ul {list-style: none;}
-.userView-nav li {position: relative; margin: 2.2em 0;}   
-.userView-nav a {line-height: 20px; text-transform: uppercase; text-decoration: none; letter-spacing: 0.4em; display: block; transition: all ease-out 300ms; color: black;}
-/* 버튼 */
-.enroll-btn {
-	background-color: #ef303d;
-    text-align: center;
-    color: white;
-    border-radius: 15px;
-    font-size : 18px;
-    border-style: none;
-    cursor: pointer;
-    width: 100px; height: 50px;
-}
-.cancel-btn {
-	background-color: #ef303d;
-    text-align: center;
-    color: white;
-    border-radius: 15px;
-    font-size : 18px;
-    border-style: none;
-    cursor: pointer;
-    width: 100px; height: 50px;
-}
-</style>
+
 	<div id="FAQ-board" class="wrap">
         <content>
     		<div class="sidebar">
@@ -155,6 +109,27 @@ const faqBoardUserInfo = () => {
 	document.menuListFrm.category.value = '회원정보';
 	document.menuListFrm.submit();
 };
+
+document.faqBoardEnrollFrm.onsubmit = (e) => {
+	const title = e.target.title;
+	const content = e.target.content;
+	console.log(title, content);
+	
+	//제목을 작성하지 않은 경우 폼제출할 수 없음.
+	if(!/^.+$/.test(title.value)){
+		alert("제목을 작성해주세요.");
+		title.select();
+		return false;
+	}
+					   
+	//내용을 작성하지 않은 경우 폼제출할 수 없음.
+	if(!/^(.|\n)+$/.test(content.value)){
+		alert("내용을 작성해주세요.");
+		content.select();
+		return false;
+	}
+}
+
 </script>
 
 

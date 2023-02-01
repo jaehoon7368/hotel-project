@@ -2,57 +2,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/board/inquiry/inquiryUpdate.css" />
 <%
 	InquiyBoard inquiyBoard = (InquiyBoard) request.getAttribute("inquiyBoard");
 %>
-<style>
-#content-main {width: 100%; height: 100%; margin: auto;}
-.wrap {padding: 54px 0 50px 0;}
-.board-menu {width: 210px; margin: 0; display: block; float: left;}
-.board-menu-list {list-style: none; margin: 0;}
-.board-menu-list li {margin-bottom: 24px;}
-#content-main>nav>ul>li>a {color: rgba(0,0,0,0.60); text-decoration: none; font-size: 18px;}
-.inquriy {width: 800px; height: 100%; margin:auto; padding-bottom: 50px}
-.inquriy-board {width: 800px; height: 100%;}
-.inquriy-head {font-size: 18px; border-bottom: rgba(0,0,0,0.3) solid 1px; height: 41px; margin: 0; padding: 0;}
-.tab-btn {margin-right: 22px; color: rgba(0,0,0,0.6); height: 40px; line-height: normal; cursor: pointer;}
-.form-top {padding: 40px 0 40px 0;}
-.user-input {width: 100%; padding: 0 10px 0 10px;}
-.inquiy-enroll {margin-bottom: 20px;}
-.product-input {height: 30px; width: 705px; font-size: 16px; color: rgba(0,0,0,0.60);}
-.inquiy-input {height: 30px; width: 705px; font-size: 16px; color: rgba(0,0,0,0.60);}
-.phone-input{height: 30px; width: 700px; font-size: 16px;}
-.email-input {height: 30px; width: 700px; font-size: 16px;}
-.content-input{resize: vertical; width: 700px; font-size: 16px;}
-/* 사이드바 */
-.sidebar li:hover {background-color: rgb(233, 227, 227); border-radius: 10px;}
-.sidebar {position:absolute; width: 15%; height: 100%; font-size: 15px; border-right: solid rgb(236, 231, 231) 1px;}
-.userView-nav {position: relative; margin: 0 15%; text-align: right; top: 18%; transform: translateY(-50%); font-weight: bold;}
-.userView-nav ul {list-style: none;}
-.userView-nav li {position: relative; margin: 2.2em 0;}   
-.userView-nav a {line-height: 20px; text-transform: uppercase; text-decoration: none; letter-spacing: 0.4em; display: block; transition: all ease-out 300ms; color: black;}
-/* 버튼 */
-.enroll-btn {
-	background-color: #ef303d;
-    text-align: center;
-    color: white;
-    border-radius: 15px;
-    font-size : 18px;
-    border-style: none;
-    cursor: pointer;
-    width: 100px; height: 50px;
-}
-.cancel-btn {
-	background-color: #ef303d;
-    text-align: center;
-    color: white;
-    border-radius: 15px;
-    font-size : 18px;
-    border-style: none;
-    cursor: pointer;
-    width: 100px; height: 50px;
-}
-</style>
+
 <div id="content-main" class="wrap">
         <content>
     		<div class="sidebar">
@@ -133,4 +87,18 @@
 
         </div>
  </div>
+  <script>
+ document.inquiyEnrollFrm.onsubmit = (e) => {
+		
+		const content = e.target.content;
+		console.log(content);
+						   
+		//내용을 작성하지 않은 경우 폼제출할 수 없음.
+		if(!/^(.|\n)+$/.test(content.value)){
+			alert("내용을 작성해주세요.");
+			content.select();
+			return false;
+		}
+	}
+ </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
