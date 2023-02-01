@@ -52,8 +52,8 @@
 <body>
 	<div id="container">
         <header>
-            <div class=>
-                <h2><a href="<%=request.getContextPath()%>" id="mainTitle">Alpha</a></h2>
+            <div>
+                <h2><a href="<%=request.getContextPath()%>" id="mainTitle"><img style="width: 100px; height:50px; display: flex; transform:translate(110px,-35px);" src="<%=request.getContextPath()%>/image/alpha.png" alt="" /></a></h2>
             </div>
             
             <div>
