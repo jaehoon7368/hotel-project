@@ -51,7 +51,7 @@ public class NoticeBoardEnrollServlet extends HttpServlet {
 		
 		// 리다이렉트
 		
-		response.sendRedirect(request.getContextPath() + "/");
+		response.sendRedirect(request.getContextPath() + "/board/noticeBoardList");
 	}
 
 }

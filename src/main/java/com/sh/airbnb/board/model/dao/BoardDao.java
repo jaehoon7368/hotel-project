@@ -495,6 +495,26 @@ public class BoardDao {
 	}
 
 
+	public List<InquiyBoard> selectInquiyType(Connection conn, String inquiyType) {
+		String sql = prop.getProperty("selectInquiyType");
+		// select * from tb_inquiy_board where inquiy_type = ?
+		List<InquiyBoard> inquiyBoardList = new ArrayList<>();
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, inquiyType);
+			try(ResultSet rs = pstmt.executeQuery()){
+				while(rs.next()) {
+					InquiyBoard inquiyBoard = handInquiyBoardResultSet(rs);
+					inquiyBoardList.add(inquiyBoard);
+				}
+				
+			}
+		} catch (Exception e) {
+			throw new BoardException();
+		}
+		return inquiyBoardList;
+	}
+
+
 	
 
 

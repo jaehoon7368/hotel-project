@@ -10,7 +10,7 @@
 .inquriy-head {font-size: 18px; border-bottom: rgba(0,0,0,0.3) solid 1px; height: 41px; margin: 0; padding: 0;}
 .tab-btn {margin-right: 22px; color: rgba(0,0,0,0.6); height: 40px; line-height: normal; cursor: pointer;}
 .form-top {padding: 40px 0 40px 0;}
-.user-input {height:: 30px; padding: 0 10px 0 10px;}
+.user-input {height: 30px; padding : 0 10px 0 10px;}
 .inquiy-enroll {margin-bottom: 20px;}
 /* 사이드바 */
 .sidebar li:hover {background-color: rgb(233, 227, 227); border-radius: 10px;}
