@@ -40,11 +40,11 @@
             <div id="check-box">
                 <div class="checkMain-box">
                     <h3>체크인</h3>
-                    <input type="search" class="datepicker" id="checkIn" name="checkIn" value="<%=checkIn.equals("null") ?"" : checkIn %>" placeholder="   날짜 추가">
+                    <input type="search" class="datepicker" id="checkIn" name="checkIn" <%-- value="<%=checkIn.equals("null") ?"" : checkIn %>" --%> placeholder="   날짜 추가">
                 </div>
                 <div class="checkMain-box">
                     <h3>체크아웃</h3>
-                    <input type="search" class="datepicker" id="checkOut" name="checkOut" value="<%=checkOut.equals("null") ?"" : checkOut %>" placeholder="   날짜 추가">
+                    <input type="search" class="datepicker" id="checkOut" name="checkOut" <%-- value="<%=checkOut.equals("null") ?"" : checkOut %>" --%> placeholder="   날짜 추가">
                 </div>
                 <div id="search-detail-btn">
                     <button type="submit"><i class="fa-solid fa-magnifying-glass"></i><span> 검색</span></button>
