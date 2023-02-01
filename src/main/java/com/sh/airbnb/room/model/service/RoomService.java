@@ -37,5 +37,12 @@ public class RoomService {
 		return roomList;
 	}
 
+	public List<Room> roomImage(String hotelNo) {
+		Connection conn = getConnection();
+		List<Room> roomImage = roomDao.roomImage(conn,hotelNo);
+		close(conn);
+		return roomImage;
+	}
+
 
 }
