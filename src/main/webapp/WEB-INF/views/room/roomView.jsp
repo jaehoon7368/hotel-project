@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/room/room.css" />
 <%
 	List<Room> roomList = (List<Room>) request.getAttribute("roomList");
+	List<Room> roomImage = (List<Room>) request.getAttribute("roomImage");
 	Hotel hotel = (Hotel) request.getAttribute("hotel");
 	List<Review> reviewList = (List<Review>) request.getAttribute("reviewList");
 	String checkIn = (String) request.getAttribute("checkIn");
@@ -25,7 +26,7 @@
                         <img src="<%=request.getContextPath()%>/upload/hotel/<%=hotel.getRenamedFilename() %>" alt="">
                     </div>
                     <div id="room-image-box">
-                    <%for(Room room : roomList){ %>
+                    <%for(Room room : roomImage){ %>
                         <div class="room-image">
                             <img src="<%=request.getContextPath()%>/upload/room/<%=room.getRenamedFilename() %>" alt="">
                         </div>

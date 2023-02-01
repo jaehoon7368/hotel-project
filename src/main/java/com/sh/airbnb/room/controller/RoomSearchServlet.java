@@ -55,6 +55,9 @@ public class RoomSearchServlet extends HttpServlet {
 		List<Room> roomList = roomService.selectRoomDateView(hotelNo,sqlDate1,sqlDate2);
 		System.out.println("roomList = " + roomList);
 		
+		//호텔 룸 이미지 가져오기
+		List<Room> roomImage = roomService.roomImage(hotelNo);
+		
 		//호텔 정보 가져오기
 		Hotel hotel = hotelService.selectOneHotel(hotelNo);
 		System.out.println("hotel = " + hotel);
@@ -66,6 +69,7 @@ public class RoomSearchServlet extends HttpServlet {
 		
 		// 3. view단처리
 		request.setAttribute("roomList", roomList);
+		request.setAttribute("roomImage", roomImage);
 		request.setAttribute("hotel", hotel);
 		request.setAttribute("reviewList", reviewList);
 		request.setAttribute("checkIn", checkIn);
