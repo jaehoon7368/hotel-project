@@ -1,5 +1,8 @@
+
 .sidebar {
   position:absolute;
+  display :flex;
+  transform : translate(20px,100px);
   width: 15%;
   height: 100%;
   font-size: 15px;
@@ -107,5 +110,7 @@
 	cursor:pointer;
 	margin-top: 17px;
 }
+
+
  
   
