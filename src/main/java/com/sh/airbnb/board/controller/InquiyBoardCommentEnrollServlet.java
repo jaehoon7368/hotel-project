@@ -48,7 +48,7 @@ public class InquiyBoardCommentEnrollServlet extends HttpServlet {
 		int result = boardService.insertInquiyComment(inquiyBoardComment);
 		
 		// 리다
-		response.sendRedirect(request.getContextPath() + "/board/inquiyBoardList");
+		response.sendRedirect(request.getContextPath() + "/board/admininquiyList");
 	}
 
 }

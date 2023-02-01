@@ -52,8 +52,8 @@
 <body>
 	<div id="container">
         <header>
-            <div class=>
-                <h2><a href="<%=request.getContextPath()%>" id="mainTitle">Alpha</a></h2>
+            <div>
+                <h2><a href="<%=request.getContextPath()%>" id="mainTitle"><img style="width: 100px; height:50px; display: flex; transform:translate(110px,-35px);" src="<%=request.getContextPath()%>/image/alpha.png" alt="" /></a></h2>
             </div>
             
             <div>
@@ -76,9 +76,11 @@
 		            <hr id="rine">
 		            <div id="board">
 		                <ul>
-		                    <li><a href="<%= request.getContextPath() %>/board/noticeBoardList"></a>공지사항</li>
-		                    <li><a href=""></a>자주 묻는 질문</li>
-		                    <li><a href="<%= request.getContextPath() %>/board/inquiyBoardList"></a>1:1 문의</li>
+		                    <li><a href="<%= request.getContextPath() %>/board/noticeBoardList">공지사항</a></li>
+		                    <li><a href="<%= request.getContextPath()%>/board/faqBoardList">자주 묻는 질문</a></li>
+		                    <% if(loginUser != null) { %>
+		                    <li><a href="<%= request.getContextPath() %>/board/inquiyBoardList">1:1 문의</a></li>
+		                    <% } %>
 		                </ul>
 		        </div>
 		     </div>
@@ -95,7 +97,7 @@
 		            <div id="board">
 		                <ul>
 		                    <li><a href="<%= request.getContextPath() %>/board/noticeBoardList">공지사항</a></li>
-		                    <li><a href="">자주 묻는 질문</a></li>
+		                    <li><a href="<%= request.getContextPath()%>/board/faqBoardList">자주 묻는 질문</a></li>
 		                    <li><a href="<%= request.getContextPath() %>/board/inquiyBoardList">1:1 문의</a></li>
 		                </ul>
 		        </div>

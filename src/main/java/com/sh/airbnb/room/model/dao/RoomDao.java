@@ -167,4 +167,22 @@ public class RoomDao {
 		return roomList;
 	}
 
+	public List<Room> roomImage(Connection conn, String hotelNo) {
+		String sql = prop.getProperty("roomImage");
+		List<Room> roomImage = new ArrayList<>();
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, hotelNo);
+			try(ResultSet rset = pstmt.executeQuery()){
+				while(rset.next()) {
+					Room room = new Room();
+					room.setRenamedFilename(rset.getString("renamed_filename"));
+					roomImage.add(room);
+				}
+			}
+		} catch (SQLException e) {
+			throw new RoomException("Room 이미지 가져오기 오류",e);
+		}
+		return roomImage;
+	}
+
 }

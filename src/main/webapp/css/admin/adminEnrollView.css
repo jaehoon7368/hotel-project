@@ -74,6 +74,7 @@ div.adminBox{
     text-align: center;
     color: white;
 	border : none;
+	cursor:pointer
 }
 
 .sidebar {

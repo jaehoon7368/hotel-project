@@ -6,14 +6,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/board/inquiry/inquiryList.css" />
 <script src="<%= request.getContextPath()%>/js/jquery-3.6.1.js"></script>
 <%
 	List<InquiyBoard> inquiyBoardList = (List<InquiyBoard>)request.getAttribute("inquiyBoardList");
 	List<InquiyBoardComment> inquiyBoardCommentList = (List<InquiyBoardComment>)request.getAttribute("inquiyBoardCommentList");
 %>
 <style>
-
+#inquiy-main {width: 100%; height: 100%; min-height: 800px; margin: auto;}
+.wrap {padding: 54px 0 50px 0;}
+.board-menu {width: 210px; margin: 0; display: block; float: left;}
+.board-menu-list {list-style: none; margin: 0;}
+.board-menu-list li {margin-bottom: 24px;}
+#inquiy-main>nav>ul>li>a {color: rgba(0,0,0,0.60); text-decoration: none; font-size: 18px;}
+.inquriy {width: 800px; height: 100%; margin: auto;}
+.inquriy-board {width: 800px; height: 100%;}
+.inquriy-head {font-size: 18px; border-bottom: rgba(0,0,0,0.3) solid 1px; height: 41px; margin: 0; padding: 0;}
+.tab-btn {margin-right: 22px; color: rgba(0,0,0,0.6); height: 40px; line-height: normal; cursor: pointer;}
+.non-inquriy-list {padding-top: 120px; text-align: center; height: 373px;}
+/* 사이드바 */
+.sidebar li:hover {background-color: rgb(233, 227, 227); border-radius: 10px;}
+.sidebar {position:absolute; width: 15%; height: 100%; font-size: 15px; border-right: solid rgb(236, 231, 231) 1px;}
+.userView-nav {position: relative; margin: 0 15%; text-align: right; top: 18%; transform: translateY(-50%); font-weight: bold;}
+.userView-nav ul {list-style: none;}
+.userView-nav li {position: relative; margin: 2.2em 0;}   
+.userView-nav a {line-height: 20px; text-transform: uppercase; text-decoration: none; letter-spacing: 0.4em; display: block; transition: all ease-out 300ms; color: black;}
+.type-btn {cursor: pointer; margin-right: 10px}
 </style>
     <div id="inquiy-main" class="wrap">
         <content>
@@ -24,15 +41,13 @@
 			            <hr>
 			            <li><a href="<%= request.getContextPath()%>/board/faqBoardList">자주 묻는 질문</a></li>
 			            <hr>
-			            <% if(loginUser != null) {%>
-			            <li class="active"><a href="<%= request.getContextPath()%>/board/inquiyBoardList">1:1 문의</a></li>
+			            <li ><a href="<%= request.getContextPath()%>/board/inquiyBoardList">1:1 문의</a></li>
 			            <hr>
-			            <% } %>
 			            <% boolean canAdmin = loginUser != null && 
 								(loginUser.getUserRole() == UserRole.A); 
 							if(canAdmin) {
 						%>
-			            <li><a href="<%= request.getContextPath() %>/board/admininquiyList">1:1 답변</a></li>
+			            <li class="active"><a href="<%= request.getContextPath() %>/board/admininquiyList">1:1 답변</a></li>
 			            <hr />
 			            <% } %>
 		           </ul>
@@ -42,9 +57,15 @@
         <div class="inquriy">
             <div class="inquriy-board">
                 <div class="inquriy-head">
-                    <span class="tab-btn" onclick="location.href = '<%= request.getContextPath() %>/board/inquiyBoardList'" style="color: #f7323f; font-weight: bold;">나의 문의 내역</span>
+                    <span class="tab-btn" onclick="location.href = '<%= request.getContextPath() %>/board/inquiyBoardList'" style="color: #f7323f; font-weight: bold;">문의 내역</span>
                     <% if(loginUser != null) { %>
-                    <span class="tab-btn" onclick="location.href = '<%= request.getContextPath() %>/board/inquiyEnroll'">새 문의 작성</span>
+                    <%-- <span class="tab-btn" onclick="location.href = '<%= request.getContextPath() %>/board/inquiyEnroll'">새 문의 작성</span> --%>
+                    <span class="type-btn" onclick="inquiyUse()">이용문의</span>
+                    <span class="type-btn" onclick="inquiyPayment()">예약/결제</span>
+                    <span class="type-btn" onclick="inquiyCancel()">취소/환불</span>
+                    <span class="type-btn" onclick="inquiyLodging()">숙소</span>
+                    <span class="type-btn" onclick="inquiyUserInfo()">회원정보</span>
+                    <span class="type-btn" onclick="inquiySeller()">판매자등록</span>
                     <% } %>
                 </div>
                 <!-- 사용자가 문의를 볼수 없을때 -->
@@ -54,6 +75,7 @@
                     <ul class="notice-show">
                     <% if(!inquiyBoardList.isEmpty()){ %>
 	                <% for(InquiyBoard inquiyBoards : inquiyBoardList) { %>
+	                <%-- <% if(inquiyBoards.getWriter().equals(loginUser.getUserId()) || loginUser.getUserRole() == UserRole.A) %> --%>
 	                 
                         <li class="notice-list" style="border-bottom: 1px solid rgba(0,0,0,0.4); list-style: none;">
                             <div style="padding: 35px 0 35px 0; display: block;" class="menu">
@@ -153,6 +175,36 @@
              }
              $(div).next("div").slideToggle();
          });
+    </script>
+    <form action="<%= request.getContextPath() %>/admin/adminInquiyType" name="inquiyTypeFrm" method="GET">
+    	<input type="hidden" name="inquiyType" value="" />
+    </form>
+    <script>
+    const inquiyUse = () => {
+    	document.inquiyTypeFrm.inquiyType.value = '이용문의';
+    	document.inquiyTypeFrm.submit();
+    }
+    const inquiyPayment = () => {
+    	document.inquiyTypeFrm.inquiyType.value = '예약/결제';
+    	document.inquiyTypeFrm.submit();
+    }
+    const inquiyCancel = () => {
+    	document.inquiyTypeFrm.inquiyType.value = '취소/환불';
+    	document.inquiyTypeFrm.submit();
+    }
+    const inquiyLodging = () => {
+    	document.inquiyTypeFrm.inquiyType.value = '숙소';
+    	document.inquiyTypeFrm.submit();
+    }
+    const inquiyUserInfo = () => {
+    	document.inquiyTypeFrm.inquiyType.value = '회원정보';
+    	document.inquiyTypeFrm.submit();
+    }
+    const inquiySeller = () => {
+    	document.inquiyTypeFrm.inquiyType.value = '판매자신청';
+    	document.inquiyTypeFrm.submit();
+    }
+    
     </script>
 
 
