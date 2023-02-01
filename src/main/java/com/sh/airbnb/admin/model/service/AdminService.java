@@ -149,4 +149,12 @@ public class AdminService {
 		return result;
 	}
 
+	public List<Hotel> selectOneHotel(String userId) {
+
+	   Connection conn = getConnection();
+	   List<Hotel> hotelList = adminDao.selectAllHotel(conn, userId);
+	   close(conn);
+	   return hotelList;
+	}
+
 }

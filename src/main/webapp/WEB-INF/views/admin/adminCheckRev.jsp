@@ -22,7 +22,7 @@
           <ul>
             <li><a href="<%= request.getContextPath() %>/user/userView">개인정보수정</a></li>
             <hr>
-            <%if (loginUser.getUserRole() == UserRole.S){ %>
+             <%if (loginUser.getUserRole() == UserRole.S){ %>
             <li><a href="<%= request.getContextPath()%>/admin/adminCheckRev?user_id=<%=loginUser.getUserId()%>">예약내역확인</a></li>
             <% }else{ %>
             <li><a href="<%= request.getContextPath()%>/user/userCheckRev?user_id=<%=loginUser.getUserId()%>">예약내역확인</a></li>
@@ -44,7 +44,7 @@
  </aside>
     	<!--  호텔이름 /  룸타입 / 박 / 체크인 체크아웃 /예약번호/ 예약자 이름 / 총가격 /  -->
     	<div class="wrapper">
-    	<div style ="margin-top :13px"><h2>예약내역</h2></div>
+    	<div style ="margin-top :13px"><h2>고객 예약 내역입니다.</h2></div>
        <% if(reservations.isEmpty()){ %>
 			<tr>
 				<td colspan="10"><br /><br /><br />조회된 예약내역이 없습니다.</td>
@@ -90,9 +90,9 @@
         <h2 class="price"><%= decFormat.format(reservation.getRePrice()) %>원</h2>
         <% if("N".equals(reservation.getReservationStatus())) { %>
 
-        <button class="paybtn" id= "btn-kakao-pay" onclick = "kakaopay('<%=reservation.getReNo()%>',
+        <button class="paybtn" id= "btn-kakao-pay" onclick = "kakaopa('<%=reservation.getReNo()%>',
         '<%=reservation.getHotelName() %>','<%=reservation.getStartDate() %>','<%=reservation.getEndDate()%>',
-        '<%=reservation.getRePrice() %>', '<%=reservation.getReName() %>')"> 결제하기 </button>
+        '<%=reservation.getRePrice() %>', '<%=reservation.getReName() %>')"> 결제 전 </button>
         
         <% } else { %>
         <button class="btn-cancel" value="<%= reservation.getReNo() %>">예약취소</button>

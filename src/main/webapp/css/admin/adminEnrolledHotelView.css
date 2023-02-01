@@ -86,6 +86,7 @@ div.adminBox{
     text-align: center;
     color: white;
 	border : none;
+	cursor:pointer
 }
 .rightBox span{
 background-color: black;
