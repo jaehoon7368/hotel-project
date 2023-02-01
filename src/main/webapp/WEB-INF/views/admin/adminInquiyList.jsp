@@ -40,10 +40,8 @@
 			            <hr>
 			            <li><a href="<%= request.getContextPath()%>/board/faqBoardList">자주 묻는 질문</a></li>
 			            <hr>
-			            <% if(loginUser != null) {%>
 			            <li class="active"><a href="<%= request.getContextPath()%>/board/inquiyBoardList">1:1 문의</a></li>
 			            <hr>
-			            <% } %>
 			            <% boolean canAdmin = loginUser != null && 
 								(loginUser.getUserRole() == UserRole.A); 
 							if(canAdmin) {
@@ -58,8 +56,8 @@
         <div class="inquriy">
             <div class="inquriy-board">
                 <div class="inquriy-head">
-                    <span class="tab-btn" onclick="location.href = '<%= request.getContextPath() %>/board/inquiyBoardList'" style="color: #f7323f; font-weight: bold;">나의 문의 내역</span>
-                    <% if(loginUser != null) { %>
+                    <span class="tab-btn" onclick="location.href = '<%= request.getContextPath() %>/board/inquiyBoardList'" style="color: #f7323f; font-weight: bold;">문의 내역</span>
+                    <% if(loginUser.getUserId() != null) { %>
                     <span class="tab-btn" onclick="location.href = '<%= request.getContextPath() %>/board/inquiyEnroll'">새 문의 작성</span>
                     <% } %>
                 </div>

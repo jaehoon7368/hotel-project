@@ -3,34 +3,77 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 <style>
-#contentt {width: 1100px; height: 100%; margin: auto;}
+#content-main {width: 100%; height: 100%; margin: auto;}
 .wrap {padding: 54px 0 50px 0;}
 .board-menu {width: 210px; margin: 0; display: block; float: left;}
 .board-menu-list {list-style: none; margin: 0;}
 .board-menu-list li {margin-bottom: 24px;}
-#contentt>nav>ul>li>a {color: rgba(0,0,0,0.60); text-decoration: none; font-size: 18px;}
-.inquriy {width: 770px; height: 100%; float: right; padding-bottom: 50px}
-.inquriy-board {width: 770px; height: 100%;}
+#content-main>nav>ul>li>a {color: rgba(0,0,0,0.60); text-decoration: none; font-size: 18px;}
+.inquriy {width: 800px; height: 100%; margin:auto; padding-bottom: 50px}
+.inquriy-board {width: 800px; height: 100%;}
 .inquriy-head {font-size: 18px; border-bottom: rgba(0,0,0,0.3) solid 1px; height: 41px; margin: 0; padding: 0;}
 .tab-btn {margin-right: 22px; color: rgba(0,0,0,0.6); height: 40px; line-height: normal; cursor: pointer;}
 .form-top {padding: 40px 0 40px 0;}
 .user-input {height:: 30px; padding: 0 10px 0 10px;}
 .inquiy-enroll {margin-bottom: 20px;}
-
+/* 사이드바 */
+.sidebar li:hover {background-color: rgb(233, 227, 227); border-radius: 10px;}
+.sidebar {position:absolute; width: 15%; height: 100%; font-size: 15px; border-right: solid rgb(236, 231, 231) 1px;}
+.userView-nav {position: relative; margin: 0 15%; text-align: right; top: 18%; transform: translateY(-50%); font-weight: bold;}
+.userView-nav ul {list-style: none;}
+.userView-nav li {position: relative; margin: 2.2em 0;}   
+.userView-nav a {line-height: 20px; text-transform: uppercase; text-decoration: none; letter-spacing: 0.4em; display: block; transition: all ease-out 300ms; color: black;}
+/* 버튼 */
+.enroll-btn {
+	background-color: #ef303d;
+    text-align: center;
+    color: white;
+    border-radius: 15px;
+    font-size : 18px;
+    border-style: none;
+    cursor: pointer;
+    width: 100px; height: 50px;
+}
+.cancel-btn {
+	background-color: #ef303d;
+    text-align: center;
+    color: white;
+    border-radius: 15px;
+    font-size : 18px;
+    border-style: none;
+    cursor: pointer;
+    width: 100px; height: 50px;
+}
 </style>
-<div id="contentt" class="wrap">
-        <nav class="board-menu">
-            <ul class="board-menu-list">
-                <li><a href="<%= request.getContextPath() %>/board/noticeBoardList">공지사항</a></li>
-                <li><a href="<%= request.getContextPath() %>/board/faqBoardList">자주 묻는 질문</a></li>
-                <li><a href="<%= request.getContextPath() %>/board/inquiyBoardList">1:1 문의</a></li>
-            </ul>
-        </nav>
+<div id="content-main" class="wrap">
+        <content>
+    		<div class="sidebar">
+        		<nav class="userView-nav">
+          			<ul>
+			            <li><a href="<%= request.getContextPath() %>/board/noticeBoardList">공지사항</a></li>
+			            <hr>
+			            <li><a href="<%= request.getContextPath()%>/board/faqBoardList">자주 묻는 질문</a></li>
+			            <hr>
+			            <li class="active"><a href="<%= request.getContextPath()%>/board/inquiyBoardList">1:1 문의</a></li>
+			            <hr>
+			            <!-- 관리자만 -->
+			            <% boolean canAdmin = loginUser != null && (loginUser.getUserRole() == UserRole.A); 
+							if(canAdmin) {
+						%>
+			            <li><a href="<%= request.getContextPath() %>/board/admininquiyList">1:1 답변</a></li>
+			            <hr />
+			            <% } %>
+		           </ul>
+        		</nav>
+    	   </div>
+		</content>
 	<div class="inquriy">
             <div class="inquriy-board">
                 <div class="inquriy-head">
                     <span class="tab-btn" onclick="location.href = '<%= request.getContextPath() %>/board/inquiyBoardList'">나의 문의 내역</span>
+                    <% if(loginUser != null) {%>
                     <span class="tab-btn" onclick="location.href = '<%= request.getContextPath() %>/board/inquiyEnroll'" style="color: #f7323f; font-weight: bold;">새 문의 작성</span>
+                    <% } %>
                 </div>
                 <!-- 문의리스트 -->
                 <div class="inquriy-list">
@@ -72,8 +115,8 @@
                                  <div class="inquiy-enroll">문의내용</div>
                                  <div class="inquiy-enroll"><textarea name="content" id="" cols="110" rows="10" style="resize: vertical; width: 700px; font-size: 16px;" class="user-input"  placeholder="문의하실 내용을 10자 이상 입력해주세요"></textarea></div>
                                  <div class="inquiy-enroll">
-		                            <input type="submit" value="작성하기" style="width: 100px; height: 50px; font-size: 18px;">
-		                            <input type="button" value="취소하기" onclick="history.go(-1);" style="width: 100px; height: 50px; font-size: 18px;"/>
+		                            <input type="submit" value="작성하기" class="enroll-btn" style="width: 100px; height: 50px; font-size: 18px;">
+		                            <input type="button" value="취소하기" class="cancel-btn" onclick="history.go(-1);" style="width: 100px; height: 50px; font-size: 18px;"/>
                                  </div>
                             </table>
                         </div>
