@@ -476,6 +476,25 @@ public class BoardDao {
 	}
 
 
+	public List<InquiyBoard> selectAdminInquiyList(Connection conn) {
+		String sql = prop.getProperty("selectAdminInquiyList");
+		List<InquiyBoard> inquiyBoardList = new ArrayList<>();
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)){
+//			pstmt.setString(1, userId); 
+			try (ResultSet rs = pstmt.executeQuery()){
+				while(rs.next()) {
+					InquiyBoard inquiyBoard = handInquiyBoardResultSet(rs);
+					inquiyBoardList.add(inquiyBoard);
+				}
+			}
+		} catch (Exception e) {
+			throw new BoardException("관리자 문의글 목록 조회 오류", e);
+		}
+		return inquiyBoardList;
+	}
+
+
 	
 
 

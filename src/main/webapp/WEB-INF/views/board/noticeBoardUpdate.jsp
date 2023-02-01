@@ -6,19 +6,20 @@
 	NoticeBoard noticeBoard = (NoticeBoard) request.getAttribute("noticeBoard");
 %>
 <style>
-#main-content {width: 1024px; min-height:800px; margin: auto;}
+#main-content {width: 100%; min-height:800px; margin: auto;}
 .wrap {padding: 54px 0 50px 0;}
 .board-menu {width: 210px; margin: 0; display: block; float: left;}
 .board-menu-list {list-style: none; margin: 0;}
 .board-menu-list li {margin-bottom: 24px;}
 #main-content>nav>ul>li>a {color: rgba(0,0,0,0.60); text-decoration: none; font-size: 18px;}
-.notice {width: 770px; height: 300px; float: right;}
-.notice-board {width: 770px; height: 500px;}
+.notice {width: 800px; height: 300px; margin: auto;}
+.notice-board {width: 800px; height: 500px;}
 .notice-head {font-size: 18px; border-bottom: rgba(0,0,0,0.3) solid 1px; height: 41px; margin: 0; padding: 0;}
 .notice-list {list-style: none; padding: 0 0 0 0;}
 .notice-show {padding: 0 0 0 0;}
 .btn-tab {margin-right: 22px; color: rgba(0,0,0,0.6); height: 40px; line-height: normal;}
 .notice-update {color: #f7323f; font-weight: bold; height: 40px;}
+.notice-box {padding-top: 35px;}
 .enroll-btn {
 	background-color: #ef303d;
     text-align: center;
@@ -40,27 +41,51 @@
     width: 100px; height: 50px;
 }
 .notice-form {margin-bottom: 20px; font-size: 18px;}
-.notice-title {width: 771px; height:30px; font-size: 18px;}
+.notice-title {width: 745px; height:30px; font-size: 18px;}
 .notice-content {resize: vertical; font-size: 18px; padding: 5px;}
+
+/* 사이드바 */
+.sidebar li:hover {background-color: rgb(233, 227, 227); border-radius: 10px;}
+.sidebar {position:absolute; width: 15%; height: 100%; font-size: 15px; border-right: solid rgb(236, 231, 231) 1px;}
+.userView-nav {position: relative; margin: 0 15%; text-align: right; top: 18%; transform: translateY(-50%); font-weight: bold;}
+.userView-nav ul {list-style: none;}
+.userView-nav li {position: relative; margin: 2.2em 0;}   
+.userView-nav a {line-height: 20px; text-transform: uppercase; text-decoration: none; letter-spacing: 0.4em; display: block; transition: all ease-out 300ms; color: black;}
 </style>
 
     <div id="main-content" class="wrap">
-        <nav class="board-menu">
-            <ul class="board-menu-list">
-                <li><a href="<%= request.getContextPath() %>/board/noticeBoardList" style="font-weight: bold; color: #f7323f;">공지사항</a></li>
-                <li><a href="<%= request.getContextPath() %>/board/faqBoardList">자주 묻는 질문</a></li>
-                <li><a href="<%= request.getContextPath() %>/board/inquiyBoardList">1:1 문의</a></li>
-            </ul>
-        </nav>
+        <content>
+    		<div class="sidebar">
+        		<nav class="userView-nav">
+          			<ul>
+			            <li class="active"><a href="<%= request.getContextPath() %>/board/noticeBoardList">공지사항</a></li>
+			            <hr>
+			            <li><a href="<%=request.getContextPath()%>/board/faqBoardList">자주 묻는 질문</a></li>
+			            <hr>
+			            <li><a href="<%= request.getContextPath()%>/board/inquiyBoardList">1:1 문의</a></li>
+			            <hr>
+			            <!-- 관리자만 -->
+			            <% boolean canAdmin = loginUser != null && (loginUser.getUserRole() == UserRole.A); 
+							if(canAdmin) {
+						%>
+			            <li><a href="<%= request.getContextPath() %>/board/admininquiyList">1:1 답변</a></li>
+			            <hr />
+			            <% } %>
+		           </ul>
+        		</nav>
+    	   </div>
+		</content>
         <div class="notice">
             <div class="notice-board">
                 <div class="notice-head">
                     <a class="btn-tab notice-view" href="<%= request.getContextPath() %>/board/noticeBoardList">서비스 공지사항</a>
                     <!-- 관리자만 볼수 있는 작성메뉴 -->
+                    <% if(canAdmin) { %>
                     <a class="btn-tab notice-enroll" href="<%= request.getContextPath() %>/board/noticeBoardEnroll">공지사항 작성</a>
-                    <span class="btn-tab notice-update">공지사항 수정</span>
+                    <a class="btn-tab notice-update" href="<%= request.getContextPath() %>/board/noticeBoardUpdate?noticeNo=<%= noticeBoard.getNoticeNo() %>">공지사항 수정</a>
+                    <% } %>
                 </div>
-                <div style="padding-top: 35px;">
+                <div class="notice-box">
                     <form name="noticeBoardUpdateFrm" action="<%=request.getContextPath() %>/board/noticeBoardUpdate" method="post">
                          <table id="tbl-board-view">
                          	<div class="notice-box">
@@ -70,7 +95,7 @@
                                 <div class="notice-form">내용</div>
 								<div class="notice-form"><textarea rows="20" cols="80" name="content" class="notice-content" placeholder="내용을 입력해주세요"><%= noticeBoard.getContent() %></textarea></div>		                                
                             	<div class="notice-form">
-                                    <input type="submit" value="작성하기" class="enroll-btn">
+                                    <input type="submit" value="수정하기" class="enroll-btn">
                                     <input type="button" value="취소하기" class="cancel-btn" onclick="history.go(-1);"/>
                             	</div>
                          	</div>

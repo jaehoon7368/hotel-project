@@ -7,13 +7,13 @@
 	FaqBoard faqBoard = (FaqBoard)request.getAttribute("faqBoard");
 %>
 <style>
-#FAQ-board {width: 1024px; min-height: 800px; margin: auto;}
+#FAQ-board {width: 100%; min-height: 850px; margin: auto;}
 .wrap {padding: 54px 0 50px 0;}
 .faq-menu {width: 210px; margin: 0; display: block; float: left;}
 .faq-menu-list {list-style: none; margin: 0;}
 .faq-menu-list li {margin-bottom: 24px;}
 #FAQ-board>nav>ul>li>a {color: rgba(0,0,0,0.60); text-decoration: none; font-size: 18px;}
-.faq {width: 770px; height: 300px; float: right;}
+.faq {width: 770px; height: 300px; margin: auto;}
 .faq-board {width: 770px; height: 500px;}
 .faq-head {font-size: 18px; border-bottom: rgba(0,0,0,0.3) solid 1px; height: 41px; margin: 0; padding: 0;}
 .btn-tab {margin-right: 22px; color: rgba(0,0,0,0.6); height: 40px; line-height: normal;}
@@ -21,9 +21,17 @@
 .faq-head>div>li>a {text-decoration: none; color: rgba(0,0,0,0.90); cursor: pointer;}
 .faq-enroll{margin-bottom: 20px;}
 .font {font-size: 18px;}
-.category-select {width: 765px; height: 30px; font-size: 18px; color: rgba(0,0,0,0.50);}
-.faq-title {width: 760px; height: 30px; font-size: 18px;}
-.faq-content {resize: vertical; font-size: 18px;}
+.category-select {width: 735px; height: 30px; font-size: 18px; color: rgba(0,0,0,0.50);}
+.faq-title {width: 729px; height: 30px; font-size: 18px;}
+.faq-content {resize: vertical; font-size: 18px; padding: 3px}
+/* 사이드바 */
+.sidebar li:hover {background-color: rgb(233, 227, 227); border-radius: 10px;}
+.sidebar {position:absolute; width: 15%; height: 100%; font-size: 15px; border-right: solid rgb(236, 231, 231) 1px;}
+.userView-nav {position: relative; margin: 0 15%; text-align: right; top: 18%; transform: translateY(-50%); font-weight: bold;}
+.userView-nav ul {list-style: none;}
+.userView-nav li {position: relative; margin: 2.2em 0;}   
+.userView-nav a {line-height: 20px; text-transform: uppercase; text-decoration: none; letter-spacing: 0.4em; display: block; transition: all ease-out 300ms; color: black;}
+/* 버튼 */
 .update-btn {
 	background-color: #ef303d;
     text-align: center;
@@ -47,25 +55,42 @@
 </style>
 
 	<div id="FAQ-board" class="wrap">
-        <nav class="faq-menu">
-            <ul class="faq-menu-list" id="faq-menu-list">
-                <li><a href="<%= request.getContextPath() %>/board/noticeBoardList">공지사항</a></li>
-                <li><a href="<%= request.getContextPath() %>/board/faqBoardList">자주 묻는 질문</a></li>
-                <li><a href="<%= request.getContextPath() %>/board/inquiyBoardList">1:1 문의</a></li>
-            </ul>
-        </nav>
+        <content>
+    		<div class="sidebar">
+        		<nav class="userView-nav">
+          			<ul>
+			            <li><a href="<%= request.getContextPath() %>/board/noticeBoardList">공지사항</a></li>
+			            <hr>
+			            <li class="active"><a href="<%= request.getContextPath()%>/board/faqBoardList">자주 묻는 질문</a></li>
+			            <hr>
+			            <li><a href="<%= request.getContextPath()%>/board/inquiyBoardList">1:1 문의</a></li>
+			            <hr>
+			            <!-- 관리자만 -->
+			            <% boolean canAdmin = loginUser != null && (loginUser.getUserRole() == UserRole.A); 
+							if(canAdmin) {
+						%>
+			            <li><a href="<%= request.getContextPath() %>/board/admininquiyList">1:1 답변</a></li>
+			            <hr />
+			            <% } %>
+		           </ul>
+        		</nav>
+    	   </div>
+		</content>
         <!-- 메인 -->
         <div class="faq">
             <div class="faq-board">
                 <div class="faq-head">
                     <div>
-                        <li><a onclick="faqBoardTOP()">TOP</a></li>
+                        <li><a onclick="faqBoardTOP()">공통</a></li>
                         <li><a onclick="faqBoardUseInquiry()">이용문의</a></li>
                         <li><a onclick="faqBoardPayment()">예약/결제</a></li>
                         <li><a onclick="faqBoardCancel()">취소/환불</a></li>
                         <li><a onclick="faqBoardLodging()">숙소</a></li>
                         <li><a onclick="faqBoardUserInfo()">회원정보</a></li>
-                        <li><a href="<%= request.getContextPath() %>/board/faqBoardEnroll">작성하기</a></li>
+                        <% if(canAdmin) { %>
+                        <li><a href="<%= request.getContextPath() %>/board/faqBoardEnroll">FAQ작성</a></li>
+                        <li><a href="<%= request.getContextPath() %>/board/faqBoardUpdate?faqNo=<%= faqBoard.getFaqNo() %>" style="color: #f7323f; font-weight: bold;">FAQ수정</a></li>
+                        <% } %>
                     </div>
                 </div>
                 <form action="<%= request.getContextPath() %>/board/faqBoardUpdate" method="POST" name="faqBoardUpdateFrm">
@@ -77,7 +102,7 @@
                             <div class="faq-enroll">
                                 <select name="category" class="category-select" >
                                 	<option value="<%= faqBoard.getCategory() %>"><%= faqBoard.getCategory() %></option>
-                                    <option value="TOP">TOP</option>
+                                    <option value="공통">공통</option>
                                     <option value="이용문의">이용문의</option>
                                     <option value="예약/결제">예약/결제</option>
                                     <option value="취소/환불">취소/환불</option>
@@ -88,9 +113,9 @@
                             <div class="faq-enroll font">제목</div>
                             <div class="faq-enroll"><input type="text" name="title" class="faq-title" value="<%= faqBoard.getTitle()%>" placeholder="제목을 입력해주세요"></div>
                             <div class="faq-enroll font">내용</div>
-                            <div class="faq-enroll"><textarea name="content" class="faq-content" cols="80" rows="20" placeholder="내용을 입력해주세요"><%= faqBoard.getContent() %></textarea></div>
+                            <div class="faq-enroll"><textarea name="content" class="faq-content" cols="70" rows="20" placeholder="내용을 입력해주세요"><%= faqBoard.getContent() %></textarea></div>
  							<div class="faq-enroll">
-                                <input type="submit" value="작성하기" class="update-btn">
+                                <input type="submit" value="수정하기" class="update-btn">
                                 <input type="button" value="취소하기" class="cancel-btn" onclick="history.go(-1);"/>
  							</div>
                         </table>
@@ -107,7 +132,7 @@
 <script>
 const faqBoardTOP = () => {
 	console.log();
-	document.menuListFrm.category.value = 'TOP';
+	document.menuListFrm.category.value = '공통';
 	document.menuListFrm.submit();
 };
 const faqBoardUseInquiry = () => {
@@ -135,6 +160,7 @@ const faqBoardUserInfo = () => {
 	document.menuListFrm.category.value = '회원정보';
 	document.menuListFrm.submit();
 };
+
 
 </script>
 
