@@ -97,7 +97,25 @@ public class BoardService {
 		}catch(Exception e) {
 			throw e;
 		}
-		
+		return inquiyBoardList;
+	}
+	
+	public List<InquiyBoard> selectInquiyType(String inquiyType) {
+		Connection conn = getConnection();
+		List<InquiyBoard> inquiyBoardList = new ArrayList<>();
+		try {
+			inquiyBoardList = boardDao.selectInquiyType(conn, inquiyType);
+			
+			if(!inquiyBoardList.isEmpty()) {
+				
+				for(InquiyBoard board : inquiyBoardList) {
+					board.setListComment(boardDao.selectComment(board.getInquiyNo(),conn));
+				}
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		close(conn);
 		return inquiyBoardList;
 	}
 	
@@ -286,6 +304,8 @@ public class BoardService {
 		close(conn);
 		return inquiyBoardCommentList;
 	}
+
+
 
 	
 

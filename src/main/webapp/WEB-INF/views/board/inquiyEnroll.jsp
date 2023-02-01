@@ -47,7 +47,7 @@
                             <div class="form-top">서비스 이용중 불편사항을 문의주시면 최대한 빠른시일내에 답변 드리겠습니다.</div>
                             <table>
 	                             <input type="hidden" name="writer" value="<%= loginUser.getUserId() %>" />
-	                             <div class="inquiy-enroll">카테고리</div>
+	                             <!--<div class="inquiy-enroll">카테고리</div>
                                  <div class="inquiy-enroll">
                                      <select name="productType" id="" class="user-input" style="height: 30px; width: 725px; font-size: 16px; color: rgba(0,0,0,0.60);">
                                          <option value="">카테고리 유형을 선택하세요</option>
@@ -55,7 +55,7 @@
                                          <option value="모텔">모텔</option>
                                          <option value="펜션">펜션</option>
                                      </select>
-                                 </div>	
+                                 </div>	 -->
                                  <div class="inquiy-enroll">문의유형</div>
 								 <div class="inquiy-enroll">
                                      <select name="inquiyType" id="" class="user-input" style="height: 30px; width: 725px; font-size: 16px; color: rgba(0,0,0,0.60);">
@@ -63,7 +63,8 @@
                                          <option value="예약/결제">예약/결제</option>
                                          <option value="취소/환불">취소/환불</option>
                                          <option value="이용문의">이용문의</option>
-                                         <option value="이용문의">회원정보</option>
+                                         <option value="회원정보">회원정보</option>
+                                         <option value="판매자신청">판매자신청</option>
                                      </select>
 								 </div>
 								 <div class="inquiy-enroll">휴대폰 번호</div>             
@@ -71,7 +72,7 @@
                                  <div class="inquiy-enroll">이메일</div>
                                  <div class="inquiy-enroll"><input type="email" name="email" class="user-input" placeholder="선택사항 입니다." style="height: 30px; width: 700px; font-size: 16px;"></div>
                                  <div class="inquiy-enroll">문의내용</div>
-                                 <div class="inquiy-enroll"><textarea name="content" id="" cols="110" rows="10" style="resize: vertical; width: 700px; font-size: 16px;" class="user-input"  placeholder="문의하실 내용을 입력해주세요"></textarea></div>
+                                 <div class="inquiy-enroll"><textarea name="content" id="" cols="80" rows="10" style="resize: vertical;  font-size: 16px;"  placeholder="문의하실 내용을 입력해주세요"></textarea></div>
                                  <div class="inquiy-enroll">
 		                            <input type="submit" value="작성하기" class="enroll-btn" style="width: 100px; height: 50px; font-size: 18px;">
 		                            <input type="button" value="취소하기" class="cancel-btn" onclick="history.go(-1);" style="width: 100px; height: 50px; font-size: 18px;"/>
