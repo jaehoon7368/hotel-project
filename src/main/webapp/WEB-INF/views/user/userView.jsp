@@ -38,7 +38,7 @@
         <div class=userinfo>
         	<div>
         		<h4>실명</h4>
-        		 <input type="text" class="input"  name="userName" id="userName" value="<%= loginUser.getUserName() %>">
+        		 <input type="text" class="input"  name="userName" id="userName" value="<%= loginUser.getUserName() %>" readonly>
         	</div>
             <div>
             	<h4>아이디</h4>
