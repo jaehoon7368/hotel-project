@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin/adminEnrollView.css" />
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
 div#center {
 	display: flex;
@@ -55,7 +56,7 @@ div#center {
 					<td><span>호텔 이름</span> <input type="text" name="hotelName" id="name" class="put"></td>
 				</tr>
 				<tr >
-					<td><span>호텔 주소</span><input type="text"  name="hotelAddress" id="address" class="put"></td>
+					<td><span></span><button class="hotelbtn" id="addressbtn">호텔 	주소검색</button><input type="text"  name="hotelAddress" id="address" class="put"></td>
 				</tr>
 				<tr>
 					
@@ -130,6 +131,18 @@ div#center {
 
 
 <script>
+document.querySelector("#addressbtn").addEventListener('click',(e)=>{
+	e.preventDefault();
+	new daum.Postcode({
+	    oncomplete: function(data) {
+	    
+	    document.querySelector("#address").value = data.address;	    
+	    }
+	}).open();	
+	
+	
+})
+
 
 document.querySelector("#upFile").addEventListener('change',(e)=>{
 	const f = e.target;
