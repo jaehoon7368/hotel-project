@@ -101,7 +101,6 @@
                     <div id="filter-box">
                         <button id="filter-btn"><i class="fa-solid fa-bars-staggered"></i><span> 필터</span></button>
                     </div>
-                    
                     <div class="modal2">
                         <form action="<%=request.getContextPath()%>/filterSearch" name="filterSearchFrm">
                             <div id="filter-main">
@@ -218,6 +217,7 @@
             
             <!-- 숙소 목록 -->
             <div id="content-area">
+           
             <%for(Hotel hotel : hotelList) {%>
             	<div class="hotel-box">
 					<a href="<%= request.getContextPath()%>/room/roomView?hotelNo=<%=hotel.getHotelNo()%>&checkIn=<%=checkIn%>&checkOut=<%=checkOut%>">
