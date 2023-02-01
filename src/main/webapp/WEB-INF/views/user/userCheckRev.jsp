@@ -60,7 +60,7 @@
                 <td class="name" colspan="2"><%=reservation.getHotelName() %></td>
             </tr> 
             <tr>
-                <td class="name"colspan="2"><%= reservation.getRoomType() %> / <%= reservation.getReDay() %></td>
+                <td class="name"colspan="2"><%= reservation.getRoomType() %> / <%= reservation.getReDay() %>박</td>
             </tr> 
             <tr>
                 <td class="td1">체크인</td>

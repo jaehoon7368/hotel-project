@@ -34,10 +34,7 @@
 								<label for="saveId">아이디저장</label>&nbsp;&nbsp;
 							</td>
 							</tr>
-							<br><br>
-				            <div class="pass">Forgot Password?</div>
-				            <button type="submit" class="btn btn-primary" ></button>
-								<img height="38px" src="<%=request.getContextPath()%>/image/kakao.png" />		
+							<br><br>		
 				            <input type="submit" value="Login" tabindex="3">
 				         
 			          </form>
