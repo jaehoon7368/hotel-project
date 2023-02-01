@@ -9,7 +9,7 @@
  	<div class="sidebar">
         <nav class="userView-nav">
           <ul>
-            <li><a href="<%= request.getContextPath() %>/user/userView">개인정보수정</a></li>
+            <li class="active"><a href="<%= request.getContextPath() %>/user/userView">개인정보수정</a></li>
             <hr>
             <%if (loginUser.getUserRole() == UserRole.S){ %>
             <li><a href="<%= request.getContextPath()%>/admin/adminCheckRev?user_id=<%=loginUser.getUserId()%>">예약내역확인</a></li>
