@@ -19,7 +19,11 @@ div#center {
           <ul>
             <li><a href="<%= request.getContextPath() %>/user/userView">개인정보수정</a></li>
             <hr>
+            <%if (loginUser.getUserRole() == UserRole.S){ %>
+            <li><a href="<%= request.getContextPath()%>/admin/adminCheckRev?user_id=<%=loginUser.getUserId()%>">예약내역확인</a></li>
+            <% }else{ %>
             <li><a href="<%= request.getContextPath()%>/user/userCheckRev?user_id=<%=loginUser.getUserId()%>">예약내역확인</a></li>
+            <%} %>
             <hr>
             <% if((loginUser != null && (loginUser.getUserRole() == UserRole.S || loginUser.getUserRole() == UserRole.A))) { %>
             <li class="active"><a href="<%=request.getContextPath()%>/admin/adminhotelenroll">숙소등록하기</a></li>

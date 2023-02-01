@@ -12,7 +12,9 @@ import java.util.List;
 import java.util.Properties;
 
 import com.sh.airbnb.admin.model.dao.AdminDao;
+import com.sh.airbnb.admin.model.exception.AdminException;
 import com.sh.airbnb.hotel.model.dto.Hotel;
+import com.sh.airbnb.hotel.model.dto.HotelType;
 import com.sh.airbnb.reservation.model.dto.Reservation;
 import com.sh.airbnb.reservation.model.dto.ReservationEntity;
 import com.sh.airbnb.reservation.model.exception.ReservationException;
@@ -223,6 +225,48 @@ public class ReservationDao {
 		
 	}
 
-
+	public List<Reservation> selectAllReservation(Connection conn, List<Hotel> hotelList) {
+		String sql = prop.getProperty("selectAdminAllReservation");
+		// select * from tb_reservation where hotel_no in (^)
+		List<Reservation> reservations = new ArrayList<>();
+		
+		List<String> strHotelList = new ArrayList<>();
+		for(int i = 0 ; i< hotelList.size(); i++) {
+			strHotelList.add(hotelList.get(i).getHotelNo());
+		}
+		String temp2 = "";
+		for(int i = 0; i < strHotelList.size();i++) {
+			temp2 += "'" + strHotelList.get(i) + "'";
+			if(i != strHotelList.size() -1)
+				temp2 += ", ";
+		}
+		sql = sql.replace("^", temp2);
+		System.out.println("sql문확인"+sql);
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			
+			try(ResultSet rset = pstmt.executeQuery();){
+				
+				while(rset.next()) {
+					Reservation reservation = new Reservation();
+					reservation.setReDay(rset.getInt("re_day"));
+					reservation.setStartDate(rset.getDate("start_date"));
+					reservation.setEndDate(rset.getDate("end_date"));
+					reservation.setReName(rset.getString("re_name"));
+					reservation.setRePrice(rset.getInt("re_price"));
+					reservation.setReNo(rset.getString("re_no"));
+					reservation.setReservationStatus(rset.getString("reservation_status"));
+					
+					reservation.setHotelName(rset.getString("hotel_name"));
+					reservation.setRoomType(rset.getString("room_type"));
+					reservations.add(reservation);
+					System.out.println("reservation : " + reservations);
+				}
+			}
+		} catch (SQLException e) {
+			throw new ReservationException("관리자 예약내역조회 오류!", e);
+		}
+		return reservations;
+	}
 
 }

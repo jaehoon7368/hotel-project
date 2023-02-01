@@ -8,6 +8,7 @@ import static com.sh.airbnb.common.JdbcTemplate.commit;
 import java.sql.Connection;
 import java.util.List;
 
+import com.sh.airbnb.hotel.model.dto.Hotel;
 import com.sh.airbnb.reservation.model.dao.ReservationDao;
 import com.sh.airbnb.reservation.model.dto.Reservation;
 
@@ -82,6 +83,13 @@ public class ReservationService {
 		}
 		return result;
 		
+	}
+	public List<Reservation> selectAllReservation(List<Hotel> hotelList) {
+
+		Connection conn = getConnection();
+		List<Reservation> reservation = reservationDao.selectAllReservation(conn, hotelList);
+		close(conn);
+		return reservation;
 	}
 	
 
