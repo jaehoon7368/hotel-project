@@ -65,7 +65,7 @@
                     <span class="type-btn" onclick="inquiyCancel()">취소/환불</span>
                     <span class="type-btn" onclick="inquiyLodging()">숙소</span>
                     <span class="type-btn" onclick="inquiyUserInfo()">회원정보</span>
-                    <span class="type-btn" onclick="inquiySeller()">판매자등록</span>
+                    <span class="type-btn" onclick="inquiySeller()">판매자신청</span>
                     <% } %>
                 </div>
                 <!-- 사용자가 문의를 볼수 없을때 -->
@@ -100,6 +100,10 @@
 	                            	</span>
 	                            </div>
 	                            <!-- 문의내용 -->
+	                            <div>아이디 :<%= inquiyBoards.getWriter() %></div>
+	                            <div>휴대폰 번호 : <%= inquiyBoards.getPhone() %></div>
+	                            <div>이메일 : <%= inquiyBoards.getEmail() %></div>
+	                            <br />
 	                            <div><%= inquiyBoards.getContent() %></div>
 	                            
 	                            <!-- 답변시작 -->
