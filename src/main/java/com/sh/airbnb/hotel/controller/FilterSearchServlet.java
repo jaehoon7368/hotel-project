@@ -32,9 +32,11 @@ public class FilterSearchServlet extends HttpServlet {
 		String searchLocation = request.getParameter("searchLocation");
 		String checkIn = request.getParameter("checkIn");
 		String checkOut = request.getParameter("checkOut");
-					
-		List<Hotel> hotelList = hotelService.filterSelectHotel(minPrice,maxPrice,category);
+		
+		// 필터부분 평균,최소,최고 가격 가져오기
 		RoomPrice roomPrice = roomService.selectRoomPrice();
+		// 가격, 편의시설로 걸러진 hotelList
+		List<Hotel> hotelList = hotelService.filterSelectHotel(minPrice,maxPrice,category);
 		
 		request.setAttribute("hotelList", hotelList);
 		request.setAttribute("roomPrice", roomPrice);
