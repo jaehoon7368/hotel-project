@@ -9,7 +9,7 @@
  	<div class="sidebar">
         <nav class="userView-nav">
           <ul>
-            <li><a href="<%= request.getContextPath() %>/user/userView">개인정보수정</a></li>
+            <li class="active"><a href="<%= request.getContextPath() %>/user/userView">개인정보수정</a></li>
             <hr>
             <%if (loginUser.getUserRole() == UserRole.S){ %>
             <li><a href="<%= request.getContextPath()%>/admin/adminCheckRev?user_id=<%=loginUser.getUserId()%>">예약내역확인</a></li>
@@ -38,7 +38,7 @@
         <div class=userinfo>
         	<div>
         		<h4>실명</h4>
-        		 <input type="text" class="input"  name="userName" id="userName" value="<%= loginUser.getUserName() %>">
+        		 <input type="text" class="input"  name="userName" id="userName" value="<%= loginUser.getUserName() %>" readonly>
         	</div>
             <div>
             	<h4>아이디</h4>

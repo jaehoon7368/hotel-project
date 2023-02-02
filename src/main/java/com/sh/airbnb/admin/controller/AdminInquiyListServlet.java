@@ -16,7 +16,7 @@ import com.sh.airbnb.board.model.service.BoardService;
  * Servlet implementation class AdminInquiyList
  */
 @WebServlet("/board/admininquiyList")
-public class AdminInquiyList extends HttpServlet {
+public class AdminInquiyListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private BoardService boardService = new BoardService();
     

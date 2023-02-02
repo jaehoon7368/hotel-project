@@ -42,10 +42,7 @@ public class NoticeBoardListServlet extends HttpServlet {
 		// 2. 로직
 		List<NoticeBoard> noticeBoardList = boardService.selectNoticeList(param);
 		System.out.println("noticeBoardList = " + noticeBoardList);
-		// 개행.
-//		NoticeBoard noticeBoard = boardService.selectNoticeBoard();
-//		noticeBoard.setContent(HelloMvcUtils.convertLineFeedToBr(HelloMvcUtils.escapeHtml(noticeBoard.getContent())));
-//		System.out.println("noticeBoard = " + noticeBoard);
+		
 		
 		//  페이지바
 		int totalCount = boardService.selectTotalCount(); // select count(*) from board

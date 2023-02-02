@@ -47,15 +47,7 @@
                             <div class="form-top">서비스 이용중 불편사항을 문의주시면 최대한 빠른시일내에 답변 드리겠습니다.</div>
                             <table>
 	                             <input type="hidden" name="writer" value="<%= loginUser.getUserId() %>" />
-	                             <!--<div class="inquiy-enroll">카테고리</div>
-                                 <div class="inquiy-enroll">
-                                     <select name="productType" id="" class="user-input" style="height: 30px; width: 725px; font-size: 16px; color: rgba(0,0,0,0.60);">
-                                         <option value="">카테고리 유형을 선택하세요</option>
-                                         <option value="호텔">호텔</option>
-                                         <option value="모텔">모텔</option>
-                                         <option value="펜션">펜션</option>
-                                     </select>
-                                 </div>	 -->
+	                             
                                  <div class="inquiy-enroll">문의유형</div>
 								 <div class="inquiy-enroll">
                                      <select name="inquiyType" id="" class="user-input" style="height: 30px; width: 725px; font-size: 16px; color: rgba(0,0,0,0.60);">
@@ -68,11 +60,11 @@
                                      </select>
 								 </div>
 								 <div class="inquiy-enroll">휴대폰 번호</div>             
-								 <div class="inquiy-enroll"><input type="tel" name="phone" class="user-input" placeholder="선택사항 입니다." style="height: 30px; width: 700px; font-size: 16px;"></div>                   
+								 <div class="inquiy-enroll"><input type="tel" name="phone" class="user-input" value="<%= loginUser.getPhone() %>" placeholder="선택사항 입니다." style="height: 30px; width: 700px; font-size: 16px;"></div>                   
                                  <div class="inquiy-enroll">이메일</div>
-                                 <div class="inquiy-enroll"><input type="email" name="email" class="user-input" placeholder="선택사항 입니다." style="height: 30px; width: 700px; font-size: 16px;"></div>
+                                 <div class="inquiy-enroll"><input type="email" name="email" class="user-input" value="<%= loginUser.getEmail() %>" placeholder="선택사항 입니다." style="height: 30px; width: 700px; font-size: 16px;"></div>
                                  <div class="inquiy-enroll">문의내용</div>
-                                 <div class="inquiy-enroll"><textarea name="content" id="" cols="80" rows="10" style="resize: vertical;  font-size: 16px;"  placeholder="문의하실 내용을 입력해주세요"></textarea></div>
+                                 <div class="inquiy-enroll"><textarea name="content" id="" cols="80" rows="10" style="resize: vertical;  font-size: 16px;"  placeholder="문의하실 내용을 10자 이상 입력해주세요"></textarea></div>
                                  <div class="inquiy-enroll">
 		                            <input type="submit" value="작성하기" class="enroll-btn" style="width: 100px; height: 50px; font-size: 18px;">
 		                            <input type="button" value="취소하기" class="cancel-btn" onclick="history.go(-1);" style="width: 100px; height: 50px; font-size: 18px;"/>
@@ -94,8 +86,9 @@
 		console.log(content);
 						   
 		//내용을 작성하지 않은 경우 폼제출할 수 없음.
-		if(!/^(.|\n)+$/.test(content.value)){
-			alert("내용을 작성해주세요.");
+		
+		if(!/^(.|\n){10,}$/.test(content.value)){
+			alert("내용을 10자 이상 작성해주세요.");
 			content.select();
 			return false;
 		}
