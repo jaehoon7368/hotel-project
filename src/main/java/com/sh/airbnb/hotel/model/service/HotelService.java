@@ -80,9 +80,9 @@ public class HotelService {
 		Connection conn = getConnection();
 		// 지역 필터로 걸러진 hotelList를 가져온다.(address)
 		List<Hotel> addressList = hotelDao.selectHotelAddress(conn,location);
-		// 지역 필터로 걸러진 hotelNo와 예약날짜를 걸러 hotelNo를 가져온다.
+		// 지역 필터로 걸러진 hotelNo와 예약날짜를 걸러 hotelList를 가져온다.
 		List<ReservationEntity> reservationList = reservationDao.selectSearhHotel(conn,addressList,sqlDate1,sqlDate2);
-		
+		// 걸러진 호텔들의 정보, 최저가격, 이미지를 가져온다.
 		List<Hotel> hotelList = hotelDao.selectSearchHotel(conn,reservationList);
 		
 		close(conn);
