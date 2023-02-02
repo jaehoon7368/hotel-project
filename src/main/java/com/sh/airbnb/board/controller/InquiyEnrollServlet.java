@@ -31,7 +31,6 @@ public class InquiyEnrollServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 입력값
-//		int inquiyNo = Integer.parseInt(request.getParameter("inquiyNo"));
 		String productType = request.getParameter("productType");
 		String inquiyType = request.getParameter("inquiyType");
 		String phone = request.getParameter("phone");
@@ -46,7 +45,6 @@ public class InquiyEnrollServlet extends HttpServlet {
 		System.out.println(writer);
 		
 		InquiyBoard inquiyBoard = new InquiyBoard();
-//		inquiyBoard.setProductType(ProductType.valueOf(request.getParameter(productType)));
 		inquiyBoard.setProductType(productType);
 		inquiyBoard.setInquiyType(inquiyType);
 		inquiyBoard.setPhone(phone);
@@ -59,7 +57,7 @@ public class InquiyEnrollServlet extends HttpServlet {
 		System.out.println(result);
 		
 		// view
-		response.sendRedirect(request.getContextPath()+ "/");
+		response.sendRedirect(request.getContextPath()+ "/board/inquiyBoardList");
 	}
 
 }

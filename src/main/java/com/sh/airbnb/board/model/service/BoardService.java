@@ -100,6 +100,7 @@ public class BoardService {
 		return inquiyBoardList;
 	}
 	
+	
 	public List<InquiyBoard> selectInquiyType(String inquiyType) {
 		Connection conn = getConnection();
 		List<InquiyBoard> inquiyBoardList = new ArrayList<>();

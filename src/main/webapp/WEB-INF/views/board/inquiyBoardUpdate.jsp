@@ -18,7 +18,11 @@
 			            <hr>
 			            <li class="active"><a href="<%= request.getContextPath()%>/board/inquiyBoardList">1:1 문의</a></li>
 			            <hr>
-			            <% if(loginUser.getUserId() != null && loginUser.getUserRole() == UserRole.A) {%>
+			            <!-- 관리자만 -->
+			            <% 
+			            	boolean canAdmin = loginUser != null && (loginUser.getUserRole() == UserRole.A); 
+							if(canAdmin) {
+						%>
 			            <li><a href="<%= request.getContextPath() %>/board/admininquiyList">1:1 답변</a></li>
 			            <hr />
 			            <% } %>
@@ -47,15 +51,7 @@
                             <div class="form-top">서비스 이용중 불편사항을 문의주시면 최대한 빠른시일내에 답변 드리겠습니다.</div>
                             <table>
 	                             <input type="hidden" name="writer" value="<%= loginUser.getUserId() %>" />
-	                             <%-- <div class="inquiy-enroll">카테고리</div>
-                                 <div class="inquiy-enroll">
-                                     <select name="productType" class="product-input">
-                                         <option value="<%= inquiyBoard.getProductType() %>"><%= inquiyBoard.getProductType() %></option>
-                                         <option value="호텔">호텔</option>
-                                         <option value="모텔">모텔</option>
-                                         <option value="펜션">펜션</option>
-                                     </select>
-                                 </div> --%>	
+	                             	
                                  <div class="inquiy-enroll">문의유형</div>
 								 <div class="inquiy-enroll">
                                      <select name="inquiyType" class="inquiy-input">
