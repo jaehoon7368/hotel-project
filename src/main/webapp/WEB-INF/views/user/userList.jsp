@@ -37,7 +37,8 @@ window.addEventListener('load', () => {
 });
 
 </script>
-	<aside>
+<div id="main-content" class="wrap">
+	<content>
 		<div class="sidebar">
         <nav class="userView-nav">
           <ul>
@@ -58,7 +59,7 @@ window.addEventListener('load', () => {
           </ul>
         </nav>
      </div>
-	</aside>
+	</content>
 
 
 <div class="userList-container">
@@ -133,6 +134,7 @@ window.addEventListener('load', () => {
 	</div>
 	
 </div>
+  </div>
 <form action="<%= request.getContextPath() %>/user/updateUserRole" name="userRoleUpdateFrm" method="POST">
 	<input type="hidden" name="userId" />
 	<input type="hidden" name="userRole" />
