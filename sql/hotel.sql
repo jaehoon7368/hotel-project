@@ -330,7 +330,15 @@ group by
     r.room_no,r.hotel_no
 order by
     r.room_no
+
 )rr;
+
+where
+    rr.hotel_no = 'H0036';
+select * from tb_reservation r join tb_hotel h  
+on r.hotel_no = h.hotel_no ;
+select hotel_no from(select r.hotel_no from tb_room r left join tb_reservation re on r.room_no = re.room_no where (start_date  not between  '23/01/29'  and   to_date('23/01/31') - 1 )  and  (end_date  not between to_date( '23/01/29') + 1   and '23/01/31' ) and not ( start_date < '23/01/29' and end_date > '23/01/31') or re_no is null group by r.hotel_no)rr where rr.hotel_no in ('H0002');
+
 
     
 select r.*,(select renamed_filename from tb_room_image i where i.room_no = r.room_no) renamed_filename from tb_room r where room_no in('R0103','R0104','R0105') order by room_price asc;
