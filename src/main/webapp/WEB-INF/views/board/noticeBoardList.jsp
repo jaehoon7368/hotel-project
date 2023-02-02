@@ -22,14 +22,15 @@
             <hr>
             <li><a href="<%=request.getContextPath()%>/board/faqBoardList">자주 묻는 질문</a></li>
             <hr>
+            <% if(loginUser != null) { %>
             <li><a href="<%= request.getContextPath()%>/board/inquiyBoardList">1:1 문의</a></li>
-            <hr>
+            <% } %>
             <!-- 관리자만 -->
-            <% boolean canAdmin = loginUser != null && 
-								(loginUser.getUserRole() == UserRole.A); 
+            <% 
+            	boolean canAdmin = loginUser != null && (loginUser.getUserRole() == UserRole.A); 
 				if(canAdmin) {
 			%>
-            
+            <hr>
             <li><a href="<%= request.getContextPath() %>/board/admininquiyList">1:1 답변</a></li>
             <hr />
             <% } %>

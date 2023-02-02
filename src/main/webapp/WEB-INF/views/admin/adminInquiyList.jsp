@@ -43,8 +43,8 @@
 			            <hr>
 			            <li ><a href="<%= request.getContextPath()%>/board/inquiyBoardList">1:1 문의</a></li>
 			            <hr>
-			            <% boolean canAdmin = loginUser != null && 
-								(loginUser.getUserRole() == UserRole.A); 
+			            <% 
+			            	boolean canAdmin = loginUser != null && (loginUser.getUserRole() == UserRole.A); 
 							if(canAdmin) {
 						%>
 			            <li class="active"><a href="<%= request.getContextPath() %>/board/admininquiyList">1:1 답변</a></li>
@@ -57,7 +57,7 @@
         <div class="inquriy">
             <div class="inquriy-board">
                 <div class="inquriy-head">
-                    <span class="tab-btn" onclick="location.href = '<%= request.getContextPath() %>/board/inquiyBoardList'" style="color: #f7323f; font-weight: bold;">문의 내역</span>
+                    <span class="tab-btn" onclick="location.href = '<%= request.getContextPath() %>/board/admininquiyList'" style="color: #f7323f; font-weight: bold;">문의 내역</span>
                     <% if(loginUser != null) { %>
                     <%-- <span class="tab-btn" onclick="location.href = '<%= request.getContextPath() %>/board/inquiyEnroll'">새 문의 작성</span> --%>
                     <span class="type-btn" onclick="inquiyUse()">이용문의</span>
@@ -80,7 +80,7 @@
                         <li class="notice-list" style="border-bottom: 1px solid rgba(0,0,0,0.4); list-style: none;">
                             <div style="padding: 35px 0 35px 0; display: block;" class="menu">
                             	<% inquiyBoards.setContent(HelloMvcUtils.convertLineFeedToBr(HelloMvcUtils.escapeHtml(inquiyBoards.getContent()))); %>
-                                <p style="margin: 0;"><b>[<%= inquiyBoards.getInquiyType() %>]</b> <%= inquiyBoards.getContent().substring(0, 4) %>
+                                <p style="margin: 0;"><b>[<%= inquiyBoards.getInquiyType() %>]</b> <%= inquiyBoards.getContent().substring(0, 9) %>
                                 
                                 	<!-- 아이콘  -->
                                     <svg xmlns="http://www.w3.org/2000/svg" style="float: right;" width="20" height="20" fill="currentColor" class="bi bi-chevron-expand" viewBox="0 0 16 16">

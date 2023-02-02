@@ -35,7 +35,7 @@ public class InquiyBoardCommentEnrollServlet extends HttpServlet {
 		System.out.println("inquiyCommentLevel = " + inquiyCommentLevel);
 		System.out.println("content = " + content);
 		
-		InquiyBoardComment inquiyBoardComment = new InquiyBoardComment(2, content, null, inquiyCommentLevel, inquiyNo, writer);
+		InquiyBoardComment inquiyBoardComment = new InquiyBoardComment(0, content, null, inquiyCommentLevel, inquiyNo, writer);
 //		InquiyBoardComment inquiyBoardComment = new InquiyBoardComment();
 //		inquiyBoardComment.setInquiyNo(inquiyNo);
 //		inquiyBoardComment.setWriter(writer);
