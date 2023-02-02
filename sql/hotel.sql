@@ -300,15 +300,22 @@ where
     EXISTS(select * from tb_reservation where re_no is null);
     
 select  
-    * 
+    hotel_no,
+    room_no,
+    start_date,
+    end_date,
+    re_name
 from 
     tb_reservation re
 where   
-    (start_date between  '23/01/29'  and   to_date('23/01/30') - 1 )  and  (end_date  not between to_date( '23/01/29') + 1   and '23/01/30' )
-    and not ( start_date < '23/01/29' and end_date > '23/01/30');
+    (start_date between  '23/01/28'  and   to_date('23/01/30') - 1 )  and  (end_date  not between to_date( '23/01/28') + 1   and '23/01/30' )
+    and not ( start_date < '23/01/28' and end_date > '23/01/30')
+order by
+hotel_no;
 
 select
-    room_no
+    room_no,
+    hotel_no
 from(
 select 
     r.room_no,
@@ -318,18 +325,135 @@ from
     on r.room_no = re.room_no
 where   
     (start_date  not between  '23/01/29'  and   to_date('23/01/31') - 1 )  and  (end_date  not between to_date( '23/01/29') + 1   and '23/01/31' )
-    and not ( start_date < '23/01/29' and end_date > '23/01/31') or re_no is null
+    and not ( start_date < '23/01/29' and end_date > '23/01/31')
 group by
     r.room_no,r.hotel_no
 order by
     r.room_no
-)rr
+
+)rr;
+
 where
     rr.hotel_no = 'H0036';
 select * from tb_reservation r join tb_hotel h  
 on r.hotel_no = h.hotel_no ;
 select hotel_no from(select r.hotel_no from tb_room r left join tb_reservation re on r.room_no = re.room_no where (start_date  not between  '23/01/29'  and   to_date('23/01/31') - 1 )  and  (end_date  not between to_date( '23/01/29') + 1   and '23/01/31' ) and not ( start_date < '23/01/29' and end_date > '23/01/31') or re_no is null group by r.hotel_no)rr where rr.hotel_no in ('H0002');
 
+
+    
 select r.*,(select renamed_filename from tb_room_image i where i.room_no = r.room_no) renamed_filename from tb_room r where room_no in('R0103','R0104','R0105') order by room_price asc;
 
-select (select renamed_filename from tb_room_image i where i.room_no = r.room_no) renamed_filename from tb_room r where hotel_no = 'H0002' order by room_price asc
+select (select renamed_filename from tb_room_image i where i.room_no = r.room_no) renamed_filename from tb_room r where hotel_no = 'H0002' order by room_price asc;
+
+
+select
+    hotel_no 
+from
+    (select r.hotel_no from tb_room r left join tb_reservation re 
+    on r.room_no = re.room_no 
+    where 
+    (start_date  not between  '23/01/29'  and   to_date('23/01/31') - 1 )  
+    and  (end_date  not between to_date( '23/01/29') + 1   and '23/01/31' ) 
+    and not ( start_date < '23/01/29' and end_date > '23/01/31') 
+    and re_no is null
+    group by r.hotel_no)rr 
+where rr.hotel_no in ('H0002');
+
+select 
+    r.hotel_no,
+    r.room_no,
+    re.re_no,
+    re.start_date,
+    re.end_date
+from tb_room r left join tb_reservation re 
+    on r.room_no = re.room_no 
+    where 
+    ((start_date  not between  '23/01/28'  and   to_date('23/01/31') - 1 )  
+    and  (end_date  not between to_date( '23/01/28') + 1   and '23/01/31' ) 
+    and not (start_date < '23/01/28' and end_date > '23/01/31'))
+    or re_no is null
+--group by 
+  --  r.hotel_no,
+    --r.room_no
+order by 
+    r.hotel_no, r.room_no;
+    
+    
+-- 1. 체크인/체크아웃 관련 예약 조회
+-- 23/01/01 ~ 23/01/31
+select
+    *
+from
+    tb_reservation
+where 
+    not (start_date > '23/01/31' or end_date < '23/01/28') -- 관계 없는 예약 제외 날짜
+    and
+    ((start_date  between  '23/01/28'  and   to_date('23/01/31') - 1 )  
+    or (end_date  between to_date( '23/01/28') + 1   and '23/01/31' ) 
+    or (start_date < '23/01/28' and end_date > '23/01/31'));
+
+-- 2. 예약 가능한 방조회
+select 
+    hotel_no,
+    room_no
+from
+    tb_room r
+where
+    not exists(
+        select
+            *
+        from
+            tb_reservation
+        where 
+            not (start_date > '23/01/31' or end_date < '23/01/28') -- 관계 없는 예약 제외 날짜
+            and
+            ((start_date  between  '23/01/28'  and   to_date('23/01/31') - 1 )  
+            or (end_date  between to_date( '23/01/28') + 1   and '23/01/31' ) 
+            or (start_date < '23/01/28' and end_date > '23/01/31'))
+            and room_no = r.room_no
+    )
+order by 
+    1,2;
+    
+  select
+        *
+    from
+        tb_reservation
+    where 
+        not (start_date > '23/01/31' or end_date < '23/01/28') -- 관계 없는 예약 제외 날짜
+        and
+        ((start_date  between  '23/01/28'  and   to_date('23/01/31') - 1 )  
+        or (end_date  between to_date( '23/01/28') + 1   and '23/01/31' ) 
+        or (start_date < '23/01/28' and end_date > '23/01/31'))
+        and room_no = 'R0004';
+    
+-- 3. 예약 가능한 방을 가진 호텔 조회
+select
+    hotel_no
+from 
+    tb_hotel
+where
+    hotel_no in (
+        select 
+            hotel_no
+        from
+            tb_room r
+        where
+            not exists(
+                select
+                    *
+                from
+                    tb_reservation
+                where 
+                    not (start_date > '23/01/31' or end_date < '23/01/28') -- 관계 없는 예약 제외 날짜
+                    and
+                    ((start_date  between  '23/01/28'  and   to_date('23/01/31') - 1 )  
+                    or (end_date  between to_date( '23/01/28') + 1   and '23/01/31' ) 
+                    or (start_date < '23/01/28' and end_date > '23/01/31'))
+                    and room_no = r.room_no
+            )
+    ) and hotel_no in ('H0002');
+    
+select hotel_no from tb_hotel where hotel_no in (select hotel_no from tb_room r where not exists(select * from tb_reservation where not (start_date > '23/01/31' or end_date < '23/01/28')and((start_date  between  '23/01/28'  and   to_date('23/01/31') - 1 )  or (end_date  between to_date( '23/01/28') + 1   and '23/01/31' ) or (start_date < '23/01/28' and end_date > '23/01/31'))and room_no = r.room_no)) and hotel_no in ('H0002');
+
+

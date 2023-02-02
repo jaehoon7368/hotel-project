@@ -192,12 +192,14 @@ public class ReservationDao {
 		// ? 하나에 배열을 넣기 위한 작업 end
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
-			pstmt.setDate(1, sqlDate1);
-			pstmt.setDate(2, sqlDate2);
+			pstmt.setDate(1, sqlDate2);
+			pstmt.setDate(2, sqlDate1);
 			pstmt.setDate(3, sqlDate1);
 			pstmt.setDate(4, sqlDate2);
 			pstmt.setDate(5, sqlDate1);
 			pstmt.setDate(6, sqlDate2);
+			pstmt.setDate(7, sqlDate1);
+			pstmt.setDate(8, sqlDate2);
 			
 			try(ResultSet rset = pstmt.executeQuery()){
 				while(rset.next()) {

@@ -65,13 +65,10 @@ public class HotelService {
 		
 		// 가격 필터로 걸러진 hotelNo를 가져온다.
 		List<RoomPrice> priceHotelNo = roomDao.priceFilterHotelNo(conn,minPrice,maxPrice);
-		System.out.println("priceHotelNo = " + priceHotelNo);
 		// 가격 필터로 걸러진 hotelNo와 category로 hotelNo를 가져온다.
 		List<HotelCategory> categoryHotelNo = hotelDao.selectCategoryHotelNo(conn,category,priceHotelNo);
-		System.out.println("categoryHotelNo = " + categoryHotelNo);
-		// 전부 걸러진 hotelList를 Servlet으로 보내준다.
+		// 걸러진 호텔들의 정보, 최저가격, 이미지를 가져온다.
 		List<Hotel> hotelList = hotelDao.filterSelectHotel(conn,categoryHotelNo);
-		System.out.println("hotelList = " + hotelList);
 		close(conn);
 		return hotelList;
 	}

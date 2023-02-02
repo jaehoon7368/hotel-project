@@ -145,15 +145,15 @@ public class HotelDao {
 		return hotelList;
 	}
 
+	// 필터부분 가격으로 걸러진 hotelList와 편의시설로 hotelList 거르기
 	public List<HotelCategory> selectCategoryHotelNo(Connection conn, String[] category, List<RoomPrice> priceHotelNo) {
 		String sql = prop.getProperty("selectCategoryHotelNo");
-		// select hotel_no from tb_hotel_category where category_no >= all(?) and hotel_no in (?) group by hotel_no
+		// select hotel_no from tb_hotel_category where category_no >= all($) and hotel_no in (^) group by hotel_no
 		
 		List<HotelCategory> categoryHotelNo = new ArrayList<>();
-		System.out.println(category); 
 		
+		// 편의시설 배열을 String으로 변환 후 쿼리문 $에 넣어주기
 		List<String> list = Arrays.asList(category);
-		
 		String temp = "";
 		for(int i = 0; i < list.size();i++) {
 			temp += "'" + category[i] + "'";
@@ -161,8 +161,8 @@ public class HotelDao {
 				temp += ", ";
 		}
 		sql = sql.replace("$", temp);
-	
 
+		// 가격으로 걸러진 hotelList 배열을 String으로 변환 후 쿼리문 ^에 넣어주기
 		List<String> hotelList = new ArrayList<>();
 		for(int i = 0 ; i< priceHotelNo.size(); i++) {
 			hotelList.add(priceHotelNo.get(i).getHotelNo());
@@ -175,17 +175,13 @@ public class HotelDao {
 		}
 		sql = sql.replace("^", temp2);
 		
-		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
-
-			try(ResultSet rset = pstmt.executeQuery()){
-				System.out.println(sql);
+		try(PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rset = pstmt.executeQuery();){
 				while(rset.next()) {
 					HotelCategory hotelCategory = new HotelCategory();
 					hotelCategory.setHotelNo(rset.getString("hotel_no"));
 					categoryHotelNo.add(hotelCategory);
-					
 				}
-			}
 		} catch (SQLException e) {
 			throw new HotelException("호텔 필터 카테고리 hotelNo 가져오기 오류!",e);
 		}
