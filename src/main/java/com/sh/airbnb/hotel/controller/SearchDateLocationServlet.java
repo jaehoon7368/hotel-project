@@ -32,22 +32,22 @@ public class SearchDateLocationServlet extends HttpServlet {
 		try {
 		String location = request.getParameter("searchLocation")==null?"":request.getParameter("searchLocation");
 		String checkIn = request.getParameter("checkIn").equals("null")?"":request.getParameter("checkIn");
-		String checkOut = request.getParameter("checkOut").equals("null")?"":request.getParameter("checkOut");;
-		System.out.println("location = " + location);
-		System.out.println("checkIn = " + checkIn);
-		System.out.println("checkOut = " + checkOut);
+		String checkOut = request.getParameter("checkOut").equals("null")?"":request.getParameter("checkOut");
 		
+		//String type의 checkIn, ckeckOut을 sql Date 타입으로 바꿔준다.
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		Date startDate = formatter.parse(checkIn);
 		Date endDate = formatter.parse(checkOut);
 		long startDate1 = startDate.getTime();
 		long endDate1 = endDate.getTime();
-
-		
+	
 		java.sql.Date sqlDate1 = new java.sql.Date(startDate1);
 		java.sql.Date sqlDate2 = new java.sql.Date(endDate1);
+		//String type의 checkIn, ckeckOut을 sql Date 타입으로 바꿔준다. (end)
 		
+		// 검색과 일치하는 호텔들 가져오기.
 		List<Hotel> hotelList = hotelService.selectSearchHotel(location,sqlDate1,sqlDate2);
+		// 필터부분의 객실 최저,최고,평균 가격 가져오기.
 		RoomPrice roomPrice = roomService.selectRoomPrice();
 		
 		request.setAttribute("hotelList", hotelList);

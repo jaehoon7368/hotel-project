@@ -223,6 +223,7 @@ public class HotelDao {
 		return hotelList;
 	}
 
+	// 선택된 지역이 포함된 호텔 정보를 가져온다.
 	public List<Hotel> selectHotelAddress(Connection conn, String location) {
 		String sql = prop.getProperty("selectHotelAddress");
 		
@@ -243,12 +244,13 @@ public class HotelDao {
 		return addressList;
 	}
 
+	// 지역과 지정된 체크인아웃 날짜 사이에 포함되지 않은 호텔의 정보와 최저가격 및 이미지 가져오기
 	public List<Hotel> selectSearchHotel(Connection conn, List<ReservationEntity> reservationList) {
-		
 		String sql = prop.getProperty("filterHotelList");
 		
 		List<Hotel> hotelList = new ArrayList<>();
 	
+		// ? 하나에 배열을 넣기 위한 작업
 		List<String> hotelListArray = new ArrayList<>();
 		for(int i = 0 ; i< reservationList.size(); i++) {
 			hotelListArray.add(reservationList.get(i).getHotelNo());
@@ -260,7 +262,7 @@ public class HotelDao {
 				temp += ", ";
 		}
 		sql = sql.replace("$", temp);
-		System.out.println("selectSearchHotel = " + temp);
+		//? 하나에 배열을 넣기 위한 작업 end
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
 	
