@@ -105,13 +105,15 @@ public class RoomDao {
 		String sql = prop.getProperty("selectDateRoom");
 		List<Room> roomDateList = new ArrayList<>();
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
-			pstmt.setDate(1, sqlDate1);
-			pstmt.setDate(2, sqlDate2);
+			pstmt.setDate(1, sqlDate2);
+			pstmt.setDate(2, sqlDate1);
 			pstmt.setDate(3, sqlDate1);
 			pstmt.setDate(4, sqlDate2);
 			pstmt.setDate(5, sqlDate1);
 			pstmt.setDate(6, sqlDate2);
-			pstmt.setString(7, hotelNo);
+			pstmt.setDate(7, sqlDate1);
+			pstmt.setDate(8, sqlDate2);
+			pstmt.setString(9, hotelNo);
 			try(ResultSet rset = pstmt.executeQuery()){
 				while(rset.next()) {
 					Room room = new Room();

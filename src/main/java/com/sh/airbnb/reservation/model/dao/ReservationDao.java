@@ -175,9 +175,12 @@ public class ReservationDao {
 	// 지역으로 걸러진 호텔들에서 지정된 체크인 아웃날짜에 포함되지않은 호텔 보여주기
 	public List<ReservationEntity> selectSearhHotel(Connection conn, List<Hotel> addressList, Date sqlDate1, Date sqlDate2) {
 		String sql = prop.getProperty("selectReservationNotHotel");
+		//select hotel_no from tb_hotel where hotel_no in (select hotel_no from tb_room r where not exists(select * from tb_reservation
+		//where not (start_date > ? or end_date < ?)and((start_date  between  ?  and ? - 1 )  or (end_date  between ? + 1   and ? ) 
+		//or (start_date < ? and end_date > ?))and room_no = r.room_no)) and hotel_no in ($)
 		List<ReservationEntity> reservationList = new ArrayList<>();
 		
-		// ? 하나에 배열을 넣기 위한 작업
+		// $ 하나에 배열을 넣기 위한 작업
 		List<String> addressListArray = new ArrayList<>();
 		for(int i = 0 ; i< addressList.size(); i++) {
 			addressListArray.add(addressList.get(i).getHotelNo());
@@ -189,7 +192,7 @@ public class ReservationDao {
 				temp += ", ";
 		}
 		sql = sql.replace("$", temp);
-		// ? 하나에 배열을 넣기 위한 작업 end
+		// $ 하나에 배열을 넣기 위한 작업 end
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
 			pstmt.setDate(1, sqlDate2);
