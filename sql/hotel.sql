@@ -456,4 +456,4 @@ where
     
 select hotel_no from tb_hotel where hotel_no in (select hotel_no from tb_room r where not exists(select * from tb_reservation where not (start_date > '23/01/31' or end_date < '23/01/28')and((start_date  between  '23/01/28'  and   to_date('23/01/31') - 1 )  or (end_date  between to_date( '23/01/28') + 1   and '23/01/31' ) or (start_date < '23/01/28' and end_date > '23/01/31'))and room_no = r.room_no)) and hotel_no in ('H0002');
 
-
+select room_no from tb_room where room_no in (select room_no from tb_room r where not exists(select * from tb_reservation where not (start_date > '23/01/31' or end_date < '23/01/28') and((start_date  between  '23/01/28'  and   to_date('23/01/31') - 1 )  or (end_date  between to_date( '23/01/28') + 1   and '23/01/31' ) or (start_date < '23/01/28' and end_date > '23/01/31'))and room_no = r.room_no)) and hotel_no = 'H0036';
