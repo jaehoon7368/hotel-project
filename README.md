@@ -1,5 +1,7 @@
 # hotel-project
 ***
+![ezgif com-video-to-gif (2)](https://user-images.githubusercontent.com/109495226/236613639-98c4aba1-6d93-459d-a1c3-51218a7db24c.gif)
+
 #### url : http://132.145.85.112:8080
 #### 배포 : Oracle Cloud
 ***
