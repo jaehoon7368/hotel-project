@@ -38,3 +38,6 @@ pw : 1234 <br />
 - 숙소 리뷰 기능
 - Kakao Map API를 활용한 숙소 위치 기능
 
+***
+### DB - ERD
+https://www.erdcloud.com/p/npxTh9Log69MzqSQQ
